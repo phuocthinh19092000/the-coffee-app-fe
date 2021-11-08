@@ -1,0 +1,5 @@
+[
+  { "name": "Mango yogurt", "price": 19000, "type": "yogurt" },
+  { "name": "Ice Tea", "price": 21000, "type": "tea" },
+  { "name": "Oreo Ice Blended", "price": 35000, "type": "ice blended" }
+]
