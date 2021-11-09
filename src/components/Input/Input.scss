@@ -1,0 +1,49 @@
+@import '../../share/assets/scss/variables.scss';
+
+#input-container {
+  display: flex;
+  position:relative;
+  border-radius: 50px;
+  vertical-align: middle;
+  background-color: $gey-4-color;
+  font-size: 16px;
+}
+#input-container input {
+  flex : 10;
+  background-color: inherit;
+  border-radius: 50px;
+  width : 100%;
+  margin:0;
+  border:none;
+  text-indent: 5%;
+}
+#input-container input:focus{
+  outline: none
+}
+#input-container img { 
+  position: relative;
+  margin: 15px 27px 15px 0
+}
+
+#input-container:focus-within {
+    outline: 2px solid #111
+}
+.search-input img{
+  margin: 15px 27px 15px 0  !important
+}
+
+
+
+/* @media (prefers-reduced-motion: no-preference) {
+    img {
+      animation: img-spin infinite 20s linear;
+    }
+  }
+@keyframes img-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  } */
