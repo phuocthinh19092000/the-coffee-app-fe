@@ -5,6 +5,7 @@ type Props = {
   titleButton: string;
   type?: string | 'submit';
 };
+
 const Button = (props: Props) => {
   return (
     <button className={props.className} type="submit">

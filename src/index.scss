@@ -1,0 +1,19 @@
+@import './share/assets/scss/font.scss';
+
+* {
+  font-family: 'Proxima Nova';
+  line-height: 24px;
+  letter-spacing: -0.45px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 19px;
+}
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
