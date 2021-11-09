@@ -1,17 +1,17 @@
 import React from 'react';
-import './Icon.css';
+import './Icon.scss';
 
 type Props = {
-  source: string;
-  href: string;
-  className: string;
+  src: string;
+  href?: string;
+  className?: string;
 };
 
 const Icon = (props: Props) => {
   return (
     <div className={props.className}>
-      <a href={props.href} target="_blank">
-        <img src={props.source} />
+      <a href={props.href} target="_blank" rel="noreferrer">
+        <img src={props.src} alt={props.src} />
       </a>
     </div>
   );
