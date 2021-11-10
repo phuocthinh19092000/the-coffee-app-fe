@@ -1,0 +1,32 @@
+@import '../../share/assets/scss/variables.scss';
+
+.card {
+  position: absolute !important;
+  display: flex;
+  flex-direction: column;
+  padding: 120px 20px 20px;
+  border: none;
+}
+
+.center {
+  left: calc(50% - 480px / 2);
+  top: calc(50% - 772px / 2);
+  height: 772px;
+  width: 480px;
+  background-color: $grey-4-color;
+}
+
+.right {
+  right: 0;
+  height: 900px;
+  width: 480px;
+  background-color: $white-color;
+}
+
+.shadow {
+  box-shadow: 0px 4px 12px rgba(7, 7, 7, 0.12);
+}
+
+.border {
+  border-radius: 1rem !important;
+}
