@@ -1,7 +1,5 @@
 import React from 'react';
-import './App.css';
-function App() {
+const HomePage = () => {
   return <React.Fragment></React.Fragment>;
-}
-
-export default App;
+};
+export default HomePage;

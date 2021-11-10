@@ -1,0 +1,48 @@
+@import '../../share/assets/scss/variables.scss';
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mb-40 {
+  margin-bottom: 40px;
+}
+
+.mtb-40 {
+  margin: 40px 0px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mlr-10 {
+  margin: 0px 20px;
+}
+.brand-media {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+}
+.display-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  a {
+    color: $accent-color;
+  }
+}
+
+.display-spacing-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.height {
+  height: 15%;
+}

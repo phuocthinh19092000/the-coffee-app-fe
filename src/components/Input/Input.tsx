@@ -1,16 +1,18 @@
 import React from 'react';
-import './Input.scss'
-
+import './Input.scss';
 
 type Props = {
-    src? : string ,
-    placeholder? : string,
-    className? : string,
-}
-const Input = (probs: Props) => {
-    return <div id="input-container" className = {probs.className}>
-                <input placeholder={probs.placeholder}/>
-                <img src={probs.src} alt = {probs.src}  />
-            </div>
-}
-export default Input
+  src?: string;
+  placeholder?: string;
+  className?: string;
+  type?: string;
+};
+const Input = (props: Props) => {
+  return (
+    <div id="input-container" className={props.className}>
+      <input placeholder={props.placeholder} type={props.type} />
+      <img src={props.src} alt={props.src} />
+    </div>
+  );
+};
+export default Input;
