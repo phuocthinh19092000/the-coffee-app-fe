@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.scss';
-import LeftSideBar from './components/LeftSideBar/left-side-bar';
+
 function App() {
   return (
     <div className="App">

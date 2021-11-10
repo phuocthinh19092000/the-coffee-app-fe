@@ -1,7 +1,5 @@
 [
-  {
-    "name": "coffee"
-  },
+  { "name": "coffee" },
   { "name": "tea" },
   { "name": "yogurt" },
   { "name": "smoothies" },
