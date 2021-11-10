@@ -1,7 +1,8 @@
-import React from 'react';
+import ListDrinkItem from './components/ListDrinkItem/list-drink-item';
+import LeftSideBar from './components/LeftSideBar/left-side-bar';
 import './App.css';
 function App() {
-  return <React.Fragment></React.Fragment>;
+  return <></>;
 }
 
 export default App;
