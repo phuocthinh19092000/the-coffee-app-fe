@@ -4,6 +4,14 @@
   margin-top: 20px;
 }
 
+.mt-40 {
+  margin-top: 40px;
+}
+
+.mt-44 {
+  margin-top: 44px;
+}
+
 .mb-20 {
   margin-bottom: 20px;
 }
@@ -14,6 +22,10 @@
 
 .mtb-40 {
   margin: 40px 0px;
+}
+
+.mb-60 {
+  margin-bottom: 60px;
 }
 
 .mt-10 {
@@ -45,4 +57,33 @@
 
 .height {
   height: 15%;
+}
+
+.filter {
+  filter: blur(5px);
+  height: 100%;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header img {
+  height: inherit;
+  margin: 12.45px 0 12.45px 20px;
+}
+.search-input {
+  width: 33.34%;
+  height: 67%;
+}
+
+.header .search-input .img {
+  width: 37.5%;
+  height: 18px;
+}
+
+.header .primary.login {
+  margin-right: 20px;
 }

@@ -6,12 +6,14 @@ type Props = {
   placeholder?: string;
   className?: string;
   type?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  value?: string;
 };
 const Input = (props: Props) => {
   return (
     <div id="input-container" className={props.className}>
-      <input placeholder={props.placeholder} type={props.type} />
-      <img src={props.src} alt={props.src} className="icon-input" />
+      <input placeholder={props.placeholder} type={props.type} onChange={props.onChange} value={props.value} />
+      <img src={props.src} alt={props.src} />
     </div>
   );
 };
