@@ -1,11 +1,10 @@
 @import '../../share/assets/scss/variables.scss';
 
 @mixin size() {
-  width: 440px;
-  height: 56px;
+  width: 100%;
 }
 
-@media only screen and (max-width: 1440px) {
+@media only screen and (min-width: 1440px) {
   button {
     @include size;
     font-size: 16px;
@@ -14,7 +13,7 @@
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 768px) {
   button {
     @include size;
     font-size: 19px;
@@ -30,7 +29,13 @@ button:hover {
 button {
   border-radius: 50px !important;
   border-style: none !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: $white-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .primary {
@@ -57,5 +62,5 @@ button {
   width: 120px;
   height: 48px;
   padding: 14px 16px;
-  background-color: $primary-color;
+  background-color: $accent-color;
 }

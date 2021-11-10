@@ -1,0 +1,22 @@
+.header {
+    display: flex;
+    height: 8%;
+    justify-content: space-between;
+    align-items: center; 
+}
+.header img {
+    height: inherit;
+    margin: 12.45px 0 12.45px 20px  
+}
+ .search-input {
+    width: 33.34%;
+    height: 67%
+}
+.header .search-input .img{
+    width:37.5%;
+    height:18px;     
+}
+.header .primary.login{
+    margin-right: 20px;
+}
+
