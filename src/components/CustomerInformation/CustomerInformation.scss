@@ -1,0 +1,75 @@
+@import '../../share/assets/scss/variables.scss';
+
+.block-customer-information {
+  display: flex;
+  justify-content: inherit;
+  align-items: center;
+  width: 173px;
+  height: 48px;
+  box-shadow: 0px 4px 12px rgba(146, 146, 146, 0.12);
+  border-radius: 50px;
+  background: $white-color;
+  margin-right: 15px;
+}
+
+.block-customer-information:hover {
+  background-color: $grey-4-color;
+  cursor: pointer;
+}
+
+.customer-name {
+  width: 40%;
+  height: 50%;
+  color: $brown-color;
+  margin-left: 18px;
+}
+
+.drop-button {
+  padding: 13px;
+}
+
+.drop-down {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-around;
+  right: 0;
+  position: absolute;
+  z-index: 1;
+  margin-top: 5px;
+  box-shadow: 0px 4px 12px rgba(7, 7, 7, 0.12);
+  border-radius: 8px;
+  width: 236px;
+  height: 264px;
+  padding-top: 12px;
+}
+
+.dropdown-content a {
+  color: black;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 21px;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  text-align: start;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+  color: black;
+}
+
+#user-information {
+  margin-left: 12px;
+}
+
+#accent-color {
+  color: $accent-color;
+}
