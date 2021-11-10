@@ -1,0 +1,24 @@
+.margin-top:first-child {
+  margin-top: 125px;
+}
+.item {
+  border: none;
+  width: 220px;
+  margin-left: 40px;
+  padding: 14px 0px 13px 20px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 23px;
+  display: flex;
+  letter-spacing: 0.25px;
+  margin-bottom: 32px;
+  background-color: #fff;
+}
+
+.item:hover {
+  border: 1px solid #f499c1;
+  box-sizing: border-box;
+  border-radius: 50px;
+  color: #d50f67;
+}
