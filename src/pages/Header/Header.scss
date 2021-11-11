@@ -8,7 +8,7 @@
   flex-direction: row;
 }
 
-.header img {
+.header .logo-header {
   height: inherit;
   margin: 12.45px 0 12.45px 20px;
 }
@@ -27,7 +27,8 @@
   height: 18px;
 }
 
-.header .primary.login {
+.header .primary .login,
+.block-customer-information {
   margin-right: 20px;
 }
 

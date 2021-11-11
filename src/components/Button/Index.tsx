@@ -4,11 +4,12 @@ type Props = {
   className: string;
   titleButton: string;
   type?: string | 'submit';
+  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
 const Button = (props: Props) => {
   return (
-    <button className={props.className} type="submit">
+    <button className={props.className} onClick={props.onClick} type="submit">
       {props.titleButton}
     </button>
   );
