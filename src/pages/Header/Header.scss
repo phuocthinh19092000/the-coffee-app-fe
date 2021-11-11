@@ -1,22 +1,59 @@
+@import '../../share/assets/scss/variables.scss';
+
 .header {
-    display: flex;
-    height: 8%;
-    justify-content: space-between;
-    align-items: center; 
-}
-.header img {
-    height: inherit;
-    margin: 12.45px 0 12.45px 20px  
-}
- .search-input {
-    width: 33.34%;
-    height: 67%
-}
-.header .search-input .img{
-    width:37.5%;
-    height:18px;     
-}
-.header .primary.login{
-    margin-right: 20px;
+  display: flex;
+  height: 8%;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
 }
 
+.header img {
+  height: inherit;
+  margin: 12.45px 0 12.45px 20px;
+}
+
+.header .search-container {
+  align-items: 'center';
+}
+
+.search-input {
+  min-width: 440px;
+  height: 67%;
+}
+
+.header .search-input .img {
+  width: 37.5%;
+  height: 18px;
+}
+
+.header .primary.login {
+  margin-right: 20px;
+}
+
+.search-list {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 68px;
+  width: 440px;
+  background-color: $grey-4-color;
+  border-radius: 8px;
+  padding: 12px;
+  overflow-y: scroll;
+  max-height: 544px;
+}
+
+.search-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+.search-list::-webkit-scrollbar-track {
+  background-color: $black-color;
+}
+
+.search-list::-webkit-scrollbar-thumb {
+  background-color: $grey-4-color;
+  border-radius: 20px;
+  border: 3px solid $black-color;
+}
