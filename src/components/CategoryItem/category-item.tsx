@@ -1,4 +1,4 @@
-import { CategoryType } from '../LeftSideBar/left-side-bar';
+import { CategoryType } from '../CategoryBar/category-bar';
 import './category-item.scss';
 
 type Props = {
