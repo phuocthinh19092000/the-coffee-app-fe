@@ -3,6 +3,7 @@ import './category-bar.scss';
 import CategoryItem from '../CategoryItem/category-item';
 
 export type CategoryType = {
+  id: number;
   name: string;
 };
 

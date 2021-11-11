@@ -7,16 +7,23 @@ import Button from '../../components/Button/Index';
 import './Header.scss';
 import SearchItem from '../../components/SearchItem/SearchItem';
 import DrinkItems from '../../json/seed_products.json';
-type Props = {
+import CustomerInformation from '../../components/CustomerInformation/CustomerInformation';
+type TypeSearchItem = {
   id: number;
   name: string;
   price: number;
   type: string;
 };
-const Header = () => {
+type Props = {
+  className: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  isLoggedIn: boolean;
+  userName: string;
+};
+const Header = (props: Props) => {
   const [value, setValue] = useState('');
   const [displaySearchList, setDisplaySearchList] = useState(false);
-  const [searchList, setSearchList] = useState([{} as Props]);
+  const [searchList, setSearchList] = useState([{} as TypeSearchItem]);
 
   const handleSearchDrink: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setValue(event.target.value);
@@ -34,7 +41,7 @@ const Header = () => {
   }, [value]);
 
   return (
-    <div className="header">
+    <div className={props.className}>
       <img className="logo-header" src={OTSVLogo} alt={OTSVLogo} />
       <div className="search-container">
         <Input
@@ -58,7 +65,11 @@ const Header = () => {
         )}
       </div>
 
-      <Button className="primary login" titleButton="Login" />
+      {props.isLoggedIn ? (
+        <CustomerInformation name={props.userName} />
+      ) : (
+        <Button className="primary login" titleButton="Login" onClick={props.onClick} />
+      )}
     </div>
   );
 };
