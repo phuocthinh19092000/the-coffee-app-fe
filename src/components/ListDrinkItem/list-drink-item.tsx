@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import DrinkItem from '../DrinkItem/drink-item';
-import axios from 'axios';
 import './list-drink-item.scss';
 
 export type DrinkItemType = {
@@ -13,12 +12,6 @@ export type DrinkItemType = {
 
 function ListDrinkItem() {
   const [itemData, setItemData] = useState([] as DrinkItemType[]);
-  useEffect(() => {
-    axios
-      .get('./seed_products.json')
-      .then((res) => setItemData(res.data))
-      .catch((err) => console.log(err));
-  }, []);
 
   return (
     <div className="container">
