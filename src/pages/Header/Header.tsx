@@ -6,10 +6,11 @@ import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Index';
 import './Header.scss';
 import SearchItem from '../../components/SearchItem/SearchItem';
+import CustomerInformation from '../../components/CustomerInformation/CustomerInformation';
 const Header = () => {
   return (
     <div className="header">
-      <img src={OTSVLogo} alt={OTSVLogo} />
+      <img className="logo-header" src={OTSVLogo} alt={OTSVLogo} />
       <div className="search-container">
         <Input placeholder="Search drink" src={SearchVector} className="search-input" />
         <div className="search-list">
@@ -21,6 +22,7 @@ const Header = () => {
           <SearchItem src={CoffeeImg} />
         </div>
       </div>
+
       <Button className="primary login" titleButton="Login" />
     </div>
   );
