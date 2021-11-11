@@ -4,7 +4,7 @@ import ExpandMore from '../../share/assets/vector/ExpandMore.svg';
 import './CustomerInformation.scss';
 
 type Props = {
-  name?: string;
+  name: string;
 };
 
 const CustomerInformation = (props: Props) => {
@@ -30,7 +30,7 @@ const CustomerInformation = (props: Props) => {
   return (
     <div className="block-customer-information" onClick={handleClickInside}>
       <img id="user-information" src={UserInformation} alt="Customer Information" />
-      <span className="customer-name"> {props.name || 'Duy Mai'} </span>
+      <span className="customer-name"> {props.name} </span>
       <div ref={dropdownMenuRef} className="dropdown">
         <img src={ExpandMore} className="drop-button" alt="expand more" onClick={handleClickInside} />
         {isMenuOpen && (
