@@ -35,7 +35,7 @@ const Header = () => {
 
   return (
     <div className="header">
-      <img src={OTSVLogo} alt={OTSVLogo} />
+      <img className="logo-header" src={OTSVLogo} alt={OTSVLogo} />
       <div className="search-container">
         <Input
           placeholder="Search drink"
@@ -57,6 +57,7 @@ const Header = () => {
           </div>
         )}
       </div>
+
       <Button className="primary login" titleButton="Login" />
     </div>
   );
