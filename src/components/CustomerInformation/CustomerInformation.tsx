@@ -2,9 +2,10 @@ import { useState, useRef, useEffect } from 'react';
 import UserInformation from '../../share/assets/vector/UserInformation.svg';
 import ExpandMore from '../../share/assets/vector/ExpandMore.svg';
 import './CustomerInformation.scss';
-
+import PopUpLogOut from '../PopUpLogOut/PopUpLogOut';
 type Props = {
-  name?: string;
+  name: string;
+  onClick: React.MouseEventHandler<HTMLAnchorElement>;
 };
 
 const CustomerInformation = (props: Props) => {
@@ -30,7 +31,7 @@ const CustomerInformation = (props: Props) => {
   return (
     <div className="block-customer-information" onClick={handleClickInside}>
       <img id="user-information" src={UserInformation} alt="Customer Information" />
-      <span className="customer-name"> {props.name || 'Duy Mai'} </span>
+      <span className="customer-name"> {props.name} </span>
       <div ref={dropdownMenuRef} className="dropdown">
         <img src={ExpandMore} className="drop-button" alt="expand more" onClick={handleClickInside} />
         {isMenuOpen && (
@@ -38,7 +39,7 @@ const CustomerInformation = (props: Props) => {
             <a href="/orders">My Orders</a>
             <a href="/user/changeAvatar">Change Avatar</a>
             <a href="/user/changePassword">Change Password</a>
-            <a href="/user/logout" id="accent-color">
+            <a onClick={props.onClick} id="accent-color">
               Log out
             </a>
           </div>

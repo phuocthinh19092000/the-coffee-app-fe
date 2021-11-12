@@ -6,20 +6,23 @@
   flex-direction: column;
   padding: 0px 20px 20px;
   border: none;
+  box-sizing: border-box !important;
+  justify-content: space-between !important;
 }
 
 .center {
   left: calc(50% - 480px / 2);
   top: calc(50% - 772px / 2);
-  height: 772px;
+  height: 85.7%;
   width: 480px;
   background-color: $grey-4-color;
   padding-top: 60px;
 }
 
 .right {
+  top: 0;
   right: 0;
-  height: 900px;
+  height: 100%;
   width: 480px;
   padding-top: 80px;
   background-color: $grey-4-color;
@@ -35,5 +38,5 @@
 
 .content-center {
   align-items: center;
-  justify-content: center;
+  justify-content: center !important;
 }

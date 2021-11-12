@@ -7,11 +7,20 @@ type Props = {
   placeholder?: string;
   className?: string;
   type?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onFocus?: React.FocusEventHandler<HTMLInputElement>;
+  value?: string;
 };
 const Input = (props: Props) => {
   return (
     <div id="input-container" className={props.className}>
-      <input placeholder={props.placeholder} type={props.type} />
+      <input
+        placeholder={props.placeholder}
+        type={props.type}
+        onChange={props.onChange}
+        onFocus={props.onFocus}
+        value={props.value}
+      />
       <img src={props.src} alt={props.src} className="icon-input" />
       {props.src2 && <img src={props.src2} alt={props.src2} className="icon-input" />}
     </div>

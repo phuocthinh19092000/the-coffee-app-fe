@@ -4,6 +4,14 @@
   margin-top: 20px;
 }
 
+.mt-40 {
+  margin-top: 40px;
+}
+
+.mt-44 {
+  margin-top: 44px;
+}
+
 .mb-20 {
   margin-bottom: 20px;
 }
@@ -16,6 +24,10 @@
   margin: 40px 0px;
 }
 
+.mb-60 {
+  margin-bottom: 60px;
+}
+
 .mt-10 {
   margin-top: 10px;
 }
@@ -23,15 +35,18 @@
 .mlr-10 {
   margin: 0px 20px;
 }
+
 .brand-media {
-  margin-top: 80px;
+  margin: 40px 0px 20px 0px;
   display: flex;
+  flex-direction: row;
   justify-content: center;
 }
 .display-center {
   display: flex;
   justify-content: center;
   align-items: center;
+
   a {
     color: $accent-color;
   }
@@ -45,4 +60,8 @@
 
 .height {
   height: 15%;
+}
+
+.filter {
+  filter: blur(5px);
 }
