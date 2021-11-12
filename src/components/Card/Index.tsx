@@ -9,9 +9,7 @@ type Props = {
 };
 
 const Card = (props: Props) => {
-  const { ref, isComponentVisible } = useComponentVisible(true);
-
-  return <div ref={ref}>{isComponentVisible && <div className={props.className}> {props.children} </div>}</div>;
+  return <div className={props.className}> {props.children} </div>;
 };
 
 export default Card;

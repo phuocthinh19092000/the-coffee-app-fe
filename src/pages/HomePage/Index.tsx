@@ -73,7 +73,9 @@ const HomePage = () => {
         {isShowLogin && <Login />}
         {isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
       </div>
-      <ListDrinkItem />
+      <div className={` ${isShowLogin || isShowLogout ? 'filter' : ''}`}>
+        <ListDrinkItem />
+      </div>
     </>
   );
 };
