@@ -1,10 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Login from '../HomePage/Login';
-import Input from '../../components/Input/Input';
-import Button from '../../components/Button/Index';
-import OTSVLogo from '../../share/assets/img/OTSVLogo.png';
-import SearchVector from '../../share/assets/img/SearchVector.png';
-import CustomerInformation from '../../components/CustomerInformation/CustomerInformation';
+import Header from '../../pages/Header/Header';
 import '../HomePage/styles.scss';
 import { useHistory } from 'react-router-dom';
 
@@ -51,15 +47,12 @@ const HomePage = () => {
 
   return (
     <>
-      <div className={`header ${isShowLogin ? 'filter' : ''}`}>
-        <img src={OTSVLogo} alt={OTSVLogo} />
-        <Input placeholder="Search drink" src={SearchVector} className="search-input" />
-        {!user ? (
-          <Button className="primary login" titleButton="Login" onClick={showLogin} />
-        ) : (
-          <CustomerInformation name={user.username} />
-        )}
-      </div>
+      <Header
+        className={`header ${isShowLogin ? 'filter' : ''}`}
+        onClick={showLogin}
+        isLoggedIn={Boolean(user)}
+        userName={user?.username}
+      />
       <div ref={ref}>{isShowLogin && <Login></Login>}</div>
     </>
   );

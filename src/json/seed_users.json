@@ -1,11 +1,38 @@
 [
   {
-    "id": "1",
     "username": "nhatnguyen",
-    "password": "123456"
+    "password": "123456",
+    "fullname": "Nhat Nguyen",
+    "freeunit": 3
   },
-  { "id": "2", "username": "vanchinh", "password": "1234567" },
-  { "id": "3", "username": "phuocthinh", "password": "12345678" },
-  { "id": "4", "username": "thanhnhan", "password": "123456789" },
-  { "id": "5", "username": "linh", "password": "23456789" }
+  {
+    "username": "vanchinh",
+    "password": "1234567",
+    "fullname": "Van Chinh",
+    "freeunit": 3
+  },
+  {
+    "username": "phuocthinh",
+    "password": "12345678",
+    "fullname": "Phuoc Thinh",
+    "freeunit": 3
+  },
+  {
+    "username": "thanhnhan",
+    "password": "123456789",
+    "fullname": "Thanh Nhan",
+    "freeunit": 3
+  },
+  {
+    "username": "linhtran",
+    "password": "23456789",
+    "fullname": "Linh Tran",
+    "freeunit": 3
+  },
+  {
+    "username": "tranphuocthinhdeptraivl",
+    "password": "1",
+    "fullname": "Linh Tran",
+    "freeunit": 3
+  }
 ]
