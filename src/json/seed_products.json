@@ -1,5 +1,5 @@
 [
-  { "id": 1, "name": "Mango yogurt", "price": 19000, "type": "yogurt" },
-  { "id": 2, "name": "Ice Tea", "price": 21000, "type": "tea" },
-  { "id": 3, "name": "Oreo Ice Blended", "price": 35000, "type": "ice blended" }
+  { "id": 1, "name": "Mango yogurt", "price": 19000, "type": "yogurt","image": "./images/blackcoffee.png"},
+  { "id": 2, "name": "Ice Tea", "price": 21000, "type": "tea","image": "./images/blackcoffee.png" },
+  { "id": 3, "name": "Oreo Ice Blended", "price": 35000, "type": "ice blended","image": "./images/blackcoffee.png" }
 ]

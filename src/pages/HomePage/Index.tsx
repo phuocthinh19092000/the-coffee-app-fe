@@ -8,6 +8,7 @@ import SearchVector from '../../share/assets/img/SearchVector.png';
 import CustomerInformation from '../../components/CustomerInformation/CustomerInformation';
 import PopUpLogOut from '../../components/PopUpLogOut/PopUpLogOut';
 import '../HomePage/styles.scss';
+import ListDrinkItem from '../../components/ListDrinkItem/list-drink-item';
 import { useHistory } from 'react-router-dom';
 
 const HomePage = () => {
@@ -72,6 +73,7 @@ const HomePage = () => {
         {isShowLogin && <Login />}
         {isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
       </div>
+      <ListDrinkItem />
     </>
   );
 };
