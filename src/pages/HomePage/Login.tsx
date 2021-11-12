@@ -84,9 +84,9 @@ const Login = () => {
       </div>
       <div>
         <div className="brand-media">
-          <Icon src={FacebookIcon} className="icon"></Icon>
-          <Icon src={InstaIcon} className="icon"></Icon>
-          <Icon src={LinkedinIcon} className="icon"></Icon>
+          <Icon href="https://www.facebook.com/OneTechStopVietnam/" src={FacebookIcon} className="icon"></Icon>
+          <Icon href="https://www.instagram.com/OneTechStopVietnam/" src={InstaIcon} className="icon"></Icon>
+          <Icon href="https://www.linkedin.com/OneTechStopVietnam/" src={LinkedinIcon} className="icon"></Icon>
         </div>
         <div className="display-center">
           <p>ONE TECH STOP VIET NAM</p>
