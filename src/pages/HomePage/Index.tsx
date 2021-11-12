@@ -1,15 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Login from '../HomePage/Login';
 import Header from '../../pages/Header/Header';
-import Input from '../../components/Input/Input';
-import Button from '../../components/Button/Index';
-import OTSVLogo from '../../share/assets/img/OTSVLogo.png';
-import SearchVector from '../../share/assets/img/SearchVector.png';
-import CustomerInformation from '../../components/CustomerInformation/CustomerInformation';
 import PopUpLogOut from '../../components/PopUpLogOut/PopUpLogOut';
 import '../HomePage/styles.scss';
-import ListDrinkItem from '../../components/ListDrinkItem/list-drink-item';
+import ListDrinkItem from '../../components/ListDrinkItem/ListDrinkItem';
 import { useHistory } from 'react-router-dom';
+import image4 from '../../share/assets/img/image4.png';
+import CategoryBar from '../../components/CategoryBar/CategoryBar';
 
 const HomePage = () => {
   let history = useHistory();
@@ -22,7 +19,6 @@ const HomePage = () => {
     return user;
   });
 
-  // Handle outside
   const ref = useRef<HTMLDivElement>(null);
 
   const hideFormHandler = (event: KeyboardEvent) => {
@@ -73,8 +69,17 @@ const HomePage = () => {
         {isShowLogin && <Login />}
         {isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
       </div>
-      <div className={` ${isShowLogin || isShowLogout ? 'filter' : ''}`}>
-        <ListDrinkItem />
+      <div className="background">
+        <img src={image4} alt={image4} className="background-img" />
+      </div>
+
+      <div className="product">
+        <div className="product-left">
+          <CategoryBar />
+        </div>
+        <div className="product-right">
+          <ListDrinkItem />
+        </div>
       </div>
     </>
   );

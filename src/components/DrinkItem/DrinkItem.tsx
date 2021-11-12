@@ -1,4 +1,4 @@
-import './drink-item.scss';
+import './DrinkItem.scss';
 type DrinkItemType = {
   id: number;
   type: string;
@@ -13,11 +13,11 @@ type Props = {
 };
 
 const DrinkItem: React.FC<Props> = ({ item, onClick }) => (
-  <div className="wrapper" onClick={onClick}>
+  <div className="wrapper-drink-item" onClick={onClick}>
     <img src={item.image} alt={item.name} />
     <div>
-      <p className="nameDrink">{item.name}</p>
-      <p>{item.price}</p>
+      <p className="name-drink">{item.name}</p>
+      <p className="price-drink">{item.price}</p>
     </div>
   </div>
 );
