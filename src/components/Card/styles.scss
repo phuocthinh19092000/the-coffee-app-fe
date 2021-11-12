@@ -4,7 +4,7 @@
   position: absolute !important;
   display: flex;
   flex-direction: column;
-  padding: 120px 20px 20px;
+  padding: 0px 20px 20px;
   border: none;
 }
 
@@ -14,12 +14,14 @@
   height: 772px;
   width: 480px;
   background-color: $grey-4-color;
+  padding-top: 60px;
 }
 
 .right {
   right: 0;
   height: 900px;
   width: 480px;
+  padding-top: 80px;
   background-color: $grey-4-color;
 }
 
