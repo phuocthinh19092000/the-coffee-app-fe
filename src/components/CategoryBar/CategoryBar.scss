@@ -1,6 +1,6 @@
 .item {
   border: none;
-  width: 220px;
+  width: 200px;
   height: 50px;
   padding: 14px 44px 13px 20px;
   font-style: normal;
@@ -9,14 +9,17 @@
   line-height: 23px;
   letter-spacing: 0.25px;
   margin-bottom: 32px;
-  background-color: #fff;
+  margin-left: 40px;
 }
+
 .item:first-child {
-  margin-top: 130px;
+  margin-top: 60px;
 }
+
 .item:hover {
   border: 1px solid #f499c1;
   box-sizing: border-box;
   border-radius: 50px;
   color: #d50f67;
+  background-color: #fff3f9;
 }

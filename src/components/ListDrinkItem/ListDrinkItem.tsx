@@ -1,8 +1,8 @@
-import DrinkItem from '../DrinkItem/drink-item';
-import './list-drink-item.scss';
+import DrinkItem from '../DrinkItem/DrinkItem';
+import './ListDrinkItem.scss';
 import { useState, useRef, useEffect } from 'react';
 import DrinkItemDetail from '../DrinkDetail/DrinkItemDetail';
-import ListProduct from '../../json/seed_products.json';
+import DrinkData from '../../json/seed_products.json';
 
 type DrinkItem = {
   id: number;
@@ -37,8 +37,8 @@ function ListDrinkItem() {
   }, [isOpen]);
 
   return (
-    <div className="container" ref={popUpDrinkItemRef}>
-      {ListProduct.map((item) => (
+    <div className="view-list-drink-item" ref={popUpDrinkItemRef}>
+      {DrinkData.map((item) => (
         <DrinkItem item={item} key={item.id} onClick={() => togglePopup(item)} />
       ))}
       {isOpen && <DrinkItemDetail item={itemDrink} onClick={() => togglePopup(itemDrink)} />}
