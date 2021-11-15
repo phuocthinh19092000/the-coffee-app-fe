@@ -39,7 +39,7 @@ const Header = (props: Props) => {
     }
   };
   useEffect(() => {
-    if (value) {
+    if (value.length >= 2) {
       const newSearchList = DrinkItems.filter((drinkItem) =>
         drinkItem.name.toLowerCase().includes(value.toLowerCase()),
       );
