@@ -8,13 +8,12 @@ import './Header.scss';
 import SearchItem from '../../components/SearchItem/SearchItem';
 import DrinkItems from '../../json/seed_products.json';
 import CustomerInformation from '../../components/CustomerInformation/CustomerInformation';
-import useComponentVisible from '../../utils/useComponentVisible';
+
 import { useRef } from 'react';
 type TypeSearchItem = {
   id: number;
   name: string;
   price: number;
-  type: string;
 };
 type Props = {
   className: string;
@@ -49,7 +48,6 @@ const Header = (props: Props) => {
       setDisplaySearchList(false);
     }
   }, [value]);
-  // Handle click outside
   useEffect(() => {
     document.addEventListener('click', clickOutsideHandler, true);
     return () => {

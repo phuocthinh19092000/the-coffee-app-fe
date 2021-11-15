@@ -6,7 +6,7 @@ import DrinkData from '../../json/seed_products.json';
 
 type DrinkItem = {
   id: number;
-  type: string;
+  categoryID: number;
   name: string;
   image: string;
   price: number;
@@ -20,6 +20,10 @@ function ListDrinkItem() {
     setItemDrink(item);
   };
 
+  let categoryType = localStorage.getItem('category');
+  console.log(categoryType);
+  const drinkType = categoryType ? JSON.parse(categoryType) : 1;
+  console.log(drinkType);
   const popUpDrinkItemRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: Event) => {
@@ -38,7 +42,7 @@ function ListDrinkItem() {
 
   return (
     <div className="view-list-drink-item" ref={popUpDrinkItemRef}>
-      {DrinkData.map((item) => (
+      {DrinkData.filter((type) => type.categoryID === drinkType).map((item) => (
         <DrinkItem item={item} key={item.id} onClick={() => togglePopup(item)} />
       ))}
       {isOpen && <DrinkItemDetail item={itemDrink} onClick={() => togglePopup(itemDrink)} />}

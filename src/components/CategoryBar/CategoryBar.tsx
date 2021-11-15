@@ -6,15 +6,21 @@ export type CategoryType = {
   id: number;
   name: string;
 };
-const getCategoryItem = (categoryData: CategoryType[]) => {
-  return categoryData.map((item) => (
-    <div key={item.id} className="item">
-      <CategoryItem item={item} />
-    </div>
-  ));
-};
+
 function CategoryBar() {
-  return <div>{CategoryData && getCategoryItem(CategoryData as CategoryType[])}</div>;
+  const setCategory = (item: CategoryType) => {
+    localStorage.setItem('category', JSON.stringify(item.id));
+    // console.log(typeof localStorage.getItem('category'));
+  };
+  return (
+    <div>
+      {CategoryData.map((item) => (
+        <div key={item.id} className="category-item" onClick={() => setCategory(item)}>
+          <CategoryItem item={item} />
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default CategoryBar;
