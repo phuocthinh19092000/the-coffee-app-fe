@@ -1,7 +1,7 @@
 import './DrinkItem.scss';
 type DrinkItemType = {
   id: number;
-  type: string;
+  categoryID: number;
   name: string;
   image: string;
   price: number;

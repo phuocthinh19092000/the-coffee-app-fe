@@ -1,60 +1,60 @@
 [
-  { "id": 1, "name": "Mango yogurt", "price": 19000, "type": "yogurt", "image": "../../images/blackcoffee.png" },
-  { "id": 2, "name": "Ice Tea", "price": 21000, "type": "tea", "image": "../../images/blackcoffee.png" },
+  { "id": 1, "name": "Mango yogurt", "price": 19000, "categoryID": 1, "image": "../../images/blackcoffee.png" },
+  { "id": 2, "name": "Ice Tea", "price": 21000, "categoryID": 2, "image": "../../images/blackcoffee.png" },
   {
     "id": 3,
     "name": "Oreo Ice Blended",
     "price": 35000,
-    "type": "ice blended",
+    "categoryID": 3,
     "image": "../../images/blackcoffee.png"
   },
   {
     "id": 4,
     "name": "Black Coffee",
     "price": 35000,
-    "type": "cafe",
+    "categoryID": 4,
     "image": "../../images/blackcoffee.png"
   },
   {
     "id": 5,
     "name": "Milk Coffee",
     "price": 35000,
-    "type": "cafe",
+    "categoryID": 4,
     "image": "../../images/blackcoffee.png"
   },
   {
     "id": 6,
     "name": "Saigon Milk Coffee",
-    "price": 35000,
-    "type": "cafe",
+    "price": 12345678900000000,
+    "categoryID": 4,
     "image": "../../images/blackcoffee.png"
   },
   {
     "id": 7,
     "name": "Bold Brew",
     "price": 35000,
-    "type": "cafe",
+    "categoryID": 4,
     "image": "../../images/blackcoffee.png"
   },
   {
     "id": 8,
     "name": "Espresso",
     "price": 35000,
-    "type": "cafe",
+    "categoryID": 4,
     "image": "../../images/blackcoffee.png"
   },
   {
     "id": 9,
     "name": "Espresso",
     "price": 35000,
-    "type": "cafe",
+    "categoryID": 4,
     "image": "../../images/blackcoffee.png"
   },
   {
     "id": 10,
     "name": "Espresso",
     "price": 35000,
-    "type": "cafe",
+    "categoryID": 4,
     "image": "../../images/blackcoffee.png"
   }
 ]

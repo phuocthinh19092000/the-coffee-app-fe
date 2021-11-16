@@ -2,17 +2,20 @@ import DrinkItem from '../DrinkItem/DrinkItem';
 import './ListDrinkItem.scss';
 import { useState, useRef, useEffect } from 'react';
 import DrinkItemDetail from '../DrinkDetail/DrinkItemDetail';
-import DrinkData from '../../json/seed_products.json';
+
 
 type DrinkItem = {
   id: number;
-  type: string;
+  categoryID: number;
   name: string;
   image: string;
   price: number;
 };
+type Props = {
+  listDrink: DrinkItem[]
+}
 
-function ListDrinkItem() {
+function ListDrinkItem(props:Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [itemDrink, setItemDrink] = useState({} as DrinkItem);
   const togglePopup = (item: DrinkItem) => {
@@ -38,9 +41,7 @@ function ListDrinkItem() {
 
   return (
     <div className="view-list-drink-item" ref={popUpDrinkItemRef}>
-      {DrinkData.map((item) => (
-        <DrinkItem item={item} key={item.id} onClick={() => togglePopup(item)} />
-      ))}
+      {props.listDrink.map((item) => (<DrinkItem item={item} key={item.id} onClick={() => togglePopup(item)} />))}
       {isOpen && <DrinkItemDetail item={itemDrink} onClick={() => togglePopup(itemDrink)} />}
     </div>
   );
