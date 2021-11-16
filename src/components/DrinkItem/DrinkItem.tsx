@@ -17,7 +17,7 @@ const DrinkItem: React.FC<Props> = ({ item, onClick }) => (
     <img src={item.image} alt={item.name} />
     <div>
       <p className="name-drink">{item.name}</p>
-      <p className="price-drink">{item.price}</p>
+      <p className="price-drink">{item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
     </div>
   </div>
 );
