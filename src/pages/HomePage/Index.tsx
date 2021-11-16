@@ -55,16 +55,8 @@ const HomePage = () => {
     setIsShowLogout(!isShowLogout);
   };
 
-  useEffect(() => {
-    if (isShowLogout || isShowLogin) {
-      document.body.classList.add('disabled-scrollbar-Y');
-    } else {
-      document.body.classList.remove('disabled-scrollbar-Y');
-    }
-  }, [isShowLogin, isShowLogout]);
-
   return (
-    <div className={isShowLogin || isShowLogout ? 'disable-scrollbar' : ''}>
+    <>
       <Header
         className={`header ${isShowLogin || isShowLogout ? 'filter' : ''}`}
         onClick={showLogin}
@@ -72,7 +64,6 @@ const HomePage = () => {
         userName={user?.username}
         onClickShowLogOut={showPopUpLogoutHandler}
       />
-
       <div ref={ref}>
         {isShowLogin && <Login />}
         {isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
@@ -81,7 +72,6 @@ const HomePage = () => {
         <div className="background">
           <img src={image4} alt={image4} className="background-img" />
         </div>
-
         <div className="product">
           <div className="product-left">
             <CategoryBar />
@@ -91,7 +81,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default HomePage;
