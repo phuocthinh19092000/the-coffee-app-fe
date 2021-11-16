@@ -7,12 +7,15 @@ import ListDrinkItem from '../../components/ListDrinkItem/ListDrinkItem';
 import { useHistory } from 'react-router-dom';
 import image4 from '../../share/assets/img/image4.png';
 import CategoryBar from '../../components/CategoryBar/CategoryBar';
+import React from 'react';
+import DrinkData from '../../json/seed_products.json';
 
 const HomePage = () => {
   let history = useHistory();
 
   const [isShowLogin, setIsShowLogin] = useState(false);
   const [isShowLogout, setIsShowLogout] = useState(false);
+  const [listDrink, setListDrink] = useState(() => DrinkData.filter((itemDrink) => itemDrink.id === 1));
   const [user, setUser] = useState(() => {
     const userJson = localStorage.getItem('user');
     const user = userJson && JSON.parse(userJson);
@@ -54,6 +57,9 @@ const HomePage = () => {
   const showPopUpLogoutHandler = () => {
     setIsShowLogout(!isShowLogout);
   };
+  const handelSetCategory = (id: number) => {
+    setListDrink(DrinkData.filter((item) => item.categoryID === id));
+  };
 
   useEffect(() => {
     if (isShowLogout || isShowLogin) {
@@ -84,10 +90,10 @@ const HomePage = () => {
 
         <div className="product">
           <div className="product-left">
-            <CategoryBar />
+            <CategoryBar onGetIdHandler={handelSetCategory} />
           </div>
           <div className="product-right">
-            <ListDrinkItem />
+            <ListDrinkItem listDrink={listDrink} />
           </div>
         </div>
       </div>

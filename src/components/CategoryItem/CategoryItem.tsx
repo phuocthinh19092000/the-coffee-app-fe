@@ -3,11 +3,10 @@ import './CategoryItem.scss';
 
 type Props = {
   item: CategoryType;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
 };
 
-const CategoryItem: React.FC<Props> = ({ item, onClick }) => (
-  <div className="wrapper-category" onClick={onClick}>
+const CategoryItem: React.FC<Props> = ({ item }) => (
+  <div className="wrapper-category">
     <p className="name-category">{item.name}</p>
   </div>
 );
