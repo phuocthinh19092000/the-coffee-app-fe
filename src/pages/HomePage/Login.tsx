@@ -11,12 +11,9 @@ import LinkedinIcon from '../../share/assets/vector/VectorLinkedin.svg';
 import UserIcon from '../../share/assets/vector/User.svg';
 import EyeIcon from '../../share/assets/vector/Eye.svg';
 import usersData from '../../json/seed_users.json';
-
 import './styles.scss';
 
 const Login = () => {
-  const history = useHistory();
-
   const [enteredUserName, setEnteredUserName] = useState('');
   const userNameChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setEnteredUserName(event.target.value);
@@ -42,7 +39,7 @@ const Login = () => {
 
     if (user !== undefined) {
       localStorage.setItem('user', JSON.stringify(user));
-      history.push('/');
+
       return;
     }
 

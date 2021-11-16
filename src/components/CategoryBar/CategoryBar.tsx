@@ -9,13 +9,18 @@ export type CategoryType = {
 };
 type Props = {
   onGetIdHandler(id: number): void;
+  selectedCategoryId: number;
 };
 
 function CategoryBar(props: Props) {
   return (
     <div>
       {CategoryData.map((item) => (
-        <div key={item.id} className="category-item" onClick={() => props.onGetIdHandler(item.id)}>
+        <div
+          key={item.id}
+          className={item.id === props.selectedCategoryId ? 'category-item active' : 'category-item'}
+          onClick={() => props.onGetIdHandler(item.id)}
+        >
           <CategoryItem item={item} />
         </div>
       ))}

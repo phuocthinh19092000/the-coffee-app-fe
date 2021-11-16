@@ -6,7 +6,6 @@ function App() {
     <Router>
       <Switch>
         <Route path="/" component={HomePage}></Route>
-        <Route path="/login" component={HomePage}></Route>
       </Switch>
     </Router>
   );

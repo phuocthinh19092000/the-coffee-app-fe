@@ -18,7 +18,7 @@ type DrinkItemType = {
 };
 type Props = {
   item: DrinkItemType;
-  onClick: React.MouseEventHandler<HTMLImageElement>;
+  onClick?: React.MouseEventHandler<HTMLImageElement>;
 };
 
 function DrinkItemDetail(props: Props) {

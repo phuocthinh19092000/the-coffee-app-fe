@@ -12,9 +12,9 @@
 }
 
 .center {
-  position: relative;
+  position: fixed !important;
   left: 35%;
-  top: 50%;
+  top: 5%;
   height: 85.7%;
   width: 480px;
   background-color: $grey-4-color;
