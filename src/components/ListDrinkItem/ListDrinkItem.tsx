@@ -2,6 +2,8 @@ import DrinkItem from '../DrinkItem/DrinkItem';
 import './ListDrinkItem.scss';
 import { useState, useRef, useEffect } from 'react';
 import DrinkItemDetail from '../DrinkDetail/DrinkItemDetail';
+// Import to use PopUpFinishOrder component
+// import PopUpFinishOrder from '../PopUpFinishOrder/PopUpFinishOrder';
 
 type DrinkItem = {
   id: number;
@@ -45,6 +47,9 @@ function ListDrinkItem(props: Props) {
         <DrinkItem item={item} key={item.id} onClick={() => togglePopup(item)} />
       ))}
       {isOpen && <DrinkItemDetail item={itemDrink} onClick={() => togglePopup(itemDrink)} />}
+
+      {/* Click Drink Item to show Popup Finish Order */}
+      {/* {isOpen && <PopUpFinishOrder onClick={() => togglePopup(itemDrink)} />} */}
     </div>
   );
 }
