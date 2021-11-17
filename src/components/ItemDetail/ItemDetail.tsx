@@ -7,8 +7,8 @@ type Props = {
 const ItemDetail = (props: Props) => {
   return (
     <div className={props.className}>
-      <p className="item-name">{props.name || 'Coffee'}</p>
-      <p className="item-price">{props.price || '20.000'}</p>
+      <p className="search-detail__name">{props.name || 'Coffee'}</p>
+      <p className="search-detail__price">{props.price || '20.000'}</p>
     </div>
   );
 };
