@@ -14,11 +14,20 @@ const PopUpLogOut = (props: Props) => {
   };
 
   return (
-    <Card className="card right content-center">
+    <Card className="card card--right card__content">
       <span id="span-log-out"> Are you sure you want to log out ?</span>
-
-      <Button onClick={LogOutHandler} className="button primary enabled logout" type="submit" titleButton="LOGOUT" />
-      <Button onClick={props.onClick} className="button primary secondary logout" type="submit" titleButton="CANCEL" />
+      <Button
+        onClick={LogOutHandler}
+        className="btn btn-primary btn--enabled btn-logout"
+        type="submit"
+        titleButton="LOGOUT"
+      />
+      <Button
+        onClick={props.onClick}
+        className="btn btn-primary btn-secondary btn-logout"
+        type="submit"
+        titleButton="CANCEL"
+      />
     </Card>
   );
 };

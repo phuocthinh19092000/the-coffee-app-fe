@@ -49,7 +49,7 @@ const Login = () => {
   };
 
   return (
-    <Card className={`card right`}>
+    <Card className={`card card-login card--right`}>
       <div>
         <img src={LoginIcon} alt="" />
         <div>
@@ -70,10 +70,12 @@ const Login = () => {
               value={enteredPassword}
               onChange={passwordChangeHandler}
             />
-            <Button className={`primary ${isValid ? 'enabled' : 'disabled'}`} titleButton="Login" />
+            <div>
+              <Button className={`btn btn-primary ${isValid ? 'btn--enabled' : 'btn--disabled'}`} titleButton="Login" />
+            </div>
           </form>
         </div>
-        <div className="display-center">
+        <div className="card__content">
           <a href="XXX" target="_blank" rel="noreferrer">
             Forget Password?
           </a>
@@ -85,7 +87,7 @@ const Login = () => {
           <Icon href="https://www.instagram.com/OneTechStopVietnam/" src={InstaIcon} className="icon"></Icon>
           <Icon href="https://www.linkedin.com/OneTechStopVietnam/" src={LinkedinIcon} className="icon"></Icon>
         </div>
-        <div className="display-center">
+        <div className="card__content">
           <p>ONE TECH STOP VIET NAM</p>
         </div>
       </div>
