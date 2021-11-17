@@ -85,7 +85,7 @@ const Header = (props: Props) => {
       {props.isLoggedIn ? (
         <CustomerInformation name={props.userName} onClick={props.onClickShowLogOut} />
       ) : (
-        <Button className="primary login" titleButton="Login" onClick={props.onClick} />
+        <Button className="btn btn-primary btn-login" titleButton="Login" onClick={props.onClick} />
       )}
     </div>
   );

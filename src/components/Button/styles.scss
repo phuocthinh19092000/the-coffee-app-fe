@@ -1,72 +1,47 @@
 @import '../../share/assets/scss/variables.scss';
 
-@mixin size() {
-  width: 100%;
-}
-
-@media only screen and (min-width: 1440px) {
-  button {
-    @include size;
-    font-size: 16px;
-    line-height: 21px;
-    padding: 18px 16px 17px;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  button {
-    @include size;
-    font-size: 19px;
-    line-height: 24px;
-    padding: 16px;
-  }
-}
-
 button:hover {
   color: $black-color;
 }
 
-button {
-  border-radius: 50px !important;
-  border-style: none !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: $white-color;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.primary {
-  box-shadow: 0px 4px 12px rgba(189, 15, 114, 0.3);
+@mixin theme($shadow-color, $color) {
+  box-shadow: 0px 4px 12px $shadow-color;
   margin: 12px 0px;
-  color: $white-color;
+  color: $color;
 }
 
-.secondary {
-  box-shadow: 0px 4px 12px rgba(7, 7, 7, 0.12);
-  margin: 12px 0px;
-  color: $black-color;
-}
-
-.enabled {
-  background-color: $accent-color;
-}
-
-.disabled {
-  background-color: $accent-third-color;
-}
-
-.login {
-  width: 120px;
-  height: 48px;
-  padding: 14px 16px;
-  background-color: $accent-color;
-}
-
-.btn-logout {
-  width: 453px;
+.btn {
   height: 56px;
-  padding: 18px 16px 17px 16px;
+  border-radius: 50px;
+  border-style: none;
+  background-color: $white-color;
+  font-size: 16px;
+  line-height: 21px;
+
+  &-primary {
+    @include theme(rgba(189, 15, 114, 0.3), $white-color);
+  }
+
+  &-secondary {
+    @include theme(rgba(7, 7, 7, 0.12), $black-color);
+  }
+
+  &--enabled {
+    background-color: $accent-color;
+  }
+
+  &--disabled {
+    background-color: $accent-third-color;
+  }
+
+  &-login {
+    width: 120px;
+    height: 48px;
+    padding: 14px 16px;
+    background-color: $accent-color;
+  }
+
+  &-logout {
+    width: 453px;
+  }
 }

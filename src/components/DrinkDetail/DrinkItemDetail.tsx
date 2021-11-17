@@ -23,7 +23,7 @@ type Props = {
 
 function DrinkItemDetail(props: Props) {
   return (
-    <Card className="card center shadow border background-color">
+    <Card className="card card--center">
       <a>
         <img src={Exit} className="iconExit" onClick={props.onClick}></img>
       </a>
@@ -32,7 +32,7 @@ function DrinkItemDetail(props: Props) {
       </div>
       <Input placeholder="Quanlity: " src={Subtraction} src2={Summation} className="margin-bottom mt-100" />
       <Input placeholder="Note" src={Edit} className="margin-bottom" />
-      <Button className="primary enabled mt-115 " titleButton="PLACE ORDER" />
+      <Button className="btn btn-primary btn--enabled mt-115 " titleButton="PLACE ORDER" />
     </Card>
   );
 }

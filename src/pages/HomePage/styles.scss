@@ -43,22 +43,6 @@
   justify-content: center;
 }
 
-.display-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  a {
-    color: $accent-color;
-  }
-}
-
-.display-spacing-center {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .height {
   height: 15%;
 }
@@ -93,11 +77,20 @@
   &-left {
     width: 256px;
     height: 100%;
-    border-right: 1px solid #cccccc;
   }
 
   &-right {
     width: 1184px;
     height: 100%;
+    border-left: 1px solid #cccccc;
+  }
+}
+
+.card__content {
+  justify-content: center;
+  align-items: center;
+
+  a {
+    color: $accent-color;
   }
 }
