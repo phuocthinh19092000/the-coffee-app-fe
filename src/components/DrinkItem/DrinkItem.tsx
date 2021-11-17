@@ -12,14 +12,16 @@ type Props = {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 };
 
-const DrinkItem: React.FC<Props> = ({ item, onClick }) => (
-  <div className="wrapper-drink-item" onClick={onClick}>
-    <img src={item.image} alt={item.name} />
-    <div>
-      <p className="name-drink">{item.name}</p>
-      <p className="price-drink">{item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
+function DrinkItem(props: Props) {
+  return (
+    <div className="drink-item" onClick={props.onClick}>
+      <img src={props.item.image} alt={props.item.name} />
+      <div>
+        <p className="drink-item__name">{props.item.name}</p>
+        <p className="drink-item__price">{props.item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
+      </div>
     </div>
-  </div>
-);
+  );
+}
 
 export default DrinkItem;

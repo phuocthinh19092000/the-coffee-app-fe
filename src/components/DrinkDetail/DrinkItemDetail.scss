@@ -1,3 +1,5 @@
+@import '../../share/assets/scss/variables.scss';
+
 .iconExit {
   width: 18px;
   height: 18px;
@@ -7,7 +9,7 @@
 }
 
 .background-color {
-  background-color: #fff !important;
+  background-color: $white-color !important;
 }
 
 .ta-center {

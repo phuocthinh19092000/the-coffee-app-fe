@@ -29,7 +29,7 @@ function PopUpFinishOrder(props: Props) {
   }, [isOpen]);
   // ---------------------------------------------------------------- //
   return (
-    <Card className="card center shadow border card-confirm-order">
+    <Card className="card card--center card-confirm-order">
       <a>
         <img src={Exit} className="card-confirm-order__exit" onClick={props.onClick}></img>
       </a>
@@ -39,7 +39,7 @@ function PopUpFinishOrder(props: Props) {
       <h2 className="card-confirm-order__title">ORDER PLACED!</h2>
       <p className="card-confirm-order__description">You will be notified to pick up when drink is ready.</p>
 
-      <Button className="primary enabled card-confirm-order_button " titleButton="OKAY, I SEE" />
+      <Button className="btn btn-primary btn--enabled card-confirm-order__button " titleButton="OKAY, I SEE" />
     </Card>
   );
 }
