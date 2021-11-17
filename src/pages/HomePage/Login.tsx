@@ -10,16 +10,24 @@ import InstaIcon from '../../share/assets/vector/VectorInsta.svg';
 import LinkedinIcon from '../../share/assets/vector/VectorLinkedin.svg';
 import UserIcon from '../../share/assets/vector/User.svg';
 import EyeIcon from '../../share/assets/vector/Eye.svg';
+import CloseEyeIcon from '../../share/assets/img/close-eye.png';
 import usersData from '../../json/seed_users.json';
 import './styles.scss';
 
 const Login = () => {
   const [enteredUserName, setEnteredUserName] = useState('');
+
   const userNameChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setEnteredUserName(event.target.value);
   };
 
   const [enteredPassword, setEnteredPassword] = useState('');
+
+  const [isShowPassword, setIsShowPassword] = useState(false);
+
+  const passwordShowHandler = () => {
+    setIsShowPassword(!isShowPassword);
+  };
   const passwordChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setEnteredPassword(event.target.value);
   };
@@ -63,12 +71,13 @@ const Login = () => {
               onChange={userNameChangeHandler}
             />
             <Input
-              type="password"
+              type={isShowPassword ? 'text' : 'password'}
               placeholder="password"
               className="type-input login-input"
-              src={EyeIcon}
+              src={isShowPassword ? CloseEyeIcon : EyeIcon}
               value={enteredPassword}
               onChange={passwordChangeHandler}
+              onClickFirstIcon={passwordShowHandler}
             />
             <Button className={`primary ${isValid ? 'enabled' : 'disabled'}`} titleButton="Login" />
           </form>

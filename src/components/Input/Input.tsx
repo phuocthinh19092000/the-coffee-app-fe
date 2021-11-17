@@ -9,6 +9,8 @@ type Props = {
   type?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
+  onClickFirstIcon?: React.MouseEventHandler<HTMLImageElement>;
+  onClickSecondIcon?: React.MouseEventHandler<HTMLImageElement>;
   value?: string;
 };
 const Input = (props: Props) => {
@@ -21,8 +23,8 @@ const Input = (props: Props) => {
         onFocus={props.onFocus}
         value={props.value}
       />
-      <img src={props.src} alt={props.src} className="icon-input" />
-      {props.src2 && <img src={props.src2} alt={props.src2} className="icon-input" />}
+      <img src={props.src} alt={props.src} className="icon-input" onClick={props.onClickFirstIcon} />
+      {props.src2 && <img src={props.src2} alt={props.src2} className="icon-input" onClick={props.onClickSecondIcon} />}
     </div>
   );
 };
