@@ -8,7 +8,7 @@ import Input from '../Input/Input';
 import '../DrinkDetail/DrinkItemDetail.scss';
 import DrinkItem from '../DrinkItem/DrinkItem';
 import DrinkItemType from '../ListDrinkItem/ListDrinkItem';
-
+import { useState } from 'react';
 type DrinkItemType = {
   id: number;
   categoryID: number;
@@ -22,6 +22,23 @@ type Props = {
 };
 
 function DrinkItemDetail(props: Props) {
+  const [quantity, setQuantity] = useState(1);
+
+  const onSubOneUnit = () => {
+    if (quantity === 1) {
+      return;
+    }
+    setQuantity(quantity - 1);
+  };
+
+  const onPlusOneUnit = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const onChangeInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuantity(event.target.valueAsNumber);
+  };
+
   return (
     <Card className="card card--center">
       <a>
@@ -30,7 +47,17 @@ function DrinkItemDetail(props: Props) {
       <div className="ta-center">
         <DrinkItem item={props.item} />
       </div>
-      <Input placeholder="Quanlity: " src={Subtraction} src2={Summation} className="margin-bottom mt-100" />
+      <Input
+        placeholder="Quanlity: "
+        src={Subtraction}
+        src2={Summation}
+        className="margin-bottom mt-100"
+        type="number"
+        value={quantity}
+        onChange={onChangeInputHandler}
+        onClickFirstIcon={onPlusOneUnit}
+        onClickSecondIcon={onSubOneUnit}
+      />
       <Input placeholder="Note" src={Edit} className="margin-bottom" />
       <Button className="btn btn-primary btn--enabled mt-115 " titleButton="PLACE ORDER" />
     </Card>

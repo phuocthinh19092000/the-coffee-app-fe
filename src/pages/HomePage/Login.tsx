@@ -85,7 +85,7 @@ const Login = () => {
           </form>
         </div>
         <div className="card__content">
-          <a href="XXX" target="_blank" rel="noreferrer">
+          <a className="card__content--accent" href="XXX" target="_blank" rel="noreferrer">
             Forget Password?
           </a>
         </div>
