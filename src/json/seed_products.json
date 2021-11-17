@@ -43,7 +43,7 @@
   },
   {
     "id": 7,
-    "name": "Bold Brew",
+    "name": "Cold Brew",
     "price": 35000,
     "categoryID": 4,
     "image": "../../images/blackcoffee.png"
