@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import UserInformation from '../../share/assets/vector/UserInformation.svg';
 import ExpandMore from '../../share/assets/vector/ExpandMore.svg';
 import './CustomerInformation.scss';
-import PopUpLogOut from '../PopUpLogOut/PopUpLogOut';
+
 type Props = {
   name: string;
   onClick: React.MouseEventHandler<HTMLAnchorElement>;
@@ -10,7 +10,9 @@ type Props = {
 
 const CustomerInformation = (props: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const handleClickInside = () => setIsMenuOpen(!isMenuOpen);
+  const handleClickInside = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const dropdownMenuRef = useRef<HTMLDivElement>(null);
 
@@ -21,25 +23,31 @@ const CustomerInformation = (props: Props) => {
   };
 
   useEffect(() => {
-    document.addEventListener('click', handleClickOutside, true);
+    document.addEventListener('click', handleClickOutside);
 
     return () => {
-      document.removeEventListener('click', handleClickOutside, true);
+      document.removeEventListener('click', handleClickOutside);
     };
   }, [isMenuOpen]);
 
   return (
-    <div className="block-customer-information" onClick={handleClickInside}>
-      <img id="user-information" src={UserInformation} alt="Customer Information" />
-      <span className="customer-name"> {props.name} </span>
-      <div ref={dropdownMenuRef} className="dropdown">
-        <img src={ExpandMore} className="drop-button" alt="expand more" onClick={handleClickInside} />
+    <div ref={dropdownMenuRef} className="block-customer-information" onClick={handleClickInside}>
+      <img className="block-customer-information__img" src={UserInformation} alt="Customer Information" />
+      <span className="block-customer-information__span">{props.name}</span>
+      <div className="menu-dropdown">
+        <img src={ExpandMore} className="menu-dropdown__img" alt="expand more" />
         {isMenuOpen && (
-          <div className="dropdown-content">
-            <a href="/orders">My Orders</a>
-            <a href="/user/changeAvatar">Change Avatar</a>
-            <a href="/user/changePassword">Change Password</a>
-            <a onClick={props.onClick} id="accent-color">
+          <div className="menu-dropdown__content">
+            <a className="menu-dropdown__item" href="/orders">
+              My Orders
+            </a>
+            <a className="menu-dropdown__item" href="/user/changeAvatar">
+              Change Avatar
+            </a>
+            <a className="menu-dropdown__item" href="/user/changePassword">
+              Change Password
+            </a>
+            <a className="menu-dropdown__item menu-dropdown__item--accent" onClick={props.onClick} id="accent-color">
               Log out
             </a>
           </div>
