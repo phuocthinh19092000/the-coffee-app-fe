@@ -93,11 +93,11 @@
   &-left {
     width: 256px;
     height: 100%;
+    border-right: 1px solid #cccccc;
   }
 
   &-right {
     width: 1184px;
     height: 100%;
-    border-left: 1px solid #cccccc;
   }
 }

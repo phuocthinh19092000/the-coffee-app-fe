@@ -4,18 +4,16 @@ import Header from '../../pages/Header/Header';
 import PopUpLogOut from '../../components/PopUpLogOut/PopUpLogOut';
 import '../HomePage/styles.scss';
 import ListDrinkItem from '../../components/ListDrinkItem/ListDrinkItem';
-import { useHistory } from 'react-router-dom';
 import image4 from '../../share/assets/img/image4.png';
 import CategoryBar from '../../components/CategoryBar/CategoryBar';
 import React from 'react';
 import DrinkData from '../../json/seed_products.json';
 
 const HomePage = () => {
-  let history = useHistory();
-
   const [isShowLogin, setIsShowLogin] = useState(false);
   const [isShowLogout, setIsShowLogout] = useState(false);
-  const [listDrink, setListDrink] = useState(() => DrinkData.filter((itemDrink) => itemDrink.id === 1));
+  const [listDrink, setListDrink] = useState(DrinkData.filter((drink) => drink.id === 1));
+  const [categoryIdSelected, setCategoryIdSelected] = useState(1);
   const [user, setUser] = useState(() => {
     const userJson = localStorage.getItem('user');
     const user = userJson && JSON.parse(userJson);
@@ -28,7 +26,6 @@ const HomePage = () => {
     if (event.key === 'Escape' || event.key === 'Esc') {
       setIsShowLogin(false);
       setIsShowLogout(false);
-      history.push('/');
     }
   };
 
@@ -36,7 +33,6 @@ const HomePage = () => {
     if (ref.current && !ref.current.contains(event.target as Node)) {
       setIsShowLogin(false);
       setIsShowLogout(false);
-      history.push('/');
     }
   };
 
@@ -51,7 +47,6 @@ const HomePage = () => {
 
   const showLogin = () => {
     setIsShowLogin(!isShowLogin);
-    history.push('/login');
   };
 
   const showPopUpLogoutHandler = () => {
@@ -59,6 +54,7 @@ const HomePage = () => {
   };
   const handelSetCategory = (id: number) => {
     setListDrink(DrinkData.filter((item) => item.categoryID === id));
+    setCategoryIdSelected(id);
   };
 
   return (
@@ -80,7 +76,7 @@ const HomePage = () => {
         </div>
         <div className="product">
           <div className="product-left">
-            <CategoryBar onGetIdHandler={handelSetCategory} />
+            <CategoryBar onGetIdHandler={handelSetCategory} selectedCategoryId={categoryIdSelected} />
           </div>
           <div className="product-right">
             <ListDrinkItem listDrink={listDrink} />
