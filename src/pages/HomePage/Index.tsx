@@ -93,7 +93,7 @@ const HomePage = () => {
           <div className="product-left">
             <CategoryBar onGetIdHandler={handelSetCategory} selectedCategoryId={categoryIdSelected} />
           </div>
-          <div className="product-right">
+          <div className="product-right" >
             <ListDrinkItem listDrink={listDrink} />
           </div>
         </div>
