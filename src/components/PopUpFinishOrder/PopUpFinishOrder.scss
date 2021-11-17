@@ -1,0 +1,46 @@
+@import '../../share/assets/scss/variables.scss';
+
+.card-confirm-order {
+  padding-top: -80px !important;
+  justify-content: center;
+  align-items: center;
+
+  &__exit {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 35px;
+    right: 35px;
+    cursor: pointer;
+  }
+
+  &__img {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -60px !important;
+
+    &--style {
+      margin-top: -60px;
+    }
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 30px;
+    margin-top: -195px;
+  }
+
+  &__description {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 21px;
+    margin-top: -180px;
+  }
+
+  &__button {
+    margin-bottom: 40px;
+  }
+}

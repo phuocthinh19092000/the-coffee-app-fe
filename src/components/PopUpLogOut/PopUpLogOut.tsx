@@ -2,7 +2,6 @@ import React from 'react';
 import './PopUpLogOut.scss';
 import Card from '../Card/Index';
 import Button from '../Button/Index';
-import { useState } from 'react';
 
 type Props = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
