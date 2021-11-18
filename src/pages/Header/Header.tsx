@@ -63,7 +63,7 @@ const Header = (props: Props) => {
         <Input
           placeholder="Search drink"
           src={SearchVector}
-          className="search-input"
+          className="block-input"
           value={value}
           onChange={handleSearchDrink}
         />

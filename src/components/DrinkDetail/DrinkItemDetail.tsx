@@ -40,29 +40,25 @@ function DrinkItemDetail(props: Props) {
   };
 
   return (
-    <div className="card-item-detail--blur">
-      <Card className="card card--center">
-        <a>
-          <img src={Exit} className="iconExit" onClick={props.onClick}></img>
-        </a>
-        <div className="ta-center">
-          <DrinkItem item={props.item} />
-        </div>
-        <Input
-          placeholder="Quanlity: "
-          src={Subtraction}
-          src2={Summation}
-          className="mt-100 mb-24"
-          type="number"
-          value={quantity}
-          onChange={onChangeInputHandler}
-          onClickFirstIcon={onSubOneUnit}
-          onClickSecondIcon={onPlusOneUnit}
-        />
-        <Input placeholder="Note" src={Edit} />
-        <Button className="btn btn-primary btn--enabled mt-100" titleButton="PLACE ORDER" />
-      </Card>
-    </div>
+    <Card className="card card--center">
+      <a>
+        <img src={Exit} className="iconExit" onClick={props.onClick}></img>
+      </a>
+      <DrinkItem item={props.item} />
+      <Input
+        placeholder="Quanlity: "
+        src={Subtraction}
+        src2={Summation}
+        className="block-input mt-100 mb-24"
+        type="number"
+        value={quantity}
+        onChange={onChangeInputHandler}
+        onClickFirstIcon={onSubOneUnit}
+        onClickSecondIcon={onPlusOneUnit}
+      />
+      <Input placeholder="Note" src={Edit} className="block-input mb-24" />
+      <Button className="btn btn-primary btn--enabled" titleButton="PLACE ORDER" />
+    </Card>
   );
 }
 
