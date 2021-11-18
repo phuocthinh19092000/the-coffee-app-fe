@@ -1,0 +1,49 @@
+@import '../../share/assets/scss/variables.scss';
+
+.card-ran-out-unit {
+  &__title {
+    padding-top: 220px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0.07px;
+    color: $brown-color;
+  }
+
+  &__exit {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 35px;
+    right: 35px;
+    cursor: pointer;
+  }
+
+  &__message {
+    text-align: center;
+    margin-top: 24px;
+    left: 41px;
+    color: $black-color;
+    line-height: 21px;
+    letter-spacing: -0.31px;
+    margin-top: 10px;
+  }
+
+  &__btn {
+    margin-top: 100px;
+  }
+
+  &--blur {
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(51, 51, 51, 0.3);
+    backdrop-filter: blur(5px);
+  }
+}
