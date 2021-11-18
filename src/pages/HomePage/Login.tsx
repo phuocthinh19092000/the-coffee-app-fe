@@ -65,7 +65,7 @@ const Login = () => {
             <Input
               type="text"
               placeholder="username"
-              className="type-input login-input"
+              className="block-input login-input"
               src={UserIcon}
               value={enteredUserName}
               onChange={userNameChangeHandler}
@@ -73,7 +73,7 @@ const Login = () => {
             <Input
               type={isShowPassword ? 'text' : 'password'}
               placeholder="password"
-              className="type-input login-input"
+              className="block-input login-input"
               src={isShowPassword ? CloseEyeIcon : EyeIcon}
               value={enteredPassword}
               onChange={passwordChangeHandler}
@@ -84,8 +84,8 @@ const Login = () => {
             </div>
           </form>
         </div>
-        <div className="card__content">
-          <a className="card__content--accent" href="XXX" target="_blank" rel="noreferrer">
+        <div className="card-login__content">
+          <a className="card-login__content--accent" href="XXX" target="_blank" rel="noreferrer">
             Forget Password?
           </a>
         </div>

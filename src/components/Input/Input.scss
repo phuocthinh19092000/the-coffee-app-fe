@@ -10,51 +10,43 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
-#input-container {
+.block-input {
   display: flex;
   flex-direction: row;
+  width: 100%;
   position: relative;
   border-radius: 50px;
-  vertical-align: middle;
   background-color: $grey-4-color;
   font-size: 16px;
-}
 
-#input-container input {
-  flex: 10;
-  background-color: inherit;
-  border-radius: 50px;
-  width: 100%;
-  margin: 0;
-  border: none;
-  text-indent: 5%;
-}
+  &:focus-within {
+    outline: 1px solid rgb(202, 195, 195);
+  }
 
-#input-container input:focus {
-  outline: none;
-}
+  input {
+    background-color: inherit;
+    border-radius: 50px;
+    width: 100%;
+    margin: 0;
+    border: none;
+    text-indent: 5%;
+  }
 
-#input-container img.icon-input {
-  position: relative;
-  margin: 15px 27px 15px 0;
-}
+  input:focus {
+    outline: none;
+  }
 
-#input-container:focus-within {
-  outline: 2px solid #111;
-}
-
-.search-input img.icon-input {
-  margin: 15px 27px 15px 0 !important;
-}
-
-.type-input {
-  margin-bottom: 24px;
-  width: 100% !important;
+  img {
+    position: relative;
+    margin: 15px 27px 15px 0;
+  }
 }
 
 .login-input {
+  margin-bottom: 24px;
   height: 56px;
   flex: 1;
+  background-color: $white-color;
 
   img {
     width: 22.5px;

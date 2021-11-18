@@ -15,7 +15,7 @@ type Props = {
 };
 const Input = (props: Props) => {
   return (
-    <div id="input-container" className={props.className}>
+    <div className={props.className || 'block-input'}>
       <input
         placeholder={props.placeholder}
         type={props.type}
