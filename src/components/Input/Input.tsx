@@ -11,7 +11,7 @@ type Props = {
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onClickFirstIcon?: React.MouseEventHandler<HTMLImageElement>;
   onClickSecondIcon?: React.MouseEventHandler<HTMLImageElement>;
-  value?: string;
+  value?: string | number;
 };
 const Input = (props: Props) => {
   return (
