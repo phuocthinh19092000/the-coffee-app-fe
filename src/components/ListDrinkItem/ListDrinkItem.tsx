@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from 'react';
 import DrinkItemDetail from '../DrinkDetail/DrinkItemDetail';
 // Import to use PopUpFinishOrder component
 // import PopUpFinishOrder from '../PopUpFinishOrder/PopUpFinishOrder';
-
 type DrinkItem = {
   id: number;
   categoryID: number;
