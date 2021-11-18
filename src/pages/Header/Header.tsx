@@ -57,8 +57,8 @@ const Header = (props: Props) => {
 
   return (
     <div className={props.className}>
-      <img className="logo-header" src={OTSVLogo} alt={OTSVLogo} />
-      <div className="search-container">
+      <img className="header__logo" src={OTSVLogo} alt={OTSVLogo} />
+      <div className="header__search-block">
         <Input
           placeholder="Search drink"
           src={SearchVector}

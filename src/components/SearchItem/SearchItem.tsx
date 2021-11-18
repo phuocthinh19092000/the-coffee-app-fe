@@ -10,7 +10,7 @@ type Props = {
 const SearchItem = (props: Props) => {
   return (
     <div className={props.className || 'search-item'} onClick = {props.onClick}>
-      <img src={props.src} alt={props.src} />
+      <img className = "search-item__img" src={props.src} alt={props.src} />
       <ItemDetail className="search-detail" name = {props.name} price = {props.price}/>
     </div>
   );
