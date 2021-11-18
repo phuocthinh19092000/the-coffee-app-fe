@@ -18,7 +18,6 @@ function ListDrinkItem(props: Props) {
   const [itemDrink, setItemDrink] = useState({} as DrinkItem);
   const togglePopup = (item: DrinkItem) => {
     setIsOpen(!isOpen);
-
     setItemDrink(item);
   };
 
@@ -27,6 +26,9 @@ function ListDrinkItem(props: Props) {
       {props.listDrink.map((item) => (
         <DrinkItem item={item} key={item.id} onClick={() => togglePopup(item)} />
       ))}
+      {isOpen && (
+        <DrinkItemDetail item={itemDrink} onClick={() => togglePopup(itemDrink)} />
+      )}
 
       {isOpen && (<DrinkItemDetail item={itemDrink} onClick={() => togglePopup(itemDrink)} />)}
     </div>
