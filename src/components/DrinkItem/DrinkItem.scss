@@ -1,23 +1,24 @@
-.wrapper-drink-item {
+@import '../../share/assets/scss/variables.scss';
+.drink-item {
   display: inline-block;
   text-align: center;
+
+  &__name {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 23px;
+  }
+
+  &__price {
+    color: $grey;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 21px;
+  }
 }
 
 img {
   object-fit: cover;
-}
-
-.name-drink {
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 23px;
-}
-
-.price-drink {
-  color: #999999;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 21px;
 }

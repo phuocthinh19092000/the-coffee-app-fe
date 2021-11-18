@@ -1,3 +1,5 @@
+@import '../../share/assets/scss/variables.scss';
+
 .category-item {
   border: none;
   width: 200px;
@@ -10,16 +12,16 @@
   letter-spacing: 0.25px;
   margin-bottom: 32px;
   margin-left: 40px;
+
+  &:first-child {
+    margin-top: 60px;
+  }
 }
 
-.category-item:first-child {
-  margin-top: 60px;
-}
-
-.category-item.active {
-  border: 1px solid #f499c1;
+.active {
+  border: 1px solid $accent-third-color;
   box-sizing: border-box;
   border-radius: 50px;
-  color: #d50f67;
-  background-color: #fff3f9;
+  color: $accent-color;
+  background-color: $primary-color;
 }
