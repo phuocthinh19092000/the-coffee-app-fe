@@ -25,6 +25,9 @@ button:hover {
 
   &-secondary {
     @include theme(rgba(7, 7, 7, 0.12), $black-color);
+    &:hover {
+      background-color: $grey-4-color;
+    }
   }
 
   &--enabled {
