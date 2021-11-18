@@ -55,8 +55,8 @@ function DrinkItemDetail(props: Props) {
         type="number"
         value={quantity}
         onChange={onChangeInputHandler}
-        onClickFirstIcon={onPlusOneUnit}
-        onClickSecondIcon={onSubOneUnit}
+        onClickFirstIcon={onSubOneUnit}
+        onClickSecondIcon={onPlusOneUnit}
       />
       <Input placeholder="Note" src={Edit} className="margin-bottom" />
       <Button className="btn btn-primary btn--enabled mt-115 " titleButton="PLACE ORDER" />
