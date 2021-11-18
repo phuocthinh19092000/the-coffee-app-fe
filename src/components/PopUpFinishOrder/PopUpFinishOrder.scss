@@ -3,7 +3,7 @@
 .card-confirm-order {
   justify-content: center;
   align-items: center;
-
+  flex-direction: column;
   &__exit {
     width: 18px;
     height: 18px;

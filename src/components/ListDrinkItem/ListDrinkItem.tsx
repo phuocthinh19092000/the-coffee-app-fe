@@ -52,7 +52,11 @@ function ListDrinkItem(props: Props) {
       )}
 
       {/* Click Drink Item to show Popup Finish Order */}
-      {/* {isOpen && <PopUpFinishOrder onClick={() => togglePopup(itemDrink)} />} */}
+      {/* {isOpen && (
+        <div ref={popUpDrinkItemRef}>
+          <PopUpFinishOrder onClick={() => togglePopup(itemDrink)} />
+        </div>
+      )} */}
     </div>
   );
 }
