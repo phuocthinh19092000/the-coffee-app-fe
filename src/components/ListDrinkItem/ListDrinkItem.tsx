@@ -1,6 +1,6 @@
 import DrinkItem from '../DrinkItem/DrinkItem';
 import './ListDrinkItem.scss';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import DrinkItemDetail from '../DrinkDetail/DrinkItemDetail';
 type DrinkItem = {
   id: number;
@@ -22,33 +22,13 @@ function ListDrinkItem(props: Props) {
     setItemDrink(item);
   };
 
-  const popUpDrinkItemRef = useRef<HTMLDivElement>(null);
-
-  const handleClickOutside = (event: Event) => {
-    if (popUpDrinkItemRef.current && !popUpDrinkItemRef.current.contains(event.target as Node)) {
-      setIsOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside, true);
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
-  }, [isOpen]);
-
   return (
-    <div className="view-list-drink-item">
+    <div className="menu-drink">
       {props.listDrink.map((item) => (
         <DrinkItem item={item} key={item.id} onClick={() => togglePopup(item)} />
       ))}
 
-      {isOpen && (
-        <div ref={popUpDrinkItemRef}>
-          <DrinkItemDetail item={itemDrink} onClick={() => togglePopup(itemDrink)} />
-        </div>
-      )}
+      {isOpen && (<DrinkItemDetail item={itemDrink} onClick={() => togglePopup(itemDrink)} />)}
     </div>
   );
 }

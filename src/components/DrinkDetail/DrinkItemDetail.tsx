@@ -8,7 +8,7 @@ import Input from '../Input/Input';
 import '../DrinkDetail/DrinkItemDetail.scss';
 import DrinkItem from '../DrinkItem/DrinkItem';
 import DrinkItemType from '../ListDrinkItem/ListDrinkItem';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 type DrinkItemType = {
   id: number;
   categoryID: number;
@@ -20,6 +20,7 @@ type Props = {
   item: DrinkItemType;
   onClick?: React.MouseEventHandler<HTMLImageElement>;
 };
+
 
 function DrinkItemDetail(props: Props) {
   const [quantity, setQuantity] = useState(1);
@@ -40,25 +41,27 @@ function DrinkItemDetail(props: Props) {
   };
 
   return (
-    <Card className="card card--center">
-      <a>
-        <img src={Exit} className="iconExit" onClick={props.onClick}></img>
-      </a>
-      <DrinkItem item={props.item} />
-      <Input
-        placeholder="Quanlity: "
-        src={Subtraction}
-        src2={Summation}
-        className="block-input mt-100 mb-24"
-        type="number"
-        value={quantity}
-        onChange={onChangeInputHandler}
-        onClickFirstIcon={onSubOneUnit}
-        onClickSecondIcon={onPlusOneUnit}
-      />
-      <Input placeholder="Note" src={Edit} className="block-input mb-24" />
-      <Button className="btn btn-primary btn--enabled" titleButton="PLACE ORDER" />
-    </Card>
+    <div className="card-item-detail--blur">
+      <Card className="card card--center">
+        <a>
+          <img src={Exit} className="icon-exit" onClick={props.onClick}></img>
+        </a>
+        <DrinkItem item={props.item} />
+        <Input
+          placeholder="Quanlity: "
+          src={Subtraction}
+          src2={Summation}
+          className="mt-100 mb-24"
+          type="number"
+          value={quantity}
+          onChange={onChangeInputHandler}
+          onClickFirstIcon={onSubOneUnit}
+          onClickSecondIcon={onPlusOneUnit}
+        />
+        <Input placeholder="Note" src={Edit} />
+        <Button className="btn btn-primary btn--enabled mt-100" titleButton="PLACE ORDER" />
+      </Card>
+    </div>
   );
 }
 
