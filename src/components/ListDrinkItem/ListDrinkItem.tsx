@@ -45,11 +45,7 @@ function ListDrinkItem(props: Props) {
       {props.listDrink.map((item) => (
         <DrinkItem item={item} key={item.id} onClick={() => togglePopup(item)} />
       ))}
-      {isOpen && (
-        <div ref={popUpDrinkItemRef}>
-          <DrinkItemDetail item={itemDrink} onClick={() => togglePopup(itemDrink)} />
-        </div>
-      )}
+      {isOpen && <DrinkItemDetail item={itemDrink} onClick={() => togglePopup(itemDrink)} />}
 
       {/* Click Drink Item to show Popup Finish Order */}
       {/* {isOpen && <PopUpFinishOrder onClick={() => togglePopup(itemDrink)} />} */}

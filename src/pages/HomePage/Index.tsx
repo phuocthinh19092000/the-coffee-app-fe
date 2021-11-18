@@ -66,6 +66,7 @@ const HomePage = () => {
   const showPopUpLogoutHandler = () => {
     setIsShowLogout(!isShowLogout);
   };
+
   const handelSetCategory = (id: number) => {
     setListDrink(DrinkData.filter((item) => item.categoryID === id));
     setCategoryIdSelected(id);
@@ -73,19 +74,19 @@ const HomePage = () => {
 
   return (
     <>
-      <Header
-        className={`header ${isShowLogin || isShowLogout ? 'filter' : ''}`}
-        onClick={showLogin}
-        isLoggedIn={Boolean(user)}
-        userName={user?.username}
-        onClickShowLogOut={showPopUpLogoutHandler}
-        freeUnit={freeUnit}
-      />
       <div ref={ref}>
         {isShowLogin && <Login />}
         {isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
       </div>
       <div className={isShowLogin || isShowLogout ? 'filter' : ''}>
+        <Header
+          className="header"
+          onClick={showLogin}
+          isLoggedIn={Boolean(user)}
+          userName={user?.username}
+          onClickShowLogOut={showPopUpLogoutHandler}
+          freeUnit={freeUnit}
+        />
         <div className="background">
           <img src={image4} alt={image4} className="background-img" />
         </div>
@@ -93,7 +94,7 @@ const HomePage = () => {
           <div className="product-left">
             <CategoryBar onGetIdHandler={handelSetCategory} selectedCategoryId={categoryIdSelected} />
           </div>
-          <div className="product-right" >
+          <div className="product-right">
             <ListDrinkItem listDrink={listDrink} />
           </div>
         </div>
