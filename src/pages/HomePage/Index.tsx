@@ -11,12 +11,26 @@ import DrinkData from '../../json/seed_products.json';
 
 const HomePage = () => {
   const [isShowLogin, setIsShowLogin] = useState(false);
+
   const [isShowLogout, setIsShowLogout] = useState(false);
+
   const [listDrink, setListDrink] = useState(DrinkData.filter((drink) => drink.id === 1));
+
   const [categoryIdSelected, setCategoryIdSelected] = useState(1);
+
+  // Component Free Unit:
+  // When create order successfully, create a callback to call the state: setFreeUnit(freeUnit-...); to update the freeUnit
+
+  const [freeUnit, setFreeUnit] = useState(-1);
+
   const [user, setUser] = useState(() => {
     const userJson = localStorage.getItem('user');
     const user = userJson && JSON.parse(userJson);
+
+    if (user !== null) {
+      setFreeUnit(user.freeunit);
+    }
+
     return user;
   });
 
@@ -65,6 +79,7 @@ const HomePage = () => {
         isLoggedIn={Boolean(user)}
         userName={user?.username}
         onClickShowLogOut={showPopUpLogoutHandler}
+        freeUnit={freeUnit}
       />
       <div ref={ref}>
         {isShowLogin && <Login />}
