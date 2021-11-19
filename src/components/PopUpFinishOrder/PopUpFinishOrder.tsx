@@ -29,18 +29,20 @@ function PopUpFinishOrder(props: Props) {
   }, [isOpen]);
   // ---------------------------------------------------------------- //
   return (
-    <Card className="card card--center card-confirm-order">
-      <a>
-        <img src={Exit} className="card-confirm-order__exit" onClick={props.onClick}></img>
-      </a>
-      <div className="card-confirm-order__img">
-        <img src={OrderConfirmed} alt="Order Confirmed Image" className="card-confirm-order__img--style" />
-      </div>
-      <h2 className="card-confirm-order__title">ORDER PLACED!</h2>
-      <p className="card-confirm-order__description">You will be notified to pick up when drink is ready.</p>
+    <div className="card-confirm-order--blur">
+      <Card className="card card--center card-confirm-order">
+        <a>
+          <img src={Exit} className="card-confirm-order__exit" onClick={props.onClick}></img>
+        </a>
+        <div className="card-confirm-order__img">
+          <img src={OrderConfirmed} alt="Order Confirmed Image" className="card-confirm-order__img--style" />
+        </div>
+        <h2 className="card-confirm-order__title">ORDER PLACED!</h2>
+        <p className="card-confirm-order__description">You will be notified to pick up when drink is ready.</p>
 
-      <Button className="btn btn-primary btn--enabled card-confirm-order__button " titleButton="OKAY, I SEE" />
-    </Card>
+        <Button className="btn btn-primary btn--enabled card-confirm-order__button " titleButton="OKAY, I SEE" />
+      </Card>
+    </div>
   );
 }
 
