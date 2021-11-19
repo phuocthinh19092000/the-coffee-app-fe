@@ -1,18 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
 import Login from '../HomePage/Login';
-import Header from '../../pages/Header/Header';
+import Header from '../Header/Header';
 import PopUpLogOut from '../../components/PopUpLogOut/PopUpLogOut';
-import '../HomePage/styles.scss';
-import image4 from '../../share/assets/img/image4.png';
-import Product from '../Product/Product';
+import '../Error/ErrorPage.scss';
+import Error from '../../components/Error/Error';
 
-const HomePage = () => {
+const ErrorPage = () => {
   const [isShowLogin, setIsShowLogin] = useState(false);
 
   const [isShowLogout, setIsShowLogout] = useState(false);
-
-  // Component Free Unit:
-  // When create order successfully, create a callback to call the state: setFreeUnit(freeUnit-...); to update the freeUnit
 
   const [freeUnit, setFreeUnit] = useState(-1);
 
@@ -51,7 +47,6 @@ const HomePage = () => {
       document.removeEventListener('click', clickOutsideHandler, true);
     };
   });
-
   const showLogin = () => {
     setIsShowLogin(!isShowLogin);
   };
@@ -59,9 +54,8 @@ const HomePage = () => {
   const showPopUpLogoutHandler = () => {
     setIsShowLogout(!isShowLogout);
   };
-
   return (
-    <>
+    <div className="error-page">
       <div ref={ref}>
         {isShowLogin && <Login />}
         {isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
@@ -75,12 +69,12 @@ const HomePage = () => {
           onClickShowLogOut={showPopUpLogoutHandler}
           freeUnit={freeUnit}
         />
-        <div className="background">
-          <img src={image4} alt={image4} className="background-img" />
-        </div>
-        <Product />
       </div>
-    </>
+      <div className="error-component">
+        <Error />
+      </div>
+    </div>
   );
 };
-export default HomePage;
+
+export default ErrorPage;
