@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useHistory } from 'react-router';
+import { useEffect, useState } from 'react';
 import Card from '../../components/Card/Index';
 import Button from '../../components/Button/Index';
 import Input from '../../components/Input/Input';
@@ -16,29 +15,32 @@ import './styles.scss';
 
 const Login = () => {
   const [enteredUserName, setEnteredUserName] = useState('');
-
   const userNameChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setEnteredUserName(event.target.value);
   };
 
   const [enteredPassword, setEnteredPassword] = useState('');
-
-  const [isShowPassword, setIsShowPassword] = useState(false);
-
-  const passwordShowHandler = () => {
-    setIsShowPassword(!isShowPassword);
-  };
   const passwordChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setEnteredPassword(event.target.value);
   };
 
-  let isValid = false;
-  if (enteredUserName.trim() !== '' && enteredPassword.trim() !== '') {
-    isValid = true;
-  }
+  const [isShowPassword, setIsShowPassword] = useState(false);
+  const passwordShowHandler = () => {
+    setIsShowPassword(!isShowPassword);
+  };
+
+  const [inputIsValid, setInputIsValid] = useState(false);
+  useEffect(() => {
+    const checkIsValid = setTimeout(() => {
+      setInputIsValid(enteredUserName.trim() !== '' && enteredPassword.trim() !== '');
+    }, 500);
+    return () => {
+      clearTimeout(checkIsValid);
+    };
+  }, [enteredUserName, enteredPassword]);
 
   const loginHandler: React.FormEventHandler<HTMLFormElement> = (event) => {
-    if (isValid === false) {
+    if (inputIsValid === false) {
       event.preventDefault();
       return;
     }
@@ -47,7 +49,6 @@ const Login = () => {
 
     if (user !== undefined) {
       localStorage.setItem('user', JSON.stringify(user));
-
       return;
     }
 
@@ -80,7 +81,10 @@ const Login = () => {
               onClickFirstIcon={passwordShowHandler}
             />
             <div>
-              <Button className={`btn btn-primary ${isValid ? 'btn--enabled' : 'btn--disabled'}`} titleButton="Login" />
+              <Button
+                className={`btn btn-primary ${inputIsValid ? 'btn--enabled' : 'btn--disabled'}`}
+                titleButton="Login"
+              />
             </div>
           </form>
         </div>
