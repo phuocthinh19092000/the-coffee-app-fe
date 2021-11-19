@@ -22,8 +22,10 @@
   }
 
   &--center {
-    position: fixed;
-    left: 35%;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
     top: 5%;
     height: 85.7%;
     width: 480px;

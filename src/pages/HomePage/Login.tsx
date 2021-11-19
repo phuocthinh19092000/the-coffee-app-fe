@@ -13,6 +13,10 @@ import CloseEyeIcon from '../../share/assets/img/close-eye.png';
 import usersData from '../../json/seed_users.json';
 import './styles.scss';
 
+enum timeInterval {
+  timeInterval = 150,
+}
+
 const Login = () => {
   const [enteredUserName, setEnteredUserName] = useState('');
   const userNameChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -30,10 +34,11 @@ const Login = () => {
   };
 
   const [inputIsValid, setInputIsValid] = useState(false);
+
   useEffect(() => {
     const checkIsValid = setTimeout(() => {
       setInputIsValid(enteredUserName.trim() !== '' && enteredPassword.trim() !== '');
-    }, 500);
+    }, timeInterval.timeInterval);
     return () => {
       clearTimeout(checkIsValid);
     };
