@@ -2,6 +2,8 @@ import DrinkItem from '../DrinkItem/DrinkItem';
 import './ListDrinkItem.scss';
 import { useState } from 'react';
 import DrinkItemDetail from '../DrinkDetail/DrinkItemDetail';
+import PopUpFinishOrder from '../PopUpFinishOrder/PopUpFinishOrder';
+
 type DrinkItem = {
   id: number;
   categoryID: number;
@@ -26,9 +28,6 @@ function ListDrinkItem(props: Props) {
       {props.listDrink.map((item) => (
         <DrinkItem item={item} key={item.id} onClick={() => togglePopup(item)} />
       ))}
-      {isOpen && (
-        <DrinkItemDetail item={itemDrink} onClick={() => togglePopup(itemDrink)} />
-      )}
 
       {isOpen && (<DrinkItemDetail item={itemDrink} onClick={() => togglePopup(itemDrink)} />)}
     </div>
