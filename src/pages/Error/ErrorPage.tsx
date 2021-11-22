@@ -67,7 +67,6 @@ const ErrorPage = () => {
           isLoggedIn={Boolean(user)}
           userName={user?.username}
           onClickShowLogOut={showPopUpLogoutHandler}
-          freeUnit={freeUnit}
         />
       </div>
       <div className="error-component">

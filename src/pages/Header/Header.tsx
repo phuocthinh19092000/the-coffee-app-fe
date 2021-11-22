@@ -21,7 +21,6 @@ type Props = {
   onClickShowLogOut: React.MouseEventHandler<HTMLAnchorElement>;
   isLoggedIn: boolean;
   userName: string;
-  freeUnit?: number;
 };
 const Header = (props: Props) => {
   const [value, setValue] = useState('');
@@ -84,7 +83,7 @@ const Header = (props: Props) => {
       </div>
 
       {props.isLoggedIn ? (
-        <CustomerInformation name={props.userName} onClick={props.onClickShowLogOut} freeUnit={props.freeUnit} />
+        <CustomerInformation name={props.userName} onClick={props.onClickShowLogOut} />
       ) : (
         <Button className="btn btn-primary btn-login" titleButton="Login" onClick={props.onClick} />
       )}
