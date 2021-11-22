@@ -1,6 +1,6 @@
 import DrinkItem from '../DrinkItem/DrinkItem';
 import './ListDrinkItem.scss';
-import { useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import DrinkItemDetail from '../DrinkDetail/DrinkItemDetail';
 import PopUpFinishOrder from '../PopUpFinishOrder/PopUpFinishOrder';
 import PopUpRanOutUnit from '../PopUpRanOutUnit/PopUpRanOutUnit';
@@ -45,6 +45,11 @@ function ListDrinkItem(props: Props) {
       localStorage.setItem('user', JSON.stringify(user));
       setStep(showPopupCase.PopUpFinishOrder);
     }
+  };
+
+  const finishOrder = () => {
+    setIsOpenPopUp(false);
+    setStep(showPopupCase.showDrinkItemDetail);
   };
 
   const exitPopUp = () => {
