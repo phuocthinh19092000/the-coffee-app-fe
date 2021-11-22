@@ -14,16 +14,9 @@ const HomePage = () => {
   // Component Free Unit:
   // When create order successfully, create a callback to call the state: setFreeUnit(freeUnit-...); to update the freeUnit
 
-  const [freeUnit, setFreeUnit] = useState(-1);
-
   const [user, setUser] = useState(() => {
     const userJson = localStorage.getItem('user');
     const user = userJson && JSON.parse(userJson);
-
-    if (user !== null) {
-      setFreeUnit(user.freeunit);
-    }
-
     return user;
   });
 
@@ -73,7 +66,6 @@ const HomePage = () => {
           isLoggedIn={Boolean(user)}
           userName={user?.username}
           onClickShowLogOut={showPopUpLogoutHandler}
-          freeUnit={freeUnit}
         />
         <div className="background">
           <img src={image4} alt={image4} className="background-img" />

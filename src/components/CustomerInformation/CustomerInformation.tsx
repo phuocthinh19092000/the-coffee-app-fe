@@ -6,14 +6,22 @@ import './CustomerInformation.scss';
 type Props = {
   name: string;
   onClick: React.MouseEventHandler<HTMLAnchorElement>;
-  freeUnit?: number;
 };
 
 const CustomerInformation = (props: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [freeUnit, setFreeUnit] = useState(() => {
+    const userJson = localStorage.getItem('user');
+    const freeUnit = userJson ? JSON.parse(userJson).freeunit : 3;
+    return freeUnit
+  })
   const handleClickInside = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const handleSetFreeUnit = (e: any) => {
+    setFreeUnit(e.detail)
+  }
 
   const dropdownMenuRef = useRef<HTMLDivElement>(null);
 
@@ -25,9 +33,10 @@ const CustomerInformation = (props: Props) => {
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
-
+    document.addEventListener('setFreeUnit', handleSetFreeUnit);
     return () => {
       document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('setFreeUnit', handleSetFreeUnit);
     };
   }, [isMenuOpen]);
 
@@ -39,7 +48,7 @@ const CustomerInformation = (props: Props) => {
         <img src={ExpandMore} className="menu-dropdown__img" alt="expand more" />
         {isMenuOpen && (
           <div className="menu-dropdown__content">
-            <span className="menu-dropdown__item menu-dropdown__item--accent">Free Unit: {props.freeUnit}</span>
+            <span className="menu-dropdown__item menu-dropdown__item--accent">Free Unit: {freeUnit}</span>
             <a className="menu-dropdown__item" href="/orders">
               My Orders
             </a>
