@@ -3,6 +3,7 @@ import './ListDrinkItem.scss';
 import { useState } from 'react';
 import DrinkItemDetail from '../DrinkDetail/DrinkItemDetail';
 import PopUpFinishOrder from '../PopUpFinishOrder/PopUpFinishOrder';
+import PopUpRanOutUnit from '../PopUpRanOutUnit/PopUpRanOutUnit';
 
 type DrinkItem = {
   id: number;
@@ -15,11 +16,75 @@ type Props = {
   listDrink: DrinkItem[];
 };
 
+type OrderDetail = {
+  drinkId: number;
+  quantity: number;
+  note: string | undefined;
+};
+
+enum showPopupCase {
+  showDrinkItemDetail = 1,
+  showPopUpRanOutUnit = 2,
+  PopUpFinishOrder = 3,
+}
+
 function ListDrinkItem(props: Props) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [step, setStep] = useState(1);
+
+  const previousStep = () => {
+    setStep(step - 1);
+  };
+
+  const handleClickPlaceOrder = (orderDetail: OrderDetail) => {
+    const userJson = localStorage.getItem('user');
+    const user = userJson && JSON.parse(userJson);
+    if (user.freeunit < orderDetail.quantity) {
+      setStep(showPopupCase.showPopUpRanOutUnit);
+    } else {
+      user.freeunit -= orderDetail.quantity;
+      localStorage.setItem('user', JSON.stringify(user));
+      setStep(showPopupCase.PopUpFinishOrder);
+    }
+  };
+
+  const exitPopUp = () => {
+    setIsOpenPopUp(false);
+    setStep(showPopupCase.showDrinkItemDetail);
+  };
+
+  const continueOrderRanoutUnit = () => {
+    setStep(showPopupCase.PopUpFinishOrder);
+  };
+
+  const switchStep = () => {
+    switch (step) {
+      case showPopupCase.showDrinkItemDetail:
+        return (
+          <DrinkItemDetail
+            item={itemDrink}
+            handleClickExitPopUp={exitPopUp}
+            handleClickPlaceOrder={handleClickPlaceOrder}
+          />
+        );
+      case showPopupCase.showPopUpRanOutUnit:
+        return (
+          <PopUpRanOutUnit
+            onClickContinueProceed={continueOrderRanoutUnit}
+            onClickBack={previousStep}
+            onClickExit={exitPopUp}
+          />
+        );
+      case showPopupCase.PopUpFinishOrder:
+        return <PopUpFinishOrder onClick={exitPopUp} />;
+      default:
+        break;
+    }
+  };
+
+  const [isOpenPopUp, setIsOpenPopUp] = useState(false);
   const [itemDrink, setItemDrink] = useState({} as DrinkItem);
   const togglePopup = (item: DrinkItem) => {
-    setIsOpen(!isOpen);
+    setIsOpenPopUp(!isOpenPopUp);
     setItemDrink(item);
   };
 
@@ -28,8 +93,7 @@ function ListDrinkItem(props: Props) {
       {props.listDrink.map((item) => (
         <DrinkItem item={item} key={item.id} onClick={() => togglePopup(item)} />
       ))}
-
-      {isOpen && (<DrinkItemDetail item={itemDrink} onClick={() => togglePopup(itemDrink)} />)}
+      {isOpenPopUp && switchStep()}
     </div>
   );
 }

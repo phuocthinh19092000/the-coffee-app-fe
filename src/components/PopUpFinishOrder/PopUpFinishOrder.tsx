@@ -6,28 +6,10 @@ import '../PopUpFinishOrder/PopUpFinishOrder.scss';
 import { useState, useRef, useEffect } from 'react';
 
 type Props = {
-  onClick?: React.MouseEventHandler<HTMLImageElement>;
+  onClick?: React.MouseEventHandler<HTMLElement>;
 };
 
 function PopUpFinishOrder(props: Props) {
-  // ---- Handle OutSide click ---- //
-  const [isOpen, setIsOpen] = useState(false);
-  const popUpDrinkItemRef = useRef<HTMLDivElement>(null);
-
-  const handleClickOutside = (event: Event) => {
-    if (popUpDrinkItemRef.current && !popUpDrinkItemRef.current.contains(event.target as Node)) {
-      setIsOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside, true);
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
-  }, [isOpen]);
-  // ---------------------------------------------------------------- //
   return (
     <div className="card-confirm-order--blur">
       <Card className="card card--center card-confirm-order">
@@ -40,7 +22,11 @@ function PopUpFinishOrder(props: Props) {
         <h2 className="card-confirm-order__title">ORDER PLACED!</h2>
         <p className="card-confirm-order__description">You will be notified to pick up when drink is ready.</p>
 
-        <Button className="btn btn-primary btn--enabled card-confirm-order__button " titleButton="OKAY, I SEE" />
+        <Button
+          onClick={props.onClick}
+          className="btn btn-primary btn--enabled card-confirm-order__button "
+          titleButton="OKAY, I SEE"
+        />
       </Card>
     </div>
   );

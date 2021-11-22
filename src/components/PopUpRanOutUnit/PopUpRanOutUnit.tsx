@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './PopUpRanOutUnit.scss';
 import Card from '../Card/Index';
 import Button from '../Button/Index';
@@ -11,6 +11,7 @@ import Exit from '../../share/assets/vector/Exit.svg';
 
 type Props = {
   onClickContinueProceed?: React.MouseEventHandler<HTMLButtonElement>;
+  onClickBack?: React.MouseEventHandler<HTMLElement>;
   onClickExit?: React.MouseEventHandler<HTMLElement>;
 };
 
@@ -32,7 +33,7 @@ const PopUpRanOutUnit = (props: Props) => {
           titleButton="YES, I WANT TO PROCEED"
         />
         <Button
-          onClick={props.onClickExit}
+          onClick={props.onClickBack}
           className="btn btn-primary btn-secondary"
           type="submit"
           titleButton="NO, I CHANGE MY MIND"
