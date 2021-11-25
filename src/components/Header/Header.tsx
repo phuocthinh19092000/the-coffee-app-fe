@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import OTSVLogo from '../../share/assets/img/OTSVLogo.png';
 import SearchVector from '../../share/assets/img/SearchVector.png';
 import CoffeeImg from '../../share/assets/img/CoffeeImg.png';
-import Input from '../../components/Input/Input';
-import Button from '../../components/Button/Index';
+import Input from '../Input/Input';
+import Button from '../Button/Index';
 import './Header.scss';
-import SearchItem from '../../components/SearchItem/SearchItem';
+import SearchItem from '../SearchItem/SearchItem';
 import DrinkItems from '../../json/seed_products.json';
-import CustomerInformation from '../../components/CustomerInformation/CustomerInformation';
+import CustomerInformation from '../CustomerInformation/CustomerInformation';
 
 import { useRef } from 'react';
 type TypeSearchItem = {

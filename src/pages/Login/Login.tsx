@@ -11,7 +11,7 @@ import UserIcon from '../../share/assets/vector/User.svg';
 import EyeIcon from '../../share/assets/vector/Eye.svg';
 import CloseEyeIcon from '../../share/assets/img/close-eye.png';
 import usersData from '../../json/seed_users.json';
-import './styles.scss';
+import './Login.scss';
 
 enum timeInterval {
   timeInterval = 150,

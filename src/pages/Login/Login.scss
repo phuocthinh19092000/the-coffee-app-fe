@@ -50,19 +50,3 @@
 .filter {
   filter: blur(5px);
 }
-
-.background {
-  background-color: $grey-4-color;
-  width: 100%;
-  padding-top: 48px;
-  padding-bottom: 56px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.background-img {
-  background-size: cover;
-  background-color: #eedfd2;
-  border-radius: 12px;
-}
