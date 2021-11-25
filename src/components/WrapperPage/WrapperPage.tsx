@@ -57,7 +57,7 @@ const WrapperPage = () => {
         className={user ? "header header--grey" : "header" }
         onClick={showLogin}
         isLoggedIn={Boolean(user)}
-        userName={user?.username}
+        userName={user?.fullname}
         onClickShowLogOut={showPopUpLogoutHandler}
       />
     </>

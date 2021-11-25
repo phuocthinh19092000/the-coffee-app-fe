@@ -10,6 +10,7 @@ import DrinkItems from '../../json/seed_products.json';
 import CustomerInformation from '../CustomerInformation/CustomerInformation';
 
 import { useRef } from 'react';
+import { useHistory } from 'react-router';
 type TypeSearchItem = {
   id: number;
   name: string;
@@ -55,9 +56,15 @@ const Header = (props: Props) => {
     };
   }, [displaySearchList]);
 
+  const history = useHistory();
+  const goHome = () => {
+    let path = `/`;
+    history.push(path);
+  };
+
   return (
     <div className={props.className}>
-      <img className="header__logo" src={OTSVLogo} alt={OTSVLogo} />
+      <img className="header__logo" src={OTSVLogo} alt={OTSVLogo} onClick={goHome} />
       <div className="header__search-block">
         <Input
           placeholder="Search drink"
