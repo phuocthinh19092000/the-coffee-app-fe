@@ -6,11 +6,17 @@ import './CustomerInformation.scss';
 type Props = {
   name: string;
   onClick: React.MouseEventHandler<HTMLAnchorElement>;
-  freeUnit?: number;
 };
 
 const CustomerInformation = (props: Props) => {
+  const [freeUnit, setFreeUnit] = useState(() => {
+    const userJson = localStorage.getItem('user');
+    const user = userJson && JSON.parse(userJson);
+    return user.freeunit;
+  });
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const handleClickInside = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -25,7 +31,11 @@ const CustomerInformation = (props: Props) => {
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
-
+    if (isMenuOpen) {
+      const userJson = localStorage.getItem('user');
+      const user = userJson && JSON.parse(userJson);
+      setFreeUnit(user.freeunit);
+    }
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
@@ -39,7 +49,7 @@ const CustomerInformation = (props: Props) => {
         <img src={ExpandMore} className="menu-dropdown__img" alt="expand more" />
         {isMenuOpen && (
           <div className="menu-dropdown__content">
-            <span className="menu-dropdown__item menu-dropdown__item--accent">Free Unit: {props.freeUnit}</span>
+            <span className="menu-dropdown__item menu-dropdown__item--accent">Free Unit: {freeUnit} </span>
             <a className="menu-dropdown__item" href="/orders">
               My Orders
             </a>
