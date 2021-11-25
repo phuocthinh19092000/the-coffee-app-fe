@@ -18,7 +18,7 @@ const Product = () => {
         <CategoryBar onGetIdHandler={handelSetCategory} selectedCategoryId={categoryIdSelected} />
       </div>
       <div className="product-right">
-        <ListDrinkItem listDrink={listDrink} />
+        <ListDrinkItem listDrink={listDrink}/>
       </div>
     </div>
   );

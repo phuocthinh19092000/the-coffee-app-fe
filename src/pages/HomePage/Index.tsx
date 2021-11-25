@@ -5,8 +5,15 @@ import PopUpLogOut from '../../components/PopUpLogOut/PopUpLogOut';
 import '../HomePage/styles.scss';
 import image4 from '../../share/assets/img/image4.png';
 import Product from '../Product/Product';
+import Toast from '../../components/Toast/Toast';
+
+const ToastType = {
+  success: "success",
+  fail: "fail",
+};
 
 const HomePage = () => {
+
   const [isShowLogin, setIsShowLogin] = useState(false);
 
   const [isShowLogout, setIsShowLogout] = useState(false);
@@ -54,8 +61,20 @@ const HomePage = () => {
     setIsShowLogout(!isShowLogout);
   };
 
+  const [showToast, setShowToast] = useState(false);
+
+  const toastRef = useRef({
+    show() {
+      setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+      }, 3000)
+    },
+  });
+
   return (
     <>
+      <Toast message={"Order changes saved successfully!"} type={ToastType.success} ref={toastRef}/>
       <div ref={ref}>
         {isShowLogin && <Login />}
         {isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
@@ -72,6 +91,14 @@ const HomePage = () => {
           <img src={image4} alt={image4} className="background-img" />
         </div>
         <Product />
+
+        {/*<button*/}
+        {/*  onClick={() => {*/}
+        {/*    toastRef.current.show();*/}
+        {/*  }}*/}
+        {/*>*/}
+        {/*  Show Toast Notication*/}
+        {/*</button>*/}
       </div>
     </>
   );
