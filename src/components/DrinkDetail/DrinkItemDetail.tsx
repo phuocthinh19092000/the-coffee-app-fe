@@ -18,16 +18,22 @@ type DrinkItemType = {
   price: number;
 };
 
+type OrderDetail = {
+  drinkId: number;
+  quantity: number;
+  note: string | undefined;
+};
+
 type Props = {
   item: DrinkItemType;
   handleClickExitPopUp?: React.MouseEventHandler<HTMLImageElement>;
-
   handleClickPlaceOrder(data: {}): void;
+  orderDetail: OrderDetail;
 };
 
 function DrinkItemDetail(props: Props) {
-  const [quantity, setQuantity] = useState(1);
-  const [note, setNote] = useState('');
+  const [quantity, setQuantity] = useState(props.orderDetail.quantity);
+  const [note, setNote] = useState(props.orderDetail.note);
 
   const onSubOneUnit = () => {
     if (quantity === 1) {
