@@ -42,6 +42,7 @@ function ListDrinkItem(props: Props) {
       setStep(showPopupCase.showPopUpRanOutUnit);
     } else {
       user.freeunit -= orderDetail.quantity;
+      document.dispatchEvent(new CustomEvent('setFreeUnit', { detail: user.freeunit }));
       localStorage.setItem('user', JSON.stringify(user));
       setStep(showPopupCase.PopUpFinishOrder);
     }

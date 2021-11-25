@@ -10,16 +10,9 @@ const ErrorPage = () => {
 
   const [isShowLogout, setIsShowLogout] = useState(false);
 
-  const [freeUnit, setFreeUnit] = useState(-1);
-
   const [user, setUser] = useState(() => {
     const userJson = localStorage.getItem('user');
     const user = userJson && JSON.parse(userJson);
-
-    if (user !== null) {
-      setFreeUnit(user.freeunit);
-    }
-
     return user;
   });
 
