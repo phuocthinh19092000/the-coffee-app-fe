@@ -3,13 +3,20 @@ import Button from '../Button/Index';
 import Exit from '../../share/assets/vector/Exit.svg';
 import OrderConfirmed from '../../share/assets/img/OrderConfirmed.png';
 import '../PopUpFinishOrder/PopUpFinishOrder.scss';
-import { useState, useRef, useEffect } from 'react';
+
+
 
 type Props = {
   onClick?: React.MouseEventHandler<HTMLElement>;
 };
 
+const ToastType = {
+  success: "success",
+  fail: "fail",
+};
+
 function PopUpFinishOrder(props: Props) {
+
   return (
     <div className="card-confirm-order--blur">
       <Card className="card card--center card-confirm-order">

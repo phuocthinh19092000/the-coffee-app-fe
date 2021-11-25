@@ -47,13 +47,16 @@ const ErrorPage = () => {
   const showPopUpLogoutHandler = () => {
     setIsShowLogout(!isShowLogout);
   };
+
+  const [disable, setDisable] = useState(true)
+
   return (
     <div className="error-page">
       <div ref={ref}>
         {isShowLogin && <Login />}
         {isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
       </div>
-      <div className={isShowLogin || isShowLogout ? 'filter' : ''}>
+      <fieldset disabled={disable} className="border--none">
         <Header
           className="header"
           onClick={showLogin}
@@ -61,7 +64,7 @@ const ErrorPage = () => {
           userName={user?.username}
           onClickShowLogOut={showPopUpLogoutHandler}
         />
-      </div>
+      </fieldset>
       <div className="error-component">
         <Error />
       </div>
