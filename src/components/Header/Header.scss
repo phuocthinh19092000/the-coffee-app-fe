@@ -7,6 +7,10 @@
   flex-direction: row;
   padding-right: 20px;
 
+  &--grey{
+    background-color: $grey-4-color
+  }
+
   &__logo {
     height: inherit;
     margin: 12.45px 0 12.45px 20px;

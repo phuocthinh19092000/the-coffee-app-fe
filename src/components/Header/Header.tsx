@@ -62,7 +62,7 @@ const Header = (props: Props) => {
         <Input
           placeholder="Search drink"
           src={SearchVector}
-          className="block-input"
+          className={props.isLoggedIn ? "block-input--white" : "block-input" }
           value={value}
           onChange={handleSearchDrink}
         />
