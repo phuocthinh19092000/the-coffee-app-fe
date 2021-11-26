@@ -29,15 +29,23 @@ enum showPopupCase {
 }
 
 function ListDrinkItem(props: Props) {
+  const [isOpenPopUp, setIsOpenPopUp] = useState(false);
+  const [itemDrink, setItemDrink] = useState({} as DrinkItem);
+  const togglePopup = (item: DrinkItem) => {
+    setIsOpenPopUp(!isOpenPopUp);
+    setItemDrink(item);
+  };
   const [step, setStep] = useState(1);
+  const [orderDetail, setOrderDetail] = useState({ drinkId: itemDrink.id, quantity: 1, note: '' } as OrderDetail);
 
-  const previousStep = () => {
+  const handleClickBackForm = () => {
     setStep(step - 1);
   };
 
   const handleClickPlaceOrder = (orderDetail: OrderDetail) => {
     const userJson = localStorage.getItem('user');
     const user = userJson && JSON.parse(userJson);
+    setOrderDetail(orderDetail);
     if (user.freeunit < orderDetail.quantity) {
       setStep(showPopupCase.showPopUpRanOutUnit);
     } else {
@@ -48,14 +56,10 @@ function ListDrinkItem(props: Props) {
     }
   };
 
-  const finishOrder = () => {
-    setIsOpenPopUp(false);
-    setStep(showPopupCase.showDrinkItemDetail);
-  };
-
   const exitPopUp = () => {
     setIsOpenPopUp(false);
     setStep(showPopupCase.showDrinkItemDetail);
+    setOrderDetail({ drinkId: itemDrink.id, quantity: 1, note: '' } as OrderDetail);
   };
 
   const continueOrderRanoutUnit = () => {
@@ -70,13 +74,14 @@ function ListDrinkItem(props: Props) {
             item={itemDrink}
             handleClickExitPopUp={exitPopUp}
             handleClickPlaceOrder={handleClickPlaceOrder}
+            orderDetail={orderDetail}
           />
         );
       case showPopupCase.showPopUpRanOutUnit:
         return (
           <PopUpRanOutUnit
             onClickContinueProceed={continueOrderRanoutUnit}
-            onClickBack={previousStep}
+            handleClickBackForm={handleClickBackForm}
             onClickExit={exitPopUp}
           />
         );
@@ -85,13 +90,6 @@ function ListDrinkItem(props: Props) {
       default:
         break;
     }
-  };
-
-  const [isOpenPopUp, setIsOpenPopUp] = useState(false);
-  const [itemDrink, setItemDrink] = useState({} as DrinkItem);
-  const togglePopup = (item: DrinkItem) => {
-    setIsOpenPopUp(!isOpenPopUp);
-    setItemDrink(item);
   };
 
   return (

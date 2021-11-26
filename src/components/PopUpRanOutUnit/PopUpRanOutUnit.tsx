@@ -9,9 +9,15 @@ import Exit from '../../share/assets/vector/Exit.svg';
   OnClickExitFrom
 */
 
+type OrderDetail = {
+  drinkId: number;
+  quantity: number;
+  note: string | undefined;
+};
+
 type Props = {
   onClickContinueProceed?: React.MouseEventHandler<HTMLButtonElement>;
-  onClickBack?: React.MouseEventHandler<HTMLElement>;
+  handleClickBackForm: React.MouseEventHandler<HTMLButtonElement>;
   onClickExit?: React.MouseEventHandler<HTMLElement>;
 };
 
@@ -33,7 +39,7 @@ const PopUpRanOutUnit = (props: Props) => {
           titleButton="YES, I WANT TO PROCEED"
         />
         <Button
-          onClick={props.onClickBack}
+          onClick={props.handleClickBackForm}
           className="btn btn-primary btn-secondary"
           type="submit"
           titleButton="NO, I CHANGE MY MIND"
