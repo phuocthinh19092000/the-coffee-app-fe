@@ -1,26 +1,22 @@
 import HomePage from './pages/HomePage/HomePage';
-import ErrorPage from './pages/ErrorPage/ErrorPage';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import LoginForm from './components/Login/LoginForm';
+
+import ErrorPage from './pages/404Page/ErrorPage';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import WrapperPage from './components/WrapperPage/WrapperPage';
+import ComingSoonPage from './pages/ComingSoonPage/ComingSoonPage';
+
 function App() {
   return (
     <Router>
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route
-          exact
-          path="/login"
-          render={() => {
-            return !!localStorage.getItem('user') ? <Redirect to="/" /> : <LoginForm />;
-          }}
-        />
-        <Route
-          exact
-          path="/homepage"
-          render={() => {
-            return !!localStorage.getItem('user') ? <HomePage /> : <Redirect to="/login" />;
-          }}
-        />
+
+        <Route path="/wrapper" component={WrapperPage} />
+        <Route path="/comingsoon" component={ComingSoonPage} />
+        <Route path="/orders" component={ComingSoonPage} />
+        <Route path="/user/changeAvatar" component={ComingSoonPage} />
+        <Route path="/user/changePassword" component={ComingSoonPage} />
+
         <Route component={ErrorPage} />
       </Switch>
     </Router>

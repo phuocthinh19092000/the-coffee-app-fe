@@ -21,7 +21,7 @@ type DrinkItemType = {
 type OrderDetail = {
   drinkId: number;
   quantity: number;
-  note: string | undefined;
+  note?: string;
 };
 
 type Props = {
