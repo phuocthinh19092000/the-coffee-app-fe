@@ -1,6 +1,6 @@
 import DrinkItem from '../DrinkItem/DrinkItem';
 import './ListDrinkItem.scss';
-import { useRef, useEffect, useState } from 'react';
+import { useState } from 'react';
 import DrinkItemDetail from '../DrinkDetail/DrinkItemDetail';
 import PopUpFinishOrder from '../PopUpFinishOrder/PopUpFinishOrder';
 import PopUpRanOutUnit from '../PopUpRanOutUnit/PopUpRanOutUnit';
@@ -67,6 +67,11 @@ function ListDrinkItem(props: Props) {
   };
 
   const continueOrderRanoutUnit = () => {
+    const userJson = localStorage.getItem('user');
+    const user = userJson && JSON.parse(userJson);
+    user.freeunit = 0;
+    document.dispatchEvent(new CustomEvent('setFreeUnit', { detail: user.freeunit }));
+    localStorage.setItem('user', JSON.stringify(user));
     setStep(showPopupCase.PopUpFinishOrder);
   };
 

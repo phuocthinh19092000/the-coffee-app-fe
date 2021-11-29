@@ -1,8 +1,6 @@
 import HomePage from './pages/HomePage/HomePage';
-
 import ErrorPage from './pages/404Page/ErrorPage';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import WrapperPage from './components/WrapperPage/WrapperPage';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import ComingSoonPage from './pages/ComingSoonPage/ComingSoonPage';
 
 function App() {
@@ -11,11 +9,16 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
 
-        <Route path="/wrapper" component={WrapperPage} />
-        <Route path="/comingsoon" component={ComingSoonPage} />
-        <Route path="/orders" component={ComingSoonPage} />
-        <Route path="/user/changeAvatar" component={ComingSoonPage} />
-        <Route path="/user/changePassword" component={ComingSoonPage} />
+        <Route
+          exact
+          path="/homepage"
+          render={() => {
+            return !!localStorage.getItem('user') ? <HomePage /> : <ComingSoonPage />;
+          }}
+        />
+        <Route exact path="/orders" component={ComingSoonPage} />
+        <Route exact path="/user/changeAvatar" component={ComingSoonPage} />
+        <Route exact path="/user/changePassword" component={ComingSoonPage} />
 
         <Route component={ErrorPage} />
       </Switch>

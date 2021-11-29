@@ -1,7 +1,6 @@
 @import '../../share/assets/scss/variables.scss';
 
 .background {
-  background-color: $grey-4-color;
   width: 100%;
   padding-top: 48px;
   padding-bottom: 56px;
@@ -12,6 +11,6 @@
 
 .background-img {
   background-size: cover;
-  background-color: #eedfd2;
+  background-color: $background-color;
   border-radius: 12px;
 }

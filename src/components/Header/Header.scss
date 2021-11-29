@@ -6,9 +6,13 @@
   align-items: center;
   flex-direction: row;
   padding-right: 20px;
+  width: 100%;
+  background-color: $white-color;
+  position: sticky;
+  top: 0;
 
-  &--grey{
-    background-color: $grey-4-color
+  &--grey {
+    background-color: $grey-4-color;
   }
 
   &__logo {
@@ -29,7 +33,6 @@
   position: absolute;
   top: 60px;
   width: 440px;
-  background-color: $grey-4-color;
   border-radius: 8px;
   padding: 12px;
   overflow-y: auto;

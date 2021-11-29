@@ -5,10 +5,11 @@ import ComingSoon from '../../components/ComingSoon/ComingSoon';
 const ComingSoonPage = () => {
   return (
     <div className="coming-soonn-page">
-      <WrapperPage />
-      <div className="coming-soon-component">
-        <ComingSoon />
-      </div>
+      <WrapperPage>
+        <div className="coming-soon-component">
+          <ComingSoon />
+        </div>
+      </WrapperPage>
     </div>
   );
 };

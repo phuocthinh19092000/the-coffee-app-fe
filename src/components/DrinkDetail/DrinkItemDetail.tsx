@@ -61,7 +61,7 @@ function DrinkItemDetail(props: Props) {
           placeholder="Quanlity: "
           src={Subtraction}
           src2={Summation}
-          className="mt-100 mb-24"
+          className="mt-100 mb-24 pointer"
           type="number"
           value={quantity}
           onChange={onChangeInputHandler}
