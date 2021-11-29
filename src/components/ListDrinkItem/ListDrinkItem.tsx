@@ -45,6 +45,10 @@ function ListDrinkItem(props: Props) {
   const handleClickPlaceOrder = (orderDetail: OrderDetail) => {
     const userJson = localStorage.getItem('user');
     const user = userJson && JSON.parse(userJson);
+    if (!user) {
+      alert('You must login first');
+      return;
+    }
     setOrderDetail(orderDetail);
     if (user.freeunit < orderDetail.quantity) {
       setStep(showPopupCase.showPopUpRanOutUnit);
