@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import OTSVLogo from '../../share/assets/img/OTSVLogo.png';
-import SearchVector from '../../share/assets/img/SearchVector.png';
+import SearchVector from '../../share/assets/vector/iconSearch.svg';
 import CoffeeImg from '../../share/assets/img/CoffeeImg.png';
 import Input from '../Input/Input';
 import Button from '../Button/Index';
@@ -69,7 +69,7 @@ const Header = (props: Props) => {
         <Input
           placeholder="Search drink"
           src={SearchVector}
-          className={props.isLoggedIn ? "block-input--white" : "block-input" }
+          className={props.isLoggedIn ? 'block-input--white' : 'block-input'}
           value={value}
           onChange={handleSearchDrink}
         />

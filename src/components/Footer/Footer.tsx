@@ -6,7 +6,7 @@ import Icon from '../Icon/Icon';
 const Footer = () => {
   return (
     <div className="footer">
-      <p>Copyright © 2021 Ocean Network Express Pte. Ltd. All rights reserved.</p>
+      <p>© 2021 Ocean Network Express Pte. Ltd. All rights reserved.</p>
     </div>
   );
 };
