@@ -19,7 +19,9 @@ function DrinkItem(props: Props) {
   };
   return (
     <div className="drink-item" onClick={props.onClick}>
-      <img src={props.item.image} alt={props.item.name} />
+      <div className="drink-item__image">
+        <img src={props.item.image} alt={props.item.name} />
+      </div>
       <div>
         <p className="drink-item__name">{props.item.name}</p>
         <p className="drink-item__price">{moneyFormat(props.item.price)}</p>

@@ -2,12 +2,14 @@ import { useState, useRef, useEffect, ReactChild } from 'react';
 import Header from '../Header/Header';
 import Login from '../../pages/Login/Login';
 import PopUpLogOut from '../PopUpLogOut/PopUpLogOut';
+
 import './WrapperPage.scss';
 type Props = {
   children?: React.ReactChild[] | ReactChild | JSX.Element | JSX.Element[];
 };
 
 const WrapperPage = (props: Props) => {
+
   const [isShowLogin, setIsShowLogin] = useState(false);
 
   const [isShowLogout, setIsShowLogout] = useState(false);
