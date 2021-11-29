@@ -1,8 +1,13 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, ReactChild } from 'react';
 import Header from '../Header/Header';
 import Login from '../../pages/Login/Login';
 import PopUpLogOut from '../PopUpLogOut/PopUpLogOut';
-const WrapperPage = () => {
+import './WrapperPage.scss';
+type Props = {
+  children?: React.ReactChild[] | ReactChild | JSX.Element | JSX.Element[];
+};
+
+const WrapperPage = (props: Props) => {
   const [isShowLogin, setIsShowLogin] = useState(false);
 
   const [isShowLogout, setIsShowLogout] = useState(false);
@@ -53,13 +58,17 @@ const WrapperPage = () => {
         {isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
       </div>
 
-      <Header
-        className={user ? "header header--grey" : "header" }
-        onClick={showLogin}
-        isLoggedIn={Boolean(user)}
-        userName={user?.fullname}
-        onClickShowLogOut={showPopUpLogoutHandler}
-      />
+      <div className={isShowLogin || isShowLogout ? 'wrapper-page--filter' : ''}>
+        <Header
+          className={user ? 'header header--grey' : 'header'}
+          onClick={showLogin}
+          isLoggedIn={Boolean(user)}
+          userName={user?.username}
+          onClickShowLogOut={showPopUpLogoutHandler}
+        />
+        {props.children}
+      </div>
+
     </>
   );
 };
