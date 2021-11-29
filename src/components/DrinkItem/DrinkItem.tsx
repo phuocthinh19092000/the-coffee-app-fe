@@ -24,7 +24,7 @@ function DrinkItem(props: Props) {
       </div>
       <div>
         <p className="drink-item__name">{props.item.name}</p>
-        <p className="drink-item__price">{moneyFormat(props.item.price)}</p>
+        <p className="drink-item__price">{moneyFormat(props.item.price)}đ</p>
       </div>
     </div>
   );

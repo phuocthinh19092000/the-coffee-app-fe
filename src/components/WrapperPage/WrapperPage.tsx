@@ -4,12 +4,12 @@ import Login from '../../pages/Login/Login';
 import PopUpLogOut from '../PopUpLogOut/PopUpLogOut';
 
 import './WrapperPage.scss';
+import Footer from '../Footer/Footer';
 type Props = {
   children?: React.ReactChild[] | ReactChild | JSX.Element | JSX.Element[];
 };
 
 const WrapperPage = (props: Props) => {
-
   const [isShowLogin, setIsShowLogin] = useState(false);
 
   const [isShowLogout, setIsShowLogout] = useState(false);
@@ -54,7 +54,7 @@ const WrapperPage = (props: Props) => {
   };
 
   return (
-    <>
+    <div className="wrapper-page">
       <div ref={ref}>
         {isShowLogin && <Login />}
         {isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
@@ -68,10 +68,12 @@ const WrapperPage = (props: Props) => {
           userName={user?.username}
           onClickShowLogOut={showPopUpLogoutHandler}
         />
-        {props.children}
+        <div className="wrapper-page__container">{props.children}</div>
+        <div className="wrapper-page__footer">
+          <Footer />
+        </div>
       </div>
-
-    </>
+    </div>
   );
 };
 

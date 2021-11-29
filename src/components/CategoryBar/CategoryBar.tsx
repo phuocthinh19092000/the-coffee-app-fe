@@ -1,7 +1,6 @@
 import CategoryData from '../../json/seed_product_types.json';
 import './CategoryBar.scss';
 import CategoryItem from '../CategoryItem/CategoryItem';
-import React from 'react';
 
 export type CategoryType = {
   id: number;

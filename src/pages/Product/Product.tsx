@@ -4,7 +4,7 @@ import CategoryBar from '../../components/CategoryBar/CategoryBar';
 import DrinkData from '../../json/seed_products.json';
 import '../Product/Product.scss';
 const Product = () => {
-  const [listDrink, setListDrink] = useState(DrinkData.filter((drink) => drink.id === 1));
+  const [listDrink, setListDrink] = useState(DrinkData.filter((drink) => drink.categoryID === 1));
 
   const [categoryIdSelected, setCategoryIdSelected] = useState(1);
 
@@ -18,7 +18,7 @@ const Product = () => {
         <CategoryBar onGetIdHandler={handelSetCategory} selectedCategoryId={categoryIdSelected} />
       </div>
       <div className="product-right">
-        <ListDrinkItem listDrink={listDrink}/>
+        <ListDrinkItem listDrink={listDrink} />
       </div>
     </div>
   );
