@@ -57,6 +57,7 @@ const WrapperPage = (props: Props) => {
         {isShowLogin && <Login />}
         {isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
       </div>
+
       <div className={isShowLogin || isShowLogout ? 'wrapper-page--filter' : ''}>
         <Header
           className={user ? 'header header--grey' : 'header'}
@@ -67,6 +68,7 @@ const WrapperPage = (props: Props) => {
         />
         {props.children}
       </div>
+
     </>
   );
 };

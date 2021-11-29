@@ -10,11 +10,12 @@
   &-left {
     width: 256px;
     height: 100%;
-    border-right: 1px solid $border-color;
   }
 
   &-right {
     width: 1184px;
+    min-height: 550px;
     height: 100%;
+    border-left: 1px solid $border-color;
   }
 }
