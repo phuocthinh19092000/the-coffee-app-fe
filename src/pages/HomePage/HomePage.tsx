@@ -3,7 +3,7 @@ import Product from '../Product/Product';
 import WrapperPage from '../../components/WrapperPage/WrapperPage';
 import Background from '../../components/Background/Background';
 import Toast from '../../components/Toast/Toast';
-
+import './HomePage.scss';
 const ToastType = {
   success: 'success',
   fail: 'fail',
@@ -22,17 +22,19 @@ const HomePage = () => {
   });
   return (
     <>
-      <Toast message={'Order changes saved successfully!'} type={ToastType.success} ref={toastRef} />
-      <WrapperPage />
-      <Background />
-      <Product />
-      {/* <button
-        onClick={() => {
-          toastRef.current.show();
-        }}
-      >
-        Show Toast Notication
-      </button> */}
+      <WrapperPage>
+        <Toast message={'Order changes saved successfully!'} type={ToastType.success} ref={toastRef} />
+        <Background />
+        <Product />
+        <button
+          className="home-page-btn--hidden"
+          onClick={() => {
+            toastRef.current.show();
+          }}
+        >
+          Show Toast Notication
+        </button>
+      </WrapperPage>
     </>
   );
 };
