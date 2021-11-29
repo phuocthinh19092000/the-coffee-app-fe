@@ -11,8 +11,12 @@ $grey-4-color: #f2f2f2;
 $grey: #999999;
 $black: #333333;
 $border-color: #cccccc;
-$green: #499E3B;
-$customer-error: #E51616;
+$green: #499e3b;
+$customer-error: #e51616;
+$pink: #bd0f72;
+$box-shadow: #000000;
+$yellow: #ffc107;
+$orange: #ffe7ba;
 @mixin background-blur {
   background: rgba(51, 51, 51, 0.3);
   backdrop-filter: blur(5px);

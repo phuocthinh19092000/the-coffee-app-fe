@@ -26,13 +26,13 @@ const HomePage = () => {
       <WrapperPage />
       <Background />
       <Product />
-      <button
+      {/* <button
         onClick={() => {
           toastRef.current.show();
         }}
       >
         Show Toast Notication
-      </button>
+      </button> */}
     </>
   );
 };

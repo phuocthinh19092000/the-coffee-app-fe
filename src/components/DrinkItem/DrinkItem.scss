@@ -3,12 +3,25 @@
   display: inline-block;
   text-align: center;
   cursor: pointer;
+  background-color: white;
+  margin: 20px;
+  border-radius: 10px;
+  border: 0px;
+  border-color: tomato;
+  border-style: solid;
+  transition: 200ms;
+  max-width: 200px;
 
+  &__image {
+    background-color: $orange;
+    border-radius: 10px;
+  }
   &__name {
     font-style: normal;
     font-weight: bold;
     font-size: 18px;
     line-height: 23px;
+    margin-top: 10px;
   }
 
   &__price {
@@ -22,4 +35,5 @@
 
 img {
   object-fit: cover;
+  border-radius: 10px;
 }

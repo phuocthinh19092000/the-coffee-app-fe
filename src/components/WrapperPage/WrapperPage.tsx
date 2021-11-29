@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import Header from '../Header/Header';
 import Login from '../../pages/Login/Login';
 import PopUpLogOut from '../PopUpLogOut/PopUpLogOut';
+import Footer from '../Footer/Footer';
 const WrapperPage = () => {
   const [isShowLogin, setIsShowLogin] = useState(false);
 
@@ -54,12 +55,13 @@ const WrapperPage = () => {
       </div>
 
       <Header
-        className={user ? "header header--grey" : "header" }
+        className={user ? 'header header--grey' : 'header'}
         onClick={showLogin}
         isLoggedIn={Boolean(user)}
         userName={user?.username}
         onClickShowLogOut={showPopUpLogoutHandler}
       />
+      <Footer />
     </>
   );
 };
