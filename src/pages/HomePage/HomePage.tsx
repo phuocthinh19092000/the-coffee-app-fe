@@ -21,13 +21,13 @@ const HomePage = () => {
     },
   });
   return (
-    <>
+    <div className="home-page">
       <WrapperPage>
         <Toast message={'Order changes saved successfully!'} type={ToastType.success} ref={toastRef} />
         <Background />
         <Product />
         <button
-          className="home-page-btn--hidden"
+          className="home-page__btn--hidden"
           onClick={() => {
             toastRef.current.show();
           }}
@@ -35,7 +35,7 @@ const HomePage = () => {
           Show Toast Notication
         </button>
       </WrapperPage>
-    </>
+    </div>
   );
 };
 export default HomePage;
