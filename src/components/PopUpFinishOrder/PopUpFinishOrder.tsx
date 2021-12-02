@@ -4,19 +4,16 @@ import Exit from '../../share/assets/vector/Exit.svg';
 import OrderConfirmed from '../../share/assets/img/OrderConfirmed.png';
 import '../PopUpFinishOrder/PopUpFinishOrder.scss';
 
-
-
 type Props = {
   onClick?: React.MouseEventHandler<HTMLElement>;
 };
 
 const ToastType = {
-  success: "success",
-  fail: "fail",
+  success: 'success',
+  fail: 'fail',
 };
 
 function PopUpFinishOrder(props: Props) {
-
   return (
     <div className="card-confirm-order--blur">
       <Card className="card card--center card-confirm-order">
@@ -31,7 +28,7 @@ function PopUpFinishOrder(props: Props) {
 
         <Button
           onClick={props.onClick}
-          className="btn btn-primary btn--enabled card-confirm-order__button "
+          className="btn btn-primary btn--enabled card-confirm-order__btn "
           titleButton="OKAY, I SEE"
         />
       </Card>

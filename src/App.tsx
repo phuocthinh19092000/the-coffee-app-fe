@@ -1,29 +1,16 @@
-import HomePage from './pages/HomePage/HomePage';
-import ErrorPage from './pages/404Page/ErrorPage';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import ComingSoonPage from './pages/ComingSoonPage/ComingSoonPage';
+import { useEffect, useState } from 'react';
+import LoadingScreen from './pages/LoadingScreen/LoadingScreen';
+import RouterPage from './routes/Router';
 
 function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
+  const [isLoading, setIsLoading] = useState(true);
 
-        <Route
-          exact
-          path="/homepage"
-          render={() => {
-            return !!localStorage.getItem('user') ? <HomePage /> : <ComingSoonPage />;
-          }}
-        />
-        <Route exact path="/orders" component={ComingSoonPage} />
-        <Route exact path="/user/changeAvatar" component={ComingSoonPage} />
-        <Route exact path="/user/changePassword" component={ComingSoonPage} />
-
-        <Route component={ErrorPage} />
-      </Switch>
-    </Router>
-  );
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 2000);
+  // }, []);
+  return <>{isLoading ? <LoadingScreen /> : <RouterPage />}</>;
 }
 
 export default App;

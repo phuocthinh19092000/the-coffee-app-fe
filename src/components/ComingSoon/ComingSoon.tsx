@@ -10,7 +10,7 @@ const ComingSoon = () => {
   return (
     <div className="coming-soon-container">
       <Button
-        className="btn btn-primary btn--enabled coming-soon-container__button "
+        className="btn btn-primary btn--enabled coming-soon-container__btn "
         titleButton="BACK TO HOME PAGE"
         onClick={goHome}
       />

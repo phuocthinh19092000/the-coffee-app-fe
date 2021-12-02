@@ -1,7 +1,7 @@
 @import '../../share/assets/scss/variables.scss';
 .drink-item {
   display: inline-block;
-  text-align: center;
+  text-align: left;
   cursor: pointer;
   background-color: white;
   margin: 20px;
@@ -11,7 +11,6 @@
   border-style: solid;
   transition: 200ms;
   width: 200px;
-  min-height: 280px;
   box-shadow: 0px 10px 20px $box-shadow;
 
   &__image {
@@ -26,6 +25,12 @@
     font-size: 18px;
     line-height: 23px;
     margin: 10px 10px 0;
+    width: 100%;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: clip;
+    overflow: hidden;
   }
 
   &__price {
@@ -41,4 +46,13 @@
 img {
   object-fit: cover;
   border-radius: 10px;
+}
+
+.block-name {
+  flex: 1;
+  margin-bottom: 1rem !important;
+}
+
+.block-price {
+  margin-top: auto !important;
 }

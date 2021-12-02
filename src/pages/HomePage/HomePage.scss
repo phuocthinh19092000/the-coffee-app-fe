@@ -1,3 +1,20 @@
-.home-page-btn--hidden {
-  display: none;
+.home-page {
+  --growth-from: 0.5;
+  --growth-to: 1;
+  animation-name: growth;
+  animation-duration: 0.2s;
+  animation-timing-function: linear;
+
+  &__btn--hidden {
+    display: none;
+  }
+}
+
+@keyframes growth {
+  from {
+    transform: scale(var(--growth-from));
+  }
+  to {
+    transform: scale(var(--growth-to));
+  }
 }
