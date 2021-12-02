@@ -1,0 +1,25 @@
+@import '../../share/assets/scss/variables.scss';
+
+.card-login-center {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: $grey-4-color;
+
+  &__exit {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 35px;
+    right: 35px;
+    cursor: pointer;
+  }
+
+  &__description {
+    width: 232px;
+    height: 22px;
+    position: absolute;
+    left: calc(50% - 232px / 2);
+    top: calc(25% - 22px / 2);
+  }
+}
