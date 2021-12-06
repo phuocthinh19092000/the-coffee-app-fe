@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import OTSVLogo from '../../share/assets/img/OTSVLogo.png';
 import SearchVector from '../../share/assets/vector/iconSearch.svg';
 import CoffeeImg from '../../share/assets/img/CoffeeImg.png';
@@ -8,7 +8,9 @@ import './Header.scss';
 import SearchItem from '../SearchItem/SearchItem';
 import DrinkItems from '../../json/seed_products.json';
 import CustomerInformation from '../CustomerInformation/CustomerInformation';
-
+import { ThemeContext } from '../../utils/ThemeProvider';
+import { CgSun } from 'react-icons/cg';
+import { HiMoon } from 'react-icons/hi';
 import { useRef } from 'react';
 import { useHistory } from 'react-router';
 type TypeSearchItem = {
@@ -61,10 +63,13 @@ const Header = (props: Props) => {
     let path = `/`;
     history.push(path);
   };
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
     <div className={props.className}>
-      <img className="header__logo" src={OTSVLogo} alt={OTSVLogo} onClick={goHome} />
+      <div className="header__logo">
+        <img src={OTSVLogo} alt={OTSVLogo} onClick={goHome} />
+      </div>
       <div className="header__search-block">
         <Input
           placeholder="Search drink"
@@ -88,12 +93,23 @@ const Header = (props: Props) => {
           )}
         </div>
       </div>
-
-      {props.isLoggedIn ? (
-        <CustomerInformation name={props.userName} onClick={props.onClickShowLogOut} />
-      ) : (
-        <Button className="btn btn-primary btn-login" titleButton="Login" onClick={props.onClick} />
-      )}
+      <div className="header__button">
+        {props.isLoggedIn ? (
+          <>
+            <button className="header__button-toggle" onClick={toggleTheme}>
+              {theme === 'Light' ? <HiMoon size={40} /> : <CgSun size={40} />}
+            </button>
+            <CustomerInformation name={props.userName} onClick={props.onClickShowLogOut} />
+          </>
+        ) : (
+          <>
+            <div className="header__button-toggle" onClick={toggleTheme}>
+              {theme === 'Light' ? <HiMoon size={40} /> : <CgSun size={40} />}
+            </div>
+            <Button className="btn btn-primary btn-login" titleButton="Login" onClick={props.onClick} />
+          </>
+        )}
+      </div>
     </div>
   );
 };

@@ -25,6 +25,23 @@
     position: relative;
     min-width: 440px;
   }
+
+  &__button {
+    display: flex;
+
+    &-toggle {
+      margin-right: 30px;
+      cursor: pointer;
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      border: none;
+      &:focus {
+        outline: none;
+      }
+      transition: all 0.5s ease;
+    }
+  }
 }
 
 .search-list {

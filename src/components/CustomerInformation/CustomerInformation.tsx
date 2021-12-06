@@ -1,8 +1,7 @@
-import { useState, useRef, useEffect, useContext } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import UserInformation from '../../share/assets/vector/UserInformation.svg';
 import ExpandMore from '../../share/assets/vector/ExpandMore.svg';
 import './CustomerInformation.scss';
-import { ThemeContext } from '../../utils/ThemeProvider';
 
 type Props = {
   name: string;
@@ -45,18 +44,17 @@ const CustomerInformation = (props: Props) => {
     };
   }, [isMenuOpen]);
 
-  const { theme, toggleTheme } = useContext(ThemeContext);
-
   return (
     <div ref={dropdownMenuRef} className="block-customer-information" onClick={handleClickInside}>
       <img className="block-customer-information__img" src={UserInformation} alt="Customer Information" />
-      <span className="block-customer-information__span">
-        {props.name}: <span>{freeUnit}</span>
-      </span>
+      <span className="block-customer-information__span">{props.name}</span>
       <div className="menu-dropdown">
         <img src={ExpandMore} className="menu-dropdown__img" alt="expand more" />
         {isMenuOpen && (
           <div className="menu-dropdown__content">
+            <a className="menu-dropdown__item" href="/orders">
+              Free Unit: {freeUnit}
+            </a>
             <a className="menu-dropdown__item" href="/orders">
               My Orders
             </a>
@@ -65,9 +63,6 @@ const CustomerInformation = (props: Props) => {
             </a>
             <a className="menu-dropdown__item" href="/user/changePassword">
               Change Password
-            </a>
-            <a className="menu-dropdown__item" onClick={toggleTheme}>
-              Switch to {theme === 'Light' ? 'Dark' : 'Light'} mode
             </a>
             <a className="menu-dropdown__item menu-dropdown__item--accent" onClick={props.onClick} id="accent-color">
               Log out

@@ -24,11 +24,7 @@ function DrinkItem(props: Props) {
       </div>
       <div>
         <div className="block-name">
-          <span className="drink-item__name">
-            {props.item.name}
-            <br />
-            <br />
-          </span>
+          <span className="drink-item__name">{props.item.name}</span>
         </div>
         <div className="block-price">
           <span className="drink-item__price">{moneyFormat(props.item.price)}đ</span>
