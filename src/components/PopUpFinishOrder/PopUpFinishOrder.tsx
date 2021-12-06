@@ -8,11 +8,6 @@ type Props = {
   onClick?: React.MouseEventHandler<HTMLElement>;
 };
 
-const ToastType = {
-  success: 'success',
-  fail: 'fail',
-};
-
 function PopUpFinishOrder(props: Props) {
   return (
     <div className="card-confirm-order--blur">
