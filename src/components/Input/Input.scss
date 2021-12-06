@@ -13,14 +13,14 @@ input[type='number'] {
 .block-input {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 440px;
   position: relative;
   border-radius: 50px;
   background-color: $grey-4-color;
   font-size: 16px;
 
-  &--white{
-    background-color:$white-color
+  &--white {
+    background-color: $white-color;
   }
 
   &:focus-within {
@@ -30,7 +30,7 @@ input[type='number'] {
   input {
     background-color: inherit;
     border-radius: 50px;
-    width: 100%;
+    width: 440px;
     margin: 0;
     border: none;
     text-indent: 5%;

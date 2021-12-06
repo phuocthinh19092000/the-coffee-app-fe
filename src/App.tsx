@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import LoadingScreen from './pages/LoadingScreen/LoadingScreen';
+import SplashScreen from './pages/SplashScreen/SplashScreen';
 import RouterPage from './routes/Router';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       setIsLoading(false);
     }, 2000);
   }, []);
-  return <>{isLoading ? <LoadingScreen /> : <RouterPage />}</>;
+  return <>{isLoading ? <SplashScreen /> : <RouterPage />}</>;
 }
 
 export default App;

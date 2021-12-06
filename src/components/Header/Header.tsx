@@ -23,7 +23,7 @@ type Props = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   onClickShowLogOut: React.MouseEventHandler<HTMLAnchorElement>;
   isLoggedIn: boolean;
-  userName: string;
+  fullName: string;
 };
 const Header = (props: Props) => {
   const [value, setValue] = useState('');
@@ -99,13 +99,13 @@ const Header = (props: Props) => {
             <button className="header__button-toggle" onClick={toggleTheme}>
               {theme === 'Light' ? <HiMoon size={40} /> : <CgSun size={40} />}
             </button>
-            <CustomerInformation name={props.userName} onClick={props.onClickShowLogOut} />
+            <CustomerInformation fullname={props.fullName} onClick={props.onClickShowLogOut} />
           </>
         ) : (
           <>
-            <div className="header__button-toggle" onClick={toggleTheme}>
+            <button className="header__button-toggle mt-15" onClick={toggleTheme}>
               {theme === 'Light' ? <HiMoon size={40} /> : <CgSun size={40} />}
-            </div>
+            </button>
             <Button className="btn btn-primary btn-login" titleButton="Login" onClick={props.onClick} />
           </>
         )}

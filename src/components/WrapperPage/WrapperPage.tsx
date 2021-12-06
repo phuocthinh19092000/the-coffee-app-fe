@@ -65,7 +65,7 @@ const WrapperPage = (props: Props) => {
           className={user ? 'header header--grey' : 'header'}
           onClick={showLogin}
           isLoggedIn={Boolean(user)}
-          userName={user?.username}
+          fullName={user?.fullname}
           onClickShowLogOut={showPopUpLogoutHandler}
         />
         <div className="wrapper-page__container">{props.children}</div>

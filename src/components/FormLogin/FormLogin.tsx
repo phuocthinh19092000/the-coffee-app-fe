@@ -83,7 +83,7 @@ function FormLogin() {
         </div>
       </form>
       <div className="card-login__content">
-        <a className="card-login__content--accent" href="XXX" target="_blank" rel="noreferrer">
+        <a className="card-login__content--accent" href="#" target="_blank" rel="noreferrer">
           Forget Password?
         </a>
       </div>
