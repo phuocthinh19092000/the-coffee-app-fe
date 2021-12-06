@@ -15,7 +15,7 @@ function PopUpLoginCenter(props: Props) {
           <img src={Exit} className="card-login-center__exit" onClick={props.onClick}></img>
         </a>
         <p className="card-login-center__description">Please login to proceed the order:</p>
-        <div>
+        <div className="mt-100">
           <FormLogin />
         </div>
       </Card>

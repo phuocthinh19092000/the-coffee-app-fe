@@ -4,7 +4,7 @@ import ExpandMore from '../../share/assets/vector/ExpandMore.svg';
 import './CustomerInformation.scss';
 
 type Props = {
-  name: string;
+  fullname: string;
   onClick: React.MouseEventHandler<HTMLAnchorElement>;
 };
 
@@ -47,13 +47,13 @@ const CustomerInformation = (props: Props) => {
   return (
     <div ref={dropdownMenuRef} className="block-customer-information" onClick={handleClickInside}>
       <img className="block-customer-information__img" src={UserInformation} alt="Customer Information" />
-      <span className="block-customer-information__span">{props.name}</span>
+      <span className="block-customer-information__span">{props.fullname}</span>
       <div className="menu-dropdown">
         <img src={ExpandMore} className="menu-dropdown__img" alt="expand more" />
         {isMenuOpen && (
           <div className="menu-dropdown__content">
             <a className="menu-dropdown__item" href="/orders">
-              Free Unit: {freeUnit}
+              Today Free Unit: <span className="menu-dropdown__item--accent">{freeUnit}</span>
             </a>
             <a className="menu-dropdown__item" href="/orders">
               My Orders

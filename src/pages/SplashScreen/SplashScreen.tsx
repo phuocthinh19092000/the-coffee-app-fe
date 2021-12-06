@@ -1,13 +1,13 @@
 import LoadingImage from '../../share/assets/img/loading.png';
 import CountUp from 'react-countup';
-import './LoadingScreen.scss';
-const LoadingScreen = () => {
+import './SplashScreen.scss';
+const SplashScreen = () => {
   return (
-    <div className="loading-screen">
-      <div className="loading-screen__img">
+    <div className="splash-screen">
+      <div className="splash-screen__img">
         <img src={LoadingImage} alt="Loading Screen" />
       </div>
-      <div className=" loading-screen__title">
+      <div className=" splash-screen__title">
         <CountUp start={0} end={100} delay={0} duration={1.5}>
           {({ countUpRef }) => (
             <div>
@@ -16,9 +16,9 @@ const LoadingScreen = () => {
           )}
         </CountUp>
       </div>
-      <p className="loading-screen__footer">One Tech Stop Vietnam @ 2021</p>
+      <p className="splash-screen__footer">One Tech Stop Vietnam @ 2021</p>
     </div>
   );
 };
 
-export default LoadingScreen;
+export default SplashScreen;

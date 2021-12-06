@@ -4,7 +4,7 @@ import { useState } from 'react';
 import DrinkItemDetail from '../DrinkDetail/DrinkItemDetail';
 import PopUpFinishOrder from '../PopUpFinishOrder/PopUpFinishOrder';
 import PopUpRanOutUnit from '../PopUpRanOutUnit/PopUpRanOutUnit';
-
+import PopUpLoginCenter from '../PopUpLoginCenter/PopUpLoginCenter';
 type DrinkItem = {
   id: number;
   categoryID: number;
@@ -26,6 +26,7 @@ enum showPopupCase {
   showDrinkItemDetail = 1,
   showPopUpRanOutUnit = 2,
   PopUpFinishOrder = 3,
+  PopUpLoginCenter = 4,
 }
 
 function ListDrinkItem(props: Props) {
@@ -46,7 +47,7 @@ function ListDrinkItem(props: Props) {
     const userJson = localStorage.getItem('user');
     const user = userJson && JSON.parse(userJson);
     if (!user) {
-      alert('You must login first');
+      setStep(showPopupCase.PopUpLoginCenter);
       return;
     }
     setOrderDetail(orderDetail);
@@ -96,6 +97,8 @@ function ListDrinkItem(props: Props) {
         );
       case showPopupCase.PopUpFinishOrder:
         return <PopUpFinishOrder onClick={exitPopUp} />;
+      case showPopupCase.PopUpLoginCenter:
+        return <PopUpLoginCenter onClick={exitPopUp} />;
       default:
         break;
     }
