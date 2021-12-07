@@ -7,6 +7,7 @@
   flex-direction: row;
   padding-right: 20px;
   width: 100%;
+  height: 80px;
   background-color: $white-color;
   position: sticky;
   top: 0;
@@ -19,11 +20,13 @@
     height: inherit;
     margin: 12.45px 0 12.45px 20px;
     cursor: pointer;
+    margin-top: 50px;
   }
 
   &__search-block {
-    position: relative;
+    position: absolute;
     min-width: 440px;
+    left: calc(50% - 440px / 2);
   }
 
   &__button {

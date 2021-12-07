@@ -2,7 +2,7 @@
 
 .splash-screen {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   text-align: center;
   align-items: center;
   justify-content: center;
@@ -13,12 +13,10 @@
   animation-delay: 1.5s;
 
   &__img {
-    padding-top: 150px;
+    padding-top: 100px;
     width: 500px;
     height: 500px;
     margin: auto;
-    width: 50%;
-    height: 50%;
   }
 
   &__title {
@@ -27,7 +25,7 @@
     line-height: 30px;
     color: $grey;
     text-align: center;
-    margin-top: 30px;
+    margin-top: -20px;
   }
 
   &__footer {
@@ -35,7 +33,7 @@
     font-size: 18px;
     line-height: 23px;
     color: $accent-color;
-    padding-top: 250px;
+    padding-top: 200px;
     padding-bottom: 60px;
   }
 }

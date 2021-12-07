@@ -23,10 +23,14 @@ function DrinkItem(props: Props) {
         <img src={props.item.image} alt={props.item.name} />
       </div>
       <div>
-        <div className="block-name">
-          <span className="drink-item__name">{props.item.name}</span>
+        <div>
+          <span className="drink-item__name">
+            {props.item.name}
+            <br />
+            <br />
+          </span>
         </div>
-        <div className="block-price">
+        <div>
           <span className="drink-item__price">{moneyFormat(props.item.price)}đ</span>
         </div>
       </div>

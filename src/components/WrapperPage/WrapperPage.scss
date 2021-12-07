@@ -2,17 +2,21 @@
 
 .wrapper-page {
   background-color: inherit;
-}
-.wrapper-page--filter {
-  filter: blur(5px);
-}
+  width: 100%;
+  height: 100vh;
 
-.wrapper-page__container {
-  min-height: 100vh;
-}
+  &--filter {
+    filter: blur(5px);
+  }
 
-.wrapper-page__footer {
-  position: relative;
-  left: 0;
-  bottom: 0;
+  &__container {
+    width: auto;
+    height: auto;
+  }
+
+  &__footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+  }
 }

@@ -52,7 +52,7 @@ const CustomerInformation = (props: Props) => {
         <img src={ExpandMore} className="menu-dropdown__img" alt="expand more" />
         {isMenuOpen && (
           <div className="menu-dropdown__content">
-            <a className="menu-dropdown__item" href="/orders">
+            <a className="menu-dropdown__item" href="#">
               Today Free Unit: <span className="menu-dropdown__item--accent">{freeUnit}</span>
             </a>
             <a className="menu-dropdown__item" href="/orders">
