@@ -3,18 +3,12 @@
   display: inline-block;
   text-align: center;
   cursor: pointer;
-  background-color: white;
   margin: 20px;
   border-radius: 10px;
-  border: 0px;
-  border-color: tomato;
-  border-style: solid;
   transition: 200ms;
-  width: 200px;
-  box-shadow: 0px 10px 20px $box-shadow;
+  width: 100%;
 
   &__image {
-    background-color: $orange;
     border-radius: 10px;
     margin: 10px;
     object-fit: cover;
@@ -25,11 +19,11 @@
     font-size: 18px;
     line-height: 23px;
     margin: 10px 10px 0;
-    width: 170px;
+    width: 100%;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    text-overflow: clip;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
     overflow: hidden;
   }
 
@@ -39,16 +33,10 @@
     font-weight: 600;
     font-size: 16px;
     line-height: 21px;
-    margin: 0 10px 10px;
   }
 }
 
 img {
   object-fit: cover;
   border-radius: 10px;
-}
-
-.block-name {
-  flex: 1;
-  margin-bottom: 1rem !important;
 }
