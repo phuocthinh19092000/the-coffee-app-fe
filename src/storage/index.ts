@@ -1,7 +1,8 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import authReducer from '../features/auth/actions/login';
-
+import categoryReducer from '../features/Product/actions/getCategoryData'
+import productReducer from '../features/Product/actions/getProductData'
 const customizedMiddleware = getDefaultMiddleware({
   serializableCheck: false
 })
@@ -9,7 +10,9 @@ const customizedMiddleware = getDefaultMiddleware({
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-    login: authReducer
+    login: authReducer,
+    category: categoryReducer,
+    product: productReducer,
   },
   middleware: customizedMiddleware
 });

@@ -1,4 +1,4 @@
-@import '../../share/assets/scss/variables.scss';
+@import '../../../../share/assets/scss/variables.scss';
 
 .product {
   width: 100%;
@@ -7,13 +7,13 @@
   display: flex;
   flex-direction: row;
   &-left {
-    width: 256px;
+    width: 300px;
     height: 100%;
   }
 
   &-right {
-    width: 1184px;
-    min-height: 550px;
+    width: 1140px;
+    min-height: 630px;
     height: 100%;
     border-left: 1px solid $border-color;
   }

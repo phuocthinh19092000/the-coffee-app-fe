@@ -1,5 +1,5 @@
 import './ItemDetail.scss';
-import { moneyPattern } from '../../utils/regex';
+import { moneyPattern } from '../../../../utils/regex';
 
 type Props = {
   className?: string;

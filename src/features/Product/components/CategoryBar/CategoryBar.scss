@@ -1,8 +1,8 @@
-@import '../../share/assets/scss/variables.scss';
+@import '../../../../share/assets/scss/variables.scss';
 
 .category-item {
   border: none;
-  width: 200px;
+  width: 240px;
   height: 50px;
   padding: 14px 44px 13px 20px;
   font-style: normal;
@@ -11,7 +11,7 @@
   line-height: 23px;
   letter-spacing: 0.25px;
   margin-bottom: 32px;
-  margin-left: 40px;
+  margin-left: 30px;
   cursor: pointer;
 
   &:first-child {
