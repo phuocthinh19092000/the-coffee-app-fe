@@ -1,6 +1,6 @@
 import DrinkItem from '../DrinkItem/DrinkItem';
 import './ListDrinkItem.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DrinkItemDetail from '../DrinkDetail/DrinkItemDetail';
 import PopUpFinishOrder from '../PopUpFinishOrder/PopUpFinishOrder';
 import PopUpRanOutUnit from '../PopUpRanOutUnit/PopUpRanOutUnit';
@@ -8,7 +8,6 @@ import PopUpLoginCenter from '../PopUpLoginCenter/PopUpLoginCenter';
 import { TypeSearchItem } from '../Header/Header';
 type DrinkItem = {
   id: number;
-  categoryID: number;
   name: string;
   image: string;
   price: number;
@@ -35,16 +34,24 @@ function ListDrinkItem(props: Props) {
   const [isOpenPopUp, setIsOpenPopUp] = useState(false);
   const [itemDrink, setItemDrink] = useState({} as DrinkItem);
   const togglePopup = (item: DrinkItem) => {
-    setIsOpenPopUp(!isOpenPopUp);
     setItemDrink(item);
+    setIsOpenPopUp(!isOpenPopUp);
   };
+
   const [step, setStep] = useState(1);
   const [orderDetail, setOrderDetail] = useState({ drinkId: itemDrink.id, quantity: 1, note: '' } as OrderDetail);
 
+  useEffect(() => {
+    if (Object.keys(props.searchDrink).length !== 0) {
+      setOrderDetail({ drinkId: props.searchDrink.id, quantity: 1, note: '' } as OrderDetail);
+      setItemDrink(props.searchDrink);
+      setIsOpenPopUp(true);
+    }
+  }, [props.searchDrink]);
   const handleClickBackForm = () => {
     setStep(step - 1);
   };
-  console.log(props.searchDrink);
+
   const handleClickPlaceOrder = (orderDetail: OrderDetail) => {
     const userJson = localStorage.getItem('user');
     const user = userJson && JSON.parse(userJson);
@@ -111,6 +118,7 @@ function ListDrinkItem(props: Props) {
       {props.listDrink.map((item) => (
         <DrinkItem item={item} key={item.id} onClick={() => togglePopup(item)} />
       ))}
+
       {isOpenPopUp && switchStep()}
     </div>
   );

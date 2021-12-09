@@ -12,7 +12,6 @@ import { useState, useEffect, useRef } from 'react';
 
 type DrinkItemType = {
   id: number;
-  categoryID: number;
   name: string;
   image: string;
   price: number;
@@ -34,7 +33,6 @@ type Props = {
 function DrinkItemDetail(props: Props) {
   const [quantity, setQuantity] = useState(props.orderDetail.quantity);
   const [note, setNote] = useState(props.orderDetail.note);
-
   const onSubOneUnit = () => {
     if (quantity === 1) {
       return;

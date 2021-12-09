@@ -16,6 +16,7 @@ import { useHistory } from 'react-router';
 export type TypeSearchItem = {
   id: number;
   name: string;
+  image: string;
   price: number;
 };
 type Props = {
