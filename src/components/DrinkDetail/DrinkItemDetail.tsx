@@ -1,6 +1,7 @@
 import Exit from '../../share/assets/vector/Exit.svg';
 import Summation from '../../share/assets/vector/Summation.svg';
 import Subtraction from '../../share/assets/vector/Subtraction.svg';
+import VectorSub from '../../share/assets/vector/VectorSub.svg';
 import Edit from '../../share/assets/vector/Edit.svg';
 import Button from '../Button/Index';
 import Card from '../Card/Index';
@@ -59,7 +60,7 @@ function DrinkItemDetail(props: Props) {
         <DrinkItem item={props.item} />
         <Input
           placeholder="Quanlity: "
-          src={Subtraction}
+          src={quantity === 1 ? Subtraction : VectorSub}
           src2={Summation}
           className="mt-100 mb-24 pointer"
           type="number"
