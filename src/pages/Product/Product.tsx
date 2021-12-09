@@ -2,8 +2,12 @@ import { useState } from 'react';
 import ListDrinkItem from '../../components/ListDrinkItem/ListDrinkItem';
 import CategoryBar from '../../components/CategoryBar/CategoryBar';
 import DrinkData from '../../json/seed_products.json';
+import { TypeSearchItem } from '../../components/Header/Header';
 import '../Product/Product.scss';
-const Product = () => {
+type Props = {
+  searchDrink: TypeSearchItem;
+};
+const Product = (props: Props) => {
   const [listDrink, setListDrink] = useState(DrinkData.filter((drink) => drink.categoryID === 1));
 
   const [categoryIdSelected, setCategoryIdSelected] = useState(1);
@@ -18,7 +22,7 @@ const Product = () => {
         <CategoryBar onGetIdHandler={handelSetCategory} selectedCategoryId={categoryIdSelected} />
       </div>
       <div className="product-right">
-        <ListDrinkItem listDrink={listDrink} />
+        <ListDrinkItem listDrink={listDrink} searchDrink={props.searchDrink} />
       </div>
     </div>
   );

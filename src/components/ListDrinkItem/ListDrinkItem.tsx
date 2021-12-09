@@ -5,6 +5,7 @@ import DrinkItemDetail from '../DrinkDetail/DrinkItemDetail';
 import PopUpFinishOrder from '../PopUpFinishOrder/PopUpFinishOrder';
 import PopUpRanOutUnit from '../PopUpRanOutUnit/PopUpRanOutUnit';
 import PopUpLoginCenter from '../PopUpLoginCenter/PopUpLoginCenter';
+import { TypeSearchItem } from '../Header/Header';
 type DrinkItem = {
   id: number;
   categoryID: number;
@@ -14,6 +15,7 @@ type DrinkItem = {
 };
 type Props = {
   listDrink: DrinkItem[];
+  searchDrink: TypeSearchItem;
 };
 
 type OrderDetail = {
@@ -42,7 +44,7 @@ function ListDrinkItem(props: Props) {
   const handleClickBackForm = () => {
     setStep(step - 1);
   };
-
+  console.log(props.searchDrink);
   const handleClickPlaceOrder = (orderDetail: OrderDetail) => {
     const userJson = localStorage.getItem('user');
     const user = userJson && JSON.parse(userJson);
