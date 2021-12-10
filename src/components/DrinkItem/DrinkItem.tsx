@@ -2,7 +2,6 @@ import './DrinkItem.scss';
 import { moneyPattern } from '../../utils/regex';
 type DrinkItemType = {
   id: number;
-  categoryID: number;
   name: string;
   image: string;
   price: number;

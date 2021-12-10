@@ -13,9 +13,10 @@ import { CgSun } from 'react-icons/cg';
 import { HiMoon } from 'react-icons/hi';
 import { useRef } from 'react';
 import { useHistory } from 'react-router';
-type TypeSearchItem = {
+export type TypeSearchItem = {
   id: number;
   name: string;
+  image: string;
   price: number;
 };
 type Props = {
@@ -24,6 +25,7 @@ type Props = {
   onClickShowLogOut: React.MouseEventHandler<HTMLAnchorElement>;
   isLoggedIn: boolean;
   fullName: string;
+  handleSearchPopup: (item: TypeSearchItem) => void;
 };
 const Header = (props: Props) => {
   const [value, setValue] = useState('');
@@ -58,6 +60,11 @@ const Header = (props: Props) => {
     };
   }, [displaySearchList]);
 
+  const handleSearchPopup = (item: TypeSearchItem) => {
+    setValue('');
+    props.handleSearchPopup(item);
+  };
+
   const history = useHistory();
   const goHome = () => {
     let path = `/`;
@@ -87,6 +94,7 @@ const Header = (props: Props) => {
                   src={CoffeeImg}
                   name={searchItem.name}
                   price={searchItem.price.toString()}
+                  onClick={() => handleSearchPopup(searchItem)}
                 />
               ))}
             </div>
