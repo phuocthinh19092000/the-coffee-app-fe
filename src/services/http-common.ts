@@ -4,18 +4,17 @@ import { envVariable } from './envVariable';
 axios.defaults.baseURL = envVariable.API_ROOT;
 axios.defaults.timeout = envVariable.REQUEST_TIMEOUT;
 axios.defaults.headers.common['Accept'] = 'application/json';
-
-axios.interceptors.request.use(
-  (config) => {
-    const dataPersist = JSON.parse(localStorage.getItem('persist:root') as string);
-    const auth = JSON.parse(dataPersist.auth);
-    if (auth.accessToken && config?.headers) {
-      config.headers['Authorization'] = `Bearer ${auth.accessToken}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+// axios.interceptors.request.use(
+//   (config) => {
+//     const dataPersist = JSON.parse(localStorage.getItem('persist:root') as string);
+//     const auth = JSON.parse(dataPersist.auth);
+//     if (auth.accessToken && config ?.headers) {
+//       config.headers['Authorization'] = `Bearer ${auth.accessToken}`;
+//     }
+//     return config;
+//   },
+//   (error) => Promise.reject(error)
+// );
 
 axios.interceptors.response.use(
   (response) => response,
@@ -24,7 +23,7 @@ axios.interceptors.response.use(
 
 const http = {
   setAuthorizationHeader(accessToken: string) {
-    const headers = axios?.defaults?.headers as any;
+    const headers = axios ?.defaults ?.headers as any;
     if (headers) {
       headers.Authorization = `Bearer ${accessToken}`;
     }

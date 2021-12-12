@@ -7,7 +7,7 @@ const LoginPage = () => {
   const dispatch = useAppDispatch();
 
   const handleLogin = () => {
-    dispatch(login({ username: 'abc', password: '123' }))
+    dispatch(login({ username: 'thanhnhan', password: 'thanhnhan' }))
   }
 
   return (

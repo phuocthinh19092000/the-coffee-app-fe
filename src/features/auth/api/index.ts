@@ -3,6 +3,6 @@ import { UserParams } from './types';
 
 export default class Auth {
   static login(body: UserParams) {
-    return http.post('/auth/local', body);
+    return http.post('/auth/login', body);
   }
 }
