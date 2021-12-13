@@ -9,7 +9,7 @@ import Input from '../Input/Input';
 import '../DrinkDetail/DrinkItemDetail.scss';
 import DrinkItem from '../DrinkItem/DrinkItem';
 import DrinkItemType from '../ListDrinkItem/ListDrinkItem';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 
 type DrinkItemType = {
   id: number;

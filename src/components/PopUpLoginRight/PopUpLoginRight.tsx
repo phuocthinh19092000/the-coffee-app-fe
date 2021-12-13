@@ -1,7 +1,4 @@
-import { useEffect, useState } from 'react';
 import Card from '../../components/Card/Index';
-import Button from '../../components/Button/Index';
-import Input from '../../components/Input/Input';
 import Icon from '../../components/Icon/Icon';
 import LoginIcon from '../../share/assets/img/Login.png';
 import FacebookIcon from '../../share/assets/vector/VectorFacebook.svg';

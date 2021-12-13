@@ -1,6 +1,4 @@
-// import { Form as form } from 'react-bootstrap';
 import { ReactChild } from 'react';
-import useComponentVisible from '../../utils/useComponentVisible';
 import './styles.scss';
 
 type Props = {
