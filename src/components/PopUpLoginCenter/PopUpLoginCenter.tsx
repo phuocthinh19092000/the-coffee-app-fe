@@ -1,5 +1,4 @@
 import Card from '../Card/Index';
-import Button from '../Button/Index';
 import Exit from '../../share/assets/vector/Exit.svg';
 import './PopUpLoginCenter.scss';
 import FormLogin from '../FormLogin/FormLogin';

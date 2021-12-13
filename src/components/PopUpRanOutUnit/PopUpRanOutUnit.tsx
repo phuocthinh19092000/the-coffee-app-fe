@@ -4,11 +4,6 @@ import Card from '../Card/Index';
 import Button from '../Button/Index';
 import Exit from '../../share/assets/vector/Exit.svg';
 
-/* Must passs two onClick Function : 
-  onClickContinueProceed 
-  OnClickExitFrom
-*/
-
 type OrderDetail = {
   drinkId: number;
   quantity: number;
