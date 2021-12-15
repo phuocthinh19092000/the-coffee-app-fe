@@ -1,7 +1,7 @@
 import Card from '../Card/Index';
 import Exit from '../../share/assets/vector/Exit.svg';
 import './PopUpLoginCenter.scss';
-import FormLogin from '../FormLogin/FormLogin';
+import HookForm from '../HookForm/HookForm';
 type Props = {
   onClick?: React.MouseEventHandler<HTMLElement>;
 };
@@ -15,7 +15,7 @@ function PopUpLoginCenter(props: Props) {
         </a>
         <p className="card-login-center__description">Please login to proceed the order:</p>
         <div className="mt-100">
-          <FormLogin />
+          <HookForm />
         </div>
       </Card>
     </div>
