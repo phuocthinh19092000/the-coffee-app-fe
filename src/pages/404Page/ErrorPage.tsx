@@ -10,7 +10,7 @@ const ErrorPage = () => {
     history.push(path);
   };
   return (
-    <WrapperPage handleSearchPopup={() => {}}>
+    <WrapperPage>
       <div className="error-page">
         <img src={ErrorImage} alt="Error Image" className="error-page__img" />
         <h2 className="error-page__title">404 - Page Not Found!</h2>

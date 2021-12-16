@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, ReactChild } from 'react';
-import Header, { TypeSearchItem } from '../Header/Header';
+import Header from '../Header/Header';
 import PopUpLogOut from '../PopUpLogOut/PopUpLogOut';
 
 import './WrapperPage.scss';
@@ -7,7 +7,7 @@ import Footer from '../Footer/Footer';
 import PopUpLoginRight from '../PopUpLoginRight/PopUpLoginRight';
 type Props = {
   children?: React.ReactChild[] | ReactChild | JSX.Element | JSX.Element[];
-  handleSearchPopup: (item: TypeSearchItem) => void;
+  // handleSearchPopup: (item: Product) => void;
 };
 
 const WrapperPage = (props: Props) => {
@@ -68,7 +68,7 @@ const WrapperPage = (props: Props) => {
           isLoggedIn={Boolean(user)}
           fullName={user?.fullname}
           onClickShowLogOut={showPopUpLogoutHandler}
-          handleSearchPopup={(item) => props.handleSearchPopup(item)}
+          // handleSearchPopup={(item) => props.handleSearchPopup(item.name)}
         />
         <div className="wrapper-page__container">{props.children}</div>
         <div className="wrapper-page__footer">

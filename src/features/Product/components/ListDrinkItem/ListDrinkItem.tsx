@@ -1,24 +1,21 @@
 import DrinkItem from '../DrinkItem/DrinkItem';
 import './ListDrinkItem.scss';
-import { useEffect, useState } from 'react';
-import DrinkItemDetail from '../DrinkDetail/DrinkItemDetail';
-import PopUpFinishOrder from '../PopUpFinishOrder/PopUpFinishOrder';
-import PopUpRanOutUnit from '../PopUpRanOutUnit/PopUpRanOutUnit';
-import PopUpLoginCenter from '../PopUpLoginCenter/PopUpLoginCenter';
-import { TypeSearchItem } from '../Header/Header';
-type DrinkItem = {
-  id: number;
-  name: string;
-  image: string;
-  price: number;
-};
+
+import { useState } from 'react';
+import DrinkItemDetail from '../../../../components/DrinkDetail/DrinkItemDetail';
+import PopUpFinishOrder from '../../../../components/PopUpFinishOrder/PopUpFinishOrder';
+import PopUpRanOutUnit from '../../../../components/PopUpRanOutUnit/PopUpRanOutUnit';
+import PopUpLoginCenter from '../../../../components/PopUpLoginCenter/PopUpLoginCenter';
+import Category from '../../../../interfaces/product';
+import Product from '../../../../interfaces/product';
+
 type Props = {
-  listDrink: DrinkItem[];
-  searchDrink: TypeSearchItem;
+  listDrink: Product[];
+  searchDrink?: Product[];
 };
 
 type OrderDetail = {
-  drinkId: number;
+  drinkId: string;
   quantity: number;
   note: string | undefined;
 };
@@ -32,22 +29,23 @@ enum showPopupCase {
 
 function ListDrinkItem(props: Props) {
   const [isOpenPopUp, setIsOpenPopUp] = useState(false);
-  const [itemDrink, setItemDrink] = useState({} as DrinkItem);
-  const togglePopup = (item: DrinkItem) => {
+
+  const [itemDrink, setItemDrink] = useState({} as Category);
+  const togglePopup = (item: Category) => {
+    setIsOpenPopUp(!isOpenPopUp);
     setItemDrink(item);
     setIsOpenPopUp(!isOpenPopUp);
   };
 
   const [step, setStep] = useState(1);
-  const [orderDetail, setOrderDetail] = useState({ drinkId: itemDrink.id, quantity: 1, note: '' } as OrderDetail);
+  const [orderDetail, setOrderDetail] = useState({ drinkId: itemDrink._id, quantity: 1, note: '' } as OrderDetail);
 
-  useEffect(() => {
-    if (Object.keys(props.searchDrink).length !== 0) {
-      setOrderDetail({ drinkId: props.searchDrink.id, quantity: 1, note: '' } as OrderDetail);
-      setItemDrink(props.searchDrink);
-      setIsOpenPopUp(true);
-    }
-  }, [props.searchDrink]);
+  // useEffect(() => {
+  //   if (Object.keys(props.searchDrink).length !== 0) {
+  //     setOrderDetail({ drinkId: itemDrink._id, quantity: 1, note: '' } as OrderDetail);
+  //     setIsOpenPopUp(true);
+  //   }
+  // }, [props.searchDrink]);
   const handleClickBackForm = () => {
     setStep(step - 1);
   };
@@ -73,7 +71,7 @@ function ListDrinkItem(props: Props) {
   const exitPopUp = () => {
     setIsOpenPopUp(false);
     setStep(showPopupCase.showDrinkItemDetail);
-    setOrderDetail({ drinkId: itemDrink.id, quantity: 1, note: '' } as OrderDetail);
+    setOrderDetail({ drinkId: itemDrink._id, quantity: 1, note: '' } as OrderDetail);
   };
 
   const continueOrderRanoutUnit = () => {
@@ -116,7 +114,7 @@ function ListDrinkItem(props: Props) {
   return (
     <div className="menu-drink">
       {props.listDrink.map((item) => (
-        <DrinkItem item={item} key={item.id} onClick={() => togglePopup(item)} />
+        <DrinkItem item={item} key={item._id} onClick={() => togglePopup(item)} />
       ))}
 
       {isOpenPopUp && switchStep()}

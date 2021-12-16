@@ -5,7 +5,7 @@ import ComingSoon from '../../components/ComingSoon/ComingSoon';
 const ComingSoonPage = () => {
   return (
     <>
-      <WrapperPage handleSearchPopup={() => {}}>
+      <WrapperPage>
         <div className="coming-soon-component">
           <ComingSoon />
         </div>

@@ -1,17 +1,17 @@
 import './SearchItem.scss';
-import ItemDetail from '../ItemDetail/ItemDetail';
+import ItemDetail from '../../features/Product/components/ItemDetail/ItemDetail';
 type Props = {
-  src?: string;
+  avatarUrl?: string;
   className?: string;
   name?: string;
-  price?: string
+  price?: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 };
 const SearchItem = (props: Props) => {
   return (
-    <div className={props.className || 'search-item'} onClick = {props.onClick}>
-      <img className = "search-item__img" src={props.src} alt={props.src} />
-      <ItemDetail className="search-detail" name = {props.name} price = {props.price}/>
+    <div className={props.className || 'search-item'} onClick={props.onClick}>
+      <img className="search-item__img" src={props.avatarUrl} alt={props.avatarUrl} />
+      <ItemDetail className="search-detail" name={props.name} price={props.price} />
     </div>
   );
 };

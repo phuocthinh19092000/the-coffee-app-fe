@@ -5,7 +5,7 @@ import Button from '../Button/Index';
 import Exit from '../../share/assets/vector/Exit.svg';
 
 type OrderDetail = {
-  drinkId: number;
+  drinkId: string;
   quantity: number;
   note: string | undefined;
 };

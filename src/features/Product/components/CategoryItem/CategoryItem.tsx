@@ -1,7 +1,7 @@
-import { CategoryType } from '../CategoryBar/CategoryBar';
+import Category from '../../../../interfaces/category';
 
 type Props = {
-  item: CategoryType;
+  item: Category;
 };
 
 function CategoryItem(props: Props) {

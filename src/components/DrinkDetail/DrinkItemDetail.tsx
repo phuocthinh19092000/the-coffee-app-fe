@@ -7,25 +7,18 @@ import Button from '../Button/Index';
 import Card from '../Card/Index';
 import Input from '../Input/Input';
 import '../DrinkDetail/DrinkItemDetail.scss';
-import DrinkItem from '../DrinkItem/DrinkItem';
-import DrinkItemType from '../ListDrinkItem/ListDrinkItem';
+import DrinkItem from '../../features/Product/components/DrinkItem/DrinkItem';
 import { useState } from 'react';
-
-type DrinkItemType = {
-  id: number;
-  name: string;
-  image: string;
-  price: number;
-};
+import Product from '../../interfaces/product';
 
 type OrderDetail = {
-  drinkId: number;
+  drinkId: string;
   quantity: number;
   note?: string;
 };
 
 type Props = {
-  item: DrinkItemType;
+  item: Product;
   handleClickExitPopUp?: React.MouseEventHandler<HTMLImageElement>;
   handleClickPlaceOrder(data: {}): void;
   orderDetail: OrderDetail;
@@ -78,7 +71,7 @@ function DrinkItemDetail(props: Props) {
         <Button
           className="btn btn-primary btn--enabled mt-100"
           titleButton="PLACE ORDER"
-          onClick={() => props.handleClickPlaceOrder({ drinkId: props.item.id, quantity: quantity, note: note })}
+          onClick={() => props.handleClickPlaceOrder({ drinkId: props.item._id, quantity: quantity, note: note })}
         />
       </Card>
     </div>

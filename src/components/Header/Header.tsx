@@ -6,31 +6,27 @@ import Input from '../Input/Input';
 import Button from '../Button/Index';
 import './Header.scss';
 import SearchItem from '../SearchItem/SearchItem';
-import DrinkItems from '../../json/seed_products.json';
 import CustomerInformation from '../CustomerInformation/CustomerInformation';
 import { ThemeContext } from '../../utils/ThemeProvider';
 import { CgSun } from 'react-icons/cg';
 import { HiMoon } from 'react-icons/hi';
 import { useRef } from 'react';
 import { useHistory } from 'react-router';
-export type TypeSearchItem = {
-  id: number;
-  name: string;
-  image: string;
-  price: number;
-};
+import Product from '../../interfaces/product';
+import productApi from '../../features/Product/api/productAPI';
+
 type Props = {
   className: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   onClickShowLogOut: React.MouseEventHandler<HTMLAnchorElement>;
   isLoggedIn: boolean;
   fullName: string;
-  handleSearchPopup: (item: TypeSearchItem) => void;
+  // handleSearchPopup: (item: Product) => void;
 };
 const Header = (props: Props) => {
   const [value, setValue] = useState('');
   const [displaySearchList, setDisplaySearchList] = useState(false);
-  const [searchList, setSearchList] = useState([{} as TypeSearchItem]);
+  const [searchList, setSearchList] = useState([] as Product[]);
 
   const DivSearchItemsRef = useRef<HTMLDivElement>(null);
   const handleSearchDrink: React.ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -42,17 +38,14 @@ const Header = (props: Props) => {
       setDisplaySearchList(false);
     }
   };
-  useEffect(() => {
-    if (value.length >= 2) {
-      const newSearchList = DrinkItems.filter((drinkItem) =>
-        drinkItem.name.toLowerCase().includes(value.toLowerCase()),
-      );
-      setDisplaySearchList(newSearchList.length ? true : false);
-      setSearchList(newSearchList);
-    } else {
-      setDisplaySearchList(false);
-    }
-  }, [value]);
+  // useEffect(() => {
+  //   if (setSearchList.length >= 2) {
+  //     const newSearchList = setSearchList((item) => item.name.toLowerCase().includes(value.toLowerCase()));
+  //     setDisplaySearchList(setSearchList.length ? true : false);
+  //   } else {
+  //     setDisplaySearchList(false);
+  //   }
+  // }, [value]);
   useEffect(() => {
     document.addEventListener('click', clickOutsideHandler, true);
     return () => {
@@ -60,9 +53,13 @@ const Header = (props: Props) => {
     };
   }, [displaySearchList]);
 
-  const handleSearchPopup = (item: TypeSearchItem) => {
-    setValue('');
-    props.handleSearchPopup(item);
+  const handleSearchPopup = (item: Product) => {
+    async function fetchSearchApi() {
+      const response = await productApi.getByCategory(value);
+      setSearchList(response.data);
+      setDisplaySearchList(true);
+    }
+    fetchSearchApi();
   };
 
   const history = useHistory();
@@ -90,8 +87,8 @@ const Header = (props: Props) => {
             <div className="search-list">
               {searchList.map((searchItem) => (
                 <SearchItem
-                  key={searchItem.id}
-                  src={CoffeeImg}
+                  key={searchItem._id}
+                  avatarUrl={CoffeeImg}
                   name={searchItem.name}
                   price={searchItem.price.toString()}
                   onClick={() => handleSearchPopup(searchItem)}

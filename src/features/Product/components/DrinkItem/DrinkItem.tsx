@@ -1,14 +1,9 @@
 import './DrinkItem.scss';
-import { moneyPattern } from '../../utils/regex';
-type DrinkItemType = {
-  id: number;
-  name: string;
-  image: string;
-  price: number;
-};
-
+import { moneyPattern } from '../../../../utils/regex';
+import Product from '../../../../interfaces/product';
+import CoffeeImg from '../../../../share/assets/img/blackcoffee.png';
 type Props = {
-  item: DrinkItemType;
+  item: Product;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 };
 
@@ -19,7 +14,8 @@ function DrinkItem(props: Props) {
   return (
     <div className="drink-item" onClick={props.onClick}>
       <div className="drink-item__image">
-        <img src={props.item.image} alt={props.item.name} />
+        {/* <img src={props.item.avatarUrl} alt={props.item.name} /> */}
+        <img src={CoffeeImg} alt={props.item.name} />
       </div>
       <div>
         <div>
