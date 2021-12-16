@@ -22,10 +22,10 @@ axios.interceptors.response.use(
 );
 
 const http = {
-  setAuthorizationHeader(accessToken: string) {
+  setAuthorizationHeader(jwtAccessToken: string) {
     const headers = axios ?.defaults ?.headers as any;
     if (headers) {
-      headers.Authorization = `Bearer ${accessToken}`;
+      headers.Authorization = `Bearer ${jwtAccessToken}`;
     }
   },
   request(config: AxiosRequestConfig<any>) {

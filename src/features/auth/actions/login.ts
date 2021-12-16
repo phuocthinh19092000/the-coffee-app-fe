@@ -23,14 +23,16 @@ export const initialState: AuthState = {
 }
 
 export const login = createAsyncThunk(
-  'auth/login',
+  '/auth/login',
   async (body: UserParams, { rejectWithValue }) => {
     console.log('is that login')
     try {
       const response = await Auth.login(body);
-      http.setAuthorizationHeader(response.data.accessToken)
+      http.setAuthorizationHeader(response.data.jwtAccessToken)
+      console.log('data', response.data)
       return response.data;
     } catch (error) {
+      console.log('error',error)
       return rejectWithValue(error);
     }
   }

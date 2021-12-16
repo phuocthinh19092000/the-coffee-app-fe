@@ -5,7 +5,7 @@ import FacebookIcon from '../../share/assets/vector/VectorFacebook.svg';
 import InstaIcon from '../../share/assets/vector/VectorInsta.svg';
 import LinkedinIcon from '../../share/assets/vector/VectorLinkedin.svg';
 import './PopUpLoginRight.scss';
-import FormLogin from '../../components/FormLogin/FormLogin';
+import HookForm from '../HookForm/HookForm';
 
 const PopUpLoginRight = () => {
   return (
@@ -13,7 +13,7 @@ const PopUpLoginRight = () => {
       <div>
         <img src={LoginIcon} alt="" />
         <div>
-          <FormLogin />
+          <HookForm />
         </div>
       </div>
       <div>
