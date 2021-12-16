@@ -3,7 +3,6 @@ import Product from '../../features/Product/page/Product/Product';
 import WrapperPage from '../../components/WrapperPage/WrapperPage';
 import Background from '../../components/Background/Background';
 import Toast from '../../components/Toast/Toast';
-
 import './HomePage.scss';
 const ToastType = {
   success: 'success',
@@ -13,6 +12,7 @@ const ToastType = {
 const HomePage = () => {
   const [showToast, setShowToast] = useState(false);
   const [searchDrink, setSearchDrink] = useState({} as typeof Product[]);
+
   const toastRef = useRef({
     show() {
       setShowToast(true);

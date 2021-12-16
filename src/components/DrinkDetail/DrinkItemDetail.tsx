@@ -71,7 +71,7 @@ function DrinkItemDetail(props: Props) {
         <Button
           className="btn btn-primary btn--enabled mt-100"
           titleButton="PLACE ORDER"
-          onClick={() => props.handleClickPlaceOrder({ drinkId: props.item._id, quantity: quantity, note: note })}
+          onClick={() => props.handleClickPlaceOrder({ drinkId: props.item.id, quantity: quantity, note: note })}
         />
       </Card>
     </div>

@@ -3,6 +3,7 @@ import counterReducer from '../features/counter/counterSlice';
 import authReducer from '../features/auth/actions/login';
 import categoryReducer from '../features/Product/actions/getCategoryData'
 import productReducer from '../features/Product/actions/getProductData'
+import getUserDataReducer from '../features/auth/actions/getUserInfo'
 const customizedMiddleware = getDefaultMiddleware({
   serializableCheck: false
 })
@@ -11,6 +12,7 @@ export const store = configureStore({
   reducer: {
     counter: counterReducer,
     login: authReducer,
+    userData: getUserDataReducer,
     category: categoryReducer,
     product: productReducer,
   },

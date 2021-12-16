@@ -1,6 +1,5 @@
 import DrinkItem from '../DrinkItem/DrinkItem';
 import './ListDrinkItem.scss';
-
 import { useState } from 'react';
 import DrinkItemDetail from '../../../../components/DrinkDetail/DrinkItemDetail';
 import PopUpFinishOrder from '../../../../components/PopUpFinishOrder/PopUpFinishOrder';
@@ -8,7 +7,8 @@ import PopUpRanOutUnit from '../../../../components/PopUpRanOutUnit/PopUpRanOutU
 import PopUpLoginCenter from '../../../../components/PopUpLoginCenter/PopUpLoginCenter';
 import Category from '../../../../interfaces/product';
 import Product from '../../../../interfaces/product';
-
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../storage/index';
 type Props = {
   listDrink: Product[];
   searchDrink?: Product[];
@@ -36,9 +36,10 @@ function ListDrinkItem(props: Props) {
     setItemDrink(item);
     setIsOpenPopUp(!isOpenPopUp);
   };
+  let userData = useSelector((state: RootState) => state.userData.userInfo);
 
   const [step, setStep] = useState(1);
-  const [orderDetail, setOrderDetail] = useState({ drinkId: itemDrink._id, quantity: 1, note: '' } as OrderDetail);
+  const [orderDetail, setOrderDetail] = useState({ drinkId: itemDrink.id, quantity: 1, note: '' } as OrderDetail);
 
   // useEffect(() => {
   //   if (Object.keys(props.searchDrink).length !== 0) {
@@ -51,19 +52,17 @@ function ListDrinkItem(props: Props) {
   };
 
   const handleClickPlaceOrder = (orderDetail: OrderDetail) => {
-    const userJson = localStorage.getItem('user');
-    const user = userJson && JSON.parse(userJson);
-    if (!user) {
+    if (!userData) {
       setStep(showPopupCase.PopUpLoginCenter);
       return;
     }
     setOrderDetail(orderDetail);
-    if (user.freeunit < orderDetail.quantity) {
+    if (userData.freeUnit < orderDetail.quantity) {
       setStep(showPopupCase.showPopUpRanOutUnit);
     } else {
-      user.freeunit -= orderDetail.quantity;
-      document.dispatchEvent(new CustomEvent('setFreeUnit', { detail: user.freeunit }));
-      localStorage.setItem('user', JSON.stringify(user));
+      userData.freeUnit -= orderDetail.quantity;
+      // document.dispatchEvent(new CustomEvent('setFreeUnit', { detail: userData }));
+      // localStorage.setItem('user', JSON.stringify(userData));
       setStep(showPopupCase.PopUpFinishOrder);
     }
   };
@@ -71,15 +70,14 @@ function ListDrinkItem(props: Props) {
   const exitPopUp = () => {
     setIsOpenPopUp(false);
     setStep(showPopupCase.showDrinkItemDetail);
-    setOrderDetail({ drinkId: itemDrink._id, quantity: 1, note: '' } as OrderDetail);
+    setOrderDetail({ drinkId: itemDrink.id, quantity: 1, note: '' } as OrderDetail);
   };
 
   const continueOrderRanoutUnit = () => {
-    const userJson = localStorage.getItem('user');
-    const user = userJson && JSON.parse(userJson);
-    user.freeunit = 0;
-    document.dispatchEvent(new CustomEvent('setFreeUnit', { detail: user.freeunit }));
-    localStorage.setItem('user', JSON.stringify(user));
+    userData.freeUnit = 0;
+    // document.dispatchEvent(new CustomEvent('setFreeUnit', { detail: userData.freeUnit }));
+    // localStorage.setItem('user', JSON.stringify(userData));
+
     setStep(showPopupCase.PopUpFinishOrder);
   };
 
@@ -114,7 +112,7 @@ function ListDrinkItem(props: Props) {
   return (
     <div className="menu-drink">
       {props.listDrink.map((item) => (
-        <DrinkItem item={item} key={item._id} onClick={() => togglePopup(item)} />
+        <DrinkItem item={item} key={item.id} onClick={() => togglePopup(item)} />
       ))}
 
       {isOpenPopUp && switchStep()}

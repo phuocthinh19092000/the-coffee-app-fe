@@ -1,4 +1,4 @@
-import http from '../../../services/http-common';
+import http from '../../../../services/http-common';
 import { UserParams } from './types';
 
 export default class Auth {
