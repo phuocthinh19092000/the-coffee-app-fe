@@ -13,9 +13,9 @@ function CategoryBar(props: Props) {
     <div>
       {props.listCategory.map((item) => (
         <div
-          key={item._id}
-          className={item._id === props.selectedCategoryId ? 'category-item active' : 'category-item'}
-          onClick={() => props.onGetIdHandler(item._id)}
+          key={item.id}
+          className={item.id === props.selectedCategoryId ? 'category-item active' : 'category-item'}
+          onClick={() => props.onGetIdHandler(item.id)}
         >
           <CategoryItem item={item} />
         </div>

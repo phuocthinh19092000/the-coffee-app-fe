@@ -14,13 +14,11 @@ import { useRef } from 'react';
 import { useHistory } from 'react-router';
 import Product from '../../interfaces/product';
 import productApi from '../../features/Product/api/productAPI';
-
 type Props = {
   className: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   onClickShowLogOut: React.MouseEventHandler<HTMLAnchorElement>;
   isLoggedIn: boolean;
-  fullName: string;
   // handleSearchPopup: (item: Product) => void;
 };
 const Header = (props: Props) => {
@@ -87,7 +85,7 @@ const Header = (props: Props) => {
             <div className="search-list">
               {searchList.map((searchItem) => (
                 <SearchItem
-                  key={searchItem._id}
+                  key={searchItem.id}
                   avatarUrl={CoffeeImg}
                   name={searchItem.name}
                   price={searchItem.price.toString()}
@@ -104,7 +102,7 @@ const Header = (props: Props) => {
             <button className="header__button-toggle" onClick={toggleTheme}>
               {theme === 'Light' ? <HiMoon size={40} /> : <CgSun size={40} />}
             </button>
-            <CustomerInformation fullname={props.fullName} onClick={props.onClickShowLogOut} />
+            <CustomerInformation onClick={props.onClickShowLogOut} />
           </>
         ) : (
           <>

@@ -1,10 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
-import Auth from '../api';
-import http from '../../../services/http-common';
-import { UserParams } from '../api/types';
+import Auth from '../api/Token/Auth';
+import { UserParams } from '../api/Token/types';
 import { RootState } from '../../../storage';
-
+import http from '../../../services/http-common'
 type RequestState = 'pending' | 'fulfilled' | 'rejected'
 
 export interface AuthState {
@@ -25,15 +23,13 @@ export const initialState: AuthState = {
 export const login = createAsyncThunk(
   '/auth/login',
   async (body: UserParams, { rejectWithValue }) => {
-    console.log('is that login')
     try {
-      const response = await Auth.login(body);
-      http.setAuthorizationHeader(response.data.jwtAccessToken)
-      console.log('data', response.data)
-      return response.data;
-    } catch (error) {
-      console.log('error',error)
-      return rejectWithValue(error);
+      const responseAccessToken = await Auth.login(body);
+      http.setAuthorizationHeader(responseAccessToken.data.jwtAccessToken)
+      localStorage.setItem('token', responseAccessToken.data.jwtAccessToken)
+      return responseAccessToken.data.jwtAccessToken;
+    } catch (error: any) {
+      return rejectWithValue(error.response);
     }
   }
 );

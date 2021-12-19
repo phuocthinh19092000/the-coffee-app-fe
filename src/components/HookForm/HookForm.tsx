@@ -1,12 +1,9 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-import usersData from '../../json/seed_users.json';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useHistory } from 'react-router-dom';
 import './HookForm.scss';
-import { useAppDispatch, useAppSelector } from '../../storage/hooks';
-import { login, selectLoginState } from '../../features/auth/actions/login';
-import http from '../../services/http-common';
+import { useAppDispatch } from '../../storage/hooks';
+import { login } from '../../features/auth/actions/login';
 import { useState } from 'react';
 import UserIcon from '../../share/assets/vector/User.svg';
 import EyeIcon from '../../share/assets/vector/Eye.svg';
@@ -28,6 +25,7 @@ const schema = yup
 export default function HookForm() {
   const {
     register,
+    reset,
     formState: { errors },
     handleSubmit,
   } = useForm<IFormInputs>({
@@ -39,15 +37,21 @@ export default function HookForm() {
       password: '',
     },
   });
+
   const [showPassword, setShowPassword] = useState(false);
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
   const dispatch = useAppDispatch();
-  const history = useHistory();
-  const onSubmit: SubmitHandler<IFormInputs> = (data) => {
-    dispatch(login({ username: data.username, password: data.password }));
-    history.push('/');
+  const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
+    const accessToken = await dispatch(login({ username: data.username, password: data.password }));
+    if (accessToken.meta.requestStatus === 'fulfilled') {
+      alert('Login successful');
+      window.location.reload();
+    } else {
+      alert('Login failed');
+      reset({ username: '', password: '' });
+    }
   };
 
   return (

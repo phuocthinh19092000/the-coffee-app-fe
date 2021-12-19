@@ -2,28 +2,29 @@ import { useState, useRef, useEffect } from 'react';
 import UserInformation from '../../share/assets/vector/UserInformation.svg';
 import ExpandMore from '../../share/assets/vector/ExpandMore.svg';
 import './CustomerInformation.scss';
-
+import { useSelector } from 'react-redux';
+import { RootState } from '../../storage/index';
 type Props = {
-  fullname: string;
   onClick: React.MouseEventHandler<HTMLAnchorElement>;
 };
 
 const CustomerInformation = (props: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { freeUnit, name } = useSelector((state: RootState) => state.userData.userInfo);
 
-  const [freeUnit, setFreeUnit] = useState(() => {
-    const userJson = localStorage.getItem('user');
-    const freeUnit = userJson ? JSON.parse(userJson).freeunit : 3;
-    return freeUnit;
-  });
+  // const [freeUnit, setFreeUnit] = useState(() => {
+  //   const userJson = localStorage.getItem('user');
+  //   const freeUnit = userJson ? JSON.parse(userJson).freeunit : 3;
+  //   return freeUnit;
+  // });
 
   const handleClickInside = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleSetFreeUnit = (e: any) => {
-    setFreeUnit(e.detail);
-  };
+  // const handleSetFreeUnit = (e: any) => {
+  //   setFreeUnit(e.detail);
+  // };
 
   const dropdownMenuRef = useRef<HTMLDivElement>(null);
 
@@ -35,19 +36,17 @@ const CustomerInformation = (props: Props) => {
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
-
-    document.addEventListener('setFreeUnit', handleSetFreeUnit);
-
+    // document.addEventListener('setFreeUnit', handleSetFreeUnit);
     return () => {
       document.removeEventListener('click', handleClickOutside);
-      document.removeEventListener('setFreeUnit', handleSetFreeUnit);
+      // document.removeEventListener('setFreeUnit', handleSetFreeUnit);
     };
   }, [isMenuOpen]);
 
   return (
     <div ref={dropdownMenuRef} className="block-customer-information" onClick={handleClickInside}>
       <img className="block-customer-information__img" src={UserInformation} alt="Customer Information" />
-      <span className="block-customer-information__span">{props.fullname}</span>
+      <span className="block-customer-information__span">{name}</span>
       <div className="menu-dropdown">
         <img src={ExpandMore} className="menu-dropdown__img" alt="expand more" />
         {isMenuOpen && (

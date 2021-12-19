@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect, ReactChild } from 'react';
 import Header from '../Header/Header';
 import PopUpLogOut from '../PopUpLogOut/PopUpLogOut';
-
 import './WrapperPage.scss';
 import Footer from '../Footer/Footer';
 import PopUpLoginRight from '../PopUpLoginRight/PopUpLoginRight';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../storage/index';
+import { useAppDispatch } from '../../storage/hooks';
+import { getUserData } from '../../features/auth/actions/getUserInfo';
 type Props = {
   children?: React.ReactChild[] | ReactChild | JSX.Element | JSX.Element[];
   // handleSearchPopup: (item: Product) => void;
@@ -14,12 +17,12 @@ const WrapperPage = (props: Props) => {
   const [isShowLogin, setIsShowLogin] = useState(false);
 
   const [isShowLogout, setIsShowLogout] = useState(false);
-
-  const [user, setUser] = useState(() => {
-    const userJson = localStorage.getItem('user');
-    const user = userJson && JSON.parse(userJson);
-    return user;
-  });
+  const userData = useSelector((state: RootState) => state.userData.userInfo);
+  // const [user, setUser] = useState(() => {
+  //   const userJson = localStorage.getItem('user');
+  //   const user = userJson && JSON.parse(userJson);
+  //   return user;
+  // });
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -53,6 +56,10 @@ const WrapperPage = (props: Props) => {
   const showPopUpLogoutHandler = () => {
     setIsShowLogout(!isShowLogout);
   };
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getUserData('users/profile'));
+  }, []);
 
   return (
     <div className="wrapper-page">
@@ -63,10 +70,9 @@ const WrapperPage = (props: Props) => {
 
       <div className={isShowLogin || isShowLogout ? 'wrapper-page--filter' : ''}>
         <Header
-          className={user ? 'header header--grey' : 'header'}
+          className={userData ? 'header header--grey' : 'header'}
           onClick={showLogin}
-          isLoggedIn={Boolean(user)}
-          fullName={user?.fullname}
+          isLoggedIn={userData ? true : false}
           onClickShowLogOut={showPopUpLogoutHandler}
           // handleSearchPopup={(item) => props.handleSearchPopup(item.name)}
         />

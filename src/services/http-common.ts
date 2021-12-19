@@ -18,7 +18,7 @@ axios.defaults.headers.common['Accept'] = 'application/json';
 
 axios.interceptors.response.use(
   (response) => response,
-  (error) => Promise.reject(error.response || error.request || error.message)
+  (error) => Promise.reject(error.response || error.request || error.message || error.data)
 );
 
 const http = {

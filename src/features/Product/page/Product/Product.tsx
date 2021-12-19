@@ -35,7 +35,7 @@ const ProductPage = (props: Props) => {
   const [categoryIdSelected, setCategoryIdSelected] = useState('');
 
   const handelSetCategory = (id: string) => {
-    const categoryFind = categoryData.find((item) => item._id === id);
+    const categoryFind = categoryData.find((item) => item.id === id);
     setCategoryIdSelected(id);
     if (categoryFind !== undefined) {
       setListDrink(categoryFind.products);

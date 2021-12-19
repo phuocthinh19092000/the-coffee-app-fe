@@ -8,13 +8,11 @@ export const initialState = {
 };
 
 export const getAllCategory = createAsyncThunk('/categories', async () => {
-  console.log('get all category');
   const allCategory = await categoryApi.getAll();
   return allCategory.data;
 });
 
 export const getCategory = createAsyncThunk('/categories/${name}', async (name: string) => {
-  console.log('get category');
   const category = await categoryApi.get(`${name}`);
   return category.data;
 });
