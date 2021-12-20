@@ -4,8 +4,8 @@ import Category from '../../../../interfaces/category';
 
 type Props = {
   onGetIdHandler(id: number | string): void;
-  selectedCategoryId: string | number | undefined;
   listCategory: Category[];
+  categoryId: string;
 };
 
 function CategoryBar(props: Props) {
@@ -14,7 +14,7 @@ function CategoryBar(props: Props) {
       {props.listCategory.map((item) => (
         <div
           key={item.id}
-          className={item.id === props.selectedCategoryId ? 'category-item active' : 'category-item'}
+          className={item.id === props.categoryId ? 'category-item active' : 'category-item'}
           onClick={() => props.onGetIdHandler(item.id)}
         >
           <CategoryItem item={item} />

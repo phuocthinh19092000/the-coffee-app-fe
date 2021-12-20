@@ -22,7 +22,6 @@ function DrinkItem(props: Props) {
           <span className="drink-item__name">
             {props.item.name}
             <br />
-            <br />
           </span>
         </div>
         <div>
