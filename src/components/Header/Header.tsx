@@ -7,7 +7,7 @@ import Button from '../Button/Index';
 import './Header.scss';
 import SearchItem from '../SearchItem/SearchItem';
 import CustomerInformation from '../CustomerInformation/CustomerInformation';
-import { ThemeContext } from '../../utils/ThemeProvider';
+import { DarkMode } from '../../utils/ThemeProvider';
 import { CgSun } from 'react-icons/cg';
 import { HiMoon } from 'react-icons/hi';
 import { useRef } from 'react';
@@ -65,7 +65,7 @@ const Header = (props: Props) => {
     let path = `/`;
     history.push(path);
   };
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { theme, toggleTheme } = useContext(DarkMode);
 
   return (
     <div className={props.className}>

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 type Theme = 'Light' | 'Dark';
 type ThemeContext = { theme: Theme; toggleTheme: () => void };
 
-export const ThemeContext = React.createContext<ThemeContext>({} as ThemeContext);
+export const DarkMode = React.createContext<ThemeContext>({} as ThemeContext);
 
 export const ThemeProvider: React.FC = ({ children }) => {
   const [theme, setTheme] = useState<Theme>('Light');
@@ -15,5 +15,5 @@ export const ThemeProvider: React.FC = ({ children }) => {
 
   document.body.style.backgroundColor = backgroundColor;
 
-  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
+  return <DarkMode.Provider value={{ theme, toggleTheme }}>{children}</DarkMode.Provider>;
 };

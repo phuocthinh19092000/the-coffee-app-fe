@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ErrorPage from '../pages/404Page/ErrorPage';
 import ComingSoonPage from '../pages/ComingSoonPage/ComingSoonPage';
 import HomePage from '../pages/HomePage/HomePage';

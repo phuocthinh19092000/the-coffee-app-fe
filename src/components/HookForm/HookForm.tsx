@@ -46,10 +46,8 @@ export default function HookForm() {
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
     const accessToken = await dispatch(login({ username: data.username, password: data.password }));
     if (accessToken.meta.requestStatus === 'fulfilled') {
-      alert('Login successful');
       window.location.reload();
     } else {
-      alert('Login failed');
       reset({ username: '', password: '' });
     }
   };
@@ -58,13 +56,18 @@ export default function HookForm() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="input-field">
         <input {...register('username')} placeholder="Usename" />
-        <img src={UserIcon} />
+        <img src={UserIcon} alt="User Icon" />
       </div>
       {errors.username && <p className="error">{errors.username?.message}</p>}
 
       <div className="input-field">
         <input type={showPassword ? 'text' : 'password'} {...register('password')} placeholder="Password" />
-        <img src={showPassword ? CloseEyeIcon : EyeIcon} onClick={toggleShowPassword} className="toggle" />
+        <img
+          src={showPassword ? CloseEyeIcon : EyeIcon}
+          onClick={toggleShowPassword}
+          className="toggle"
+          alt="Icon Password"
+        />
       </div>
       {errors.password && <p className="error">{errors.password?.message}</p>}
 

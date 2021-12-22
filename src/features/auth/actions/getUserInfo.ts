@@ -34,7 +34,7 @@ export const getUserData = createAsyncThunk(
   async (url: string, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem('token')
-      if (token != null) {
+      if (!!token) {
       http.setAuthorizationHeader(token)
       const responseUserData = await GetUserData.getUserData(url);
       return responseUserData.data;
@@ -50,7 +50,7 @@ const getDataSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getUserData.pending, (state, action) => {
+    builder.addCase(getUserData.pending, (state) => {
       state.loading = 'pending'
     })
     builder.addCase(getUserData.fulfilled, (state, action) => {

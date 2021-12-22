@@ -39,7 +39,7 @@ const loginSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(login.pending, (state, action) => {
+    builder.addCase(login.pending, (state) => {
       state.loading = 'pending'
     })
     builder.addCase(login.fulfilled, (state, action) => {

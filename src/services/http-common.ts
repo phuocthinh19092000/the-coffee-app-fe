@@ -23,7 +23,7 @@ axios.interceptors.response.use(
 
 const http = {
   setAuthorizationHeader(jwtAccessToken: string) {
-    const headers = axios ?.defaults ?.headers as any;
+    const headers = axios?.defaults?.headers as any;
     if (headers) {
       headers.Authorization = `Bearer ${jwtAccessToken}`;
     }
