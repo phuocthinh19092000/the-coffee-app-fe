@@ -47,7 +47,7 @@ const WrapperPage = (props: Props) => {
       document.removeEventListener('keydown', hideFormHandler, true);
       document.removeEventListener('click', clickOutsideHandler, true);
     };
-  });
+  }, []);
 
   const showLogin = () => {
     setIsShowLogin(!isShowLogin);
@@ -59,7 +59,7 @@ const WrapperPage = (props: Props) => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getUserData('users/profile'));
-  }, []);
+  });
 
   return (
     <div className="wrapper-page">

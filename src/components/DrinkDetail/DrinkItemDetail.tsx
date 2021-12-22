@@ -10,7 +10,9 @@ import '../DrinkDetail/DrinkItemDetail.scss';
 import DrinkItem from '../../features/Product/components/DrinkItem/DrinkItem';
 import { useState } from 'react';
 import Product from '../../interfaces/product';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../storage';
+import { increment, decrement } from '../../features/order/actions/order';
 type OrderDetail = {
   drinkId: string;
   quantity: number;
@@ -25,29 +27,26 @@ type Props = {
 };
 
 function DrinkItemDetail(props: Props) {
-  const [quantity, setQuantity] = useState(props.orderDetail.quantity);
   const [note, setNote] = useState(props.orderDetail.note);
+  const dispatch = useDispatch();
+  const quantity = useSelector((state: RootState) => state.order.orderData.quantity);
   const onSubOneUnit = () => {
     if (quantity === 1) {
       return;
+    } else {
+      dispatch(decrement());
     }
-    setQuantity(quantity - 1);
   };
 
   const onPlusOneUnit = () => {
-    setQuantity(quantity + 1);
-  };
-
-  const onChangeInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuantity(event.target.valueAsNumber);
+    dispatch(increment());
   };
 
   return (
     <div className="card-item-detail--blur">
       <Card className="card card--center">
-        <a>
-          <img src={Exit} className="icon-exit" onClick={props.handleClickExitPopUp}></img>
-        </a>
+        <img src={Exit} className="icon-exit" onClick={props.handleClickExitPopUp} alt="Exit" />
+
         <DrinkItem item={props.item} />
         <Input
           placeholder="Quanlity: "
@@ -56,9 +55,9 @@ function DrinkItemDetail(props: Props) {
           className="mt-100 mb-24 pointer"
           type="number"
           value={quantity}
-          onChange={onChangeInputHandler}
           onClickFirstIcon={onSubOneUnit}
           onClickSecondIcon={onPlusOneUnit}
+          readOnly={true}
         />
         <Input
           placeholder="Note"

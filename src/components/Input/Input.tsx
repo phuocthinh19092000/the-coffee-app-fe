@@ -12,6 +12,7 @@ type Props = {
   onClickFirstIcon?: React.MouseEventHandler<HTMLImageElement>;
   onClickSecondIcon?: React.MouseEventHandler<HTMLImageElement>;
   value?: string | number;
+  readOnly?: boolean | false;
 };
 const Input = (props: Props) => {
   return (
@@ -20,6 +21,7 @@ const Input = (props: Props) => {
         placeholder={props.placeholder}
         type={props.type}
         onChange={props.onChange}
+        readOnly={props.readOnly}
         onFocus={props.onFocus}
         value={props.value}
       />

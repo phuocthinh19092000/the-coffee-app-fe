@@ -12,11 +12,10 @@ function PopUpFinishOrder(props: Props) {
   return (
     <div className="card-confirm-order--blur">
       <Card className="card card--center card-confirm-order">
-        <a>
-          <img src={Exit} className="card-confirm-order__exit" onClick={props.onClick}></img>
-        </a>
+        <img src={Exit} className="card-confirm-order__exit" onClick={props.onClick} alt="Exit" />
+
         <div className="card-confirm-order__img">
-          <img src={OrderConfirmed} alt="Order Confirmed Image" className="card-confirm-order__img--style" />
+          <img src={OrderConfirmed} alt="Order Confirmed" className="card-confirm-order__img--style" />
         </div>
         <h2 className="card-confirm-order__title">ORDER PLACED!</h2>
         <p className="card-confirm-order__description">You will be notified to pick up when drink is ready.</p>

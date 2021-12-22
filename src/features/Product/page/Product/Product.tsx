@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../../../storage/hooks';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../storage';
 import { getAllCategory } from '../../actions/getCategoryData';
+import Category from '../../../../interfaces/category';
 
 const ProductPage = () => {
   const [listDrink, setListDrink] = useState<Product[]>([]);
@@ -23,14 +24,21 @@ const ProductPage = () => {
     fetchCategories();
   }, [categoryId]);
 
-  const handelSetCategory = (id: string, categoriesData: any[]) => {
+  // const handelSetCategory = (id: string, categoriesData: any[]) => {
+  //   setCategoryId(id);
+  //   const categoryFind = categoriesData.find((item: any) => item.id === id);
+  //   if (categoryFind?.products?.length > 0) {
+  //     return setListDrink(categoryFind.products);
+  //   }
+  //   return setListDrink([]);
+  // };
+  function handelSetCategory(id: string, categoriesData: Category[]) {
     setCategoryId(id);
     const categoryFind = categoriesData.find((item: any) => item.id === id);
-    if (categoryFind?.products?.length > 0) {
-      return setListDrink(categoryFind.products);
-    }
-    return setListDrink([]);
-  };
+    // categoryFind?.products?.length > 0 ? setListDrink(categoryFind.products) : setListDrink([]);
+    return setListDrink(categoryFind?.products!);
+  }
+
   return (
     <div className="product">
       <div className="product-left">

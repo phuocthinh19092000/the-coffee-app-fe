@@ -23,7 +23,7 @@ export default function useComponentVisible(initialIsVisible: Boolean) {
       document.removeEventListener('keydown', handleHideDropdown, true);
       document.removeEventListener('click', handleClickOutside, true);
     };
-  });
+  }, []);
 
   return { ref, isComponentVisible, setIsComponentVisible };
 }

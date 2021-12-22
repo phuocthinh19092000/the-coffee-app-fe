@@ -4,6 +4,7 @@ import authReducer from '../features/auth/actions/login';
 import categoryReducer from '../features/Product/actions/getCategoryData'
 import productReducer from '../features/Product/actions/getProductData'
 import getUserDataReducer from '../features/auth/actions/getUserInfo'
+import orderReducer from '../features/order/actions/order'
 const customizedMiddleware = getDefaultMiddleware({
   serializableCheck: false
 })
@@ -15,6 +16,7 @@ export const store = configureStore({
     userData: getUserDataReducer,
     category: categoryReducer,
     product: productReducer,
+    order: orderReducer,
   },
   middleware: customizedMiddleware
 });

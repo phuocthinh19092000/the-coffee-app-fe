@@ -17,8 +17,8 @@ export const getAllCategory = createAsyncThunk('/categories', async () => {
   return allCategory.data;
 });
 
-export const getCategory = createAsyncThunk('/categories/${name}', async (name: string) => {
-  const category = await categoryApi.get(`${name}`);
+export const getCategory = createAsyncThunk('/categories/name-categories', async (name: string) => {
+  const category = await categoryApi.get(name);
   return category.data;
 });
 
@@ -26,15 +26,15 @@ const categorySlice = createSlice({
   name: 'category',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getAllCategory.pending, (state, action) => {
+  extraReducers: builder => {
+    builder.addCase(getAllCategory.pending, state => {
       state.loading = 'pending';
     });
     builder.addCase(getAllCategory.fulfilled, (state, action) => {
       state.loading = 'fulfilled';
       state.data = action.payload;
     });
-    builder.addCase(getAllCategory.rejected, (state, action) => {
+    builder.addCase(getAllCategory.rejected, state => {
       state.loading = 'rejected';
     });
   },

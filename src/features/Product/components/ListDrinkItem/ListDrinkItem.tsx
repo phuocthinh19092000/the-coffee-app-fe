@@ -32,7 +32,6 @@ function ListDrinkItem(props: Props) {
 
   const [itemDrink, setItemDrink] = useState({} as Category);
   const togglePopup = (item: Category) => {
-    setIsOpenPopUp(!isOpenPopUp);
     setItemDrink(item);
     setIsOpenPopUp(!isOpenPopUp);
   };

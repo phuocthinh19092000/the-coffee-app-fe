@@ -51,7 +51,7 @@ const CustomerInformation = (props: Props) => {
         <img src={ExpandMore} className="menu-dropdown__img" alt="expand more" />
         {isMenuOpen && (
           <div className="menu-dropdown__content">
-            <a className="menu-dropdown__item" href="#">
+            <a className="menu-dropdown__item" href="###">
               Today Free Unit: <span className="menu-dropdown__item--accent">{freeUnit}</span>
             </a>
             <a className="menu-dropdown__item" href="/orders">
@@ -63,9 +63,9 @@ const CustomerInformation = (props: Props) => {
             <a className="menu-dropdown__item" href="/user/changePassword">
               Change Password
             </a>
-            <a className="menu-dropdown__item menu-dropdown__item--accent" onClick={props.onClick} id="accent-color">
+            <span className="menu-dropdown__item menu-dropdown__item--accent" onClick={props.onClick} id="accent-color">
               Log out
-            </a>
+            </span>
           </div>
         )}
       </div>

@@ -1,8 +1,7 @@
-import { useAppSelector, useAppDispatch } from '../../../storage/hooks';
-import { login, selectLoginState } from '../actions/login';
+import { useAppDispatch } from '../../../storage/hooks';
+import { login } from '../actions/login';
 
 const LoginPage = () => {
-  const loginData = useAppSelector(selectLoginState);
   const dispatch = useAppDispatch();
 
   const handleLogin = () => {
