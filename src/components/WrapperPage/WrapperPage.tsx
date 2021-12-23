@@ -5,9 +5,7 @@ import './WrapperPage.scss';
 import Footer from '../Footer/Footer';
 import PopUpLoginRight from '../PopUpLoginRight/PopUpLoginRight';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../storage/index';
-import { useAppDispatch } from '../../storage/hooks';
-import { getUserData } from '../../features/auth/actions/getUserInfo';
+import { selectLoginState } from '../../features/auth/actions/login';
 type Props = {
   children?: React.ReactChild[] | ReactChild | JSX.Element | JSX.Element[];
   // handleSearchPopup: (item: Product) => void;
@@ -15,16 +13,9 @@ type Props = {
 
 const WrapperPage = (props: Props) => {
   const [isShowLogin, setIsShowLogin] = useState(false);
-
   const [isShowLogout, setIsShowLogout] = useState(false);
-  const userData = useSelector((state: RootState) => state.userData.userInfo);
-  // const [user, setUser] = useState(() => {
-  //   const userJson = localStorage.getItem('user');
-  //   const user = userJson && JSON.parse(userJson);
-  //   return user;
-  // });
-
   const ref = useRef<HTMLDivElement>(null);
+  const auth = useSelector(selectLoginState);
 
   const hideFormHandler = (event: KeyboardEvent) => {
     if (event.key === 'Escape' || event.key === 'Esc') {
@@ -56,23 +47,18 @@ const WrapperPage = (props: Props) => {
   const showPopUpLogoutHandler = () => {
     setIsShowLogout(!isShowLogout);
   };
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getUserData('users/profile'));
-  });
-
   return (
     <div className="wrapper-page">
       <div ref={ref}>
-        {isShowLogin && <PopUpLoginRight />}
-        {isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
+        {!auth && isShowLogin && <PopUpLoginRight />}
+        {auth && isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
       </div>
 
-      <div className={isShowLogin || isShowLogout ? 'wrapper-page--filter' : ''}>
+      <div className={(!auth && isShowLogin) || (auth && isShowLogout) ? 'wrapper-page--filter' : ''}>
         <Header
-          className={userData ? 'header header--grey' : 'header'}
+          className={auth ? 'header header--grey' : 'header'}
           onClick={showLogin}
-          isLoggedIn={userData ? true : false}
+          isLoggedIn={!!auth}
           onClickShowLogOut={showPopUpLogoutHandler}
           // handleSearchPopup={(item) => props.handleSearchPopup(item.name)}
         />

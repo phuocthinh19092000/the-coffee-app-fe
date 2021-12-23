@@ -1,6 +1,6 @@
 import DrinkItem from '../DrinkItem/DrinkItem';
 import './ListDrinkItem.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DrinkItemDetail from '../../../../components/DrinkDetail/DrinkItemDetail';
 import PopUpFinishOrder from '../../../../components/PopUpFinishOrder/PopUpFinishOrder';
 import PopUpRanOutUnit from '../../../../components/PopUpRanOutUnit/PopUpRanOutUnit';
@@ -8,16 +8,13 @@ import PopUpLoginCenter from '../../../../components/PopUpLoginCenter/PopUpLogin
 import Category from '../../../../interfaces/product';
 import Product from '../../../../interfaces/product';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../../storage/index';
+import { getProductId, placeOrder, resetOrder, selectOrderState } from '../../../order/actions/order';
+import { getUserDataState, updateFreeUnit } from '../../../auth/actions/getUserInfo';
+import { useAppDispatch } from '../../../../storage/hooks';
+import { selectLoginState } from '../../../auth/actions/login';
 type Props = {
   listDrink: Product[];
   searchDrink?: Product[];
-};
-
-type OrderDetail = {
-  drinkId: string;
-  quantity: number;
-  note: string | undefined;
 };
 
 enum showPopupCase {
@@ -28,55 +25,53 @@ enum showPopupCase {
 }
 
 function ListDrinkItem(props: Props) {
+  const [step, setStep] = useState(1);
   const [isOpenPopUp, setIsOpenPopUp] = useState(false);
-
   const [itemDrink, setItemDrink] = useState({} as Category);
+  const dispatch = useAppDispatch();
+  const userData = useSelector(getUserDataState);
+  const order = useSelector(selectOrderState)
+  const auth = useSelector(selectLoginState)
+
   const togglePopup = (item: Category) => {
     setItemDrink(item);
     setIsOpenPopUp(!isOpenPopUp);
+    dispatch(getProductId(item.id));
   };
-  let userData = useSelector((state: RootState) => state.userData.userInfo);
 
-  const [step, setStep] = useState(1);
-  const [orderDetail, setOrderDetail] = useState({ drinkId: itemDrink.id, quantity: 1, note: '' } as OrderDetail);
-
-  // useEffect(() => {
-  //   if (Object.keys(props.searchDrink).length !== 0) {
-  //     setOrderDetail({ drinkId: itemDrink._id, quantity: 1, note: '' } as OrderDetail);
-  //     setIsOpenPopUp(true);
-  //   }
-  // }, [props.searchDrink]);
   const handleClickBackForm = () => {
     setStep(step - 1);
   };
 
-  const handleClickPlaceOrder = (orderDetail: OrderDetail) => {
-    if (!userData) {
+  const handleClickPlaceOrder = () => {
+    if (!userData.id) {
       setStep(showPopupCase.PopUpLoginCenter);
       return;
     }
-    setOrderDetail(orderDetail);
-    if (userData.freeUnit < orderDetail.quantity) {
+    if (userData.freeUnit < order.quantity) {
       setStep(showPopupCase.showPopUpRanOutUnit);
     } else {
-      userData.freeUnit -= orderDetail.quantity;
-      // document.dispatchEvent(new CustomEvent('setFreeUnit', { detail: userData }));
-      // localStorage.setItem('user', JSON.stringify(userData));
+      dispatch(placeOrder(order))
+      dispatch(updateFreeUnit(order.quantity))
       setStep(showPopupCase.PopUpFinishOrder);
     }
   };
 
+  useEffect(() => {
+    if (auth) {
+      setStep(showPopupCase.showDrinkItemDetail)
+    }
+  },[auth])
+
   const exitPopUp = () => {
+    dispatch(resetOrder())
     setIsOpenPopUp(false);
     setStep(showPopupCase.showDrinkItemDetail);
-    setOrderDetail({ drinkId: itemDrink.id, quantity: 1, note: '' } as OrderDetail);
   };
 
   const continueOrderRanoutUnit = () => {
-    userData.freeUnit = 0;
-    // document.dispatchEvent(new CustomEvent('setFreeUnit', { detail: userData.freeUnit }));
-    // localStorage.setItem('user', JSON.stringify(userData));
-
+    dispatch(placeOrder(order))
+    dispatch(updateFreeUnit(order.quantity))
     setStep(showPopupCase.PopUpFinishOrder);
   };
 
@@ -88,7 +83,6 @@ function ListDrinkItem(props: Props) {
             item={itemDrink}
             handleClickExitPopUp={exitPopUp}
             handleClickPlaceOrder={handleClickPlaceOrder}
-            orderDetail={orderDetail}
           />
         );
       case showPopupCase.showPopUpRanOutUnit:
@@ -119,4 +113,5 @@ function ListDrinkItem(props: Props) {
   );
 }
 
-export default ListDrinkItem;
+export default ListDrinkItem
+
