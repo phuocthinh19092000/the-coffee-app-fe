@@ -2,15 +2,19 @@ import React from 'react';
 import './PopUpLogOut.scss';
 import Card from '../Card/Index';
 import Button from '../Button/Index';
+import { useAppDispatch } from '../../storage/hooks';
+import { logout } from '../../features/auth/actions/login';
 
 type Props = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const PopUpLogOut = (props: Props) => {
+  const dispatch = useAppDispatch();
+  
   const LogOutHandler = () => {
-    localStorage.clear();
-    window.location.reload();
+    dispatch(logout())
+    localStorage.clear()
   };
 
   return (

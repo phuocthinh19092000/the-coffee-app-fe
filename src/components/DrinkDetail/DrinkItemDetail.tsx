@@ -8,39 +8,32 @@ import Card from '../Card/Index';
 import Input from '../Input/Input';
 import '../DrinkDetail/DrinkItemDetail.scss';
 import DrinkItem from '../../features/Product/components/DrinkItem/DrinkItem';
-import { useState } from 'react';
 import Product from '../../interfaces/product';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../storage';
-import { increment, decrement } from '../../features/order/actions/order';
-type OrderDetail = {
-  drinkId: string;
-  quantity: number;
-  note?: string;
-};
+import { getQuantity, getNote, selectOrderState } from '../../features/order/actions/order';
 
 type Props = {
   item: Product;
   handleClickExitPopUp?: React.MouseEventHandler<HTMLImageElement>;
-  handleClickPlaceOrder(data: {}): void;
-  orderDetail: OrderDetail;
+  handleClickPlaceOrder(): void;
 };
 
 function DrinkItemDetail(props: Props) {
-  const [note, setNote] = useState(props.orderDetail.note);
   const dispatch = useDispatch();
-  const quantity = useSelector((state: RootState) => state.order.orderData.quantity);
+  const order = useSelector(selectOrderState);
   const onSubOneUnit = () => {
-    if (quantity === 1) {
-      return;
-    } else {
-      dispatch(decrement());
+    if (order.quantity > 1) {
+      dispatch(getQuantity(-1));
     }
   };
 
   const onPlusOneUnit = () => {
-    dispatch(increment());
+    dispatch(getQuantity(1));
   };
+
+  const onChangeNote: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    dispatch(getNote(e.target.value))
+  }
 
   return (
     <div className="card-item-detail--blur">
@@ -50,11 +43,11 @@ function DrinkItemDetail(props: Props) {
         <DrinkItem item={props.item} />
         <Input
           placeholder="Quanlity: "
-          src={quantity === 1 ? Subtraction : VectorSub}
+          src={order.quantity <= 1 ? Subtraction : VectorSub}
           src2={Summation}
           className="mt-100 mb-24 pointer"
           type="number"
-          value={quantity}
+          value={order.quantity}
           onClickFirstIcon={onSubOneUnit}
           onClickSecondIcon={onPlusOneUnit}
           readOnly={true}
@@ -62,15 +55,13 @@ function DrinkItemDetail(props: Props) {
         <Input
           placeholder="Note"
           src={Edit}
-          onChange={(e) => {
-            setNote(e.target.value);
-          }}
-          value={note}
+          onChange={onChangeNote}
+          value={order.note}
         />
         <Button
           className="btn btn-primary btn--enabled mt-100"
           titleButton="PLACE ORDER"
-          onClick={() => props.handleClickPlaceOrder({ drinkId: props.item.id, quantity: quantity, note: note })}
+          onClick={() => props.handleClickPlaceOrder()}
         />
       </Card>
     </div>

@@ -3,14 +3,14 @@ import UserInformation from '../../share/assets/vector/UserInformation.svg';
 import ExpandMore from '../../share/assets/vector/ExpandMore.svg';
 import './CustomerInformation.scss';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../storage/index';
+import { getUserDataState } from '../../features/auth/actions/getUserInfo';
 type Props = {
   onClick: React.MouseEventHandler<HTMLAnchorElement>;
 };
 
 const CustomerInformation = (props: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { freeUnit, name } = useSelector((state: RootState) => state.userData.userInfo);
+  const { freeUnit, name } = useSelector(getUserDataState);
 
   // const [freeUnit, setFreeUnit] = useState(() => {
   //   const userJson = localStorage.getItem('user');

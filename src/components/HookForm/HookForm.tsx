@@ -8,6 +8,7 @@ import { useState } from 'react';
 import UserIcon from '../../share/assets/vector/User.svg';
 import EyeIcon from '../../share/assets/vector/Eye.svg';
 import CloseEyeIcon from '../../share/assets/img/close-eye.png';
+import { getUserData } from '../../features/auth/actions/getUserInfo';
 interface IFormInputs {
   username: string;
   password: string;
@@ -46,7 +47,7 @@ export default function HookForm() {
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
     const accessToken = await dispatch(login({ username: data.username, password: data.password }));
     if (accessToken.meta.requestStatus === 'fulfilled') {
-      window.location.reload();
+      dispatch(getUserData('users/profile'));
     } else {
       reset({ username: '', password: '' });
     }
