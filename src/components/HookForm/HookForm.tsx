@@ -49,6 +49,7 @@ export default function HookForm() {
     if (accessToken.meta.requestStatus === 'fulfilled') {
       dispatch(getUserData('users/profile'));
     } else {
+      alert('Username or password incorrect');
       reset({ username: '', password: '' });
     }
   };
