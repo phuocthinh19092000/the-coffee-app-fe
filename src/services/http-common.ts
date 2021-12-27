@@ -4,21 +4,21 @@ import { envVariable } from './envVariable';
 axios.defaults.baseURL = envVariable.API_ROOT;
 axios.defaults.timeout = envVariable.REQUEST_TIMEOUT;
 axios.defaults.headers.common['Accept'] = 'application/json';
-// axios.interceptors.request.use(
-//   (config) => {
-//     const dataPersist = JSON.parse(localStorage.getItem('persist:root') as string);
-//     const auth = JSON.parse(dataPersist.auth);
-//     if (auth.accessToken && config ?.headers) {
-//       config.headers['Authorization'] = `Bearer ${auth.accessToken}`;
-//     }
-//     return config;
-//   },
-//   (error) => Promise.reject(error)
-// );
+axios.interceptors.request.use(
+  (config) => {
+    const dataPersist = JSON.parse(localStorage.getItem('persist:auth') as string);
+    const auth = dataPersist.accessToken.replaceAll('"', '');
+    if (auth && config.headers) {
+      config.headers['Authorization'] = `Bearer ${auth}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
 
 axios.interceptors.response.use(
   (response) => response,
-  (error) => Promise.reject(error.response || error.request || error.message || error.data)
+  (error) => Promise.reject(error.response || error.request || error.message || error.data),
 );
 
 const http = {
@@ -45,7 +45,7 @@ const http = {
   },
   delete(url: string) {
     return axios.delete(url);
-  }
-}
+  },
+};
 
 export default http;

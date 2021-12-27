@@ -45,9 +45,9 @@ export default function HookForm() {
   };
   const dispatch = useAppDispatch();
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
-    const accessToken = await dispatch(login({ username: data.username, password: data.password }));
-    if (accessToken.meta.requestStatus === 'fulfilled') {
-      dispatch(getUserData('users/profile'));
+    const accessToken = await dispatch(login({ username: data.username, password: data.password })).unwrap();
+    if (accessToken) {
+      dispatch(getUserData());
     } else {
       alert('Username or password incorrect');
       reset({ username: '', password: '' });

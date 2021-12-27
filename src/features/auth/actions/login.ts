@@ -24,7 +24,6 @@ export const login = createAsyncThunk('/auth/login', async (body: UserParams, { 
   try {
     const responseAccessToken = await Auth.login(body);
     http.setAuthorizationHeader(responseAccessToken.data.jwtAccessToken);
-    localStorage.setItem('token', responseAccessToken.data.jwtAccessToken);
     return responseAccessToken.data.jwtAccessToken;
   } catch (error: any) {
     return rejectWithValue(error.response);

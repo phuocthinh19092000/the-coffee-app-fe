@@ -26,12 +26,8 @@ export const initialState: OrderDetail = {
 
 export const placeOrder = createAsyncThunk('/orders', async (body: orderParams, { rejectWithValue }) => {
   try {
-    const token = localStorage.getItem('token');
-    if (!!token) {
-      http.setAuthorizationHeader(token);
-      const responseOrderData = await Order.placeOrder(body);
-      return responseOrderData.data;
-    }
+    const responseOrderData = await Order.placeOrder(body);
+    return responseOrderData.data;
   } catch (error: any) {
     return rejectWithValue(error.response);
   }

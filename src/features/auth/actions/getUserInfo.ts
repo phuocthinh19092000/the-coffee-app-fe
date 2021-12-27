@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import http from '../../../services/http-common';
 import { RootState } from '../../../storage';
 import GetUserData from '../api/UserData/GetUserData';
 import { logout } from './login';
@@ -28,14 +27,10 @@ export const initialState: DataUserState = {
   },
 };
 
-export const getUserData = createAsyncThunk('/users/profile', async (url: string, { rejectWithValue }) => {
+export const getUserData = createAsyncThunk('/users/profile', async (_, { rejectWithValue }) => {
   try {
-    const token = localStorage.getItem('token');
-    if (!!token) {
-      http.setAuthorizationHeader(token);
-      const responseUserData = await GetUserData.getUserData(url);
-      return responseUserData.data;
-    }
+    const responseUserData = await GetUserData.getUserData();
+    return responseUserData.data;
   } catch (error) {
     return rejectWithValue(error);
   }
