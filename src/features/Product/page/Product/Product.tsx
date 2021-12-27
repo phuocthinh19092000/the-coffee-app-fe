@@ -20,18 +20,11 @@ const ProductPage = () => {
       const categoriesData = await dispatch(getAllCategory()).unwrap();
       const id = categoryId ? categoryId : categoriesData[0].id;
       handelSetCategory(id, categoriesData);
+      return categoriesData;
     }
     fetchCategories();
   }, [categoryId]);
 
-  // const handelSetCategory = (id: string, categoriesData: any[]) => {
-  //   setCategoryId(id);
-  //   const categoryFind = categoriesData.find((item: any) => item.id === id);
-  //   if (categoryFind?.products?.length > 0) {
-  //     return setListDrink(categoryFind.products);
-  //   }
-  //   return setListDrink([]);
-  // };
   function handelSetCategory(id: string, categoriesData: Category[]) {
     setCategoryId(id);
     const categoryFind = categoriesData.find((item: any) => item.id === id);
