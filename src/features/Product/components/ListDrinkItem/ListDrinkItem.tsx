@@ -9,7 +9,7 @@ import Category from '../../../../interfaces/product';
 import Product from '../../../../interfaces/product';
 import { useSelector } from 'react-redux';
 import { getProductId, placeOrder, resetOrder, selectOrderState } from '../../../order/actions/order';
-import { getUserDataState, updateFreeUnit } from '../../../auth/actions/getUserInfo';
+import { getUserData, getUserDataState, updateFreeUnit } from '../../../auth/actions/getUserInfo';
 import { useAppDispatch } from '../../../../storage/hooks';
 import { selectLoginState } from '../../../auth/actions/login';
 type Props = {
@@ -43,25 +43,28 @@ function ListDrinkItem(props: Props) {
     setStep(step - 1);
   };
 
-  const handleClickPlaceOrder = () => {
+  const handleClickPlaceOrder = async () => {
     if (!userData.id) {
       setStep(showPopupCase.PopUpLoginCenter);
       return;
     }
-    if (userData.freeUnit < order.quantity) {
+    const { freeUnit } = await dispatch(getUserData()).unwrap()
+    if (typeof freeUnit !== 'number' && freeUnit >= 0) return;
+    if (freeUnit < order.quantity) {
       setStep(showPopupCase.showPopUpRanOutUnit);
     } else {
       dispatch(placeOrder(order))
       dispatch(updateFreeUnit(order.quantity))
       setStep(showPopupCase.PopUpFinishOrder);
     }
+
   };
 
   useEffect(() => {
     if (auth) {
       setStep(showPopupCase.showDrinkItemDetail)
     }
-  },[auth])
+  }, [auth])
 
   const exitPopUp = () => {
     dispatch(resetOrder())

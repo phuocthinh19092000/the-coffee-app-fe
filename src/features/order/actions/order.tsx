@@ -29,7 +29,7 @@ export const placeOrder = createAsyncThunk('/orders', async (body: orderParams, 
     const responseOrderData = await Order.placeOrder(body);
     return responseOrderData.data;
   } catch (error: any) {
-    return rejectWithValue(error.response);
+    return rejectWithValue(error.data);
   }
 });
 
