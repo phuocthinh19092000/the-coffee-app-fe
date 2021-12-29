@@ -26,20 +26,21 @@ const categorySlice = createSlice({
   name: 'category',
   initialState,
   reducers: {},
-  extraReducers: builder => {
-    builder.addCase(getAllCategory.pending, state => {
-      state.loading = 'pending';
-    });
-    builder.addCase(getAllCategory.fulfilled, (state, action) => {
-      state.loading = 'fulfilled';
-      state.data = action.payload;
-    });
-    builder.addCase(getAllCategory.rejected, state => {
-      state.loading = 'rejected';
-    });
+  extraReducers: (builder) => {
+    builder
+      .addCase(getAllCategory.pending, (state) => {
+        state.loading = 'pending';
+      })
+      .addCase(getAllCategory.fulfilled, (state, action) => {
+        state.loading = 'fulfilled';
+        state.data = action.payload;
+      })
+      .addCase(getAllCategory.rejected, (state) => {
+        state.loading = 'rejected';
+      });
   },
 });
 
-export const selectCatelogyState = (state: RootState) => state.category.data;
+export const selectCategoryState = (state: RootState) => state.category.data;
 
 export default categorySlice.reducer;

@@ -1,48 +1,48 @@
 import { useEffect, useState } from 'react';
 import CategoryBar from '../../components/CategoryBar/CategoryBar';
 import './Product.scss';
-import Product from '../../../../interfaces/product';
 import ListDrinkItem from '../../components/ListDrinkItem/ListDrinkItem';
 import { useAppDispatch } from '../../../../storage/hooks';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../../storage';
-import { getAllCategory } from '../../actions/getCategoryData';
-import Category from '../../../../interfaces/category';
+import { getAllCategory, selectCategoryState } from '../../actions/getCategoryData';
+import { getProductsByCategory, selectProductState } from '../../actions/getProductData';
 
 const ProductPage = () => {
-  const [listDrink, setListDrink] = useState<Product[]>([]);
   const [categoryId, setCategoryId] = useState('');
   const dispatch = useAppDispatch();
-  const categories = useSelector((state: RootState) => state.category);
+  const categories = useSelector(selectCategoryState);
+  const products = useSelector(selectProductState);
 
   useEffect(() => {
     async function fetchCategories() {
       const categoriesData = await dispatch(getAllCategory()).unwrap();
-      const id = categoryId ? categoryId : categoriesData[0].id;
-      handelSetCategory(id, categoriesData);
-      return categoriesData;
+      if (categoriesData.length > 0) {
+        const id = categoriesData[0].id;
+        handleGetProductsByCategory(id);
+      }
     }
     fetchCategories();
-  }, [categoryId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  function handelSetCategory(id: string, categoriesData: Category[]) {
-    setCategoryId(id);
-    const categoryFind = categoriesData.find((item: any) => item.id === id);
-    // categoryFind?.products?.length > 0 ? setListDrink(categoryFind.products) : setListDrink([]);
-    return setListDrink(categoryFind?.products!);
-  }
+  const handleGetProductsByCategory = async (id: string) => {
+    if (categoryId !== id) {
+      setCategoryId(id);
+      await dispatch(getProductsByCategory(id));
+    }
+  };
 
   return (
     <div className="product">
       <div className="product-left">
         <CategoryBar
           categoryId={categoryId}
-          onGetIdHandler={(categoryId: string) => setCategoryId(categoryId)}
-          listCategory={categories.data}
+          onGetIdHandler={(categoryId: string) => handleGetProductsByCategory(categoryId)}
+          listCategory={categories}
         />
       </div>
       <div className="product-right">
-        <ListDrinkItem listDrink={listDrink} />
+        <ListDrinkItem listDrink={products} />
       </div>
     </div>
   );

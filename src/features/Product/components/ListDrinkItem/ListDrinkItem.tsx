@@ -30,9 +30,8 @@ function ListDrinkItem(props: Props) {
   const [itemDrink, setItemDrink] = useState({} as Category);
   const dispatch = useAppDispatch();
   const userData = useSelector(getUserDataState);
-  const order = useSelector(selectOrderState)
-  const auth = useSelector(selectLoginState)
-
+  const order = useSelector(selectOrderState);
+  const auth = useSelector(selectLoginState);
   const togglePopup = (item: Category) => {
     setItemDrink(item);
     setIsOpenPopUp(!isOpenPopUp);
@@ -48,33 +47,32 @@ function ListDrinkItem(props: Props) {
       setStep(showPopupCase.PopUpLoginCenter);
       return;
     }
-    const { freeUnit } = await dispatch(getUserData()).unwrap()
+    const { freeUnit } = await dispatch(getUserData()).unwrap();
     if (typeof freeUnit !== 'number' && freeUnit >= 0) return;
     if (freeUnit < order.quantity) {
       setStep(showPopupCase.showPopUpRanOutUnit);
     } else {
-      dispatch(placeOrder(order))
-      dispatch(updateFreeUnit(order.quantity))
+      dispatch(placeOrder(order));
+      dispatch(updateFreeUnit(order.quantity));
       setStep(showPopupCase.PopUpFinishOrder);
     }
-
   };
 
   useEffect(() => {
     if (auth) {
-      setStep(showPopupCase.showDrinkItemDetail)
+      setStep(showPopupCase.showDrinkItemDetail);
     }
-  }, [auth])
+  }, [auth]);
 
   const exitPopUp = () => {
-    dispatch(resetOrder())
+    dispatch(resetOrder());
     setIsOpenPopUp(false);
     setStep(showPopupCase.showDrinkItemDetail);
   };
 
   const continueOrderRanoutUnit = () => {
-    dispatch(placeOrder(order))
-    dispatch(updateFreeUnit(order.quantity))
+    dispatch(placeOrder(order));
+    dispatch(updateFreeUnit(order.quantity));
     setStep(showPopupCase.PopUpFinishOrder);
   };
 
@@ -116,5 +114,4 @@ function ListDrinkItem(props: Props) {
   );
 }
 
-export default ListDrinkItem
-
+export default ListDrinkItem;

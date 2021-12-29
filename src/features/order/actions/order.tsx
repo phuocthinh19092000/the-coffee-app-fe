@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import Order from '../api/orderAPI';
 import { orderParams } from '../api/orderParams';
 import { RootState } from '../../../storage';
-import http from '../../../services/http-common';
+
 type RequestState = 'pending' | 'fulfilled' | 'rejected';
 
 export interface OrderDetail {
