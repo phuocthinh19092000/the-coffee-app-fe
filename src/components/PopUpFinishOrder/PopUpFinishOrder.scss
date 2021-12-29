@@ -18,7 +18,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: -300px !important;
+    position: absolute;
+    top: 10%;
   }
 
   &__title {
@@ -31,7 +32,7 @@
 
   &__description {
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 21px;
   }
 
@@ -39,8 +40,7 @@
     width: 440px;
     height: 60px;
     position: absolute;
-    left: 20px;
-    top: 676px;
+    top: 80%;
   }
 
   &--blur {

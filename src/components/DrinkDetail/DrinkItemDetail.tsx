@@ -6,7 +6,7 @@ import Edit from '../../share/assets/vector/Edit.svg';
 import Button from '../Button/Index';
 import Card from '../Card/Index';
 import Input from '../Input/Input';
-import '../DrinkDetail/DrinkItemDetail.scss';
+import './DrinkItemDetail.scss';
 import DrinkItem from '../../features/Product/components/DrinkItem/DrinkItem';
 import Product from '../../interfaces/product';
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,34 +32,34 @@ function DrinkItemDetail(props: Props) {
   };
 
   const onChangeNote: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    dispatch(getNote(e.target.value))
-  }
+    dispatch(getNote(e.target.value));
+  };
 
   return (
-    <div className="card-item-detail--blur">
-      <Card className="card card--center">
-        <img src={Exit} className="icon-exit" onClick={props.handleClickExitPopUp} alt="Exit" />
+    <div className="popup-detail--blur">
+      <Card className="card card--center popup-detail">
+        <img src={Exit} className="popup-detail__exit" onClick={props.handleClickExitPopUp} alt="Exit Icon" />
+        <div className="popup-detail__drink-item">
+          <DrinkItem item={props.item} />
+        </div>
 
-        <DrinkItem item={props.item} />
-        <Input
-          placeholder="Quanlity: "
-          src={order.quantity <= 1 ? Subtraction : VectorSub}
-          src2={Summation}
-          className="mt-100 mb-24 pointer"
-          type="number"
-          value={order.quantity}
-          onClickFirstIcon={onSubOneUnit}
-          onClickSecondIcon={onPlusOneUnit}
-          readOnly={true}
-        />
-        <Input
-          placeholder="Note"
-          src={Edit}
-          onChange={onChangeNote}
-          value={order.note}
-        />
+        <div className="popup-detail__input-group">
+          <Input
+            placeholder="Quanlity: "
+            src={order.quantity <= 1 ? Subtraction : VectorSub}
+            src2={Summation}
+            className="popup-detail__input"
+            type="number"
+            value={order.quantity}
+            onClickFirstIcon={onSubOneUnit}
+            onClickSecondIcon={onPlusOneUnit}
+            readOnly={true}
+          />
+          <Input placeholder="Note" src={Edit} onChange={onChangeNote} value={order.note} />
+        </div>
+
         <Button
-          className="btn btn-primary btn--enabled mt-100"
+          className="btn btn-primary btn--enabled popup-detail__button"
           titleButton="PLACE ORDER"
           onClick={() => props.handleClickPlaceOrder()}
         />

@@ -1,7 +1,7 @@
 import Card from '../Card/Index';
 import Button from '../Button/Index';
 import Exit from '../../share/assets/vector/Exit.svg';
-import OrderConfirmed from '../../share/assets/img/OrderConfirmed.png';
+import OrderImage from '../../share/assets/img/finish-order.png';
 import '../PopUpFinishOrder/PopUpFinishOrder.scss';
 
 type Props = {
@@ -12,10 +12,10 @@ function PopUpFinishOrder(props: Props) {
   return (
     <div className="card-confirm-order--blur">
       <Card className="card card--center card-confirm-order">
-        <img src={Exit} className="card-confirm-order__exit" onClick={props.onClick} alt="Exit" />
+        <img src={Exit} className="card-confirm-order__exit" onClick={props.onClick} alt="Exit Icon" />
 
         <div className="card-confirm-order__img">
-          <img src={OrderConfirmed} alt="Order Confirmed" className="card-confirm-order__img--style" />
+          <img src={OrderImage} alt="Order Confirmed" />
         </div>
         <h2 className="card-confirm-order__title">ORDER PLACED!</h2>
         <p className="card-confirm-order__description">You will be notified to pick up when drink is ready.</p>
