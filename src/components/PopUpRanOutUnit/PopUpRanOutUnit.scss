@@ -11,8 +11,7 @@
   }
 
   &__content {
-    position: absolute;
-    top: 30%;
+    padding-top: 130px;
   }
 
   &__title {
@@ -34,16 +33,8 @@
     margin-top: 10px;
   }
 
-  &__btn-first {
-    width: 90%;
-    position: absolute;
-    top: 55%;
-  }
-
-  &__btn-secondary {
-    width: 90%;
-    position: absolute;
-    top: 68%;
+  &__button-group {
+    padding-top: 80px;
   }
 
   &--blur {

@@ -6,25 +6,16 @@ import { useSelector } from 'react-redux';
 import { getUserDataState } from '../../features/auth/actions/getUserInfo';
 type Props = {
   onClick: React.MouseEventHandler<HTMLAnchorElement>;
+  showMyOrder: React.MouseEventHandler<HTMLAnchorElement>;
 };
 
 const CustomerInformation = (props: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { freeUnit, name } = useSelector(getUserDataState);
 
-  // const [freeUnit, setFreeUnit] = useState(() => {
-  //   const userJson = localStorage.getItem('user');
-  //   const freeUnit = userJson ? JSON.parse(userJson).freeunit : 3;
-  //   return freeUnit;
-  // });
-
   const handleClickInside = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
-  // const handleSetFreeUnit = (e: any) => {
-  //   setFreeUnit(e.detail);
-  // };
 
   const dropdownMenuRef = useRef<HTMLDivElement>(null);
 
@@ -36,10 +27,8 @@ const CustomerInformation = (props: Props) => {
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
-    // document.addEventListener('setFreeUnit', handleSetFreeUnit);
     return () => {
       document.removeEventListener('click', handleClickOutside);
-      // document.removeEventListener('setFreeUnit', handleSetFreeUnit);
     };
   }, [isMenuOpen]);
 
@@ -54,9 +43,9 @@ const CustomerInformation = (props: Props) => {
             <a className="menu-dropdown__item" href="###">
               Today Free Unit: <span className="menu-dropdown__item--accent">{freeUnit}</span>
             </a>
-            <a className="menu-dropdown__item" href="/orders">
+            <span className="menu-dropdown__item" onClick={props.showMyOrder}>
               My Orders
-            </a>
+            </span>
             <a className="menu-dropdown__item" href="/user/changeAvatar">
               Change Avatar
             </a>

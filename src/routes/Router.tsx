@@ -19,7 +19,7 @@ const RouterPage = () => {
             return !!localStorage.getItem('user') ? <HomePage /> : <ComingSoonPage />;
           }}
         />
-        <Route exact path="/orders" component={ComingSoonPage} />
+
         <Route exact path="/user/changeAvatar" component={ComingSoonPage} />
         <Route exact path="/user/changePassword" component={ComingSoonPage} />
 
