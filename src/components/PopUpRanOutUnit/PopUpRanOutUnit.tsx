@@ -15,21 +15,23 @@ const PopUpRanOutUnit = (props: Props) => {
     <div className="card-ran-out-unit--blur">
       <Card className="card card--center card-ran-out-unit">
         <img src={Exit} className="card-ran-out-unit__exit" onClick={props.onClickExit} alt="Exit" />
-        <span className="card-ran-out-unit__title">You ran out of free units</span>
-        <span className="card-ran-out-unit__message">
-          Are you sure you want to proceed this order?
-          <br />
-          Excceeding orders will be sent to you by month-end.
-        </span>
+        <div className="card-ran-out-unit__content">
+          <p className="card-ran-out-unit__title">You ran out of free units</p>
+          <p className="card-ran-out-unit__message">
+            Are you sure you want to proceed this order?
+            <br />
+            Excceeding orders will be sent to you by month-end.
+          </p>
+        </div>
         <Button
           onClick={props.onClickContinueProceed}
-          className="btn btn-primary btn--enabled card-ran-out-unit__btn"
+          className="btn btn-primary btn--enabled card-ran-out-unit__btn-first"
           type="submit"
           titleButton="YES, I WANT TO PROCEED"
         />
         <Button
           onClick={props.handleClickBackForm}
-          className="btn btn-primary btn-secondary"
+          className="btn btn-primary btn-secondary card-ran-out-unit__btn-secondary "
           type="submit"
           titleButton="NO, I CHANGE MY MIND"
         />
