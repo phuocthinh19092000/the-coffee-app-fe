@@ -2,7 +2,7 @@ import Exit from '../../share/assets/vector/Exit.svg';
 import Summation from '../../share/assets/vector/Summation.svg';
 import Subtraction from '../../share/assets/vector/Subtraction.svg';
 import VectorSub from '../../share/assets/vector/VectorSub.svg';
-import Edit from '../../share/assets/vector/Edit.svg';
+import Edit from '../../share/assets/vector/EditIcon.svg';
 import Button from '../Button/Index';
 import Card from '../Card/Index';
 import Input from '../Input/Input';
