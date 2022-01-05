@@ -43,7 +43,7 @@
     height: 264px;
     z-index: 1;
     margin-top: 15px;
-    box-shadow: 0px 4px 12px rgba(7, 7, 7, 0.12);
+    box-shadow: 0 4px 12px rgba(7, 7, 7, 0.12);
     border-radius: 8px;
     background: $white-color;
   }
@@ -51,7 +51,7 @@
   &__item {
     display: block;
     width: 100%;
-    text-align: flex-start;
+    text-align: start;
     color: black;
     font-size: 16px;
     font-weight: 600;

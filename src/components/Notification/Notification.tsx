@@ -3,6 +3,7 @@ import CoffeeImg from '../../share/assets/img/blackcoffee.png';
 import { moneyFormat } from '../../utils/MoneyFormat';
 import EditIcon from '../../share/assets/vector/EditIcon.svg';
 import SuccessIcon from '../../share/assets/vector/SuccessIcon.svg';
+import React from 'react';
 interface Props {
   price: number;
   title: string;
@@ -31,7 +32,7 @@ const Notification = (props: Props) => {
   return (
     <div className="notification" onClick={props.onClickNotification}>
       <div className="notification-item">
-        <img src={CoffeeImg} className="notification-item__img" alt={CoffeeImg}></img>
+        <img src={CoffeeImg} className='notification-item__img' alt={CoffeeImg}/>
         <div className="notification-item__detail dp-space-between">
           <div>
             <b className="notification-item__title">{props.title}</b>
@@ -44,7 +45,7 @@ const Notification = (props: Props) => {
           </div>
           {btnSrc ? (
             <button onClick={props.onClickButton}>
-              <img src={btnSrc} alt={btnSrc}></img>
+              <img src={btnSrc} alt={btnSrc}/>
             </button>
           ) : (
             ''

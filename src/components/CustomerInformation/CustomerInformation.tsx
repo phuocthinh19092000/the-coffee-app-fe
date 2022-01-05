@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import UserInformation from '../../share/assets/vector/UserInformation.svg';
 import ExpandMore from '../../share/assets/vector/ExpandMore.svg';
 import './CustomerInformation.scss';
@@ -11,7 +11,7 @@ type Props = {
 
 const CustomerInformation = (props: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { freeUnit, name } = useSelector(getUserDataState);
+  const { name, freeUnit } = useSelector(getUserDataState);
 
   const handleClickInside = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -40,9 +40,9 @@ const CustomerInformation = (props: Props) => {
         <img src={ExpandMore} className="menu-dropdown__img" alt="expand more" />
         {isMenuOpen && (
           <div className="menu-dropdown__content">
-            <a className="menu-dropdown__item" href="###">
+            <span className="menu-dropdown__item">
               Today Free Unit: <span className="menu-dropdown__item--accent">{freeUnit}</span>
-            </a>
+            </span>
             <span className="menu-dropdown__item" onClick={props.showMyOrder}>
               My Orders
             </span>
