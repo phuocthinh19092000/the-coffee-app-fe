@@ -5,6 +5,7 @@ import categoryReducer from '../features/Product/actions/getCategoryData';
 import productReducer from '../features/Product/actions/getProductData';
 import getUserDataReducer from '../features/auth/actions/getUserInfo';
 import orderReducer from '../features/order/actions/order';
+
 import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 const customizedMiddleware = getDefaultMiddleware({

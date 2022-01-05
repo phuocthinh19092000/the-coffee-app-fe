@@ -18,6 +18,7 @@ type Props = {
   className: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   onClickShowLogOut: React.MouseEventHandler<HTMLAnchorElement>;
+  onClickShowMyOrder: React.MouseEventHandler<HTMLAnchorElement>;
   isLoggedIn: boolean;
   // handleSearchPopup: (item: Product) => void;
 };
@@ -102,7 +103,7 @@ const Header = (props: Props) => {
             <button className="header__button-toggle" onClick={toggleTheme}>
               {theme === 'Light' ? <HiMoon size={40} /> : <CgSun size={40} />}
             </button>
-            <CustomerInformation onClick={props.onClickShowLogOut} />
+            <CustomerInformation onClick={props.onClickShowLogOut} showMyOrder={props.onClickShowMyOrder} />
           </>
         ) : (
           <>

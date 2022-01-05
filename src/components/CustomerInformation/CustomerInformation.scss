@@ -34,7 +34,7 @@
   &__content {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     justify-content: space-around;
     position: absolute;
     right: 0;
@@ -51,7 +51,7 @@
   &__item {
     display: block;
     width: 100%;
-    text-align: start;
+    text-align: flex-start;
     color: black;
     font-size: 16px;
     font-weight: 600;

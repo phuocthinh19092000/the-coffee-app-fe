@@ -2,6 +2,7 @@ import Card from '../Card/Index';
 import Exit from '../../share/assets/vector/Exit.svg';
 import './PopUpLoginCenter.scss';
 import HookForm from '../HookForm/HookForm';
+import React from 'react';
 type Props = {
   onClick?: React.MouseEventHandler<HTMLElement>;
 };

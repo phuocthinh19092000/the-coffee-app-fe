@@ -28,8 +28,10 @@ const HomePage = () => {
     <div className="home-page">
       <WrapperPage>
         {/* <Toast message={'Order changes saved successfully!'} type={ToastType.success} ref={toastRef} /> */}
-        <Background />
-        <Product />
+        <div>
+          <Background />
+          <Product />
+        </div>
         {/* <button
           className="home-page__btn--hidden"
           onClick={() => {

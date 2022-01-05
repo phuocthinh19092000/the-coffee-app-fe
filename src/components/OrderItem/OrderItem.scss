@@ -1,0 +1,78 @@
+@import '../../share/assets/scss/variables.scss';
+
+.order-item {
+  width: 100%;
+  margin-top: 10px;
+
+  &__date {
+    color: $brown-color;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  &__name {
+    width: 100%;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__desc {
+    width: 100%;
+    margin-top: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__note {
+    width: 100%;
+    margin-top: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__contain {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    margin-top: 20px;
+
+    &-left {
+      align-items: flex-start;
+      padding-right: 10px;
+    }
+
+    &-center {
+      margin-top: 10px;
+      width: 250px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &-right {
+      align-items: flex-end;
+      align-content: flex-end
+    }
+
+    &-icon {
+      margin-top: 20px;
+      width: 48px;
+      height: 48px;
+      background-color: $white-color;
+      border-radius: 50%;
+    }
+
+  }
+}
+
+.edit-icon {
+  margin-top: 15px;
+  margin-left: 15px;
+}

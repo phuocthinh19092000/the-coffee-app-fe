@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, ReactChild } from 'react';
+import React, { useState, useRef, useEffect, ReactChild } from 'react';
 import Header from '../Header/Header';
 import PopUpLogOut from '../PopUpLogOut/PopUpLogOut';
 import './WrapperPage.scss';
@@ -6,6 +6,7 @@ import Footer from '../Footer/Footer';
 import PopUpLoginRight from '../PopUpLoginRight/PopUpLoginRight';
 import { useSelector } from 'react-redux';
 import { selectLoginState } from '../../features/auth/actions/login';
+import MyOrder from '../../pages/MyOrder/MyOrder';
 type Props = {
   children?: React.ReactChild[] | ReactChild | JSX.Element | JSX.Element[];
   // handleSearchPopup: (item: Product) => void;
@@ -14,6 +15,7 @@ type Props = {
 const WrapperPage = (props: Props) => {
   const [isShowLogin, setIsShowLogin] = useState(false);
   const [isShowLogout, setIsShowLogout] = useState(false);
+  const [isShowMyOrder, setIsShowMyOrder] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const auth = useSelector(selectLoginState);
 
@@ -21,6 +23,7 @@ const WrapperPage = (props: Props) => {
     if (event.key === 'Escape' || event.key === 'Esc') {
       setIsShowLogin(false);
       setIsShowLogout(false);
+      setIsShowMyOrder(false);
     }
   };
 
@@ -28,6 +31,7 @@ const WrapperPage = (props: Props) => {
     if (ref.current && !ref.current.contains(event.target as Node)) {
       setIsShowLogin(false);
       setIsShowLogout(false);
+      setIsShowMyOrder(false);
     }
   };
 
@@ -47,19 +51,31 @@ const WrapperPage = (props: Props) => {
   const showPopUpLogoutHandler = () => {
     setIsShowLogout(!isShowLogout);
   };
+  const showPopUpMyOrder = () => {
+    setIsShowMyOrder(!isShowMyOrder);
+  };
+  const hideMyOrder = () => {
+    setIsShowMyOrder(false);
+  }
   return (
     <div className="wrapper-page">
       <div ref={ref}>
         {!auth && isShowLogin && <PopUpLoginRight />}
+        {auth && isShowMyOrder && <MyOrder onClick={hideMyOrder}/>}
         {auth && isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
       </div>
 
-      <div className={(!auth && isShowLogin) || (auth && isShowLogout) ? 'wrapper-page--filter' : ''}>
+      <div
+        className={
+          (!auth && isShowLogin) || (auth && isShowLogout) ? 'wrapper-page--filter' : ''
+        }
+      >
         <Header
           className={auth ? 'header header--grey' : 'header'}
           onClick={showLogin}
           isLoggedIn={!!auth}
           onClickShowLogOut={showPopUpLogoutHandler}
+          onClickShowMyOrder={showPopUpMyOrder}
           // handleSearchPopup={(item) => props.handleSearchPopup(item.name)}
         />
         <div className="wrapper-page__container">{props.children}</div>
