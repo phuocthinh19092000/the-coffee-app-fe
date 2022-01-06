@@ -3,7 +3,6 @@ import ErrorPage from '../pages/404Page/ErrorPage';
 import ComingSoonPage from '../pages/ComingSoonPage/ComingSoonPage';
 import HomePage from '../pages/HomePage/HomePage';
 import Counter from '../features/counter';
-import Login from '../features/auth/page';
 
 const RouterPage = () => {
   return (
@@ -11,7 +10,7 @@ const RouterPage = () => {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/counter" component={Counter} />
-        <Route exact path="/login" component={Login} />
+
         <Route
           exact
           path="/homepage"

@@ -1,5 +1,7 @@
-import { initializeApp } from 'firebase/app';
-import { getMessaging, getToken, onMessage } from 'firebase/messaging';
+import firebase from 'firebase/app';
+import '@firebase/messaging';
+import { MessagingPayload } from 'firebase-admin/lib/messaging/messaging-api';
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -11,18 +13,22 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
-initializeApp(firebaseConfig);
-const messaging = getMessaging();
+firebase.initializeApp(firebaseConfig);
+export default firebase;
 
-export const getDeviceToken = async (setToken: any) => {
-  const currentToken = await getToken(messaging, { vapidKey: process.env.KEY_PAIR });
-  currentToken ? setToken(true) : setToken(false);
+export const getDeviceToken = async () => {
+  const message = firebase.messaging();
+  const currentToken = await message.getToken({ vapidKey: process.env.KEY_PAIR });
   return currentToken;
 };
 
-export const onMessageListener = () =>
-  new Promise((resolve) => {
-    onMessage(messaging, (payload) => {
+export const onMessageListener = (): Promise<MessagingPayload> =>
+  new Promise((resolve, reject) => {
+    const message = firebase.messaging();
+    message.onMessage((payload: MessagingPayload) => {
+      if (!payload) {
+        reject(new Error('There is no payload'));
+      }
       resolve(payload);
     });
   });

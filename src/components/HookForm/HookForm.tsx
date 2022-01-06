@@ -9,6 +9,8 @@ import UserIcon from '../../share/assets/vector/User.svg';
 import EyeIcon from '../../share/assets/vector/Eye.svg';
 import CloseEyeIcon from '../../share/assets/img/close-eye.png';
 import { getUserData } from '../../features/auth/actions/getUserInfo';
+import { getDeviceToken } from '../../services/firebase';
+
 interface IFormInputs {
   username: string;
   password: string;
@@ -45,8 +47,11 @@ export default function HookForm() {
   };
   const dispatch = useAppDispatch();
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
-    const accessToken = await dispatch(login({ username: data.username, password: data.password }));
-    if (accessToken.meta.requestStatus === "fulfilled") {
+    const deviceToken = await getDeviceToken();
+    const accessToken = await dispatch(
+      login({ username: data.username, password: data.password, deviceToken: deviceToken }),
+    );
+    if (accessToken.meta.requestStatus === 'fulfilled') {
       dispatch(getUserData());
     } else {
       alert('Username or password incorrect');
