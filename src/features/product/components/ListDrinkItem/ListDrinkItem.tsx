@@ -1,10 +1,10 @@
 import DrinkItem from '../DrinkItem/DrinkItem';
 import './ListDrinkItem.scss';
 import { useEffect, useState } from 'react';
-import DrinkItemDetail from '../../../../components/DrinkDetail/DrinkItemDetail';
+import DrinkItemDetail from '../../../order/components/DrinkDetail/DrinkItemDetail';
 import PopUpFinishOrder from '../../../../components/PopUpFinishOrder/PopUpFinishOrder';
 import PopUpRanOutUnit from '../../../../components/PopUpRanOutUnit/PopUpRanOutUnit';
-import PopUpLoginCenter from '../../../../components/PopUpLoginCenter/PopUpLoginCenter';
+import PopUpLoginCenter from '../../../auth/components/PopUpLoginCenter/PopUpLoginCenter';
 import Category from '../../../../interfaces/product';
 import Product from '../../../../interfaces/product';
 import { useSelector } from 'react-redux';

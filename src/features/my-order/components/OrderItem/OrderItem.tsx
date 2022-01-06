@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 import './OrderItem.scss';
-import EditIcon from '../../share/assets/img/edit.png';
-import Order from '../../interfaces/order';
-import CoffeeImg from '../../share/assets/img/CoffeeImg.png'
+import EditIcon from '../../../../share/assets/img/edit.png';
+import Order from '../../../../interfaces/order';
+import CoffeeImg from '../../../../share/assets/img/CoffeeImg.png'
 type Props = {
   item: Order;
 }
@@ -22,9 +22,9 @@ const OrderItem = (props: Props) => {
           <p className="order-item__note">Note: {props.item.note}</p>
         </div>
         <div className="order-item__contain-right">
-          <div className="order-item__contain-icon">
-          <img src={EditIcon} alt="Edit Icon" className="edit-icon" />
-          </div>
+          {/*<div className="order-item__contain-icon">*/}
+          {/*<img src={EditIcon} alt="Edit Icon" className="edit-icon" />*/}
+          {/*</div>*/}
         </div>
       </div>
     </div>

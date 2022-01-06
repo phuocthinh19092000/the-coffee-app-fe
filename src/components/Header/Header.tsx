@@ -13,14 +13,14 @@ import { HiMoon } from 'react-icons/hi';
 import { useRef } from 'react';
 import { useHistory } from 'react-router';
 import Product from '../../interfaces/product';
-import productApi from '../../features/Product/api/productAPI';
+import productApi from '../../features/product/api/productAPI';
 type Props = {
   className: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   onClickShowLogOut: React.MouseEventHandler<HTMLAnchorElement>;
   onClickShowMyOrder: React.MouseEventHandler<HTMLAnchorElement>;
   isLoggedIn: boolean;
-  // handleSearchPopup: (item: Product) => void;
+  // handleSearchPopup: (item: product) => void;
 };
 const Header = (props: Props) => {
   const [value, setValue] = useState('');

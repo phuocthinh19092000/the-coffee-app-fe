@@ -1,5 +1,5 @@
 // import { useState, useRef } from 'react';
-import Product from '../../features/Product/page/Product/Product';
+import Product from '../../features/product/page/Product/Product';
 import WrapperPage from '../../components/WrapperPage/WrapperPage';
 import Background from '../../components/Background/Background';
 // import Toast from '../../components/Toast/Toast';
@@ -21,7 +21,7 @@ const HomePage = () => {
   //   },
   // });
 
-  // const handleSearchPopup = (item: typeof Product) => {
+  // const handleSearchPopup = (item: typeof product) => {
   //   setSearchDrink(searchDrink);
   // };
   return (
