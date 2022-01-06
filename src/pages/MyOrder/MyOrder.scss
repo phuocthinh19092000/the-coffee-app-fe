@@ -1,11 +1,14 @@
 @import '../../share/assets/scss/variables.scss';
 
 .out-side {
-  width: 70%;
+  width: 65%;
   height: 100%;
 }
+.accent {
+  color: $accent-color;
+}
 .my-order {
-  width: 30%;
+  width: 35%;
   height: 100%;
   overflow-y: scroll;
 
@@ -25,8 +28,8 @@
     @include background-blur;
   }
   &__list-order {
-    height: 100%;
     width: 100%;
+    padding-top: 25px;
   }
   &__title {
     color: $brown-color;

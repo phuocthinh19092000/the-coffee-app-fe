@@ -2,6 +2,7 @@ import './DrinkItem.scss';
 import { moneyPattern } from '../../../../utils/regex';
 import Product from '../../../../interfaces/product';
 import CoffeeImg from '../../../../share/assets/img/blackcoffee.png';
+import React from 'react';
 type Props = {
   item: Product;
   onClick?: React.MouseEventHandler<HTMLDivElement>;

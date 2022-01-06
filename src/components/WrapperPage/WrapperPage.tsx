@@ -7,6 +7,8 @@ import PopUpLoginRight from '../PopUpLoginRight/PopUpLoginRight';
 import { useSelector } from 'react-redux';
 import { selectLoginState } from '../../features/auth/actions/login';
 import MyOrder from '../../pages/MyOrder/MyOrder';
+import { getMyOrders, getMyOrderState } from '../../features/my-order/actions/historyOrder';
+import { useAppDispatch } from '../../storage/hooks';
 type Props = {
   children?: React.ReactChild[] | ReactChild | JSX.Element | JSX.Element[];
   // handleSearchPopup: (item: Product) => void;
@@ -18,7 +20,8 @@ const WrapperPage = (props: Props) => {
   const [isShowMyOrder, setIsShowMyOrder] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const auth = useSelector(selectLoginState);
-
+  const dispatch = useAppDispatch();
+  const orderData = useSelector(getMyOrderState);
   const hideFormHandler = (event: KeyboardEvent) => {
     if (event.key === 'Escape' || event.key === 'Esc') {
       setIsShowLogin(false);
@@ -44,6 +47,14 @@ const WrapperPage = (props: Props) => {
     };
   }, []);
 
+  useEffect(() => {
+    async function fetchOrders() {
+      await dispatch(getMyOrders()).unwrap();
+    }
+    fetchOrders();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isShowMyOrder])
+
   const showLogin = () => {
     setIsShowLogin(!isShowLogin);
   };
@@ -61,7 +72,7 @@ const WrapperPage = (props: Props) => {
     <div className="wrapper-page">
       <div ref={ref}>
         {!auth && isShowLogin && <PopUpLoginRight />}
-        {auth && isShowMyOrder && <MyOrder onClick={hideMyOrder}/>}
+        {auth && isShowMyOrder && <MyOrder listOrder={orderData} onClick={hideMyOrder}/>}
         {auth && isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
       </div>
 

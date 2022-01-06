@@ -17,8 +17,7 @@ function App() {
         setDataNotification(dataOrder);
       }
     })
-    .catch((err) => {
-      // TODO: handle error if have no payload
+    .catch(() => {
     });
 
   useEffect(() => {
