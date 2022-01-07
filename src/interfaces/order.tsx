@@ -4,6 +4,6 @@ export default interface Order {
   note: string;
   quantity: number;
   createdAt: string;
-  productId: Product;
+  product: Product;
   orderStatus: string;
 }

@@ -10,20 +10,18 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [dataNotification, setDataNotification] = useState({} as NotificationOrder);
   const timeoutNotification = 5000;
-  onMessageListener()
-    .then((payload: MessagingPayload) => {
-      if (payload.data) {
-        const dataOrder = JSON.parse(payload.data.data);
-        setDataNotification(dataOrder);
-      }
-    })
-    .catch(() => {
-    });
+  const timeOutSplashScreen = 2000;
+  onMessageListener().then((payload: MessagingPayload) => {
+    if (payload.data?.data) {
+      const dataOrder = JSON.parse(payload.data.data);
+      setDataNotification(dataOrder);
+    }
+  });
 
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, timeOutSplashScreen);
   }, []);
 
   useEffect(() => {

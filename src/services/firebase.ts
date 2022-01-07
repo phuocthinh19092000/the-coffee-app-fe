@@ -18,8 +18,19 @@ export default firebase;
 
 export const getDeviceToken = async () => {
   const message = firebase.messaging();
-  const currentToken = await message.getToken({ vapidKey: process.env.KEY_PAIR });
-  return currentToken;
+  let deviceToken: string = '';
+
+  try {
+    deviceToken = await message.getToken({ vapidKey: process.env.KEY_PAIR });
+    localStorage.setItem('deviceToken', deviceToken);
+  } catch (error) {
+    /* If the user refuses to receive the notification,
+     * firebase version 8 getToken() function will throw an error and
+     * i won't do anything about it because it's the user's choice
+     */
+    console.error('If you refuse to receive notifications, you will not receive the status of your order');
+  }
+  return deviceToken;
 };
 
 export const onMessageListener = (): Promise<MessagingPayload> =>
