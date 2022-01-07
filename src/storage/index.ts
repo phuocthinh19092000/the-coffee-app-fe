@@ -1,7 +1,7 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import authReducer from '../features/auth/actions/login';
-import categoryReducer from '../features/Product/actions/getCategoryData';
-import productReducer from '../features/Product/actions/getProductData';
+import categoryReducer from '../features/product/actions/getCategoryData';
+import productReducer from '../features/product/actions/getProductData';
 import getUserDataReducer from '../features/auth/actions/getUserInfo';
 import orderReducer from '../features/order/actions/order';
 import myOrderReducer from '../features/my-order/actions/historyOrder'

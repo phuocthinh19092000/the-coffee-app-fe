@@ -1,9 +1,9 @@
 import React from 'react';
 import './PopUpLogOut.scss';
-import Card from '../Card/Index';
-import Button from '../Button/Index';
-import { useAppDispatch } from '../../storage/hooks';
-import { logout } from '../../features/auth/actions/login';
+import Card from '../../../../components/Card/Index';
+import Button from '../../../../components/Button/Index';
+import { useAppDispatch } from '../../../../storage/hooks';
+import { logout } from '../../actions/login';
 
 type Props = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;

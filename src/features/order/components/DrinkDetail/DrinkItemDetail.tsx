@@ -1,16 +1,17 @@
-import Exit from '../../share/assets/vector/Exit.svg';
-import Summation from '../../share/assets/vector/Summation.svg';
-import Subtraction from '../../share/assets/vector/Subtraction.svg';
-import VectorSub from '../../share/assets/vector/VectorSub.svg';
-import Edit from '../../share/assets/vector/EditIcon.svg';
-import Button from '../Button/Index';
-import Card from '../Card/Index';
-import Input from '../Input/Input';
+import Exit from '../../../../share/assets/vector/Exit.svg';
+import Summation from '../../../../share/assets/vector/Summation.svg';
+import Subtraction from '../../../../share/assets/vector/Subtraction.svg';
+import VectorSub from '../../../../share/assets/vector/VectorSub.svg';
+import Edit from '../../../../share/assets/vector/EditIcon.svg';
+import Button from '../../../../components/Button/Index';
+import Card from '../../../../components/Card/Index';
+import Input from '../../../../components/Input/Input';
 import './DrinkItemDetail.scss';
-import DrinkItem from '../../features/Product/components/DrinkItem/DrinkItem';
-import Product from '../../interfaces/product';
+import DrinkItem from '../../../product/components/DrinkItem/DrinkItem';
+import Product from '../../../../interfaces/product';
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuantity, getNote, selectOrderState } from '../../features/order/actions/order';
+import { getQuantity, getNote, selectOrderState } from '../../actions/order';
+import React from 'react';
 
 type Props = {
   item: Product;
@@ -45,7 +46,7 @@ function DrinkItemDetail(props: Props) {
 
         <div className="popup-detail__input-group">
           <Input
-            placeholder="Quanlity: "
+            placeholder="Quantity: "
             src={order.quantity <= 1 ? Subtraction : VectorSub}
             src2={Summation}
             className="popup-detail__input"

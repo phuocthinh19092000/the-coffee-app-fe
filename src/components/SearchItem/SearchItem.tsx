@@ -1,5 +1,5 @@
 import './SearchItem.scss';
-import ItemDetail from '../../features/Product/components/ItemDetail/ItemDetail';
+import ItemDetail from '../../features/product/components/ItemDetail/ItemDetail';
 type Props = {
   avatarUrl?: string;
   className?: string;

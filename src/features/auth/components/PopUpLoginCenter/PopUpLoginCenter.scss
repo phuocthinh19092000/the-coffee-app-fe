@@ -1,9 +1,10 @@
-@import '../../share/assets/scss/variables.scss';
+@import '../../../../share/assets/scss/variables';
 
-.popup-detail {
+.card-login-center {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: $grey-4-color;
 
   &--blur {
     position: fixed;
@@ -25,25 +26,15 @@
     cursor: pointer;
   }
 
-  &__drink-item {
+  &__description {
+    width: 280px;
+    height: 22px;
     position: absolute;
-    top: 5%;
+    left: calc(50% - 280px / 2);
+    top: calc(25% - 22px / 2);
   }
+}
 
-  &__input-group {
-    position: absolute;
-    top: 50%;
-  }
-
-  &__input {
-    margin-top: 30px;
-    margin-bottom: 20px;
-    cursor: pointer;
-  }
-
-  &__button {
-    width: 90%;
-    position: absolute;
-    top: 85%;
-  }
+.mt-100 {
+  margin-top: 100px;
 }

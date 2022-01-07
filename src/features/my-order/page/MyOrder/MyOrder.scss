@@ -1,4 +1,4 @@
-@import '../../share/assets/scss/variables.scss';
+@import '../../../../share/assets/scss/variables';
 
 .out-side {
   width: 65%;
@@ -29,7 +29,7 @@
   }
   &__list-order {
     width: 100%;
-    padding-top: 25px;
+    padding-top: 10px;
   }
   &__title {
     color: $brown-color;

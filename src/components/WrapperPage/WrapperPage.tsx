@@ -1,17 +1,17 @@
 import React, { useState, useRef, useEffect, ReactChild } from 'react';
 import Header from '../Header/Header';
-import PopUpLogOut from '../PopUpLogOut/PopUpLogOut';
+import PopUpLogOut from '../../features/auth/components/PopUpLogOut/PopUpLogOut';
 import './WrapperPage.scss';
 import Footer from '../Footer/Footer';
-import PopUpLoginRight from '../PopUpLoginRight/PopUpLoginRight';
+import PopUpLoginRight from '../../features/auth/components/PopUpLoginRight/PopUpLoginRight';
 import { useSelector } from 'react-redux';
 import { selectLoginState } from '../../features/auth/actions/login';
-import MyOrder from '../../pages/MyOrder/MyOrder';
+import MyOrder from '../../features/my-order/page/MyOrder/MyOrder';
 import { getMyOrders, getMyOrderState } from '../../features/my-order/actions/historyOrder';
 import { useAppDispatch } from '../../storage/hooks';
 type Props = {
   children?: React.ReactChild[] | ReactChild | JSX.Element | JSX.Element[];
-  // handleSearchPopup: (item: Product) => void;
+  // handleSearchPopup: (item: product) => void;
 };
 
 const WrapperPage = (props: Props) => {
