@@ -51,7 +51,9 @@ const WrapperPage = (props: Props) => {
     async function fetchOrders() {
       await dispatch(getMyOrders()).unwrap();
     }
-    fetchOrders();
+    if (auth && isShowMyOrder) {
+      fetchOrders();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isShowMyOrder])
 

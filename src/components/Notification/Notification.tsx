@@ -38,7 +38,7 @@ const Notification = (props: Props) => {
             <b className="notification-item__title">{props.title}</b>
             <div className="dp-row mt-10">
               <p>
-                {moneyFormat(Number(props.price))} - Qty: {props.quantity} -
+                {moneyFormat(Number(props.price))}đ - Qty: {props.quantity} -
               </p>
               <pre className={`notification--${props.status}`}> {props.status}</pre>
             </div>

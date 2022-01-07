@@ -1,5 +1,5 @@
 import './DrinkItem.scss';
-import { moneyPattern } from '../../../../utils/regex';
+import { moneyPattern } from '../../../../utils/moneyRegex';
 import Product from '../../../../interfaces/product';
 import CoffeeImg from '../../../../share/assets/img/blackcoffee.png';
 import React from 'react';

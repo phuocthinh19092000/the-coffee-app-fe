@@ -3,5 +3,6 @@ export default interface Product {
   images?: string;
   status?: string;
   price: number;
-  name: string;
+  name?: string;
+  description?: string;
 }
