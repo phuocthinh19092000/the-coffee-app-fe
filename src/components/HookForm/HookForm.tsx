@@ -63,7 +63,7 @@ export default function HookForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="input-field">
-        <input {...register('username')} placeholder="Usename" />
+        <input {...register('username')} placeholder="Username" />
         <img src={UserIcon} alt="User Icon" />
       </div>
       {errors.username && <p className="error">{errors.username?.message}</p>}
