@@ -40,7 +40,7 @@ export default function HookForm() {
       password: '',
     },
   });
-
+  const [loginFailed, setLoginFailed] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -52,9 +52,10 @@ export default function HookForm() {
       login({ username: data.username, password: data.password, deviceToken: deviceToken }),
     );
     if (accessToken.meta.requestStatus === 'fulfilled') {
+      setLoginFailed(false);
       dispatch(getUserData());
     } else {
-      alert('Username or password incorrect');
+      setLoginFailed(true);
       reset({ username: '', password: '' });
     }
   };
@@ -78,6 +79,7 @@ export default function HookForm() {
       </div>
       {errors.password && <p className="error">{errors.password?.message}</p>}
 
+      {loginFailed && <p className="error">{'Username or password incorrect'}</p>}
       <button className="submit-btn" type="submit">
         LOGIN
       </button>
