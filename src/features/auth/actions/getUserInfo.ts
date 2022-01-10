@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../../storage';
 import GetUserData from '../api/UserData/GetUserData';
-import { logout } from './login';
+import { logout } from './auth';
 
 type RequestState = 'pending' | 'fulfilled' | 'rejected';
 
@@ -57,7 +57,6 @@ const getDataSlice = createSlice({
       state.loading = 'rejected';
       state.error = action.payload;
     });
-    builder.addCase(logout, () => initialState);
   },
 });
 

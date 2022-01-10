@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import Auth from '../api/Token/Auth';
-import { UserParams } from '../api/Token/types';
+import { LogoutParams, UserParams } from '../api/Token/types';
 import { RootState } from '../../../storage';
 import http from '../../../services/http-common';
 type RequestState = 'pending' | 'fulfilled' | 'rejected';
@@ -29,13 +29,35 @@ export const login = createAsyncThunk('/auth/login', async (body: UserParams, { 
     return rejectWithValue(error.response);
   }
 });
+export const logout = createAsyncThunk('/auth/logout', async (body: LogoutParams, { rejectWithValue }) => {
+  try {
+    await Auth.logout(body);
+  } catch (error: any) {
+    return rejectWithValue(error.response);
+  }
+});
 
+export const logoutSlide = createSlice({
+  name: 'logout',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(logout.pending, (state) => {
+        state.loading = 'pending';
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state = initialState;
+      })
+      .addCase(logout.rejected, (state) => {
+        state.loading = 'rejected';
+      });
+  },
+});
 const loginSlice = createSlice({
   name: 'login',
   initialState,
-  reducers: {
-    logout: () => initialState,
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(login.pending, (state) => {
       state.loading = 'pending';
@@ -52,5 +74,4 @@ const loginSlice = createSlice({
 });
 
 export const selectLoginState = (state: RootState) => state.login.accessToken;
-export const { logout } = loginSlice.actions;
 export default loginSlice.reducer;

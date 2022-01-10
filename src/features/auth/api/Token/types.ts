@@ -3,3 +3,6 @@ export type UserParams = {
   password: string;
   deviceToken: string;
 };
+export type LogoutParams = {
+  deviceToken: string | null;
+};
