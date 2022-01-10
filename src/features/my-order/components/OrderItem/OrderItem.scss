@@ -41,31 +41,30 @@
     }
 
     &-center {
-      margin-top: 10px;
-      width: 250px;
+      width: 280px;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
     }
 
     &-right {
-      align-items: flex-end;
-      align-content: flex-end;
+      width: 48px;
+      height: 48px;
     }
 
     &-icon {
-      margin-top: 20px;
       width: 48px;
       height: 48px;
-      background-color: $white-color;
       border-radius: 50%;
+      &:hover {
+        cursor: pointer;
+      }
     }
-
   }
 }
 
-.edit-icon {
-  margin-top: 15px;
-  margin-left: 15px;
-}
+
