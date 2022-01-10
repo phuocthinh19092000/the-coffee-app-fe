@@ -1,6 +1,6 @@
 import './OrderItem.scss';
-import EditIcon from '../../../../share/assets/img/edit.png';
-import SuccessIcon from '../../../../share/assets/vector/SuccessIcon.svg';
+import EditIcon from '../../../../share/assets/img/edit-button.png';
+import SuccessIcon from '../../../../share/assets/img/success-button.png';
 import CoffeeImg from '../../../../share/assets/img/CoffeeImg.png';
 import { moneyFormat } from '../../../../utils/MoneyFormat'
 import { camelCase, startCase } from 'lodash';
@@ -43,10 +43,11 @@ const OrderItem = (props: Props) => {
         <div className="order-item__contain-right">
           {icon ? (
             <div className="order-item__contain-icon">
-              <img src={icon} alt={icon} className="edit-icon" />
+              <img src={icon} alt={icon} />
             </div>
           ) : (
-            ''
+            <div className="order-item__contain-icon">
+            </div>
           )}
         </div>
       </div>
