@@ -46,17 +46,21 @@ const getDataSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getUserData.pending, (state) => {
-      state.loading = 'pending';
-    });
-    builder.addCase(getUserData.fulfilled, (state, action) => {
-      state.loading = 'fulfilled';
-      state.userInfo = action.payload;
-    });
-    builder.addCase(getUserData.rejected, (state, action) => {
-      state.loading = 'rejected';
-      state.error = action.payload;
-    });
+    builder
+      .addCase(getUserData.pending, (state) => {
+        state.loading = 'pending';
+      })
+      .addCase(getUserData.fulfilled, (state, action) => {
+        state.loading = 'fulfilled';
+        state.userInfo = action.payload;
+      })
+      .addCase(getUserData.rejected, (state, action) => {
+        state.loading = 'rejected';
+        state.error = action.payload;
+      })
+      .addCase(logout.fulfilled, () => {
+        return initialState;
+      });
   },
 });
 

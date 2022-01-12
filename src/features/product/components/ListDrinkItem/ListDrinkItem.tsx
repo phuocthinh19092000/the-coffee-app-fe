@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import { getProductId, placeOrder, resetOrder, selectOrderState } from '../../../order/actions/order';
 import { getUserData, getUserDataState, updateFreeUnit } from '../../../auth/actions/getUserInfo';
 import { useAppDispatch } from '../../../../storage/hooks';
-import { selectLoginState } from '../../../auth/actions/login';
+import { selectLoginState } from '../../../auth/actions/auth';
 type Props = {
   listDrink: Product[];
   searchDrink?: Product[];

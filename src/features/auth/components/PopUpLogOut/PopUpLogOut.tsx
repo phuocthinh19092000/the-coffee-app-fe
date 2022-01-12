@@ -4,6 +4,7 @@ import Card from '../../../../components/Card/Index';
 import Button from '../../../../components/Button/Index';
 import { useAppDispatch } from '../../../../storage/hooks';
 import { logout } from '../../actions/auth';
+import { getDeviceToken } from '../../../../services/firebase';
 
 type Props = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -12,13 +13,9 @@ type Props = {
 const PopUpLogOut = (props: Props) => {
   const dispatch = useAppDispatch();
 
-  const LogOutHandler = () => {
-    const deviceToken = localStorage.getItem('deviceToken');
-    const logoutParams = {
-      deviceToken: deviceToken,
-    };
-    dispatch(logout(logoutParams));
-    localStorage.clear();
+  const LogOutHandler = async () => {
+    const deviceToken = await getDeviceToken();
+    dispatch(logout({ deviceToken }));
   };
 
   return (

@@ -3,6 +3,7 @@ import Auth from '../api/Token/Auth';
 import { LogoutParams, UserParams } from '../api/Token/types';
 import { RootState } from '../../../storage';
 import http from '../../../services/http-common';
+
 type RequestState = 'pending' | 'fulfilled' | 'rejected';
 
 export interface AuthState {
@@ -37,41 +38,35 @@ export const logout = createAsyncThunk('/auth/logout', async (body: LogoutParams
   }
 });
 
-export const logoutSlide = createSlice({
-  name: 'logout',
+const authSlice = createSlice({
+  name: 'auth',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(logout.pending, (state) => {
+      .addCase(login.pending, (state) => {
         state.loading = 'pending';
       })
-      .addCase(logout.fulfilled, (state) => {
-        state = initialState;
+      .addCase(login.fulfilled, (state, action) => {
+        state.loading = 'fulfilled';
+        state.accessToken = action.payload;
       })
-      .addCase(logout.rejected, (state) => {
+      .addCase(login.rejected, (state, action) => {
         state.loading = 'rejected';
+        state.error = action.payload;
+      })
+      .addCase(logout.pending, (state) => {
+        state.loading = 'fulfilled';
+      })
+      .addCase(logout.fulfilled, () => {
+        return initialState;
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.loading = 'rejected';
+        state.error = action.payload;
       });
   },
 });
-const loginSlice = createSlice({
-  name: 'login',
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(login.pending, (state) => {
-      state.loading = 'pending';
-    });
-    builder.addCase(login.fulfilled, (state, action) => {
-      state.loading = 'fulfilled';
-      state.accessToken = action.payload;
-    });
-    builder.addCase(login.rejected, (state, action) => {
-      state.loading = 'rejected';
-      state.error = action.payload;
-    });
-  },
-});
 
-export const selectLoginState = (state: RootState) => state.login.accessToken;
-export default loginSlice.reducer;
+export const selectLoginState = (state: RootState) => state.authData.accessToken;
+export default authSlice.reducer;
