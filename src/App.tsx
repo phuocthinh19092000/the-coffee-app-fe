@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+  import { useEffect, useState } from 'react';
 import SplashScreen from './pages/SplashScreen/SplashScreen';
 import RouterPage from './routes/Router';
 import Notification from './components/Notification/Notification';
