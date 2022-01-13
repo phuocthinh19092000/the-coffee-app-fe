@@ -2,12 +2,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import './FormLoginStaff.scss';
-import { useAppDispatch } from '../../storage/hooks';
-import { login } from '../../features/auth/actions/auth';
+import { useAppDispatch } from '../../../../storage/hooks';
+import { login } from '../../../auth/actions/auth';
 import { useState } from 'react';
-import EyeIcon from '../../share/assets/vector/Eye.svg';
-import CloseEyeIcon from '../../share/assets/img/close-eye.png';
-import { getDeviceToken } from '../../services/firebase';
+import EyeIcon from '../../../../share/assets/vector/Eye.svg';
+import CloseEyeIcon from '../../../../share/assets/img/close-eye.png';
+import { getDeviceToken } from '../../../../services/firebase';
 
 interface IFormInputs {
   username: string;
@@ -70,7 +70,7 @@ export default function FormLoginStaff() {
         <img
           src={showPassword ? CloseEyeIcon : EyeIcon}
           onClick={toggleShowPassword}
-          className='toggle'
+          className='cursor-pointer absolute right-4 top-3'
           alt='Icon Password'
         />
       </div>

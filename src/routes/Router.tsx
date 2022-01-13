@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ErrorPage from '../pages/404Page/ErrorPage';
 import ComingSoonPage from '../pages/ComingSoonPage/ComingSoonPage';
 import HomePage from '../pages/HomePage/HomePage';
-import LoginStaff from '../pages/Login-Staff/LoginStaff';
+import LoginStaff from '../features/staff/page/Login-Staff/LoginStaff';
 
 const RouterPage = () => {
   return (

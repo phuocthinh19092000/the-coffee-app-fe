@@ -1,11 +1,11 @@
-import Card from '../../components/Card/Index';
-import StaffImg from '../../share/assets/img/LoginStaff.png'
+import Card from '../../../../components/Card/Index';
+import StaffImg from '../../../../share/assets/img/LoginStaff.png'
 import FormLoginStaff from '../../components/FormLoginStaff/FormLoginStaff';
 import './LoginStaff.scss'
-import Icon from '../../components/Icon/Icon';
-import FacebookIcon from '../../share/assets/vector/VectorFacebook.svg';
-import InstaIcon from '../../share/assets/vector/VectorInsta.svg';
-import LinkedinIcon from '../../share/assets/vector/VectorLinkedin.svg';
+import Icon from '../../../../components/Icon/Icon';
+import FacebookIcon from '../../../../share/assets/vector/VectorFacebook.svg';
+import InstaIcon from '../../../../share/assets/vector/VectorInsta.svg';
+import LinkedinIcon from '../../../../share/assets/vector/VectorLinkedin.svg';
 const LoginStaff = () => {
 	return (
 		<div className="login-staff">
