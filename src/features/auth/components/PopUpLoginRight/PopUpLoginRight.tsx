@@ -8,26 +8,26 @@ import './PopUpLoginRight.scss';
 import HookForm from '../../../../components/HookForm/HookForm';
 
 const PopUpLoginRight = () => {
-  return (
-    <Card className={`card card-login card--right`}>
-      <div>
-        <img src={LoginIcon} alt="" />
-        <div>
-          <HookForm />
-        </div>
-      </div>
-      <div>
-        <div className="brand-media">
-          <Icon href='https://www.facebook.com/OneTechStopVietnam/' src={FacebookIcon} className='icon'/>
-          <Icon href='https://www.instagram.com/OneTechStopVietnam/' src={InstaIcon} className='icon'/>
-          <Icon href='https://www.linkedin.com/OneTechStopVietnam/' src={LinkedinIcon} className='icon'/>
-        </div>
-        <div className="card__content">
-          <p>ONE TECH STOP VIET NAM</p>
-        </div>
-      </div>
-    </Card>
-  );
+	return (
+		<Card className={`card card-login card--right`}>
+			<div>
+				<img src={LoginIcon} alt='' />
+				<div>
+					<HookForm />
+				</div>
+			</div>
+			<div>
+				<div className='brand-media'>
+					<Icon href='https://www.facebook.com/OneTechStopVietnam/' src={FacebookIcon} className='icon' />
+					<Icon href='https://www.instagram.com/OneTechStopVietnam/' src={InstaIcon} className='icon' />
+					<Icon href='https://www.linkedin.com/OneTechStopVietnam/' src={LinkedinIcon} className='icon' />
+				</div>
+				<div className='card__content'>
+					<p>ONE TECH STOP VIET NAM</p>
+				</div>
+			</div>
+		</Card>
+	);
 };
 
 export default PopUpLoginRight;

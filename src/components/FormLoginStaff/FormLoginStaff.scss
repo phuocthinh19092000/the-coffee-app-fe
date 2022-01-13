@@ -4,26 +4,11 @@
   cursor: pointer;
 }
 
-.input-field {
+.input-field-staff {
   display: flex;
   margin-bottom: 20px;
   position: relative;
   flex-direction: row;
-
-  input {
-    flex: 1;
-    background-color: $white-color;
-    border-radius: 50px;
-    width: 440px;
-    height: 56px;
-    border: none;
-    text-indent: 5%;
-    font-size: 16px;
-
-    &:focus-within {
-      outline: 1px solid rgb(202, 195, 195);
-    }
-  }
 
   img {
     width: 22.5px;
@@ -33,7 +18,19 @@
     right: 20px;
   }
 }
+.staff-input {
+  flex: 1;
+  border-radius: 8px;
+  width: 100%;
+  height: 56px;
+  border: 1px solid $grey;
+  text-indent: 5%;
+  font-size: 16px;
 
+  &:focus-within {
+    outline: 1px solid rgb(202, 195, 195);
+  }
+}
 .error {
   color: $customer-error;
   margin-left: 10px;
@@ -47,10 +44,10 @@
   cursor: pointer;
 }
 
-.submit-btn {
+.staff-login-btn {
   height: 56px;
   width: 100%;
-  border-radius: 50px;
+  border-radius: 8px;
   border-style: none;
   background-color: $accent-color;
   font-size: 16px;

@@ -1,0 +1,12 @@
+.login-staff {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  &__img {
+    margin-bottom: 30px;
+  }
+  &__copyright {
+    position: relative;
+    top: 92%;
+  }
+}
