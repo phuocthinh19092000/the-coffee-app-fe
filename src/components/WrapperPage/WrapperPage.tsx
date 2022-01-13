@@ -7,9 +7,6 @@ import PopUpLoginRight from '../../features/auth/components/PopUpLoginRight/PopU
 import { useSelector } from 'react-redux';
 import { selectLoginState } from '../../features/auth/actions/auth';
 import MyOrder from '../../features/my-order/page/MyOrder/MyOrder';
-import { getMyOrders } from '../../features/my-order/actions/historyOrder';
-import { useAppDispatch } from '../../storage/hooks';
-import Order from '../../interfaces/order';
 type Props = {
   children?: React.ReactChild[] | ReactChild | JSX.Element | JSX.Element[];
   // handleSearchPopup: (item: product) => void;
@@ -19,10 +16,8 @@ const WrapperPage = (props: Props) => {
   const [isShowLogin, setIsShowLogin] = useState(false);
   const [isShowLogout, setIsShowLogout] = useState(false);
   const [isShowMyOrder, setIsShowMyOrder] = useState(false);
-  const [order, setOrder] = useState([] as Order[]);
   const ref = useRef<HTMLDivElement>(null);
   const auth = useSelector(selectLoginState);
-  const dispatch = useAppDispatch();
   const hideFormHandler = (event: KeyboardEvent) => {
     if (event.key === 'Escape' || event.key === 'Esc') {
       setIsShowLogin(false);
@@ -48,18 +43,6 @@ const WrapperPage = (props: Props) => {
     };
   }, []);
 
-  useEffect(() => {
-    async function fetchOrders() {
-      const data = await dispatch(getMyOrders()).unwrap();
-      setOrder(data);
-    }
-    if (auth && isShowMyOrder) {
-      fetchOrders();
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isShowMyOrder]);
-
   const showLogin = () => {
     setIsShowLogin(!isShowLogin);
   };
@@ -77,7 +60,7 @@ const WrapperPage = (props: Props) => {
     <div className="wrapper-page">
       <div ref={ref}>
         {!auth && isShowLogin && <PopUpLoginRight />}
-        {auth && isShowMyOrder && <MyOrder listOrder={order} onClick={hideMyOrder} />}
+        {auth && isShowMyOrder && <MyOrder onClick={hideMyOrder} />}
         {auth && isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
       </div>
 

@@ -51,5 +51,5 @@ const myOrderSlice = createSlice({
 });
 
 export const getMyOrderState = (state: RootState) => state.myOrder.data;
-
+export const getMyOrderLoading = (state: RootState) => state.myOrder.loading;
 export default myOrderSlice.reducer;
