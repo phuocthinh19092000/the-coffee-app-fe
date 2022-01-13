@@ -5,7 +5,7 @@ import './WrapperPage.scss';
 import Footer from '../Footer/Footer';
 import PopUpLoginRight from '../../features/auth/components/PopUpLoginRight/PopUpLoginRight';
 import { useSelector } from 'react-redux';
-import { selectLoginState } from '../../features/auth/actions/login';
+import { selectLoginState } from '../../features/auth/actions/auth';
 import MyOrder from '../../features/my-order/page/MyOrder/MyOrder';
 import { getMyOrders } from '../../features/my-order/actions/historyOrder';
 import { useAppDispatch } from '../../storage/hooks';
@@ -50,7 +50,7 @@ const WrapperPage = (props: Props) => {
 
   useEffect(() => {
     async function fetchOrders() {
-    const data = await dispatch(getMyOrders()).unwrap();
+      const data = await dispatch(getMyOrders()).unwrap();
       setOrder(data);
     }
     if (auth && isShowMyOrder) {
@@ -58,7 +58,7 @@ const WrapperPage = (props: Props) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isShowMyOrder])
+  }, [isShowMyOrder]);
 
   const showLogin = () => {
     setIsShowLogin(!isShowLogin);
@@ -72,21 +72,16 @@ const WrapperPage = (props: Props) => {
   };
   const hideMyOrder = () => {
     setIsShowMyOrder(false);
-  }
-
+  };
   return (
     <div className="wrapper-page">
       <div ref={ref}>
         {!auth && isShowLogin && <PopUpLoginRight />}
-        {auth && isShowMyOrder && <MyOrder listOrder={order} onClick={hideMyOrder}/>}
+        {auth && isShowMyOrder && <MyOrder listOrder={order} onClick={hideMyOrder} />}
         {auth && isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
       </div>
 
-      <div
-        className={
-          (!auth && isShowLogin) || (auth && isShowLogout) ? 'wrapper-page--filter' : ''
-        }
-      >
+      <div className={(!auth && isShowLogin) || (auth && isShowLogout) ? 'wrapper-page--filter' : ''}>
         <Header
           className={auth ? 'header header--grey' : 'header'}
           onClick={showLogin}

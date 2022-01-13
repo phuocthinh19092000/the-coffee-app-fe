@@ -22,7 +22,7 @@ export const getDeviceToken = async () => {
 
   try {
     deviceToken = await message.getToken({ vapidKey: process.env.KEY_PAIR });
-    localStorage.setItem('deviceToken', deviceToken);
+    return deviceToken;
   } catch (error) {
     /* If the user refuses to receive the notification,
      * firebase version 8 getToken() function will throw an error and
@@ -30,7 +30,6 @@ export const getDeviceToken = async () => {
      */
     console.error('If you refuse to receive notifications, you will not receive the status of your order');
   }
-  return deviceToken;
 };
 
 export const onMessageListener = (): Promise<MessagingPayload> =>

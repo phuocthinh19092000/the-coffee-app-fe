@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import './HookForm.scss';
 import { useAppDispatch } from '../../storage/hooks';
-import { login } from '../../features/auth/actions/login';
+import { login } from '../../features/auth/actions/auth';
 import { useState } from 'react';
 import UserIcon from '../../share/assets/vector/User.svg';
 import EyeIcon from '../../share/assets/vector/Eye.svg';
