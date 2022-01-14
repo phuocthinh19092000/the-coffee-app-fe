@@ -1,57 +1,41 @@
 @import '../../../../share/assets/scss/variables';
 
 .out-side {
-  width: 65%;
-  height: 100%;
+  @apply w-2/3 h-full;
 }
+
 .accent {
-  color: $accent-color;
+  @apply text-accent-1
 }
+
 .my-order {
-  width: 35%;
-  height: 100%;
-  overflow-y: scroll;
+  @apply w-1/3 h-full overflow-scroll;
 
   &::-webkit-scrollbar {
-    display: none;
+    @apply hidden;
   }
+
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   &--blur {
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
+    @apply fixed z-10 left-[0px] top-[0px] w-full h-full overflow-auto;
     @include background-blur;
   }
+
   &__list-order {
-    width: 100%;
-    padding-top: 10px;
+    @apply w-full pt-[10px];
   }
+
   &__title {
-    color: $brown-color;
-    font-size: 24px;
-    line-height: 30px;
-    font-weight: bold;
-    position: absolute;
-    top: 20px;
-    left: 20px;
+    @apply text-3xl font-bold text-brown;
+    @apply absolute top-[20px] left-[20px];
   }
+
   &__freeUnit {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 20px;
-    position: absolute;
-    top: 30px;
-    right: 30px;
+    @apply absolute top-[30px] right-[30px];
   }
+
   &__warning {
-    font-size: 24px;
-    line-height: 30px;
-    text-align: center;
-    color: $grey;
+    @apply text-2xl text-center text-grey-1;
   }
 }

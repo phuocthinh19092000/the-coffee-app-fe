@@ -1,0 +1,6 @@
+.login-staff {
+  @apply justify-center items-center flex-col;
+  &__img {
+    @apply mb-5;
+  }
+}
