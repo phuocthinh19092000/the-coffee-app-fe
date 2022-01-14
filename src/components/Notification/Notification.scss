@@ -35,6 +35,16 @@ $box-shadow: rgba(7, 7, 7, 0.12);
   animation-name: show;
   animation-duration: 2s;
 
+  &__btn {
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
   &-item {
     padding: 8px;
     display: flex;
@@ -87,24 +97,6 @@ $box-shadow: rgba(7, 7, 7, 0.12);
   justify-content: space-between;
 }
 
-.button {
-  border: none;
-  width: 48px;
-  height: 48px;
-  border-radius: 50px;
-}
-
 .mt-10 {
   margin-top: 10px;
-}
-
-button {
-  border: none;
-  width: 48px;
-  height: 48px;
-  border-radius: 50px;
-
-  &:hover {
-    cursor: pointer;
-  }
 }

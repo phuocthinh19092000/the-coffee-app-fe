@@ -1,28 +1,32 @@
 @import '../../share/assets/scss/variables.scss';
 
 @mixin textPriceAndNote {
-  @apply  font-semibold leading-[19px] text-[16px] tracking-[0.1px];
+  @apply font-semibold leading-[19px] text-[16px] tracking-[0.1px] w-[180px];
+}
+
+@mixin textFlow {
+  @apply w-[200px] text-ellipsis overflow-hidden whitespace-nowrap;
 }
 
 .order {
-  @apply w-fit mb-[12px] ;
+  @apply w-fit mb-[12px];
 }
 
 .order-item {
-  @apply flex flex-row items-center rounded-[8px] bg-white h-[80px] min-h-[80px] py-[12px] pl-[12px] ;
+  @apply flex flex-row items-center rounded-[8px] bg-white py-[12px] pl-[12px];
   box-shadow: 0px 2px 4px $box-shadow;
   &__img {
-     @apply w-[56px] h-[56px];
-  }
-  &__avatar {
-    @apply flex flex-col items-start w-[40px];
+    @apply w-[56px] h-[56px];
   }
   &-right {
-    @apply flex flex-col items-start justify-evenly w-[40px] ;
-    height :inherit;
+    @apply flex flex-col items-start justify-evenly w-[40px];
+    height: inherit;
     &__avatar {
-      @apply mb-[10px] w-[20px] h-[20px]
+      @apply mb-[10px] w-[20px] h-[20px];
     }
+  }
+  &__alarm {
+    @apply w-[36px] sticky top-[60px] mb-[-4px];
   }
 }
 
@@ -31,16 +35,17 @@
   height: inherit;
   &__product {
     @apply font-semibold leading-[21px] text-[18px] tracking-[0.15px];
+    @include textFlow();
   }
   &__price {
     @include textPriceAndNote();
-    color: $grey-1-color; 
+    color: $grey-1-color;
   }
   &__note {
     @include textPriceAndNote();
-    color : $grey-1-color ;
+    color: $grey-1-color;
+    @include textFlow();
   }
 }
-
 
 $box-shadow: rgba(34, 34, 34, 0.08);
