@@ -1,26 +1,13 @@
 @import '../../../../share/assets/scss/variables.scss';
 
 .category-item {
-  border: none;
-  width: 80%;
-  height: 100%;
-  padding: 14px 20px 13px;
-  font-size: 18px;
-  line-height: 23px;
-  letter-spacing: 0.25px;
-  margin-bottom: 32px;
-  margin-left: 20px;
-  cursor: pointer;
+  @apply border-none w-3/4 h-full p-1 mb-2 ml-1 cursor-pointer;
 
   &:first-child {
-    margin-top: 60px;
+    @apply mt-4;
   }
 }
 
 .active {
-  border: 1px solid $accent-third-color;
-  box-sizing: border-box;
-  border-radius: 50px;
-  color: $accent-color;
-  background-color: $primary-color;
+  @apply border border-solid border-accent-3 box-border rounded-full text-accent-1 bg-primary-1;
 }

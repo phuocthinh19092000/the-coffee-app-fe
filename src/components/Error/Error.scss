@@ -1,14 +1,10 @@
 @import '../../share/assets/scss/variables.scss';
 
 .error-page {
-  @apply w-full flex flex-col text-center items-center h-full;
-
-  &__img {
-    @apply pt-8 pb-4;
-  }
+  @apply flex flex-col text-center items-center h-screen;
 
   &__title {
-    @apply pb-4;
+    @apply py-3;
   }
 
   &__button {
