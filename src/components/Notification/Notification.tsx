@@ -3,6 +3,7 @@ import CoffeeImg from '../../share/assets/img/blackcoffee.png';
 import { moneyFormat } from '../../utils/MoneyFormat';
 import EditIcon from '../../share/assets/vector/EditIcon.svg';
 import SuccessIcon from '../../share/assets/vector/SuccessIcon.svg';
+import { OrderStatus } from '../../enum/OrderStatus';
 import React from 'react';
 interface Props {
   price: number;
@@ -13,26 +14,18 @@ interface Props {
   onClickNotification?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-enum OrderStatus {
-  new = 'new',
-  processing = 'processing',
-  readyForPickUp = 'ready for pickup',
-  pickedUp = 'picked up',
-  canceled = 'canceled',
-}
-
 const Notification = (props: Props) => {
   let btnSrc = '';
-  if (props.status === OrderStatus.new) {
+  if (props.status === OrderStatus.NEW) {
     btnSrc = EditIcon;
-  } else if (props.status === OrderStatus.readyForPickUp) {
+  } else if (props.status === OrderStatus.READY_TO_PICKUP) {
     btnSrc = SuccessIcon;
   }
 
   return (
     <div className="notification" onClick={props.onClickNotification}>
       <div className="notification-item">
-        <img src={CoffeeImg} className='notification-item__img' alt={CoffeeImg}/>
+        <img src={CoffeeImg} className="notification-item__img" alt={CoffeeImg} />
         <div className="notification-item__detail dp-space-between">
           <div>
             <b className="notification-item__title">{props.title}</b>
@@ -44,8 +37,8 @@ const Notification = (props: Props) => {
             </div>
           </div>
           {btnSrc ? (
-            <button onClick={props.onClickButton}>
-              <img src={btnSrc} alt={btnSrc}/>
+            <button className="notification__btn" onClick={props.onClickButton}>
+              <img src={btnSrc} alt={btnSrc} />
             </button>
           ) : (
             ''
