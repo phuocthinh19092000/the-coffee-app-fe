@@ -3,7 +3,7 @@ import UserInformation from '../../share/assets/vector/UserInformation.svg';
 import ExpandMore from '../../share/assets/vector/ExpandMore.svg';
 import './CustomerInformation.scss';
 import { useSelector } from 'react-redux';
-import { getUserDataState } from '../../features/auth/actions/getUserInfo';
+import { selectUserState } from '../../features/auth/actions/auth';
 type Props = {
   onClick: React.MouseEventHandler<HTMLAnchorElement>;
   showMyOrder: React.MouseEventHandler<HTMLAnchorElement>;
@@ -11,7 +11,7 @@ type Props = {
 
 const CustomerInformation = (props: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { name, freeUnit } = useSelector(getUserDataState);
+  const { name, freeUnit } = useSelector(selectUserState);
 
   const handleClickInside = () => {
     setIsMenuOpen(!isMenuOpen);

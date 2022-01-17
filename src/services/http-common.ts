@@ -7,10 +7,12 @@ axios.defaults.headers.common['Accept'] = 'application/json';
 axios.interceptors.request.use(
   (config) => {
     const dataPersist = JSON.parse(localStorage.getItem('persist:auth') as string);
-    const auth = dataPersist.accessToken.replaceAll('"', '');
+    const auth = JSON.parse(dataPersist.data).jwtAccessToken.replaceAll('"', '');
+
     if (auth && config.headers) {
       config.headers['Authorization'] = `Bearer ${auth}`;
     }
+
     return config;
   },
   (error) => Promise.reject(error),

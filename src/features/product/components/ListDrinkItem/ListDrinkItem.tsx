@@ -9,9 +9,8 @@ import Category from '../../../../interfaces/product';
 import Product from '../../../../interfaces/product';
 import { useSelector } from 'react-redux';
 import { getProductId, placeOrder, resetOrder, selectOrderState } from '../../../order/actions/order';
-import { getUserData, getUserDataState, updateFreeUnit } from '../../../auth/actions/getUserInfo';
 import { useAppDispatch } from '../../../../storage/hooks';
-import { selectLoginState } from '../../../auth/actions/auth';
+import { getUserData, selectLoginState, selectUserState, updateFreeUnit } from '../../../auth/actions/auth';
 type Props = {
   listDrink: Product[];
   searchDrink?: Product[];
@@ -29,7 +28,6 @@ function ListDrinkItem(props: Props) {
   const [isOpenPopUp, setIsOpenPopUp] = useState(false);
   const [itemDrink, setItemDrink] = useState({} as Category);
   const dispatch = useAppDispatch();
-  const userData = useSelector(getUserDataState);
   const order = useSelector(selectOrderState);
   const auth = useSelector(selectLoginState);
   const togglePopup = (item: Category) => {
@@ -43,7 +41,7 @@ function ListDrinkItem(props: Props) {
   };
 
   const handleClickPlaceOrder = async () => {
-    if (!userData.id) {
+    if (!auth) {
       setStep(showPopupCase.PopUpLoginCenter);
       return;
     }
