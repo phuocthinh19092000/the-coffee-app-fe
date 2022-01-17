@@ -26,9 +26,7 @@
     @apply w-4 h-4 mr-3;
   }
   &__message {
-    font-family: Proxima Nova;
-    color: $white-color;
-    @apply font-semibold not-italic leading-[21px] text-[18px] text-center tracking-[0.15px] w-fit;
+    @apply text-white font-proximaNova text-2.5 font-semibold not-italic leading-[21px]  text-center tracking-[0.15px] w-fit;
   }
 }
 @keyframes TopToBottom {
