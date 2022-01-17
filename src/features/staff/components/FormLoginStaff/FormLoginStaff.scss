@@ -1,11 +1,11 @@
 @import '../../../../share/assets/scss/variables';
 
 .input-field-staff {
-  @apply flex-row mb-4 relative;
+  @apply flex-row mb-3 relative;
 }
 
 .staff-input {
-  @apply flex-1 rounded-lg w-full h-8 border border-grey-1 indent-2;
+  @apply flex-1 rounded-lg w-full h-3 border border-grey-1 indent-2;
 
   &:focus-within {
     outline: 1px solid rgb(202, 195, 195);
@@ -13,7 +13,7 @@
 }
 
 .error {
-  @apply text-error ml-[10px] pb-4;
+  @apply text-error ml-0.5 pb-1;
 }
 
 .forget-password {
@@ -21,5 +21,5 @@
 }
 
 .staff-login-btn {
-  @apply w-full rounded-lg border-none bg-accent-1 cursor-pointer text-white mt-6;
+  @apply w-full h-3 rounded-lg border-none bg-accent-1 cursor-pointer text-white mb-3 ;
 }

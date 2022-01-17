@@ -1,0 +1,15 @@
+.left-side-bar {
+  @apply w-fit h-screen bg-white;
+
+  &__img {
+    @apply flex items-center justify-center mx-2 py-3;
+  }
+
+  &__group-item {
+    @apply flex flex-col text-center items-center justify-center h-2/5 my-5 py-2 px-2;
+  }
+
+  &__logout {
+    @apply flex py-[10px] px-2 absolute bottom-2;
+  }
+}
