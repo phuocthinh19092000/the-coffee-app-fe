@@ -1,19 +1,33 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import Auth from '../api/Token/Auth';
 import { LogoutParams, UserParams } from '../api/Token/types';
 import { RootState } from '../../../storage';
 import http from '../../../services/http-common';
-
+import GetUserData from '../api/UserData/GetUserData';
+import { UserInfor } from '../types/userInfor.type';
 type RequestState = 'pending' | 'fulfilled' | 'rejected';
 
 export interface AuthState {
   loading?: RequestState;
   error?: any;
-  accessToken?: string;
+  data: UserInfor;
 }
 
 export const initialState: AuthState = {
-  accessToken: '',
+  data: {
+    jwtAccessToken: '',
+    userInfor: {
+      role: {
+        name: '',
+      },
+      avatarUrl: '',
+      freeUnit: 0,
+      phoneNumber: '',
+      email: '',
+      name: '',
+    },
+  },
+
   loading: 'pending',
   error: {
     message: '',
@@ -23,13 +37,14 @@ export const initialState: AuthState = {
 
 export const login = createAsyncThunk('/auth/login', async (body: UserParams, { rejectWithValue }) => {
   try {
-    const responseAccessToken = await Auth.login(body);
-    http.setAuthorizationHeader(responseAccessToken.data.jwtAccessToken);
-    return responseAccessToken.data.jwtAccessToken;
+    const response = await Auth.login(body);
+    http.setAuthorizationHeader(response.data.data.jwtAccessToken);
+    return response.data.data;
   } catch (error: any) {
     return rejectWithValue(error.response);
   }
 });
+
 export const logout = createAsyncThunk('/auth/logout', async (body: LogoutParams, { rejectWithValue }) => {
   try {
     await Auth.logout(body);
@@ -38,10 +53,24 @@ export const logout = createAsyncThunk('/auth/logout', async (body: LogoutParams
   }
 });
 
+export const getUserData = createAsyncThunk('/users/profile', async (_, { rejectWithValue }) => {
+  try {
+    const responseUserData = await GetUserData.getUserData();
+    return responseUserData.data;
+  } catch (error) {
+    return rejectWithValue(error);
+  }
+});
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    updateFreeUnit: (state, action: PayloadAction<number>) => {
+      const newFreeUnit = state.data.userInfor.freeUnit - action.payload;
+      state.data.userInfor.freeUnit = newFreeUnit > 0 ? newFreeUnit : 0;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
@@ -49,7 +78,7 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.loading = 'fulfilled';
-        state.accessToken = action.payload;
+        state.data = action.payload;
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = 'rejected';
@@ -64,9 +93,22 @@ const authSlice = createSlice({
       .addCase(logout.rejected, (state, action) => {
         state.loading = 'rejected';
         state.error = action.payload;
+      })
+      .addCase(getUserData.pending, (state) => {
+        state.loading = 'pending';
+      })
+      .addCase(getUserData.fulfilled, (state, action) => {
+        state.loading = 'fulfilled';
+        state.data.userInfor = action.payload;
+      })
+      .addCase(getUserData.rejected, (state, action) => {
+        state.loading = 'rejected';
+        state.error = action.payload;
       });
   },
 });
 
-export const selectLoginState = (state: RootState) => state.authData.accessToken;
+export const selectLoginState = (state: RootState) => state.authData.data.jwtAccessToken;
+export const selectUserState = (state: RootState) => state.authData.data.userInfor;
+export const { updateFreeUnit } = authSlice.actions;
 export default authSlice.reducer;

@@ -2,7 +2,6 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import authReducer from '../features/auth/actions/auth';
 import categoryReducer from '../features/product/actions/getCategoryData';
 import productReducer from '../features/product/actions/getProductData';
-import getUserDataReducer from '../features/auth/actions/getUserInfo';
 import orderReducer from '../features/order/actions/order';
 import myOrderReducer from '../features/my-order/actions/historyOrder';
 import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
@@ -18,17 +17,10 @@ const persistAuthConfig = {
   version: 1,
   storage,
 };
-const persistUserConfig = {
-  key: 'user',
-  version: 1,
-  storage,
-};
 const persistedAuthReducer = persistReducer(persistAuthConfig, authReducer);
-const persistedUserReducer = persistReducer(persistUserConfig, getUserDataReducer);
 export const store = configureStore({
   reducer: {
     authData: persistedAuthReducer,
-    userData: persistedUserReducer,
     category: categoryReducer,
     product: productReducer,
     order: orderReducer,

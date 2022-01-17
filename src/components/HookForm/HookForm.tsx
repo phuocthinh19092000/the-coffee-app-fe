@@ -8,7 +8,6 @@ import { useState } from 'react';
 import UserIcon from '../../share/assets/vector/User.svg';
 import EyeIcon from '../../share/assets/vector/Eye.svg';
 import CloseEyeIcon from '../../share/assets/img/close-eye.png';
-import { getUserData } from '../../features/auth/actions/getUserInfo';
 import { getDeviceToken } from '../../services/firebase';
 import { useHistory } from 'react-router';
 
@@ -54,7 +53,7 @@ export default function HookForm() {
 		);
 		if (accessToken.meta.requestStatus === 'fulfilled') {
 			setLoginFailed(false);
-			dispatch(getUserData());
+
 		} else {
 			setLoginFailed(true);
 			reset({ username: '', password: '' });
