@@ -1,49 +1,47 @@
 @import '../../share/assets/scss/variables.scss';
 
 @mixin textPriceAndNote {
-  @apply font-semibold leading-[19px] text-[16px] tracking-[0.1px] w-[180px];
+  @apply font-proximaNova text-grey-5 font-semibold leading-[19px] text-2 not-italic tracking-[0.1px] w-[180px];
 }
 
 @mixin textFlow {
   @apply w-[200px] text-ellipsis overflow-hidden whitespace-nowrap;
 }
 
-.order {
-  @apply w-fit mb-[12px];
-}
 
 .order-item {
-  @apply flex flex-row items-center rounded-[8px] bg-white py-[12px] pl-[12px];
+  @apply flex flex-row w-fit h-fit items-center rounded-[8px] bg-white px-[12px] py-[10px] relative;
   box-shadow: 0px 2px 4px $box-shadow;
   &__img {
     @apply w-[56px] h-[56px];
   }
   &-right {
-    @apply flex flex-col items-start justify-evenly w-[40px];
-    height: inherit;
+    @apply  w-2; 
     &__avatar {
-      @apply mb-[10px] w-[20px] h-[20px];
+      @apply w-[20px] absolute top-[12px];
+    }
+    &__next-icon {
+      @apply w-[20px] absolute bottom-[12px];
     }
   }
   &__alarm {
-    @apply w-[36px] sticky top-[60px] mb-[-4px];
-  }
+    @apply w-[40px] absolute bottom-[4px] right-[42px];
+  } 
 }
 
 .order-detail {
-  @apply flex flex-col items-start justify-evenly w-[248px] h-full pl-[24px];
-  height: inherit;
+  @apply flex flex-col items-start justify-between w-[250px] ml-[24px];
   &__product {
-    @apply font-semibold leading-[21px] text-[18px] tracking-[0.15px];
+    @apply font-semibold leading-[21px] text-[18px] tracking-[0.15px] mb-[8px];
     @include textFlow();
   }
   &__price {
     @include textPriceAndNote();
-    color: $grey-1-color;
+    @include textFlow();
   }
   &__note {
+    @apply mt-[8px];
     @include textPriceAndNote();
-    color: $grey-1-color;
     @include textFlow();
   }
 }

@@ -9,20 +9,20 @@ const RouterPage = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path='/' component={HomePage} />
-        
+        <Route exact path="/" component={HomePage} />
+
         <Route
           exact
-          path='/homepage'
+          path="/homepage"
           render={() => {
             return !!localStorage.getItem('user') ? <HomePage /> : <ComingSoonPage />;
           }}
         />
-        
-        <Route exact path='/staff-login' component={LoginStaff} />
-        <Route exact path='/dashboard' component={DashBoard} />
-        <Route exact path='/user/changePassword' component={ComingSoonPage} />
-        
+
+        <Route exact path="/staff-login" component={LoginStaff} />
+        <Route exact path="/dashboard" component={DashBoard} />
+        <Route exact path="/user/changePassword" component={ComingSoonPage} />
+
         <Route component={ErrorPage} />
       </Switch>
     </Router>
