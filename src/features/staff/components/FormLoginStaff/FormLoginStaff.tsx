@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import './FormLoginStaff.scss';
 import { useAppDispatch } from '../../../../storage/hooks';
-import { login } from '../../../auth/actions/auth';
+import {login} from '../../../auth/actions/auth';
 import { useEffect, useState } from 'react';
 import EyeIcon from '../../../../share/assets/vector/Eye.svg';
 import CloseEyeIcon from '../../../../share/assets/img/close-eye.png';
@@ -11,6 +11,7 @@ import { getDeviceToken } from '../../../../services/firebase';
 import { NotificationType } from '../../../../enum/NotificationType';
 import ToastNotification from '../../../../components/ToastNotification/ToatstNotification';
 import { PositionToast } from '../../../../enum/PositionToast';
+import {useHistory} from "react-router-dom";
 
 interface IFormInputs {
   username: string;
@@ -45,6 +46,11 @@ export default function FormLoginStaff() {
   const [loginFailed, setLoginFailed] = useState(false);
   const timeOutToast = 3000;
   const [showPassword, setShowPassword] = useState(false);
+  const history = useHistory();
+  const goDashboard = () => {
+    let path = `/dashboard`;
+    history.push(path);
+  };
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -57,6 +63,7 @@ export default function FormLoginStaff() {
     );
     if (accessToken.meta.requestStatus === 'fulfilled') {
       setLoginFailed(false);
+      goDashboard();
     } else {
       setLoginFailed(true);
       reset({ username: '', password: '' });
@@ -92,7 +99,7 @@ export default function FormLoginStaff() {
         <img
           src={showPassword ? CloseEyeIcon : EyeIcon}
           onClick={toggleShowPassword}
-          className="cursor-pointer absolute right-4 top-3"
+          className="cursor-pointer absolute right-1 top-1"
           alt="Icon Password"
         />
       </div>

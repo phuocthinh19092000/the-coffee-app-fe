@@ -1,7 +1,7 @@
 @import '../../share/assets/scss/variables.scss';
 
 .toast-notification {
-  @apply h-fit w-fit py-1 px-1 rounded-[8px] fixed z-20;
+  @apply h-fit w-fit py-0.5 px-1 rounded-lg fixed z-20;
 
   &--success {
     background-color: $green;
@@ -23,15 +23,15 @@
   @apply h-1.5 flex flex-row items-center;
 
   &__icon {
-    @apply w-1.5 h-1.5 mr-1;
+    @apply w-1.5 h-1.5 mr-0.5;
   }
   &__message {
-    @apply text-white font-proximaNova text-2.5 font-semibold not-italic leading-[21px]  text-center tracking-[0.15px] w-fit;
+    @apply text-white font-proximaNova text-2.5 font-semibold not-italic leading-[21px] text-center tracking-[0.15px] w-fit;
   }
 }
 @keyframes TopToBottom {
   from {
-    top: 0px;
+    top: 0;
     opacity: 0;
   }
   to {
