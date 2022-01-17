@@ -32,6 +32,7 @@ module.exports = {
         3: '#DBDBDB',
         4: '#F2F2F2',
       },
+      'vendor-grey-4': '#E6E6E6',
       brown: '#502f13',
       success: '#499E3B',
       error: '#E51616',
