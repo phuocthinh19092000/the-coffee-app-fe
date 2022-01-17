@@ -4,6 +4,16 @@ module.exports = {
   //   require('./my-preset-color.js'),
   // ],
   theme: {
+    fontFamily: {
+      proximaNova: ['"proxima-nova"', 'sans-serif'],
+    },
+    fontSize: {
+      1: '12px',
+      2: '16px',
+      2.5: '18px',
+      3: '22px',
+      4: '26px',
+    },
     colors: {
       primary: {
         1: '#FFF2E7',
@@ -29,14 +39,14 @@ module.exports = {
     },
     extend: {
       spacing: {
-        '0.5': '0.5rem',
-        '1': '1rem',
-        '1.5': '1.5rem',
-        '2': '2rem',
-        '3': '3rem',
-        '4': '4rem',
-        '5': '5rem',
-        '6': '6rem',
+        0.5: '0.5rem',
+        1: '1rem',
+        1.5: '1.5rem',
+        2: '2rem',
+        3: '3rem',
+        4: '4rem',
+        5: '5rem',
+        6: '6rem',
       },
     },
   },
