@@ -13,7 +13,7 @@ const ItemDetail = (props: Props) => {
   return (
     <div className={props.className}>
       <p className="search-detail__name">{props.name}</p>
-      <p className="search-detail__price">{moneyFormat(Number(props.price))}đ</p>
+      <p>{moneyFormat(Number(props.price))}đ</p>
     </div>
   );
 };
