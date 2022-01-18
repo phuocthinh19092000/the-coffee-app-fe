@@ -27,7 +27,7 @@
   }
 
   &__title {
-    @apply text-3xl font-bold text-brown;
+    @apply text-4 font-bold text-brown;
     @apply absolute top-[20px] left-[20px];
   }
 
@@ -36,6 +36,6 @@
   }
 
   &__warning {
-    @apply text-2xl text-center text-grey-1;
+    @apply text-3 text-center text-grey-1;
   }
 }
