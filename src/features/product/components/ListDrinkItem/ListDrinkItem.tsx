@@ -10,7 +10,7 @@ import Product from '../../../../interfaces/product';
 import { useSelector } from 'react-redux';
 import { getProductId, placeOrder, resetOrder, selectOrderState } from '../../../order/actions/order';
 import { useAppDispatch } from '../../../../storage/hooks';
-import { getUserData, selectLoginState, selectUserState, updateFreeUnit } from '../../../auth/actions/auth';
+import { getUserData, selectLoginState, updateFreeUnit } from '../../../auth/actions/auth';
 type Props = {
   listDrink: Product[];
   searchDrink?: Product[];

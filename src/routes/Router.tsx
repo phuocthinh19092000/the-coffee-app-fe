@@ -3,7 +3,7 @@ import ErrorPage from '../pages/404Page/ErrorPage';
 import ComingSoonPage from '../pages/ComingSoonPage/ComingSoonPage';
 import HomePage from '../pages/HomePage/HomePage';
 import LoginStaff from '../features/staff/page/Login-Staff/LoginStaff';
-import LeftSideBar from '../components/LeftSideBar/LeftSideBar';
+import DashBoard from '../features/staff/page/DashBoard/DashBoard';
 
 const RouterPage = () => {
   return (
@@ -20,7 +20,7 @@ const RouterPage = () => {
         />
         
         <Route exact path='/staff-login' component={LoginStaff} />
-        <Route exact path='/left-side-bar' component={LeftSideBar} />
+        <Route exact path='/dashboard' component={DashBoard} />
         <Route exact path='/user/changePassword' component={ComingSoonPage} />
         
         <Route component={ErrorPage} />

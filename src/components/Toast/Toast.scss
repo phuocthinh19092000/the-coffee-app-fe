@@ -1,25 +1,14 @@
 @import '../../share/assets/scss/variables.scss';
 
 .toast-container {
-  position: fixed;
-  top: 80px;
-  right: 20px;
-  width: 440px;
-  height: 64px;
-  border-radius: 8px;
-  display: flex;
-  color: $white-color;
+  @apply fixed top-5 right-1 w-1/4 h-4 rounded-lg flex text-white;
 
   &__symbol {
-    width: 24px;
-    height: 24px;
-    margin: 20px;
+    @apply w-1.5 h-1.5 m-1;
   }
 
   &__message {
-    font-size: 16px;
-    font-weight: 600;
-    margin: 21.5px 0;
+    @apply my-1.5;
   }
 }
 

@@ -1,8 +1,5 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
-  // presets: [
-  //   require('./my-preset-color.js'),
-  // ],
   theme: {
     fontFamily: {
       proximaNova: ['"proxima-nova"', 'sans-serif'],
@@ -42,9 +39,12 @@ module.exports = {
       spacing: {
         0.5: '0.5rem',
         1: '1rem',
+        1.25: '1.25rem',
         1.5: '1.5rem',
+        1.875: '1.875rem',
         2: '2rem',
         3: '3rem',
+        3.5: '3.5rem',
         4: '4rem',
         5: '5rem',
         6: '6rem',

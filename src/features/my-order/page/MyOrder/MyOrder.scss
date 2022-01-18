@@ -18,24 +18,24 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   &--blur {
-    @apply fixed z-10 left-[0px] top-[0px] w-full h-full overflow-auto;
+    @apply fixed z-10 left-0 top-0 w-full h-full overflow-auto;
     @include background-blur;
   }
 
   &__list-order {
-    @apply w-full pt-[10px];
+    @apply w-full pt-0.5;
   }
 
   &__title {
-    @apply text-4 font-bold text-brown;
-    @apply absolute top-[20px] left-[20px];
+    @apply text-3 font-bold text-brown;
+    @apply absolute top-1.25 left-1.25;
   }
 
   &__freeUnit {
-    @apply absolute top-[30px] right-[30px];
+    @apply absolute top-1.875 right-1.875;
   }
 
   &__warning {
-    @apply text-3 text-center text-grey-1;
+    @apply text-4 text-center text-grey-1;
   }
 }
