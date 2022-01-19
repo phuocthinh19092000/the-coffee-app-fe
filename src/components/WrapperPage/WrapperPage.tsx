@@ -25,7 +25,7 @@ const WrapperPage = (props: Props) => {
       setIsShowMyOrder(false);
     }
   };
-  
+
   const clickOutsideHandler = (event: Event) => {
     if (ref.current && !ref.current.contains(event.target as Node)) {
       setIsShowLogin(false);
@@ -33,7 +33,7 @@ const WrapperPage = (props: Props) => {
       setIsShowMyOrder(false);
     }
   };
-  
+
   useEffect(() => {
     document.addEventListener('keydown', hideFormHandler, true);
     document.addEventListener('click', clickOutsideHandler, true);
@@ -42,11 +42,11 @@ const WrapperPage = (props: Props) => {
       document.removeEventListener('click', clickOutsideHandler, true);
     };
   }, []);
-  
+
   const showLogin = () => {
     setIsShowLogin(!isShowLogin);
   };
-  
+
   const showPopUpLogoutHandler = () => {
     setIsShowLogout(!isShowLogout);
   };
@@ -56,14 +56,15 @@ const WrapperPage = (props: Props) => {
   const hideMyOrder = () => {
     setIsShowMyOrder(false);
   };
+
   return (
-    <div className='w-full h-full relative bg-grey-4'>
+    <div className="w-full h-full relative bg-grey-4">
       <div ref={ref}>
         {!auth && isShowLogin && <PopUpLoginRight />}
         {auth && isShowMyOrder && <MyOrder onClick={hideMyOrder} />}
         {auth && isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
       </div>
-      
+
       <div className={(!auth && isShowLogin) || (auth && isShowLogout) ? 'blur-sm' : ''}>
         <Header
           className={auth ? 'header header--grey' : 'header'}
@@ -73,8 +74,8 @@ const WrapperPage = (props: Props) => {
           onClickShowMyOrder={showPopUpMyOrder}
           // handleSearchPopup={(item) => props.handleSearchPopup(item.name)}
         />
-        <div className='w-full h-full'>{props.children}</div>
-        <div className='w-full absolute bottom-0 left-0'>
+        <div className="w-full h-full">{props.children}</div>
+        <div className="w-full absolute bottom-0 left-0">
           <Footer />
         </div>
       </div>

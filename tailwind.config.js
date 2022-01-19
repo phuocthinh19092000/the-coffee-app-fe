@@ -5,11 +5,11 @@ module.exports = {
       proximaNova: ['"proxima-nova"', 'sans-serif'],
     },
     fontSize: {
-      1: '12px',
-      2: '16px',
-      2.5: '18px',
-      3: '22px',
-      4: '26px',
+        1: '12px',
+        2: '16px',
+        2.5: '18px',
+        3: '22px',
+        4: '26px',
     },
     colors: {
       primary: {
@@ -28,6 +28,7 @@ module.exports = {
         2: '#BDBDBD',
         3: '#DBDBDB',
         4: '#F2F2F2',
+        5: '#666666',
       },
       'vendor-grey-4': '#E6E6E6',
       brown: '#502f13',
