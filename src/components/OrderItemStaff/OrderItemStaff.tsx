@@ -6,7 +6,7 @@ import ADuyMai from '../../share/assets/img/aDuyMai.jpg';
 import nextIcon from '../../share/assets/vector/nextIcon.svg';
 import iconPickedUp from '../../share/assets/vector/iconpickedUp.svg';
 import alarmIcon from '../../share/assets/vector/AlarmIcon.svg';
-import { OrderStatus } from '../../enum/OrderStatus';
+import { OrderStatus } from '../../enum';
 import { useState } from 'react';
 interface Props {
   order: Order;
@@ -16,10 +16,10 @@ interface Props {
 
 const OrderItemStaff = (props: Props) => {
   const [showAlarmIcon, setShowAlarmIcon] = useState(() => {
-    return props.order.orderStatus.name === OrderStatus.READY_TO_PICKUP;
+    return props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP;
   });
 
-  let icon = props.order.orderStatus.name === OrderStatus.READY_TO_PICKUP ? iconPickedUp : nextIcon;
+  let icon = props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP ? iconPickedUp : nextIcon;
 
   return (
     <div className="order-item">
