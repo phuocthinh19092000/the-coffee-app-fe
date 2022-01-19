@@ -3,7 +3,7 @@ import CoffeeImg from '../../share/assets/img/blackcoffee.png';
 import { moneyFormat } from '../../utils/MoneyFormat';
 import EditIcon from '../../share/assets/vector/EditIcon.svg';
 import SuccessIcon from '../../share/assets/vector/SuccessIcon.svg';
-import { OrderStatus } from '../../enum/OrderStatus';
+import { OrderStatus } from '../../enum';
 import React from 'react';
 interface Props {
   price: number;
@@ -18,7 +18,7 @@ const Notification = (props: Props) => {
   let btnSrc = '';
   if (props.status === OrderStatus.NEW) {
     btnSrc = EditIcon;
-  } else if (props.status === OrderStatus.READY_TO_PICKUP) {
+  } else if (props.status === OrderStatus.READY_FOR_PICKUP) {
     btnSrc = SuccessIcon;
   }
 

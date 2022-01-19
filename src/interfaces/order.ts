@@ -14,4 +14,6 @@ export default interface Order {
     name: string;
     value: number;
   };
+  userId: string;
+  quantityBilled: number;
 }
