@@ -18,7 +18,6 @@ const RouterPage = () => {
             return !!localStorage.getItem('user') ? <HomePage /> : <ComingSoonPage />;
           }}
         />
-
         <Route exact path="/staff-login" component={LoginStaff} />
         <Route exact path="/dashboard" component={DashBoard} />
         <Route exact path="/user/changePassword" component={ComingSoonPage} />
