@@ -1,54 +1,29 @@
 @import '../../../../share/assets/scss/variables';
 
 .order-item {
-  width: 100%;
+  @apply w-full;
 
   &__name {
-    width: 100%;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 20px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    @apply w-full font-bold text-2.5 mb-0.5 truncate;
   }
 
   &__desc {
-    width: 100%;
-    margin-top: 5px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    @apply w-full mb-0.5 truncate;
   }
 
   &__note {
-    width: 100%;
-    margin-top: 5px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    @apply w-full truncate;
   }
 
   &__contain {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 20px;
+    @apply flex flex-row justify-between mt-1.25;
 
     &-left {
-      align-items: flex-start;
-      padding-right: 20px;
+      @apply items-start pr-1.5;
     }
 
     &-center {
-      width: 280px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
+      @apply flex flex-col justify-center items-start w-full truncate;
     }
 
     &-right {

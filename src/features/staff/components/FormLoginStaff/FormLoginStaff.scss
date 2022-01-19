@@ -8,7 +8,7 @@
   @apply flex-1 rounded-lg w-full h-3 border border-grey-1 indent-2;
 
   &:focus-within {
-    outline: 1px solid rgb(202, 195, 195);
+    @apply outline outline-1 outline-outline;
   }
 }
 

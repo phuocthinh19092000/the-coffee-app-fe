@@ -15,7 +15,7 @@ const PopUpRanOutUnit = (props: Props) => {
     <div className="card-ran-out-unit--blur">
       <Card className="card card--center card-ran-out-unit">
         <img src={Exit} className="card-ran-out-unit__exit" onClick={props.onClickExit} alt="Exit" />
-        <div className="card-ran-out-unit__content">
+        <div className="pt-50">
           <p className="card-ran-out-unit__title">You ran out of free units</p>
           <p className="card-ran-out-unit__message">
             Are you sure you want to proceed this order?
@@ -23,7 +23,7 @@ const PopUpRanOutUnit = (props: Props) => {
             Excceeding orders will be sent to you by month-end.
           </p>
         </div>
-        <div className="card-ran-out-unit__button-group">
+        <div className="pt-15">
           <Button
             onClick={props.onClickContinueProceed}
             className="btn btn-primary btn--enabled "

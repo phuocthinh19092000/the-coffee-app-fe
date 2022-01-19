@@ -1,14 +1,7 @@
 @import '../../share/assets/scss/variables.scss';
 
 .loader {
-    color: $black-color;
-    font-size: 20px;
-    margin: 100px auto;
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    position: relative;
-    text-indent: -9999em;
+    @apply text-black text-3 m-auto w-1 mt-1.25 h-1.25 rounded-full relative;
     -webkit-animation: load4 1.3s infinite linear;
     animation: load4 1s infinite linear;
     -webkit-transform: translateZ(0);
