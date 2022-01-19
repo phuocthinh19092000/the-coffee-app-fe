@@ -7,8 +7,7 @@
   display: flex;
   flex-direction: row;
   &-left {
-    width: 300px;
-    height: 100%;
+    @apply w-1/6 h-full;
   }
 
   &-right {

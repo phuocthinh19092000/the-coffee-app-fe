@@ -35,6 +35,8 @@ module.exports = {
       success: '#499E3B',
       error: '#E51616',
       warning: '#FE5D18',
+      outline: '#cac3c3',
+      green: '#499e3b',
     },
     extend: {
       spacing: {
@@ -50,6 +52,8 @@ module.exports = {
         4: '4rem',
         5: '5rem',
         6: '6rem',
+        15: '15%',
+        50: '50%'
       },
     },
   },

@@ -75,7 +75,7 @@ const WrapperPage = (props: Props) => {
           // handleSearchPopup={(item) => props.handleSearchPopup(item.name)}
         />
         <div className="w-full h-full">{props.children}</div>
-        <div className="w-full absolute bottom-0 left-0">
+        <div className="w-full bottom-0 left-0">
           <Footer />
         </div>
       </div>
