@@ -18,15 +18,15 @@ const ListOrderStaff = () => {
 
   return (
     <div className="list-order">
-      <ColumnOrderStaff title={ColumnOrderStatus.NEW} listOrder={ordersByStatus.orderStatusNew}></ColumnOrderStaff>
+      <ColumnOrderStaff title={ColumnOrderStatus.NEW} listOrder={ordersByStatus.orderStatusNew}/>
       <ColumnOrderStaff
-        title={ColumnOrderStatus.PROCESSING}
-        listOrder={ordersByStatus.orderStatusProcessing}
-      ></ColumnOrderStaff>
+  title={ColumnOrderStatus.PROCESSING}
+  listOrder={ordersByStatus.orderStatusProcessing}
+  />
       <ColumnOrderStaff
-        title={ColumnOrderStatus.READY_FOR_PICKUP}
-        listOrder={ordersByStatus.orderStatusReady}
-      ></ColumnOrderStaff>
+  title={ColumnOrderStatus.READY_FOR_PICKUP}
+  listOrder={ordersByStatus.orderStatusReady}
+  />
     </div>
   );
 };

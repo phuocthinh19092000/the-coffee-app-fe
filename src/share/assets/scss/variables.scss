@@ -27,3 +27,6 @@ $error-color: #e51616;
   background: rgba(51, 51, 51, 0.3);
   backdrop-filter: blur(5px);
 }
+@mixin icon-active {
+  filter: invert(14%) sepia(55%) saturate(7500%) hue-rotate(324deg) brightness(90%) contrast(94%);
+}

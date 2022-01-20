@@ -24,10 +24,8 @@ const OrderItemStaff = (props: Props) => {
   return (
     <div className="order-item">
       <img src={CoffeeImg} className="order-item__img" alt={CoffeeImg} />
-      {
         // TODO:  get image from API
-        /* <img src={props.order.product.images} className='order-item__img' alt={props.order.product.images} /> */
-      }
+        {/*<img src={props.order.product.images} className='order-item__img' alt={props.order.product.images} /> */}
       <div className="order-detail">
         <b className="order-detail__product">{props.order.product.name}</b>
         <p className="order-detail__price">
