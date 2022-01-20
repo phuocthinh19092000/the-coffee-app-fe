@@ -1,5 +1,5 @@
 import React from 'react';
-import './LeftSideBarItem.scss'
+import './LeftSideBarItem.scss';
 type Props = {
   onClick: React.MouseEventHandler<HTMLElement>;
   src?: string;

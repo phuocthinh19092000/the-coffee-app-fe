@@ -9,7 +9,7 @@
 }
 
 
-.order-item {
+.order-item-staff {
   @apply flex flex-row w-fit h-fit items-center rounded-[8px] bg-white px-[12px] py-[10px] relative;
   box-shadow: 0px 2px 4px $box-shadow;
   &__img {
@@ -29,7 +29,7 @@
   } 
 }
 
-.order-detail {
+.order-detail-staff {
   @apply flex flex-col items-start justify-between w-[250px] ml-[24px];
   &__product {
     @apply font-semibold leading-[21px] text-[18px] tracking-[0.15px] mb-[8px];

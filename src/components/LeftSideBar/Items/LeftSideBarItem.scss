@@ -1,9 +1,12 @@
+@import '../../../share/assets/scss/variables.scss';
+
 .left-side-bar-item {
   @apply flex flex-col w-[108px] h-[80px] my-2 justify-center text-center items-center;
   &--active {
-  @apply flex flex-col w-[108px] h-[80px] my-2 justify-center text-center items-center bg-accent-4 text-accent-1;
+    @apply flex flex-col w-[108px] h-[80px] my-2 justify-center text-center items-center bg-accent-4 text-accent-1 rounded-lg;
   }
   &__img {
     @apply mb-1;
+    @include icon-active;
   }
 }
