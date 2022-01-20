@@ -1,10 +1,10 @@
 @import '../../share/assets/scss/variables.scss';
 
 .column-order {
-  @apply w-fit h-full py-1 px-2;
+  @apply w-fit h-full py-1 px-1;
 
   &-header {
-    @apply pl-1 py-[18px] mb-1 bg-vendor-grey-4 rounded-[8px];
+    @apply pl-1 py-[18px] mb-1 bg-vendor-grey-4 rounded-[8px] min-w-[330px];
 
     &__title {
       @apply font-semibold not-italic leading-[21px] text-2.5 tracking-[0.15px];
