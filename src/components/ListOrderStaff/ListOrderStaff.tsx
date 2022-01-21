@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { ColumnOrderStatus, OrderStatus } from '../../enum';
 import { getOrdersByStatus, selectOrderByStatusState } from '../../features/orderStatus/action/orderStatus';
 import { useAppDispatch } from '../../storage/hooks';
+import { SocketContext } from '../../utils/socketProvider';
 import ColumnOrderStaff from '../ColumnOrderStaff/ColumnOrderStaff';
 import './ListOrderStaff.scss';
 const ListOrderStaff = () => {
@@ -15,6 +16,12 @@ const ListOrderStaff = () => {
     dispatch(getOrdersByStatus(OrderStatus.READY_FOR_PICKUP)).unwrap();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const socket = useContext(SocketContext);
+
+  useEffect(() => {
+    socket.on('sendToStaff', (data) => console.log(data));
+  }, [socket]);
 
   return (
     <div className="list-order">
