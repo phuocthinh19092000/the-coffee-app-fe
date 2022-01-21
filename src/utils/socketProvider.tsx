@@ -1,19 +1,16 @@
-import io from 'socket.io-client';
 import React, { ReactChild } from 'react';
 
-const socket = io('http://localhost:8080', {
-  reconnection: true,
-  reconnectionDelay: 1000,
-  reconnectionDelayMax: 5000,
-  reconnectionAttempts: 99999,
-});
-socket.emit('joinRoomStaff', 'staffRoom');
-console.log('socket connected and join room');
-type socketType = typeof socket;
+import { Socket } from 'socket.io-client';
+import { SocketEvent } from '../enum';
+import { envVariable } from '../services/envVariable';
+import { initSocketForStaff } from '../services/socketService';
+
+const socket = initSocketForStaff(envVariable.API_ROOT, SocketEvent.JOIN_ROOM_STAFF_EVENT);
+
 type Props = {
   children: React.ReactChild[] | ReactChild | JSX.Element | JSX.Element[];
 };
-export const SocketContext = React.createContext<socketType>(socket);
+export const SocketContext = React.createContext<Socket>(socket);
 
 export const SocketProvider = (props: Props) => {
   return <SocketContext.Provider value={socket}>{props.children}</SocketContext.Provider>;

@@ -7,7 +7,6 @@ import { checkRole, login } from '../../../auth/actions/auth';
 import { useEffect, useState } from 'react';
 import EyeIcon from '../../../../share/assets/vector/Eye.svg';
 import CloseEyeIcon from '../../../../share/assets/img/close-eye.png';
-import { getDeviceToken } from '../../../../services/firebase';
 import { NotificationType } from '../../../../enum/NotificationType';
 import ToastNotification from '../../../../components/ToastNotification/ToatstNotification';
 import { PositionToast } from '../../../../enum/PositionToast';
@@ -57,10 +56,7 @@ export default function FormLoginStaff() {
 
   const dispatch = useAppDispatch();
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
-    const deviceToken = await getDeviceToken();
-    const accessToken = await dispatch(
-      login({ username: data.username, password: data.password, deviceToken: deviceToken }),
-    );
+    const accessToken = await dispatch(login({ username: data.username, password: data.password }));
     dispatch(checkRole([ROLE.VENDOR]));
     if (accessToken.payload && accessToken.payload.userInfor.role === ROLE.VENDOR) {
       setLoginFailed(false);
