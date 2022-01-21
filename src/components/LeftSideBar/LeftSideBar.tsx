@@ -5,20 +5,39 @@ import ItemsIcon from '../../share/assets/vector/MenuVector.svg';
 import ReportIcon from '../../share/assets/vector/ReportVector.svg';
 import LogoutIcon from '../../share/assets/img/logout-icon.png';
 import LeftSideBarItem from './Items/LeftSideBarItem';
-import React from 'react';
+import { TabName } from '../../enum/TabName';
 type Props = {
-  onClickChangeTab: React.MouseEventHandler<HTMLElement>;
+  onClickChangeTab(tabName: TabName): void;
+  currentTab: TabName;
 };
 const LeftSideBar = (props: Props) => {
   return (
     <div className="left-side-bar">
       <div className="left-side-bar__img">
-        <img src={Logo} alt="logo" />
+        <img src={Logo} alt="logo" className="w-[100px]" />
       </div>
       <div className="left-side-bar__group-item">
-        <LeftSideBarItem src={OrderIcon} alt="Order" title="Orders" onClick={props.onClickChangeTab} />
-        <LeftSideBarItem src={ItemsIcon} alt="Items" title="Items" onClick={props.onClickChangeTab} />
-        <LeftSideBarItem src={ReportIcon} alt="Report" title="Report" onClick={props.onClickChangeTab} />
+        <LeftSideBarItem
+          isActive={props.currentTab === TabName.ORDERS}
+          src={OrderIcon}
+          alt="Order"
+          title="Orders"
+          onClickChangeTab={() => props.onClickChangeTab(TabName.ORDERS)}
+        />
+        <LeftSideBarItem
+          isActive={props.currentTab === TabName.ITEM}
+          src={ItemsIcon}
+          alt="Items"
+          title="Items"
+          onClickChangeTab={() => props.onClickChangeTab(TabName.ITEM)}
+        />
+        <LeftSideBarItem
+          isActive={props.currentTab === TabName.REPORT}
+          src={ReportIcon}
+          alt="Report"
+          title="Report"
+          onClickChangeTab={() => props.onClickChangeTab(TabName.REPORT)}
+        />
       </div>
       <div className="left-side-bar__logout">
         <img src={LogoutIcon} alt="" className="mr-[10px] w-fit h-fit" />
