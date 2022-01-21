@@ -17,9 +17,7 @@ export const initialState: AuthState = {
   data: {
     jwtAccessToken: '',
     userInfor: {
-      role: {
-        name: '',
-      },
+      role: '',
       avatarUrl: '',
       freeUnit: 0,
       phoneNumber: '',
@@ -27,7 +25,6 @@ export const initialState: AuthState = {
       name: '',
     },
   },
-
   loading: 'pending',
   error: {
     message: '',
