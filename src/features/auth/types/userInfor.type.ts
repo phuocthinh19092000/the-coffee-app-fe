@@ -1,9 +1,7 @@
 export type UserInfor = {
   jwtAccessToken: string;
   userInfor: {
-    role: {
-      name: string;
-    };
+    role: string;
     avatarUrl: string;
     freeUnit: number;
     phoneNumber: string;
