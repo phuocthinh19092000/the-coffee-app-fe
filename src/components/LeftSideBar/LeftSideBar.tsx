@@ -1,10 +1,11 @@
 import './LeftSideBar.scss';
 import Logo from '../../share/assets/img/OTSVLogo.png';
-import OrderIcon from '../../share/assets/img/order-icon.png';
-import ItemsIcon from '../../share/assets/img/item-icon.png';
-import ReportIcon from '../../share/assets/vector/ReportIcon.svg';
+import OrderIcon from '../../share/assets/vector/OrderVector.svg';
+import ItemsIcon from '../../share/assets/vector/MenuVector.svg';
+import ReportIcon from '../../share/assets/vector/ReportVector.svg';
 import LogoutIcon from '../../share/assets/img/logout-icon.png';
 import LeftSideBarItem from './Items/LeftSideBarItem';
+import React from 'react';
 type Props = {
   onClickChangeTab: React.MouseEventHandler<HTMLElement>;
 };

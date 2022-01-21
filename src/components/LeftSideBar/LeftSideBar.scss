@@ -2,11 +2,11 @@
   @apply w-fit h-screen bg-white mr-1 sticky top-0 left-0 self-start;
 
   &__img {
-    @apply flex items-center justify-center mx-2 pt-2.5;
+    @apply flex items-center justify-center mt-2.5;
   }
 
   &__group-item {
-    @apply flex flex-col text-center items-center justify-center h-2/5 mt-4 px-1.5;
+    @apply flex flex-col text-center items-center justify-center mt-4 px-1.5;
   }
 
   &__logout {

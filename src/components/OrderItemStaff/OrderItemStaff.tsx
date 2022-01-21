@@ -7,7 +7,7 @@ import nextIcon from '../../share/assets/vector/nextIcon.svg';
 import iconPickedUp from '../../share/assets/vector/iconpickedUp.svg';
 import alarmIcon from '../../share/assets/vector/AlarmIcon.svg';
 import { OrderStatus } from '../../enum';
-import { useState } from 'react';
+
 interface Props {
   order: Order;
   onClickChangeStatus?: React.MouseEventHandler<HTMLElement>;
@@ -15,36 +15,30 @@ interface Props {
 }
 
 const OrderItemStaff = (props: Props) => {
-  const [showAlarmIcon, setShowAlarmIcon] = useState(() => {
-    return props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP;
-  });
-
   let icon = props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP ? iconPickedUp : nextIcon;
 
   return (
-    <div className="order-item">
-      <img src={CoffeeImg} className="order-item__img" alt={CoffeeImg} />
-      {
-        // TODO:  get image from API
-        /* <img src={props.order.product.images} className='order-item__img' alt={props.order.product.images} /> */
-      }
-      <div className="order-detail">
-        <b className="order-detail__product">{props.order.product.name}</b>
-        <p className="order-detail__price">
+    <div className="order-item-staff">
+      <img src={CoffeeImg} className="order-item-staff__img" alt={CoffeeImg} />
+
+      {/* TODO:  get image from API<img src={props.order.product.images} className='order-item__img' alt={props.order.product.images} /> */}
+      <div className="order-detail-staff">
+        <b className="order-detail-staff__product">{props.order.product.name}</b>
+        <p className="order-detail-staff__price">
           {moneyFormat(Number(props.order.product.price))}đ - Qty: {props.order.quantity}
         </p>
-        {props.order.note ? <p className="order-detail__note">Note: {props.order.note}</p> : ''}
+        {props.order.note ? <p className="order-detail-staff__note">Note: {props.order.note}</p> : ''}
       </div>
-      <div className="order-item__alarm">
-        {true && (
+      <div className="order-item-staff__alarm">
+        {props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP && (
           <button onClick={props.onClickSendNotification}>
             <img src={alarmIcon} alt={alarmIcon} />
           </button>
         )}
       </div>
-      <div className="order-item-right">
-        <img className="order-item-right__avatar" src={ADuyMai} alt={ADuyMai} />
-        <img src={icon} alt={icon} className="order-item-right__next-icon" onClick={props.onClickChangeStatus} />
+      <div className="order-item-staff-right">
+        <img className="order-item-staff-right__avatar" src={ADuyMai} alt={ADuyMai} />
+        <img src={icon} alt={icon} className="order-item-staff-right__next-icon" onClick={props.onClickChangeStatus} />
       </div>
     </div>
   );
