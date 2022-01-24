@@ -2,11 +2,10 @@ import { ROLE } from '../../enum';
 import { useSelector } from 'react-redux';
 import { Redirect, Route, useLocation } from 'react-router-dom';
 import { selectLoginState, selectUserState } from '../../features/auth/actions/auth';
-import AccessDenied from '../../pages/AccessDenied/AccessDenied';
 
 type Props = {
   children: JSX.Element;
-  role: ROLE;
+  roles: Array<ROLE>;
   path: string;
 };
 
@@ -14,24 +13,17 @@ function PrivateRoute(props: Props) {
   const location = useLocation();
   const user = useSelector(selectUserState);
   const accessToken = useSelector(selectLoginState);
-  const userHasRequiredRole = user && props.role === user.role ? true : false;
-
-  if (!accessToken) {
-    return (
-      <Redirect
-        to={{
-          pathname: '/',
-          state: { from: location },
-        }}
-      />
-    );
+  const userHasRequiredRole = user && props.roles.includes(user.role as ROLE) ? true : false;
+  if (accessToken && userHasRequiredRole) {
+    return <Route path={props.path} render={() => props.children} />;
   }
-
-  if (accessToken && !userHasRequiredRole) {
-    return <AccessDenied />;
-  }
-
-  return <Route path={props.path} render={({ location }) => props.children}></Route>;
+  return (
+    <Redirect
+      to={{
+        state: { from: location },
+      }}
+    />
+  );
 }
 
 export default PrivateRoute;
