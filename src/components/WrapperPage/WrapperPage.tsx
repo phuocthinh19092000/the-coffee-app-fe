@@ -4,8 +4,9 @@ import PopUpLogOut from '../../features/auth/components/PopUpLogOut/PopUpLogOut'
 import Footer from '../Footer/Footer';
 import PopUpLoginRight from '../../features/auth/components/PopUpLoginRight/PopUpLoginRight';
 import { useSelector } from 'react-redux';
-import { selectLoginState } from '../../features/auth/actions/auth';
+import { selectUserState } from '../../features/auth/actions/auth';
 import MyOrder from '../../features/my-order/page/MyOrder/MyOrder';
+import { ROLE } from '../../enum';
 
 type Props = {
   children?: React.ReactChild[] | ReactChild | JSX.Element | JSX.Element[];
@@ -17,7 +18,9 @@ const WrapperPage = (props: Props) => {
   const [isShowLogout, setIsShowLogout] = useState(false);
   const [isShowMyOrder, setIsShowMyOrder] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const auth = useSelector(selectLoginState);
+  const user = useSelector(selectUserState);
+  const isLoggedInCustomer = user.role === ROLE.CUSTOMER;
+
   const hideFormHandler = (event: KeyboardEvent) => {
     if (event.key === 'Escape' || event.key === 'Esc') {
       setIsShowLogin(false);
@@ -56,20 +59,19 @@ const WrapperPage = (props: Props) => {
   const hideMyOrder = () => {
     setIsShowMyOrder(false);
   };
-
   return (
     <div className="w-full h-full relative bg-grey-4">
       <div ref={ref}>
-        {!auth && isShowLogin && <PopUpLoginRight />}
-        {auth && isShowMyOrder && <MyOrder onClick={hideMyOrder} />}
-        {auth && isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
+        {!isLoggedInCustomer && isShowLogin && <PopUpLoginRight />}
+        {isLoggedInCustomer && isShowMyOrder && <MyOrder onClick={hideMyOrder} />}
+        {isLoggedInCustomer && isShowLogout && <PopUpLogOut onClick={showPopUpLogoutHandler} />}
       </div>
 
-      <div className={(!auth && isShowLogin) || (auth && isShowLogout) ? 'blur-sm' : ''}>
+      <div className={(!isLoggedInCustomer && isShowLogin) || (isLoggedInCustomer && isShowLogout) ? 'blur-sm' : ''}>
         <Header
-          className={auth ? 'header header--grey' : 'header'}
+          className={isLoggedInCustomer ? 'header header--grey' : 'header'}
           onClick={showLogin}
-          isLoggedIn={!!auth}
+          isLoggedIn={isLoggedInCustomer}
           onClickShowLogOut={showPopUpLogoutHandler}
           onClickShowMyOrder={showPopUpMyOrder}
           // handleSearchPopup={(item) => props.handleSearchPopup(item.name)}

@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import './FormLoginStaff.scss';
 import { useAppDispatch } from '../../../../storage/hooks';
-import {login} from '../../../auth/actions/auth';
+import { checkRole, login } from '../../../auth/actions/auth';
 import { useEffect, useState } from 'react';
 import EyeIcon from '../../../../share/assets/vector/Eye.svg';
 import CloseEyeIcon from '../../../../share/assets/img/close-eye.png';
@@ -11,7 +11,8 @@ import { getDeviceToken } from '../../../../services/firebase';
 import { NotificationType } from '../../../../enum/NotificationType';
 import ToastNotification from '../../../../components/ToastNotification/ToatstNotification';
 import { PositionToast } from '../../../../enum/PositionToast';
-import {useHistory} from "react-router-dom";
+import { useHistory } from 'react-router-dom';
+import { ROLE } from '../../../../enum';
 
 interface IFormInputs {
   username: string;
@@ -26,7 +27,6 @@ const schema = yup
     password: yup.string().min(8, 'Password must be at least 6 characters').required('Password is required'),
   })
   .required();
-
 export default function FormLoginStaff() {
   const {
     register,
@@ -48,7 +48,7 @@ export default function FormLoginStaff() {
   const [showPassword, setShowPassword] = useState(false);
   const history = useHistory();
   const goDashboard = () => {
-    let path = `/dashboard`;
+    let path = `/staff`;
     history.push(path);
   };
   const toggleShowPassword = () => {
@@ -61,7 +61,8 @@ export default function FormLoginStaff() {
     const accessToken = await dispatch(
       login({ username: data.username, password: data.password, deviceToken: deviceToken }),
     );
-    if (accessToken.meta.requestStatus === 'fulfilled') {
+    dispatch(checkRole([ROLE.VENDOR]));
+    if (accessToken.payload && accessToken.payload.userInfor.role === ROLE.VENDOR) {
       setLoginFailed(false);
       goDashboard();
     } else {

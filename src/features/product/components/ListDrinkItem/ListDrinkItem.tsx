@@ -10,7 +10,8 @@ import Product from '../../../../interfaces/product';
 import { useSelector } from 'react-redux';
 import { getProductId, placeOrder, resetOrder, selectOrderState } from '../../../order/actions/order';
 import { useAppDispatch } from '../../../../storage/hooks';
-import { getUserData, selectLoginState, updateFreeUnit } from '../../../auth/actions/auth';
+import { getFreeUnit, selectUserState, updateFreeUnit } from '../../../auth/actions/auth';
+import { ROLE } from '../../../../enum';
 type Props = {
   listDrink: Product[];
   searchDrink?: Product[];
@@ -29,7 +30,7 @@ function ListDrinkItem(props: Props) {
   const [itemDrink, setItemDrink] = useState({} as Category);
   const dispatch = useAppDispatch();
   const order = useSelector(selectOrderState);
-  const auth = useSelector(selectLoginState);
+  const user = useSelector(selectUserState);
   const togglePopup = (item: Category) => {
     setItemDrink(item);
     setIsOpenPopUp(!isOpenPopUp);
@@ -41,11 +42,11 @@ function ListDrinkItem(props: Props) {
   };
 
   const handleClickPlaceOrder = async () => {
-    if (!auth) {
+    if (user.role !== ROLE.CUSTOMER) {
       setStep(showPopupCase.PopUpLoginCenter);
       return;
     }
-    const { freeUnit } = await dispatch(getUserData()).unwrap();
+    const freeUnit = await dispatch(getFreeUnit()).unwrap();
     if (typeof freeUnit !== 'number' && freeUnit >= 0) return;
     if (freeUnit < order.quantity) {
       setStep(showPopupCase.showPopUpRanOutUnit);
@@ -57,10 +58,10 @@ function ListDrinkItem(props: Props) {
   };
 
   useEffect(() => {
-    if (auth) {
+    if (user.role === ROLE.CUSTOMER) {
       setStep(showPopupCase.showDrinkItemDetail);
     }
-  }, [auth]);
+  }, [user.role]);
 
   const exitPopUp = () => {
     dispatch(resetOrder());

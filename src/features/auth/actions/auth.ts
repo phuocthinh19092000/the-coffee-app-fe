@@ -5,6 +5,7 @@ import { RootState } from '../../../storage';
 import http from '../../../services/http-common';
 import GetUserData from '../api/UserData/GetUserData';
 import { UserInfor } from '../types/userInfor.type';
+import { ROLE } from '../../../enum';
 type RequestState = 'pending' | 'fulfilled' | 'rejected';
 
 export interface AuthState {
@@ -50,10 +51,10 @@ export const logout = createAsyncThunk('/auth/logout', async (body: LogoutParams
   }
 });
 
-export const getUserData = createAsyncThunk('/users/profile', async (_, { rejectWithValue }) => {
+export const getFreeUnit = createAsyncThunk('/users/freeunit', async (_, { rejectWithValue }) => {
   try {
-    const responseUserData = await GetUserData.getUserData();
-    return responseUserData.data;
+    const responseUserFreeUnit = await GetUserData.getFreeUnit();
+    return responseUserFreeUnit.data;
   } catch (error) {
     return rejectWithValue(error);
   }
@@ -66,6 +67,11 @@ const authSlice = createSlice({
     updateFreeUnit: (state, action: PayloadAction<number>) => {
       const newFreeUnit = state.data.userInfor.freeUnit - action.payload;
       state.data.userInfor.freeUnit = newFreeUnit > 0 ? newFreeUnit : 0;
+    },
+    checkRole: (state, action: PayloadAction<ROLE[]>) => {
+      if (!action.payload.includes(state.data.userInfor.role as ROLE)) {
+        return initialState;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -80,6 +86,7 @@ const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.loading = 'rejected';
         state.error = action.payload;
+        state.data = initialState.data;
       })
       .addCase(logout.pending, (state) => {
         state.loading = 'fulfilled';
@@ -91,14 +98,14 @@ const authSlice = createSlice({
         state.loading = 'rejected';
         state.error = action.payload;
       })
-      .addCase(getUserData.pending, (state) => {
+      .addCase(getFreeUnit.pending, (state) => {
         state.loading = 'pending';
       })
-      .addCase(getUserData.fulfilled, (state, action) => {
+      .addCase(getFreeUnit.fulfilled, (state, action) => {
         state.loading = 'fulfilled';
-        state.data.userInfor = action.payload;
+        state.data.userInfor.freeUnit = action.payload;
       })
-      .addCase(getUserData.rejected, (state, action) => {
+      .addCase(getFreeUnit.rejected, (state, action) => {
         state.loading = 'rejected';
         state.error = action.payload;
       });
@@ -107,5 +114,5 @@ const authSlice = createSlice({
 
 export const selectLoginState = (state: RootState) => state.authData.data.jwtAccessToken;
 export const selectUserState = (state: RootState) => state.authData.data.userInfor;
-export const { updateFreeUnit } = authSlice.actions;
+export const { updateFreeUnit, checkRole } = authSlice.actions;
 export default authSlice.reducer;
