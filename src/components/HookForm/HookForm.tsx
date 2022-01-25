@@ -62,7 +62,7 @@ export default function HookForm() {
   };
   const history = useHistory();
   const staffLogin = () => {
-    let path = `/staff-login`;
+    let path = `/login`;
     history.push(path);
   };
   return (

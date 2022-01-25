@@ -6,15 +6,21 @@ import ReportIcon from '../../share/assets/vector/ReportVector.svg';
 import LogoutIcon from '../../share/assets/img/logout-icon.png';
 import LeftSideBarItem from './Items/LeftSideBarItem';
 import { TabName } from '../../enum/TabName';
+import { useHistory } from 'react-router-dom';
 type Props = {
   onClickChangeTab(tabName: TabName): void;
   currentTab: TabName;
 };
 const LeftSideBar = (props: Props) => {
+  const history = useHistory();
+  const goHome = () => {
+    let path = `/`;
+    history.push(path);
+  };
   return (
     <div className="left-side-bar">
       <div className="left-side-bar__img">
-        <img src={Logo} alt="logo" className="w-[100px]" />
+        <img src={Logo} alt="logo" className="w-[100px]" onClick={goHome} />
       </div>
       <div className="left-side-bar__group-item">
         <LeftSideBarItem
