@@ -19,7 +19,7 @@
       @apply w-[20px] absolute top-[12px];
     }
     &__next-icon {
-      @apply w-[20px] absolute bottom-[12px];
+      @apply w-[20px] absolute bottom-[12px] cursor-pointer;
     }
   }
   &__alarm {

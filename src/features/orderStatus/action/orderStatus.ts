@@ -6,7 +6,7 @@ import OrderByStatusApi from '../api/orderStatusApi';
 
 type RequestState = 'pending' | 'fulfilled' | 'rejected';
 
-export interface AuthState {
+export interface OrderByStatusState {
   data: {
     orderStatusNew: Order[];
     orderStatusProcessing: Order[];
@@ -16,7 +16,7 @@ export interface AuthState {
   error?: any;
 }
 
-export const initialState: AuthState = {
+export const initialState: OrderByStatusState = {
   data: {
     orderStatusNew: [],
     orderStatusProcessing: [],

@@ -4,8 +4,9 @@ import categoryReducer from '../features/product/actions/getCategoryData';
 import productReducer from '../features/product/actions/getProductData';
 import orderReducer from '../features/order/actions/order';
 import myOrderReducer from '../features/my-order/actions/historyOrder';
-import orderByStatusReducer from '../features/orderStatus/action/orderStatus'
-import searchReducer from '../features/search/action/getSearchItemData'
+import orderByStatusReducer from '../features/orderStatus/action/orderStatus';
+import searchReducer from '../features/search/action/getSearchItemData';
+import updateStatusOrderReducer from '../features/updateOrder/action/updateOrder';
 import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 const customizedMiddleware = getDefaultMiddleware({
@@ -29,6 +30,7 @@ export const store = configureStore({
     myOrder: myOrderReducer,
     orderByStatus: orderByStatusReducer,
     search: searchReducer,
+    updateStatusOrder: updateStatusOrderReducer,
   },
   middleware: customizedMiddleware,
 });
