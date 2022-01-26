@@ -13,7 +13,7 @@ const RouterPage = () => {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/login" component={LoginStaff} />
-        <PrivateRoute path="/staff" roles={[ROLE.VENDOR]}>
+        <PrivateRoute exact path="/staff" roles={[ROLE.VENDOR]}>
           <DashBoard />
         </PrivateRoute>
 
