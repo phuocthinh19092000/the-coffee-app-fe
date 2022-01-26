@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import OTSVLogo from '../../share/assets/img/OTSVLogo.png';
 import SearchVector from '../../share/assets/vector/iconSearch.svg';
+import CancelVector from '../../share/assets/vector/cancelVector.svg';
 import CoffeeImg from '../../share/assets/img/CoffeeImg.png';
 import NotFound from '../../share/assets/vector/NotFoundIcon.svg'
 import Input from '../Input/Input';
@@ -53,7 +54,7 @@ const Header = (props: Props) => {
     };
   }, [displaySearchList]);
 
-  const handleSearchPopup = (item: Product) => {
+  const handleSearchPopup = (searchItem: Product) => {
     async function fetchSearchApi() {
       const response = await productApi.getByCategory(value);
       setSearchList(response.data);
@@ -69,19 +70,24 @@ const Header = (props: Props) => {
   };
   const { theme, toggleTheme } = useContext(DarkMode);
 
+  const resetValue = () => {
+    setValue('');
+  }
+
   return (
     <div className={props.className}>
       <div className="header__logo">
         <img src={OTSVLogo} alt={OTSVLogo} onClick={goHome} />
       </div>
       <div className="header__search-block">
-        <Input
-          placeholder="Search drink"
-          src={SearchVector}
-          className={props.isLoggedIn ? 'block-input--white' : 'block-input'}
-          value={value}
-          onChange={handleSearchDrink}
-        />
+          <Input
+            placeholder="Search drink"
+            src={value.length === 0 ? SearchVector : CancelVector}
+            className={props.isLoggedIn ? 'block-input--white' : 'block-input'}
+            value={value}
+            onChange={handleSearchDrink}
+            onClickFirstIcon={resetValue}
+          />
         <div ref={DivSearchItemsRef}>
           {displaySearchList && (
             // TODO: Integrate API search items
