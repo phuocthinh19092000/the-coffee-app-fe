@@ -55,12 +55,14 @@
   width: 440px;
   border-radius: 8px;
   padding: 12px;
-  overflow-y: auto;
+  overflow: auto;
   max-height: 544px;
   background-color: $grey-4-color;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 
   &::-webkit-scrollbar {
-    width: 10px;
+    display: none;
   }
 
   &::-webkit-scrollbar-track {

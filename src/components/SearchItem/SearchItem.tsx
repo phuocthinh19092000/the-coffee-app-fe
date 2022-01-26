@@ -1,5 +1,6 @@
 import './SearchItem.scss';
 import ItemDetail from '../../features/product/components/ItemDetail/ItemDetail';
+import React from 'react';
 type Props = {
   avatarUrl?: string;
   className?: string;
