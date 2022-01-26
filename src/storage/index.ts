@@ -5,6 +5,7 @@ import productReducer from '../features/product/actions/getProductData';
 import orderReducer from '../features/order/actions/order';
 import myOrderReducer from '../features/my-order/actions/historyOrder';
 import orderByStatusReducer from '../features/orderStatus/action/orderStatus'
+import searchReducer from '../features/search/action/getSearchItemData'
 import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 const customizedMiddleware = getDefaultMiddleware({
@@ -27,6 +28,7 @@ export const store = configureStore({
     order: orderReducer,
     myOrder: myOrderReducer,
     orderByStatus: orderByStatusReducer,
+    search: searchReducer,
   },
   middleware: customizedMiddleware,
 });

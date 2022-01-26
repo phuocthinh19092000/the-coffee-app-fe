@@ -15,7 +15,9 @@ import { HiMoon } from 'react-icons/hi';
 import { useRef } from 'react';
 import { useHistory } from 'react-router';
 import Product from '../../interfaces/product';
-import productApi from '../../features/product/api/productAPI';
+import { useAppDispatch } from '../../storage/hooks';
+import { useSelector } from 'react-redux';
+import { getSearchItems, selectSearchState } from '../../features/search/action/getSearchItemData';
 type Props = {
   className: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -25,13 +27,15 @@ type Props = {
   // handleSearchPopup: (item: product) => void;
 };
 const Header = (props: Props) => {
-  const [value, setValue] = useState('');
+  const [keyword, setKeyword] = useState('');
   const [displaySearchList, setDisplaySearchList] = useState(false);
-  const [searchList, setSearchList] = useState([] as Product[]);
+  const searchItems = useSelector(selectSearchState);
+
+  const dispatch = useAppDispatch();
 
   const DivSearchItemsRef = useRef<HTMLDivElement>(null);
   const handleSearchDrink: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    setValue(event.target.value);
+    setKeyword(event.target.value);
   };
 
   const clickOutsideHandler = (event: Event) => {
@@ -39,14 +43,7 @@ const Header = (props: Props) => {
       setDisplaySearchList(false);
     }
   };
-  // useEffect(() => {
-  //   if (setSearchList.length >= 2) {
-  //     const newSearchList = setSearchList((item) => item.name.toLowerCase().includes(value.toLowerCase()));
-  //     setDisplaySearchList(setSearchList.length ? true : false);
-  //   } else {
-  //     setDisplaySearchList(false);
-  //   }
-  // }, [value]);
+
   useEffect(() => {
     document.addEventListener('click', clickOutsideHandler, true);
     return () => {
@@ -54,14 +51,14 @@ const Header = (props: Props) => {
     };
   }, [displaySearchList]);
 
-  const handleSearchPopup = (searchItem: Product) => {
-    async function fetchSearchApi() {
-      const response = await productApi.getByCategory(value);
-      setSearchList(response.data);
+  useEffect(() => {
+    if (keyword.length > 2) {
+      dispatch(getSearchItems(keyword.toLocaleLowerCase())).unwrap();
       setDisplaySearchList(true);
+    } else {
+      setDisplaySearchList(false);
     }
-    fetchSearchApi();
-  };
+  }, [dispatch, keyword]);
 
   const history = useHistory();
   const goHome = () => {
@@ -71,7 +68,7 @@ const Header = (props: Props) => {
   const { theme, toggleTheme } = useContext(DarkMode);
 
   const resetValue = () => {
-    setValue('');
+    setKeyword('');
   }
 
   return (
@@ -82,34 +79,35 @@ const Header = (props: Props) => {
       <div className="header__search-block">
           <Input
             placeholder="Search drink"
-            src={value.length === 0 ? SearchVector : CancelVector}
+            src={keyword.length === 0 ? SearchVector : CancelVector}
             className={props.isLoggedIn ? 'block-input--white' : 'block-input'}
-            value={value}
+            value={keyword}
             onChange={handleSearchDrink}
             onClickFirstIcon={resetValue}
           />
         <div ref={DivSearchItemsRef}>
-          {displaySearchList && (
-            // TODO: Integrate API search items
-            //
-            // <div className="search-list">
-            //   {searchList.map((searchItem) => (
-            //     <SearchItem
-            //       key={searchItem.id}
-            //       avatarUrl={CoffeeImg}
-            //       name={searchItem.name}
-            //       price={searchItem.price.toString()}
-            //       onClick={() => handleSearchPopup(searchItem)}
-            //     />
-            //   ))}
-            // </div>
+          {displaySearchList && searchItems.length !== 0 ?(
+            <div className="search-list">
+              {searchItems.map((searchItem: Product) => (
+                <SearchItem
+                  key={searchItem.id}
+                  avatarUrl={CoffeeImg}
+                  name={searchItem.name}
+                  price={searchItem.price.toString()}
+                />
+              ))}
+            </div>
+          ) : displaySearchList && searchItems.length === 0 ?(
             <div className='not-found'>
               <div className='not-found__group'>
                 <img src={NotFound} alt='Not Found' className='mb-1' />
                 <p className='text-grey-1'>No Drink is Found</p>
               </div>
             </div>
-          )}
+          ) : (
+            <div>
+            </div>
+         )}
         </div>
       </div>
       <div className="header__button">
