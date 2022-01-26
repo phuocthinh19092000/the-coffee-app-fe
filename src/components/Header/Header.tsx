@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, ChangeEvent } from 'react';
 import OTSVLogo from '../../share/assets/img/OTSVLogo.png';
 import SearchVector from '../../share/assets/vector/iconSearch.svg';
 import CancelVector from '../../share/assets/vector/cancelVector.svg';
@@ -18,6 +18,7 @@ import Product from '../../interfaces/product';
 import { useAppDispatch } from '../../storage/hooks';
 import { useSelector } from 'react-redux';
 import { getSearchItems, selectSearchState } from '../../features/search/action/getSearchItemData';
+import useDebounce from '../../Hook/useDebounce';
 type Props = {
   className: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -30,11 +31,10 @@ const Header = (props: Props) => {
   const [keyword, setKeyword] = useState('');
   const [displaySearchList, setDisplaySearchList] = useState(false);
   const searchItems = useSelector(selectSearchState);
-
+  const debouncedKeyword = useDebounce(keyword, 1000)
   const dispatch = useAppDispatch();
-
   const DivSearchItemsRef = useRef<HTMLDivElement>(null);
-  const handleSearchDrink: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+  const handleSearchDrink: React.ChangeEventHandler<HTMLInputElement> = (event: ChangeEvent<HTMLInputElement>) => {
     setKeyword(event.target.value);
   };
 
@@ -58,7 +58,7 @@ const Header = (props: Props) => {
     } else {
       setDisplaySearchList(false);
     }
-  }, [dispatch, keyword]);
+  }, [debouncedKeyword]);
 
   const history = useHistory();
   const goHome = () => {
