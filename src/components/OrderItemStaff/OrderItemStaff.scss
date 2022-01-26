@@ -8,15 +8,13 @@
   @apply w-[200px] text-ellipsis overflow-hidden whitespace-nowrap;
 }
 
-
 .order-item-staff {
   @apply flex flex-row w-fit h-fit items-center rounded-[8px] bg-white px-[12px] py-[10px] relative;
-  box-shadow: 0px 2px 4px $box-shadow;
   &__img {
     @apply w-[56px] h-[56px];
   }
   &-right {
-    @apply  w-2; 
+    @apply w-2;
     &__avatar {
       @apply w-[20px] absolute top-[12px];
     }
@@ -26,7 +24,7 @@
   }
   &__alarm {
     @apply w-[40px] absolute bottom-[4px] right-[42px];
-  } 
+  }
 }
 
 .order-detail-staff {

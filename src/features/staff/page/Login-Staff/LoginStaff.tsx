@@ -8,20 +8,20 @@ import LinkedinIcon from '../../../../share/assets/vector/VectorLinkedin.svg';
 
 const LoginStaff = () => {
   return (
-    <div className='flex flex-col justify-center items-center'>
-      <Card className='card card--center'>
-        <img src={StaffImg} alt='Login Staff' className='mb-5' />
-        <div className='w-full'>
+    <div className="flex flex-col justify-center items-center">
+      <Card className="card card--center">
+        <img src={StaffImg} alt="Login Staff" className="mb-5" />
+        <div className="w-full">
           <FormLoginStaff />
         </div>
         <div>
-          <div className='brand-media'>
-            <Icon href='https://www.facebook.com/OneTechStopVietnam/' src={FacebookIcon} className='icon' />
-            <Icon href='https://www.instagram.com/OneTechStopVietnam/' src={InstaIcon} className='icon' />
-            <Icon href='https://www.linkedin.com/OneTechStopVietnam/' src={LinkedinIcon} className='icon' />
+          <div className="brand-media">
+            <Icon href="https://www.facebook.com/OneTechStopVietnam/" src={FacebookIcon} className="icon" />
+            <Icon href="https://www.instagram.com/OneTechStopVietnam/" src={InstaIcon} className="icon" />
+            <Icon href="https://www.linkedin.com/OneTechStopVietnam/" src={LinkedinIcon} className="icon" />
           </div>
-          <div className='card__content'>
-            <p className='login-staff '>ONE TECH STOP VIET NAM</p>
+          <div className="card__content">
+            <p className="login-staff ">ONE TECH STOP VIET NAM</p>
           </div>
         </div>
       </Card>

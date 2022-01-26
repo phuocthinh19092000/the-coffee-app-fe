@@ -1,4 +1,3 @@
-import { TabName } from '../../../enum/TabName';
 import './LeftSideBarItem.scss';
 type Props = {
   onClickChangeTab(): void;

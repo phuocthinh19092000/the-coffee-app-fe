@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { OrderStatus } from '../../../enum/Order';
 import Order from '../../../interfaces/order';
 import { RootState } from '../../../storage';
@@ -48,7 +48,11 @@ export const getOrdersByStatus = createAsyncThunk(
 const orderByStatusSlice = createSlice({
   name: 'orderByStatus',
   initialState,
-  reducers: {},
+  reducers: {
+    addNewOrder: (state, action: PayloadAction<Order>) => {
+      state.data.orderStatusNew.push(action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getOrdersByStatus.pending, (state) => {
@@ -70,7 +74,6 @@ const orderByStatusSlice = createSlice({
             state.data.orderStatusReady = action.payload.orders;
             break;
         }
-        
       })
       .addCase(getOrdersByStatus.rejected, (state, action) => {
         state.loading = 'rejected';
@@ -80,5 +83,5 @@ const orderByStatusSlice = createSlice({
 });
 
 export const selectOrderByStatusState = (state: RootState) => state.orderByStatus.data;
-
+export const { addNewOrder } = orderByStatusSlice.actions;
 export default orderByStatusSlice.reducer;
