@@ -39,6 +39,12 @@ module.exports = {
       outline: '#cac3c3',
       green: '#499e3b',
     },
+    screens: {
+      'sm': '375px', //mobile screen
+      'md': '768px', //tablet screen
+      'lg': '1152px', //laptop screen
+      'xl': '1440px', //desktop screen
+    },
     extend: {
       spacing: {
         0.5: '0.5rem',
