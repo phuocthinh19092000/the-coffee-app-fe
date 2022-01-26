@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import OTSVLogo from '../../share/assets/img/OTSVLogo.png';
 import SearchVector from '../../share/assets/vector/iconSearch.svg';
 import CoffeeImg from '../../share/assets/img/CoffeeImg.png';
+import NotFound from '../../share/assets/vector/NotFoundIcon.svg'
 import Input from '../Input/Input';
 import Button from '../Button/Index';
 import './Header.scss';
@@ -83,16 +84,24 @@ const Header = (props: Props) => {
         />
         <div ref={DivSearchItemsRef}>
           {displaySearchList && (
-            <div className="search-list">
-              {searchList.map((searchItem) => (
-                <SearchItem
-                  key={searchItem.id}
-                  avatarUrl={CoffeeImg}
-                  name={searchItem.name}
-                  price={searchItem.price.toString()}
-                  onClick={() => handleSearchPopup(searchItem)}
-                />
-              ))}
+            // TODO: Integrate API search items
+            //
+            // <div className="search-list">
+            //   {searchList.map((searchItem) => (
+            //     <SearchItem
+            //       key={searchItem.id}
+            //       avatarUrl={CoffeeImg}
+            //       name={searchItem.name}
+            //       price={searchItem.price.toString()}
+            //       onClick={() => handleSearchPopup(searchItem)}
+            //     />
+            //   ))}
+            // </div>
+            <div className='not-found'>
+              <div className='not-found__group'>
+                <img src={NotFound} alt='Not Found' className='mb-1' />
+                <p className='text-grey-1'>No Drink is Found</p>
+              </div>
             </div>
           )}
         </div>
@@ -107,7 +116,7 @@ const Header = (props: Props) => {
           </>
         ) : (
           <>
-            <button className="header__button-toggle mt-15" onClick={toggleTheme}>
+            <button className="header__button-toggle mt-1" onClick={toggleTheme}>
               {theme === 'Light' ? <HiMoon size={40} /> : <CgSun size={40} />}
             </button>
             <Button className="btn btn-primary btn-login" titleButton="Login" onClick={props.onClick} />

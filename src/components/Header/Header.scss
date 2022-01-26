@@ -18,9 +18,8 @@
 
   &__logo {
     height: inherit;
-    margin: 12.45px 0 12.45px 20px;
     cursor: pointer;
-    margin-top: 50px;
+    margin: 50px 0 12.45px 20px;
   }
 
   &__search-block {
@@ -74,6 +73,9 @@
     border: 3px solid $black-color;
   }
 }
-.mt-15 {
-  margin-top: 15px;
+.not-found {
+  @apply bg-white absolute top-[70px] w-[440px] rounded-lg;
+  &__group {
+    @apply flex flex-col justify-center text-center items-center p-1;
+  }
 }
