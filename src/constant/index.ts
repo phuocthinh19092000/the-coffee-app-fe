@@ -1,1 +1,1 @@
-export * from './currencySymbol';
+export * from './currencySymbol.constant';
