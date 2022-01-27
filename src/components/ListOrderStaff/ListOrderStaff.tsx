@@ -1,3 +1,4 @@
+import { log } from 'console';
 import { useContext, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { ColumnOrderStatus, OrderStatus, SocketEvent } from '../../enum';
@@ -17,12 +18,16 @@ const ListOrderStaff = () => {
   const dispatch = useAppDispatch();
   const ordersByStatus = useSelector(selectOrderByStatusState);
   const socket = useContext(SocketContext);
+
   useEffect(() => {
     dispatch(getOrdersByStatus(OrderStatus.NEW)).unwrap();
     dispatch(getOrdersByStatus(OrderStatus.PROCESSING)).unwrap();
     dispatch(getOrdersByStatus(OrderStatus.READY_FOR_PICKUP)).unwrap();
+
     onListenEvent(socket, SocketEvent.CREATE_ORDER_EVENT, (order) => {
       dispatch(updateOrder(order, OrderStatus.NEW));
+      const audio = new Audio('order.mp3');
+      audio.play();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
