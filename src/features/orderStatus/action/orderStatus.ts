@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { OrderStatus } from '../../../enum/Order';
 import Order from '../../../interfaces/order';
 import { RootState } from '../../../storage';
@@ -45,16 +45,39 @@ export const getOrdersByStatus = createAsyncThunk(
   },
 );
 
+function prepare(order: Order, newStatus: OrderStatus) {
+  return {
+    payload: {
+      order,
+      newStatus,
+    },
+  };
+}
+export const updateOrder = createAction('orderByStatus/addOrder', prepare);
+
 const orderByStatusSlice = createSlice({
   name: 'orderByStatus',
   initialState,
-  reducers: {
-    addNewOrder: (state, action: PayloadAction<Order>) => {
-      state.data.orderStatusNew.push(action.payload);
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(updateOrder, (state, action) => {
+        switch (action.payload.newStatus) {
+          case OrderStatus.NEW:
+            state.data.orderStatusNew.push(action.payload.order);
+            break;
+          case OrderStatus.PROCESSING:
+            state.data.orderStatusProcessing.push(action.payload.order);
+            state.data.orderStatusNew.filter((order) => order.id !== action.payload.order.id);
+            break;
+          case OrderStatus.READY_FOR_PICKUP:
+            state.data.orderStatusReady.push(action.payload.order);
+            state.data.orderStatusProcessing.filter((order) => order.id !== action.payload.order.id);
+            break;
+          case OrderStatus.CANCELED:
+            state.data.orderStatusNew.filter((order) => order.id !== action.payload.order.id);
+        }
+      })
       .addCase(getOrdersByStatus.pending, (state) => {
         state.loading = 'pending';
       })
@@ -83,5 +106,4 @@ const orderByStatusSlice = createSlice({
 });
 
 export const selectOrderByStatusState = (state: RootState) => state.orderByStatus.data;
-export const { addNewOrder } = orderByStatusSlice.actions;
 export default orderByStatusSlice.reducer;

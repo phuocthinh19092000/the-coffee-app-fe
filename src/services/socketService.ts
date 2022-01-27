@@ -1,5 +1,3 @@
-import { ActionCreatorWithPayload, AnyAction } from '@reduxjs/toolkit';
-import { Dispatch } from 'react';
 import { io, Socket } from 'socket.io-client';
 import Order from '../interfaces/order';
 
@@ -16,11 +14,6 @@ export const initSocketForStaff = (URL: string, event: string) => {
   return socket;
 };
 
-export const onListenEvent = (
-  socket: Socket,
-  dispatch: Dispatch<AnyAction>,
-  action: ActionCreatorWithPayload<Order, string>,
-  event: string,
-) => {
-  socket.on(event, (data: Order) => dispatch(action(data)));
+export const onListenEvent = (socket: Socket, event: string, callback: (order: Order) => void) => {
+  socket.on(event, (data: Order) => callback(data));
 };

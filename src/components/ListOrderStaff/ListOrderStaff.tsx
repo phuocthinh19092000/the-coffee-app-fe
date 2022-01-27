@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { ColumnOrderStatus, OrderStatus, SocketEvent } from '../../enum';
 import {
-  addNewOrder,
+  updateOrder,
   getOrdersByStatus,
   selectOrderByStatusState,
 } from '../../features/orderStatus/action/orderStatus';
@@ -21,13 +21,11 @@ const ListOrderStaff = () => {
     dispatch(getOrdersByStatus(OrderStatus.NEW)).unwrap();
     dispatch(getOrdersByStatus(OrderStatus.PROCESSING)).unwrap();
     dispatch(getOrdersByStatus(OrderStatus.READY_FOR_PICKUP)).unwrap();
+    onListenEvent(socket, SocketEvent.CREATE_ORDER_EVENT, (order) => {
+      dispatch(updateOrder(order, OrderStatus.NEW));
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    onListenEvent(socket, dispatch, addNewOrder, SocketEvent.SEND_TO_STAFF_EVENT);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socket]);
 
   return (
     <div className="list-order">
