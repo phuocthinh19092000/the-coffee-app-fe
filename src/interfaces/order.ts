@@ -17,3 +17,8 @@ export default interface Order {
   userId: string;
   quantityBilled: number;
 }
+
+export interface OrderSocket {
+  order: Order;
+  newOrderStatus?: string;
+}

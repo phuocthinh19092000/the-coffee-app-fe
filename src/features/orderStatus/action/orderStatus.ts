@@ -66,16 +66,26 @@ const orderByStatusSlice = createSlice({
           case OrderStatus.NEW:
             state.data.orderStatusNew.push(action.payload.order);
             break;
+
           case OrderStatus.PROCESSING:
             state.data.orderStatusProcessing.push(action.payload.order);
-            state.data.orderStatusNew.filter((order) => order.id !== action.payload.order.id);
+            state.data.orderStatusNew = state.data.orderStatusNew.filter(
+              (order) => order.id !== action.payload.order.id,
+            );
             break;
+
           case OrderStatus.READY_FOR_PICKUP:
             state.data.orderStatusReady.push(action.payload.order);
-            state.data.orderStatusProcessing.filter((order) => order.id !== action.payload.order.id);
+            state.data.orderStatusProcessing = state.data.orderStatusProcessing.filter(
+              (order) => order.id !== action.payload.order.id,
+            );
             break;
+
           case OrderStatus.CANCELED:
-            state.data.orderStatusNew.filter((order) => order.id !== action.payload.order.id);
+            state.data.orderStatusNew = state.data.orderStatusNew.filter(
+              (order) => order.id !== action.payload.order.id,
+            );
+            break;
         }
       })
       .addCase(getOrdersByStatus.pending, (state) => {

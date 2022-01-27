@@ -23,13 +23,29 @@ const ListOrderStaff = () => {
     dispatch(getOrdersByStatus(OrderStatus.NEW)).unwrap();
     dispatch(getOrdersByStatus(OrderStatus.PROCESSING)).unwrap();
     dispatch(getOrdersByStatus(OrderStatus.READY_FOR_PICKUP)).unwrap();
+    onListenEvent(socket, SocketEvent.HANDLE_ORDER_EVENT, (data) => {
+      if (data.newOrderStatus) {
+        switch (data.newOrderStatus) {
+          case OrderStatus.PROCESSING:
+            dispatch(updateOrder(data.order, OrderStatus.PROCESSING));
+            break;
 
-    onListenEvent(socket, SocketEvent.CREATE_ORDER_EVENT, (order) => {
-      dispatch(updateOrder(order, OrderStatus.NEW));
-      const audio = new Audio('order.mp3');
-      audio.play();
+          case OrderStatus.READY_FOR_PICKUP:
+            dispatch(updateOrder(data.order, OrderStatus.READY_FOR_PICKUP));
+            break;
+
+          case OrderStatus.CANCELED:
+            dispatch(updateOrder(data.order, OrderStatus.CANCELED));
+            break;
+        }
+      } else {
+        dispatch(updateOrder(data.order, OrderStatus.NEW));
+        const audio = new Audio('order.mp3');
+        audio.play();
+      }
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
