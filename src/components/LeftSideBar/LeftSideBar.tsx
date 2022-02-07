@@ -20,7 +20,7 @@ const LeftSideBar = (props: Props) => {
   return (
     <div className="left-side-bar">
       <div className="left-side-bar__img">
-        <img src={Logo} alt="logo" className="w-[100px]" onClick={goHome} />
+        <img src={Logo} alt="logo" className="left-side-bar__img-logo" onClick={goHome} />
       </div>
       <div className="left-side-bar__group-item">
         <LeftSideBarItem
@@ -46,8 +46,8 @@ const LeftSideBar = (props: Props) => {
         />
       </div>
       <div className="left-side-bar__logout">
-        <img src={LogoutIcon} alt="" className="mr-[10px] w-fit h-fit" />
-        <span className="text-accent-1">Log Out</span>
+          <img src={LogoutIcon} alt="" className="md:mr-[5px] lg:mr-[10px] md:w-[12px] md:h-[12px] md:w-[16px] md:h-[16px]" />
+          <span className="text-accent-1">Log Out</span>
       </div>
     </div>
   );

@@ -14,8 +14,10 @@ const DashBoard = () => {
   return (
     <SocketProvider>
       <div className="flex">
-        <LeftSideBar currentTab={tabName} onClickChangeTab={(tabName: TabName) => handleClickChangeTab(tabName)} />
+          <LeftSideBar currentTab={tabName} onClickChangeTab={(tabName: TabName) => handleClickChangeTab(tabName)} />
+        <div className="w-full">
         <ListOrderStaff />
+        </div>
       </div>
     </SocketProvider>
   );
