@@ -1,4 +1,3 @@
-import { log } from 'console';
 import { useContext, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { ColumnOrderStatus, OrderStatus, SocketEvent } from '../../enum';
