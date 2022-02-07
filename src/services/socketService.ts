@@ -1,5 +1,5 @@
 import { io, Socket } from 'socket.io-client';
-import Order from '../interfaces/order';
+import Order, { OrderSocket } from '../interfaces/order';
 
 const ROOM_FOR_STAFF = 'staffRoom';
 
@@ -14,6 +14,6 @@ export const initSocketForStaff = (URL: string, event: string) => {
   return socket;
 };
 
-export const onListenEvent = (socket: Socket, event: string, callback: (order: Order) => void) => {
-  socket.on(event, (data: Order) => callback(data));
+export const onListenEvent = (socket: Socket, event: string, callback: (order: OrderSocket) => void) => {
+  socket.on(event, (data: OrderSocket) => callback(data));
 };

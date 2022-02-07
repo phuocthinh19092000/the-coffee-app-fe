@@ -1,5 +1,4 @@
 export enum SocketEvent {
-  CREATE_ORDER_EVENT = 'createOrder',
-  UPDATE_ORDER_EVENT = 'updateOrder',
+  HANDLE_ORDER_EVENT = 'handleOrder',
   JOIN_ROOM_STAFF_EVENT = 'joinRoomStaff',
 }
