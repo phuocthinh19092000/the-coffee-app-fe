@@ -20,7 +20,7 @@ export const initialState: OrderDetail = {
   orderData: {
     quantity: 1,
     note: '',
-    product: '',
+    productId: '',
   },
 };
 
@@ -44,7 +44,7 @@ const orderSlice = createSlice({
       state.orderData.quantity -= 1;
     },
     getProductId: (state, action: PayloadAction<string>) => {
-      state.orderData.product = action.payload;
+      state.orderData.productId = action.payload;
     },
     getNote: (state, action: PayloadAction<string>) => {
       state.orderData.note = action.payload;

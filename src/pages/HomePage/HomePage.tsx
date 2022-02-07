@@ -20,7 +20,6 @@ const HomePage = () => {
 
   onMessageListener().then((payload: MessagingPayload) => {
     if (payload.data?.data) {
-      console.log('In payload notification', payload.data.data);
       const dataOrder = JSON.parse(payload.data.data);
       setDataNotification(dataOrder);
     }

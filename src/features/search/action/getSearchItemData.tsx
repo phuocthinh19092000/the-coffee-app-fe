@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../../storage';
-import searchAPI from '../api/searchAPI'
+import searchAPI from '../api/searchAPI';
 import Product from '../../../interfaces/product';
 
 export interface ProductState {
@@ -18,14 +18,17 @@ export const initialState: ProductState = {
   },
 };
 
-export const getSearchItems = createAsyncThunk('/products/search?keyword=name', async (name: string, { rejectWithValue }) => {
-  try {
-    const allItems = await searchAPI.getByName(name);
-    return allItems.data;
-  } catch (error: any) {
-    return rejectWithValue(error.response);
-  }
-});
+export const getSearchItems = createAsyncThunk(
+  '/products/search?keyword=name',
+  async (name: string, { rejectWithValue }) => {
+    try {
+      const allItems = await searchAPI.getByName(name);
+      return allItems.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response);
+    }
+  },
+);
 
 const searchSlice = createSlice({
   name: 'search',
@@ -44,7 +47,7 @@ const searchSlice = createSlice({
         state.loading = 'rejected';
         state.error = action.payload;
       });
-  }
+  },
 });
 
 export const selectSearchState = (state: RootState) => state.search.data;

@@ -5,10 +5,10 @@ import DrinkItemDetail from '../../../order/components/DrinkDetail/DrinkItemDeta
 import PopUpFinishOrder from '../../../../components/PopUpFinishOrder/PopUpFinishOrder';
 import PopUpRanOutUnit from '../../../../components/PopUpRanOutUnit/PopUpRanOutUnit';
 import PopUpLoginCenter from '../../../auth/components/PopUpLoginCenter/PopUpLoginCenter';
-import Category from '../../../../interfaces/product';
 import Product from '../../../../interfaces/product';
 import { useSelector } from 'react-redux';
 import { getProductId, placeOrder, resetOrder, selectOrderState } from '../../../order/actions/order';
+import { selectSearchState } from '../../../search/action/getSearchItemData';
 import { useAppDispatch } from '../../../../storage/hooks';
 import { getFreeUnit, selectUserState, updateFreeUnit } from '../../../auth/actions/auth';
 import { ROLE } from '../../../../enum';
@@ -27,11 +27,12 @@ enum showPopupCase {
 function ListDrinkItem(props: Props) {
   const [step, setStep] = useState(1);
   const [isOpenPopUp, setIsOpenPopUp] = useState(false);
-  const [itemDrink, setItemDrink] = useState({} as Category);
+  const [itemDrink, setItemDrink] = useState({} as Product);
   const dispatch = useAppDispatch();
   const order = useSelector(selectOrderState);
   const user = useSelector(selectUserState);
-  const togglePopup = (item: Category) => {
+  const listProductItemsSearch = useSelector(selectSearchState);
+  const togglePopup = (item: Product) => {
     setItemDrink(item);
     setIsOpenPopUp(!isOpenPopUp);
     dispatch(getProductId(item.id));
@@ -62,6 +63,17 @@ function ListDrinkItem(props: Props) {
       setStep(showPopupCase.showDrinkItemDetail);
     }
   }, [user.role]);
+
+  useEffect(() => {
+    if (order.productId) {
+      const itemSearchClicked = listProductItemsSearch.find((product) => product.id === order.productId);
+      if (itemSearchClicked) {
+        setItemDrink(itemSearchClicked);
+        setIsOpenPopUp(true);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [order.productId]);
 
   const exitPopUp = () => {
     dispatch(resetOrder());

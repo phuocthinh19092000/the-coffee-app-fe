@@ -1,5 +1,5 @@
 import { io, Socket } from 'socket.io-client';
-import Order, { OrderSocket } from '../interfaces/order';
+import { OrderSocket } from '../interfaces/order';
 
 const ROOM_FOR_STAFF = 'staffRoom';
 
