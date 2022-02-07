@@ -20,6 +20,7 @@
     height: inherit;
     cursor: pointer;
     margin: 50px 0 12.45px 20px;
+    z-index: -2;
   }
 
   &__search-block {
@@ -30,7 +31,7 @@
 
   &__button {
     display: flex;
-
+    z-index: -2;
     &-toggle {
       background-color: inherit;
       margin-right: 30px;
@@ -58,9 +59,11 @@
   overflow: auto;
   max-height: 544px;
   background-color: $grey-4-color;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::before {
+    @include background-blur-header-search;
+  }
   &::-webkit-scrollbar {
     display: none;
   }
@@ -79,5 +82,8 @@
   @apply bg-white absolute top-[70px] w-[440px] rounded-lg;
   &__group {
     @apply flex flex-col justify-center text-center items-center p-1;
+  }
+  &::before {
+    @include background-blur-header-search;
   }
 }
