@@ -21,7 +21,7 @@ const OrderItemStaff = (props: Props) => {
 
   const onUpdateStatusHandler = async () => {
     const valueNewStatus = props.order.orderStatus.value + 1;
-    await dispatch(updateStatusOrder({ id: props.order.id, newStatus: valueNewStatus, userId: props.order.userId }));
+    await dispatch(updateStatusOrder({ id: props.order.id, newStatus: valueNewStatus }));
   };
 
   return (
