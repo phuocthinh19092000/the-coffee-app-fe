@@ -1,15 +1,18 @@
 .left-side-bar {
-  @apply w-fit h-screen bg-white mr-1 sticky top-0 left-0 self-start;
+  @apply md:w-[90px] lg:w-[135px] h-screen bg-white mr-1 sticky top-0 left-0;
 
   &__img {
-    @apply flex items-center justify-center mt-2.5;
+    @apply flex items-center justify-center md:mt-[12px] lg:mt-2.5;
+    &-logo {
+      @apply md:w-[67px] lg:w-[100px];
+    }
   }
 
   &__group-item {
-    @apply flex flex-col text-center items-center justify-center px-1.5;
+    @apply flex flex-col text-center items-center justify-center md:py-1.5 lg:py-0 px-1.5;
   }
 
   &__logout {
-    @apply flex px-1.25 absolute bottom-1 items-center;
+    @apply flex justify-center sticky top-[95vh] items-center;
   }
 }

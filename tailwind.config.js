@@ -42,8 +42,8 @@ module.exports = {
     screens: {
       'sm': '375px', //mobile screen
       'md': '768px', //tablet screen
-      'lg': '1152px', //laptop screen
-      'xl': '1440px', //desktop screen
+      'lg': '1024px', //laptop screen
+      'xl': '1366px', //desktop screen
     },
     extend: {
       spacing: {

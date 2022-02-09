@@ -1,41 +1,41 @@
 @import '../../share/assets/scss/variables.scss';
 
 @mixin textPriceAndNote {
-  @apply font-proximaNova text-grey-5 font-semibold leading-[19px] text-2 not-italic tracking-[0.1px] w-[180px];
+  @apply font-proximaNova text-grey-5 font-semibold leading-[19px] text-2 not-italic tracking-[0.1px];
 }
 
 @mixin textFlow {
-  @apply w-[200px] text-ellipsis overflow-hidden whitespace-nowrap;
+  @apply md:w-[90px] lg:w-[140px] xl:w-[220px] text-ellipsis overflow-hidden whitespace-nowrap;
 }
 
 .order-item-staff {
-  @apply flex flex-row w-fit h-fit items-center rounded-[8px] bg-white px-[12px] py-[10px] relative;
+  @apply flex flex-row h-fit items-center rounded-[8px] bg-white px-1.25 py-0.5 relative;
   &__img {
-    @apply w-[56px] h-[56px];
-  }
-  &-right {
-    @apply w-2;
-    &__avatar {
-      @apply w-[20px] absolute top-[12px];
-    }
-    &__next-icon {
-      @apply w-[20px] absolute bottom-[12px] cursor-pointer;
-    }
-  }
-  &__alarm {
-    @apply w-[40px] absolute bottom-[4px] right-[42px];
+    @apply md:w-[37px] lg:w-[56px] md:h-[37px] lg:h-[56px]  md:mr-1 lg:mr-1.5;
   }
 }
 
 .order-detail-staff {
-  @apply flex flex-col items-start justify-between w-[250px] ml-[24px];
+  @apply flex flex-row justify-between lg:mr-1;
+  &__group {
+    @apply flex flex-col items-start justify-between;
+  }
   &__product {
     @apply font-semibold leading-[21px] text-[18px] tracking-[0.15px] mb-[8px];
     @include textFlow();
   }
+  &__avatar {
+    @apply md:w-[13px] lg:w-[20px] md:mt-[5px] lg:mt-0 absolute right-0.5;
+  }
   &__price {
     @include textPriceAndNote();
     @include textFlow();
+  }
+  &__alarm {
+    @apply md:w-[13px] lg:w-[18px] md:mt-[5px] lg:mt-0 ;
+  }
+  &__icon {
+    @apply md:w-[13px] lg:w-[18px] md:mt-[5px] lg:mt-0 cursor-pointer absolute right-0.5;
   }
   &__note {
     @apply mt-[8px];
