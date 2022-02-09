@@ -73,6 +73,7 @@ const authSlice = createSlice({
         return initialState;
       }
     },
+    resetAuthState: () => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -114,5 +115,5 @@ const authSlice = createSlice({
 
 export const selectLoginState = (state: RootState) => state.authData.data.jwtAccessToken;
 export const selectUserState = (state: RootState) => state.authData.data.userInfor;
-export const { updateFreeUnit, checkRole } = authSlice.actions;
+export const { updateFreeUnit, checkRole, resetAuthState } = authSlice.actions;
 export default authSlice.reducer;

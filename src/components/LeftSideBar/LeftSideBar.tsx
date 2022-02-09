@@ -7,15 +7,23 @@ import LogoutIcon from '../../share/assets/img/logout-icon.png';
 import LeftSideBarItem from './Items/LeftSideBarItem';
 import { TabName } from '../../enum/TabName';
 import { useHistory } from 'react-router-dom';
+import { useAppDispatch } from '../../storage/hooks';
+import { resetAuthState } from '../../features/auth/actions/auth';
 type Props = {
   onClickChangeTab(tabName: TabName): void;
   currentTab: TabName;
 };
 const LeftSideBar = (props: Props) => {
   const history = useHistory();
+  const dispatch = useAppDispatch();
   const goHome = () => {
     let path = `/`;
     history.push(path);
+  };
+
+  const handleClickLogout = () => {
+    dispatch(resetAuthState());
+    history.push(`/login`);
   };
   return (
     <div className="left-side-bar">
@@ -45,9 +53,13 @@ const LeftSideBar = (props: Props) => {
           onClickChangeTab={() => props.onClickChangeTab(TabName.REPORT)}
         />
       </div>
-      <div className="left-side-bar__logout">
-          <img src={LogoutIcon} alt="" className="md:mr-[5px] lg:mr-[10px] md:w-[12px] md:h-[12px] md:w-[16px] md:h-[16px]" />
-          <span className="text-accent-1">Log Out</span>
+      <div className="left-side-bar__logout" onClick={() => handleClickLogout()}>
+        <img
+          src={LogoutIcon}
+          alt=""
+          className="md:mr-[5px] lg:mr-[10px] md:w-[12px] md:h-[12px] md:w-[16px] md:h-[16px]"
+        />
+        <span className="text-accent-1">Log Out</span>
       </div>
     </div>
   );
