@@ -2,7 +2,7 @@
   @apply md:w-[90px] lg:w-[135px] h-screen bg-white mr-1 sticky top-0 left-0;
 
   &__img {
-    @apply flex items-center justify-center md:mt-[12px] lg:mt-2.5;
+    @apply flex items-center justify-center md:mt-0.5 lg:mt-1;
     &-logo {
       @apply md:w-[67px] lg:w-[100px];
     }
