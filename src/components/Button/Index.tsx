@@ -1,4 +1,5 @@
 import './styles.scss';
+import React from 'react';
 type Props = {
   className: string;
   titleButton: string;
