@@ -40,9 +40,9 @@ export const initialState: UpdateStatusOrder = {
 
 export const updateStatusOrder = createAsyncThunk(
   '/orders/{id}',
-  async (data: { id: string; newStatus: number; userId: string }, { rejectWithValue }) => {
+  async (data: { id: string; newStatus: number }, { rejectWithValue }) => {
     try {
-      const response = await UpdateStatusOrderApi.updateStatusOrder(data.id, data.newStatus, data.userId);
+      const response = await UpdateStatusOrderApi.updateStatusOrder(data.id, data.newStatus);
       return response.data;
     } catch (error: any) {
       return rejectWithValue(error.response);
