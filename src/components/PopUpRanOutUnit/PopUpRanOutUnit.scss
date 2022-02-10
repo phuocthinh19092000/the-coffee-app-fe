@@ -17,4 +17,12 @@
     @apply fixed z-10 left-0 top-0 w-full h-full overflow-auto;
     @include background-blur;
   }
+
+  &__group {
+    @apply flex flex-col w-full items-center pt-15;
+  }
+
+  &__button {
+    @apply w-10/12;
+  }
 }
