@@ -13,6 +13,9 @@
   }
 
   &__logout {
-    @apply flex justify-center sticky top-[95vh] items-center;
+    @apply flex px-1.25 absolute bottom-1 items-center;
+    :hover {
+      cursor: pointer;
+    }
   }
 }
