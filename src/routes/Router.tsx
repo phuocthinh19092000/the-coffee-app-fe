@@ -4,7 +4,6 @@ import ComingSoonPage from '../pages/ComingSoonPage/ComingSoonPage';
 import HomePage from '../pages/HomePage/HomePage';
 import LoginStaff from '../features/staff/page/Login-Staff/LoginStaff';
 import DashBoard from '../features/staff/page/DashBoard/DashBoard';
-// import PrivateRoute from './PrivateRoute/PrivateRoute';
 import ProtectedSwitch from './ProtectedSwitch/ProtectedSwitch';
 import { ROLE } from '../enum/Roles';
 import { PROTECTED_STAFF_PATH } from '../constant';
