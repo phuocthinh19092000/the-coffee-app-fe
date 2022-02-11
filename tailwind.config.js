@@ -5,11 +5,11 @@ module.exports = {
       proximaNova: ['"proxima-nova"', 'sans-serif'],
     },
     fontSize: {
-        1: '12px',
-        2: '16px',
-        2.5: '18px',
-        3: '22px',
-        4: '26px',
+      1: '12px',
+      2: '16px',
+      2.5: '18px',
+      3: '22px',
+      4: '26px',
     },
     colors: {
       primary: {
@@ -20,7 +20,7 @@ module.exports = {
         1: '#D50F67',
         2: '#ED619F',
         3: '#F499C1',
-        4: '#FFF3F9'
+        4: '#FFF3F9',
       },
       black: '#333333',
       white: '#FFFFFF',
@@ -30,6 +30,7 @@ module.exports = {
         3: '#DBDBDB',
         4: '#F2F2F2',
         5: '#666666',
+        6: '#E6E6E6',
       },
       'vendor-grey-4': '#E6E6E6',
       brown: '#502f13',
@@ -40,10 +41,10 @@ module.exports = {
       green: '#499e3b',
     },
     screens: {
-      'sm': '375px', //mobile screen
-      'md': '768px', //tablet screen
-      'lg': '1024px', //laptop screen
-      'xl': '1366px', //desktop screen
+      sm: '375px', //mobile screen
+      md: '768px', //tablet screen
+      lg: '1024px', //laptop screen
+      xl: '1366px', //desktop screen
     },
     extend: {
       spacing: {
@@ -60,7 +61,7 @@ module.exports = {
         5: '5rem',
         6: '6rem',
         15: '15%',
-        50: '50%'
+        50: '50%',
       },
     },
   },
