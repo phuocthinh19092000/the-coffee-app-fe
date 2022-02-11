@@ -27,7 +27,11 @@ export const initialState: UpdateStatusOrder = {
     },
     note: '',
     quantity: 0,
-    userId: '',
+    user: {
+      id: '',
+      name: '',
+      phoneNumber: '',
+    },
     createdAt: '',
     id: '',
   },

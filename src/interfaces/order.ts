@@ -14,7 +14,11 @@ export default interface Order {
     name: string;
     value: number;
   };
-  userId: string;
+  user: {
+    id: string;
+    name: string;
+    phoneNumber: string;
+  };
   quantityBilled: number;
 }
 

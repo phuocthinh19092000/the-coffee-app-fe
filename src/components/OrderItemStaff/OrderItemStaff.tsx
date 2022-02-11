@@ -10,53 +10,81 @@ import { useAppDispatch } from '../../storage/hooks';
 import { updateStatusOrder } from '../../features/updateOrder/action/updateOrder';
 import { moneyFormat } from '../../utils/MoneyFormat';
 import { VN_CURRENCY_SYMBOL } from '../../constant';
+import OrderDetail from '../OrderDetail/OrderDetail';
 import { sendNotificationRemindPickUpOrder } from '../../features/notifications/action/notification';
+import { useState } from 'react';
 interface Props {
   order: Order;
-  onClickSendNotification?: React.MouseEventHandler<HTMLElement>;
 }
 
 const OrderItemStaff = (props: Props) => {
+  const [isShowDetailOrder, setIsShowDetailOrder] = useState(false);
   const dispatch = useAppDispatch();
+
   let icon = props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP ? iconPickedUp : nextIcon;
 
-  const onUpdateStatusHandler = async () => {
+  const onUpdateStatusHandler = async (e: React.SyntheticEvent) => {
+    e.stopPropagation();
+
     const valueNewStatus = props.order.orderStatus.value + 1;
     await dispatch(updateStatusOrder({ id: props.order.id, newStatus: valueNewStatus }));
   };
 
-  const onRemindOrder = async () => {
+  const onShowDetailOrder = () => {
+    setIsShowDetailOrder(true);
+  };
+
+  const onRemindOrder = async (e: React.SyntheticEvent) => {
+    e.stopPropagation();
+
     const bodyNotificationPickUpOrderApi = {
       orderId: props.order.id,
     };
     await dispatch(sendNotificationRemindPickUpOrder(bodyNotificationPickUpOrderApi));
   };
 
-  return (
-    <div className="order-item-staff">
-      {/* TODO:  get image from API<img src={props.order.product.images} className='order-item__img' alt={props.order.product.images} /> */}
-      <img src={CoffeeImg} className="order-item-staff__img" alt="Avatar Drink" />
+  const onExitFormHandler = () => {
+    setIsShowDetailOrder(false);
+  };
 
-      <div className="order-detail-staff">
-        <b className="order-detail-staff__product">{props.order.product.name}</b>
-        <p className="order-detail-staff__price">
-          {moneyFormat(Number(props.order.product.price))}
-          {VN_CURRENCY_SYMBOL} - Qty: {props.order.quantity}
-        </p>
-        {props.order.note ? <p className="order-detail-staff__note">Note: {props.order.note}</p> : ''}
+  return (
+    <>
+      <div className="order-item-staff" onClick={onShowDetailOrder}>
+        {/* TODO:  get image from API<img src={props.order.product.images} className='order-item__img' alt={props.order.product.images} /> */}
+        <img src={CoffeeImg} className="order-item-staff__img" alt="Avatar Drink" />
+
+        <div className="order-detail-staff">
+          <div className="order-detail-staff__group">
+            <div className="flex flex-row items-start justify-between">
+              <b className="order-detail-staff__product">{props.order.product.name}</b>
+              <img className="order-detail-staff__avatar" src={ADuyMai} alt="Avatar Customer" />
+            </div>
+            <div className="flex">
+              <p className="order-detail-staff__price">
+                {moneyFormat(Number(props.order.product.price))}
+                {VN_CURRENCY_SYMBOL} - Qty: {props.order.quantity}
+              </p>
+              {props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP && (
+                <img
+                  src={alarmIcon}
+                  alt={alarmIcon}
+                  className="order-detail-staff__alarm"
+                  onClick={(e) => onRemindOrder(e)}
+                />
+              )}
+              <img
+                src={icon}
+                alt={icon}
+                className="order-detail-staff__icon"
+                onClick={(e) => onUpdateStatusHandler(e)}
+              />
+            </div>
+            {props.order.note ? <p className="order-detail-staff__note">Note: {props.order.note}</p> : ''}
+          </div>
+        </div>
       </div>
-      <div className="order-item-staff__alarm">
-        {props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP && (
-          <button onClick={onRemindOrder}>
-            <img src={alarmIcon} alt={alarmIcon} />
-          </button>
-        )}
-      </div>
-      <div className="order-item-staff-right">
-        <img className="order-item-staff-right__avatar" src={ADuyMai} alt="Avatar Customer" />
-        <img src={icon} alt={icon} className="order-item-staff-right__next-icon" onClick={onUpdateStatusHandler} />
-      </div>
-    </div>
+      {isShowDetailOrder && <OrderDetail order={props.order} onClickExit={onExitFormHandler} />}
+    </>
   );
 };
 
