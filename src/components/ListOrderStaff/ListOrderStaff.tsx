@@ -13,7 +13,12 @@ import { SocketContext } from '../../utils/socketProvider';
 
 import ColumnOrderStaff from '../ColumnOrderStaff/ColumnOrderStaff';
 import './ListOrderStaff.scss';
-const ListOrderStaff = () => {
+
+type Props = {
+  setIsShowNotification: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const ListOrderStaff = (props: Props) => {
   const dispatch = useAppDispatch();
   const ordersByStatus = useSelector(selectOrderByStatusState);
   const socket = useContext(SocketContext);
@@ -51,7 +56,11 @@ const ListOrderStaff = () => {
     <div className="list-order">
       <ColumnOrderStaff title={ColumnOrderStatus.NEW} listOrder={ordersByStatus.orderStatusNew} />
       <ColumnOrderStaff title={ColumnOrderStatus.PROCESSING} listOrder={ordersByStatus.orderStatusProcessing} />
-      <ColumnOrderStaff title={ColumnOrderStatus.READY_FOR_PICKUP} listOrder={ordersByStatus.orderStatusReady} />
+      <ColumnOrderStaff
+        title={ColumnOrderStatus.READY_FOR_PICKUP}
+        listOrder={ordersByStatus.orderStatusReady}
+        setIsShowNotification={props.setIsShowNotification}
+      />
     </div>
   );
 };

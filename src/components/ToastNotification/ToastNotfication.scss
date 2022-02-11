@@ -1,7 +1,7 @@
 @import '../../share/assets/scss/variables.scss';
 
 .toast-notification {
-  @apply h-fit w-fit py-0.5 px-1 rounded-lg fixed z-20;
+  @apply h-[56px] w-fit py-1 px-1 rounded-lg fixed z-20;
 
   &--success {
     @apply bg-green;

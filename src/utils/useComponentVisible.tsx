@@ -3,15 +3,16 @@ import { useState, useEffect, useRef } from 'react';
 export default function useComponentVisible(initialIsVisible: Boolean) {
   const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible);
   const ref = useRef<HTMLDivElement>(null);
+  const escKeyCode = 27;
 
   const handleHideDropdown = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') {
+    if (event.keyCode === escKeyCode) {
       setIsComponentVisible(false);
     }
   };
 
   const handleClickOutside = (event: Event) => {
-    if (ref.current && !ref.current.contains(event.target as Node)) {
+    if (ref.current && !ref.current.children[0].contains(event.target as Node)) {
       setIsComponentVisible(false);
     }
   };
