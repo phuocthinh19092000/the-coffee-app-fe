@@ -12,26 +12,27 @@ import { moneyFormat } from '../../utils/MoneyFormat';
 import { VN_CURRENCY_SYMBOL } from '../../constant';
 import OrderDetail from '../OrderDetail/OrderDetail';
 import { sendNotificationRemindPickUpOrder } from '../../features/notifications/action/notification';
-import { useState } from 'react';
+import useComponentVisible from '../../utils/useComponentVisible';
 interface Props {
   order: Order;
+  setIsShowNotification?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const OrderItemStaff = (props: Props) => {
-  const [isShowDetailOrder, setIsShowDetailOrder] = useState(false);
+  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
+
   const dispatch = useAppDispatch();
 
   let icon = props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP ? iconPickedUp : nextIcon;
 
   const onUpdateStatusHandler = async (e: React.SyntheticEvent) => {
     e.stopPropagation();
-
     const valueNewStatus = props.order.orderStatus.value + 1;
     await dispatch(updateStatusOrder({ id: props.order.id, newStatus: valueNewStatus }));
   };
 
   const onShowDetailOrder = () => {
-    setIsShowDetailOrder(true);
+    setIsComponentVisible(true);
   };
 
   const onRemindOrder = async (e: React.SyntheticEvent) => {
@@ -41,10 +42,11 @@ const OrderItemStaff = (props: Props) => {
       orderId: props.order.id,
     };
     await dispatch(sendNotificationRemindPickUpOrder(bodyNotificationPickUpOrderApi));
+    props.setIsShowNotification && props.setIsShowNotification(true);
   };
 
   const onExitFormHandler = () => {
-    setIsShowDetailOrder(false);
+    setIsComponentVisible(false);
   };
 
   return (
@@ -65,25 +67,23 @@ const OrderItemStaff = (props: Props) => {
                 {VN_CURRENCY_SYMBOL} - Qty: {props.order.quantity}
               </p>
               {props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP && (
-                <img
-                  src={alarmIcon}
-                  alt={alarmIcon}
-                  className="order-detail-staff__alarm"
-                  onClick={(e) => onRemindOrder(e)}
-                />
+                <img src={alarmIcon} alt={alarmIcon} className="order-detail-staff__alarm" onClick={onRemindOrder} />
               )}
-              <img
-                src={icon}
-                alt={icon}
-                className="order-detail-staff__icon"
-                onClick={(e) => onUpdateStatusHandler(e)}
-              />
+              {props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP ? (
+                <img src={icon} alt={icon} className="order-detail-staff__icon" />
+              ) : (
+                <img src={icon} alt={icon} className="order-detail-staff__icon__next" onClick={onUpdateStatusHandler} />
+              )}
             </div>
             {props.order.note ? <p className="order-detail-staff__note">Note: {props.order.note}</p> : ''}
           </div>
         </div>
       </div>
-      {isShowDetailOrder && <OrderDetail order={props.order} onClickExit={onExitFormHandler} />}
+      {isComponentVisible && (
+        <div ref={ref} className="order-detail--blur">
+          <OrderDetail order={props.order} onClickExit={onExitFormHandler} />
+        </div>
+      )}
     </>
   );
 };

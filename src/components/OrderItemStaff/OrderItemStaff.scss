@@ -4,6 +4,12 @@
   @apply font-proximaNova text-grey-5 font-semibold leading-[19px] text-2 not-italic tracking-[0.1px];
 }
 
+.order-detail--blur {
+  @apply fixed left-0 top-0 w-full h-full overflow-auto;
+  z-index: 1;
+  @include background-blur;
+}
+
 @mixin textFlow {
   @apply md:w-[90px] lg:w-[140px] xl:w-[220px] text-ellipsis overflow-hidden whitespace-nowrap;
 }
@@ -32,10 +38,16 @@
     @include textFlow();
   }
   &__alarm {
-    @apply md:w-[13px] lg:w-[18px] md:mt-[5px] lg:mt-0 ;
+    @apply md:w-[13px] lg:w-[18px] md:mt-[5px] lg:mt-0;
+    &:hover {
+      @apply cursor-pointer;
+    }
   }
   &__icon {
-    @apply md:w-[13px] lg:w-[18px] md:mt-[5px] lg:mt-0 cursor-pointer absolute right-0.5;
+    @apply md:w-[13px] lg:w-[18px] md:mt-[5px] lg:mt-0 absolute right-0.5;
+    &__next {
+      @apply cursor-pointer;
+    }
   }
   &__note {
     @apply mt-[8px];

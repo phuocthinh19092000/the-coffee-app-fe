@@ -6,6 +6,7 @@ import './ColumnOrderStaff.scss';
 type Props = {
   title: ColumnOrderStatus;
   listOrder: Order[];
+  setIsShowNotification?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const ColumnOrderStaff = (props: Props) => {
   return (
@@ -17,7 +18,7 @@ const ColumnOrderStaff = (props: Props) => {
       </div>
       <div className="column-order__content">
         {props.listOrder.map((order) => (
-          <OrderItemStaff order={order} key={order.id} />
+          <OrderItemStaff order={order} key={order.id} setIsShowNotification={props.setIsShowNotification} />
         ))}
       </div>
     </div>

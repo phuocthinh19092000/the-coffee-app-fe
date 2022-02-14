@@ -37,13 +37,15 @@ const OrderDetail = (props: Props) => {
           <img className="order-detail__img" src={avatarDuyMai} alt="Avatar Customer" />
           <div className="order-detail__information-drink dp-center">
             <p>{user.name}</p>
-            <p> {user.phoneNumber} </p>
+            {/* <p> {user.phoneNumber} </p> */}
           </div>
         </div>
       </div>
+
+      {/* //TODO: Hide button cancel order, cancel order feature not for mvp 
       <div className="order-detail__bottom">
         <button className="order-detail__btn-cancel"> Cancel Order </button>
-      </div>
+      </div> */}
     </div>
   );
 };
