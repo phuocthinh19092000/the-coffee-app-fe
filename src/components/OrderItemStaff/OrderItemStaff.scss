@@ -46,7 +46,7 @@
   &__icon {
     @apply md:w-[13px] lg:w-[18px] md:mt-[5px] lg:mt-0 absolute right-0.5;
     &__next {
-      @apply cursor-pointer;
+      @apply cursor-pointer absolute right-0.5;
     }
   }
   &__note {
