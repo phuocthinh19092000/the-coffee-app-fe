@@ -1,0 +1,12 @@
+.dropdown {
+  @apply w-fit h-fit;
+  &__icon {
+    @apply w-[44px] h-[44px] flex justify-center items-center hover:bg-grey-5 hover:rounded-full;
+  }
+  &__list {
+      @apply mt-0.5 bg-white rounded-lg shadow-[0_4px_16px_rgba(34,34,34,0.08)];
+    &-group {
+      @apply w-fit h-fit flex flex-auto p-1;
+    }
+  }
+}

@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './CustomInput.scss';
+
 interface Props {
   type?: string;
   placeholder?: string;
