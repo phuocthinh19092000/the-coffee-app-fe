@@ -29,6 +29,10 @@ $cancel-order-bg-btn: #fff3f9;
   backdrop-filter: blur(5px);
 }
 
+@mixin text-style-vendor-body-2 {
+  @apply font-proximaNova font-normal text-2 leading-[19px] tracking-[0.25px];
+}
+
 @mixin background-blur-header-search {
   content: '';
   position: fixed;

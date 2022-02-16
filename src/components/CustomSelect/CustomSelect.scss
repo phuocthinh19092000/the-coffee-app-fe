@@ -1,5 +1,8 @@
+@import '../../share/assets/scss/variables.scss';
+
 @mixin textStyle {
-  @apply w-[240px] font-proximaNova font-normal text-2 leading-[19px] tracking-[0.25px];
+  @apply w-[240px];
+  @include text-style-vendor-body-2();
 }
 @mixin borderStyle {
   @apply border-solid box-border border-[1px] rounded;
