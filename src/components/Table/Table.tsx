@@ -1,12 +1,14 @@
-import { ProductStatus } from '../../enum';
+import { ProductStatus, UserStatus } from '../../enum';
 import { ProductTable, UserTable } from '../../interfaces';
-import { UserStatus } from '../../enum';
-import './Table.scss';
+import { moneyFormat } from '../../utils/MoneyFormat';
 import Dropdown from '../Dropdown/Dropdown';
+
+import './Table.scss';
 
 type Props = {
   header: Array<string | JSX.Element>;
   body: Array<ProductTable | UserTable>;
+  startIndex?: number;
   isHaveDropdown: boolean;
 };
 
@@ -25,46 +27,54 @@ const Table = (props: Props) => {
       </thead>
 
       <tbody>
-        {body.map((object, index) => (
-          <tr key={index} className="table-body__row">
-            <td key={object.id} className="table-body__cell">
-              {index}
-            </td>
+        {body &&
+          body.map((object, index) => (
+            <tr key={index} className="table-body__row">
+              {props.startIndex && (
+                <td key={object.id} className="table-body__cell">
+                  {props.startIndex + index}
+                </td>
+              )}
 
-            {Object.entries(object).map((obj, index) => {
-              const key = obj[0];
-              const value = obj[1];
+              {Object.entries(object).map((obj, index) => {
+                const key = obj[0];
+                let value = obj[1];
 
-              if (key === 'id') {
-                return;
-              } else if (key === 'images') {
+                if (typeof value === 'number') {
+                  value = moneyFormat(value);
+                }
+
+                if (key === 'id') {
+                  return;
+                } else if (key === 'images') {
+                  return (
+                    <td key={index}>
+                      <img className="table-body__img" src={value} alt="Avatar Drink"></img>
+                    </td>
+                  );
+                }
+
                 return (
-                  <td key={index}>
-                    <img className="table-body__img" src={value} alt="Avatar Drink"></img>
+                  <td
+                    key={index}
+                    className={`table-body__cell ${
+                      value === ProductStatus.OUT_OF_STOCK || value === UserStatus.IN_ACTIVE
+                        ? 'table-body__cell--accent'
+                        : ''
+                    }`}
+                  >
+                    {value}
                   </td>
                 );
-              }
+              })}
 
-              return (
-                <td
-                  key={index}
-                  className={`table-body__cell ${
-                    value === ProductStatus.OUT_OF_STOCK || value === UserStatus.IN_ACTIVE
-                      ? 'table-body__cell--accent'
-                      : ''
-                  }`}
-                >
-                  {value}
+              {props.isHaveDropdown && (
+                <td className="table-body__cell">
+                  <Dropdown />
                 </td>
-              );
-            })}
-            {props.isHaveDropdown && (
-              <td className="table-body__cell">
-                <Dropdown />
-              </td>
-            )}
-          </tr>
-        ))}
+              )}
+            </tr>
+          ))}
       </tbody>
     </table>
   );
