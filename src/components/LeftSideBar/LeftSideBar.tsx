@@ -24,6 +24,7 @@ const LeftSideBar = (props: Props) => {
     dispatch(resetAuthState());
     history.push(`/login`);
   };
+
   return (
     <div className="left-side-bar">
       <div className="left-side-bar__img">
@@ -32,6 +33,7 @@ const LeftSideBar = (props: Props) => {
       <div className="left-side-bar__group-item">
         {props.listTabName.map((val, index) => (
           <LeftSideBarItem
+            key={index}
             isActive={props.currentTab === val}
             src={props.listTabIcon[index]}
             alt={val}
