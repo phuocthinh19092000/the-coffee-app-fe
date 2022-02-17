@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import LeftSideBar from '../../../../components/LeftSideBar/LeftSideBar';
-import ListOrderStaff from '../../../../components/ListOrderStaff/ListOrderStaff';
+import ListOrderStaff from '../ListOrderStaff/ListOrderStaff';
 import ToastNotification from '../../../../components/ToastNotification/ToatstNotification';
 import { NotificationType } from '../../../../enum/NotificationType';
 import { PositionToast } from '../../../../enum/PositionToast';
 import { TabIcon, TabName } from '../../../../constant';
 import { SocketProvider } from '../../../../utils/socketProvider';
+import ListProductStaff from '../ProductPage/ListProductStaff';
 
 const DashBoard = () => {
   const [tabName, setTabName] = useState(TabName.STAFF.ORDER);
@@ -26,9 +27,16 @@ const DashBoard = () => {
 
   const handleClickChangeTab = (tabName: string) => {
     setTabName(tabName);
-    // TODO: handle change tab content when click LeftSideBarItem
   };
 
+  const switchPage = () => {
+    switch (tabName) {
+      case TabName.STAFF.ORDER:
+        return <ListOrderStaff setIsShowNotification={setIsShowNotification} />;
+      case TabName.STAFF.ITEM:
+        return <ListProductStaff />;
+    }
+  };
   return (
     <>
       <SocketProvider>
@@ -39,9 +47,7 @@ const DashBoard = () => {
             listTabIcon={Object.values(TabIcon.STAFF)}
             onClickChangeTab={handleClickChangeTab}
           />
-          <div className="w-full">
-            <ListOrderStaff setIsShowNotification={setIsShowNotification} />
-          </div>
+          <div className="w-full">{switchPage()}</div>
         </div>
       </SocketProvider>
       {isShowNotification && (
