@@ -5,14 +5,14 @@ import ExpandLess from '../../share/assets/vector/ExpandLess.svg';
 import IconSelected from '../../share/assets/vector/IconSelected.svg';
 import useComponentVisible from '../../utils/useComponentVisible';
 type Props = {
-  listOptions: string[];
-  selectedValue?: string;
+  listOptions: string[] | number[];
+  selectedValue?: string | number;
   placeholder?: string;
 };
 
 const CustomSelect = (props: Props) => {
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
-  const [value, setValue] = useState(props.selectedValue || '');
+  const [value, setValue] = useState<string | number>(props.selectedValue || '');
   const [colorSelect, setColorSelect] = useState(value ? 'text-black' : 'text-grey-1');
   const [showOutlineText, setShowOutlineText] = useState(false);
 
@@ -20,7 +20,7 @@ const CustomSelect = (props: Props) => {
     setIsComponentVisible(!isComponentVisible);
   };
 
-  const handleOnSelectedOption = (item: string) => {
+  const handleOnSelectedOption = (item: string | number) => {
     setValue(item);
   };
 
@@ -53,7 +53,7 @@ const CustomSelect = (props: Props) => {
         </div>
         {isComponentVisible && (
           <div className="custom-select__dropdown ">
-            {props.listOptions.map((item: string, index: number) => (
+            {props.listOptions.map((item: string | number, index: number) => (
               <div className="custom-select-option" key={index} onClick={() => handleOnSelectedOption(item)}>
                 <p className="custom-select-option__label">{item}</p>
                 {item === value ? <img alt="iconSelected" src={IconSelected} /> : <></>}
