@@ -11,20 +11,20 @@ import { PROTECTED_STAFF_PATH } from '../constant';
 const RouterPage = () => {
   return (
     <Router>
-        <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/login" component={LoginStaff} />
-            <ProtectedSwitch
-                path="/staff"
-                redirectPath="/login"
-                protectedPaths={PROTECTED_STAFF_PATH}
-                roles={[ROLE.VENDOR]}
-            >
-                <Route exact path="/staff" component={DashBoard} />
-            </ProtectedSwitch>
-            <Route exact path="/user/changePassword" component={ComingSoonPage} />
-            <Route component={ErrorPage} />
-        </Switch>
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/login" component={LoginStaff} />
+        <ProtectedSwitch
+          path="/staff"
+          redirectPath="/login"
+          protectedPaths={PROTECTED_STAFF_PATH}
+          roles={[ROLE.VENDOR]}
+        >
+          <Route exact path="/staff" component={DashBoard} />
+        </ProtectedSwitch>
+        <Route exact path="/user/changePassword" component={ComingSoonPage} />
+        <Route component={ErrorPage} />
+      </Switch>
     </Router>
   );
 };

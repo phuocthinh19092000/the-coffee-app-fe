@@ -4,6 +4,8 @@ import avatarDuyMai from '../../share/assets/img/avatarDuyMai.png';
 import Order from '../../interfaces/order';
 import Exit from '../../share/assets/vector/Exit.svg';
 import { moneyFormat } from '../../utils/MoneyFormat';
+import React from 'react';
+
 interface Props {
   order: Order;
   onClickExit: React.MouseEventHandler<HTMLImageElement>;

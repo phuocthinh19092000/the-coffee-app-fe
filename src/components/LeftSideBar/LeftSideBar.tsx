@@ -5,6 +5,7 @@ import LeftSideBarItem from './Items/LeftSideBarItem';
 import { useHistory } from 'react-router-dom';
 import { useAppDispatch } from '../../storage/hooks';
 import { resetAuthState } from '../../features/auth/actions/auth';
+
 type Props = {
   onClickChangeTab(tabName: string): void;
   listTabName: string[];

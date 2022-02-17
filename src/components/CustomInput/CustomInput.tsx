@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './CustomInput.scss';
 
 interface Props {
-  type?: string;
-  placeholder?: string;
+  type: string;
+  placeholder: string;
 }
 const CustomInput = (props: Props) => {
   const [outlinedText, setOutlinedText] = useState(false);

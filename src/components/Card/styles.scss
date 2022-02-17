@@ -37,6 +37,10 @@
     background-color: $white-color;
   }
 
+  &--new-center {
+    @apply absolute my-0 mx-auto inset-x-0 top-[5%] w-fit h-fit rounded-2xl bg-white;
+  }
+
   &--right {
     position: fixed;
     top: 0;
