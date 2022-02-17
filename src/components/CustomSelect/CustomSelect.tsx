@@ -6,7 +6,7 @@ import IconSelected from '../../share/assets/vector/IconSelected.svg';
 import useComponentVisible from '../../utils/useComponentVisible';
 type Props = {
   listOptions: string[] | number[];
-  selectedValue?: string;
+  selectedValue?: string | number;
   placeholder?: string;
 };
 
