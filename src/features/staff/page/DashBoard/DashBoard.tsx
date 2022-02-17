@@ -4,11 +4,11 @@ import ListOrderStaff from '../../../../components/ListOrderStaff/ListOrderStaff
 import ToastNotification from '../../../../components/ToastNotification/ToatstNotification';
 import { NotificationType } from '../../../../enum/NotificationType';
 import { PositionToast } from '../../../../enum/PositionToast';
-import { TabName } from '../../../../enum/TabName';
+import { TabIcon, TabName } from '../../../../constant';
 import { SocketProvider } from '../../../../utils/socketProvider';
 
 const DashBoard = () => {
-  const [tabName, setTabName] = useState(TabName.ORDERS);
+  const [tabName, setTabName] = useState(TabName.STAFF.ORDER);
   const [isShowNotification, setIsShowNotification] = useState(false);
   const timeOutNotification = 2000;
 
@@ -24,7 +24,7 @@ const DashBoard = () => {
     }
   }, [isShowNotification]);
 
-  const handleClickChangeTab = (tabName: TabName) => {
+  const handleClickChangeTab = (tabName: string) => {
     setTabName(tabName);
     // TODO: handle change tab content when click LeftSideBarItem
   };
@@ -33,7 +33,12 @@ const DashBoard = () => {
     <>
       <SocketProvider>
         <div className="flex">
-          <LeftSideBar currentTab={tabName} onClickChangeTab={(tabName: TabName) => handleClickChangeTab(tabName)} />
+          <LeftSideBar
+            currentTab={tabName}
+            listTabName={Object.values(TabName.STAFF)}
+            listTabIcon={Object.values(TabIcon.STAFF)}
+            onClickChangeTab={handleClickChangeTab}
+          />
           <div className="w-full">
             <ListOrderStaff setIsShowNotification={setIsShowNotification} />
           </div>
