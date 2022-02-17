@@ -7,10 +7,10 @@ type Props = {
   name: string;
   children?: React.ReactChild[] | ReactChild | JSX.Element | JSX.Element[];
   onClickExit?: React.MouseEventHandler<HTMLImageElement>;
-  onClickBrowser?: React.MouseEventHandler<HTMLButtonElement>;
   onClickCancel?: React.MouseEventHandler<HTMLButtonElement>;
+  onClickBrowseAgain: React.MouseEventHandler<HTMLElement>;
   onClickSave?: React.MouseEventHandler<HTMLButtonElement>;
-  haveImage: boolean;
+  isHavePreviewFile: boolean;
   isFullFill: boolean;
 };
 const WrapperForm = (props: Props) => {
@@ -23,8 +23,8 @@ const WrapperForm = (props: Props) => {
         </div>
         <div className="form-add-item__body">{props.children}</div>
         <div className="form-add-item__footer">
-          <button className="form-add-item__btn" onClick={props.onClickBrowser}>
-            <p className={props.haveImage ? 'form-add-item__btn-title' : 'hidden'}>Browse Again</p>
+          <button className="form-add-item__btn" onClick={props.onClickBrowseAgain}>
+            <p className={props.isHavePreviewFile ? 'form-add-item__btn-title' : 'hidden'}>Browse Again</p>
           </button>
           <div className="flex">
             <button className="form-add-item__btn" onClick={props.onClickCancel}>

@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import './CustomInput.scss';
 
 interface Props {
-  type: string;
   placeholder: string;
+  type?: string;
+  value?: string | number;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 const CustomInput = (props: Props) => {
   const [outlinedText, setOutlinedText] = useState(false);
+
   const handleOnFocus: React.FocusEventHandler<HTMLInputElement> = (event: React.FocusEvent<HTMLInputElement>) => {
     if (!event.target.value) {
       event.target.placeholder = '';
@@ -21,6 +24,7 @@ const CustomInput = (props: Props) => {
       setOutlinedText(true);
     }
   };
+
   return (
     <div className="outlined-text-input">
       <label htmlFor="inputText" className="outlined-text-input__label">
@@ -32,6 +36,8 @@ const CustomInput = (props: Props) => {
         type={props.type || 'text'}
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
+        value={props.value || ''}
+        onChange={props.onChange}
       />
     </div>
   );
