@@ -38,7 +38,7 @@
   }
 
   &--new-center {
-    @apply absolute my-0 mx-auto inset-x-0 top-[5%] w-fit h-fit rounded-2xl bg-white;
+    @apply flex flex-col items-center relative my-0 mx-auto inset-x-0 top-[15%] w-fit min-w-[50%] h-fit rounded-2xl bg-white;
   }
 
   &--right {

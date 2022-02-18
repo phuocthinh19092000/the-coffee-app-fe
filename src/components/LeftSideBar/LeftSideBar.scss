@@ -13,7 +13,7 @@
   }
 
   &__logout {
-    @apply flex px-1.25 absolute bottom-1 items-center;
+    @apply flex lg:px-1.25 md:px-0 absolute bottom-1 items-center text-center justify-center;
     :hover {
       cursor: pointer;
     }
