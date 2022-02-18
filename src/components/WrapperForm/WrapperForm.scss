@@ -1,7 +1,13 @@
+@import '../../share/assets/scss/variables.scss';
+
 .form-add-item {
-  @apply w-max h-max relative flex flex-col;
+  @apply w-full h-full relative flex flex-col;
   &__header {
     @apply flex justify-between items-center my-1 px-1.5;
+  }
+
+  &__title {
+    @apply text-3 leading-6  tracking-[0.15px];
   }
 
   &__btn-exit {
@@ -9,7 +15,7 @@
   }
 
   &__body {
-    @apply w-max h-max border-y-[1px] border-grey-4;
+    @apply w-full h-full border-y-[1px] border-grey-4 flex flex-col items-center;
   }
 
   &__footer {
@@ -29,5 +35,11 @@
 
   &__btn-title {
     @apply px-1 py-0.5;
+  }
+
+  &--blur {
+    @apply fixed left-0 top-0 w-full h-full overflow-auto;
+    z-index: 1;
+    @include background-blur;
   }
 }

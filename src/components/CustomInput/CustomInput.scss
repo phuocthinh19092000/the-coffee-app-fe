@@ -20,6 +20,6 @@
     @apply absolute left-0 h-[12px] bottom-0 z-[-1] bg-white w-full ;
 }
 .form-control {
-    @apply border-solid border-grey-3 border-[1px] rounded h-[44px] indent-1 text-2 font-normal placeholder:text-grey-5;
+    @apply w-full border-solid border-grey-3 border-[1px] rounded h-[44px] indent-1 text-2 font-normal placeholder:text-grey-5;
    
 }
