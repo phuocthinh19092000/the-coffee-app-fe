@@ -1,0 +1,13 @@
+.list-product {
+  @apply w-full px-[126px] pt-[16px] flex justify-center;
+  &-header {
+    @apply flex flex-row justify-between;
+
+    &__item {
+      @apply flex flex-row justify-between items-center;
+    }
+  }
+  &-table {
+    @apply sm:mt-[7px] md:mt-[14.4px] lg:mt-[19.2px] xl:mt-[24px];
+  }
+}
