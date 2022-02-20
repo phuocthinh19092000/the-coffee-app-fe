@@ -11,7 +11,7 @@ const ProductPage = () => {
   const [categoryId, setCategoryId] = useState('');
   const dispatch = useAppDispatch();
   const categories = useSelector(selectCategoryState);
-  const products = useSelector(selectProductState);
+  const dataProduct = useSelector(selectProductState);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -32,6 +32,8 @@ const ProductPage = () => {
     }
   };
 
+  const listProducts = dataProduct.products;
+
   return (
     <div className="product">
       <div className="product-left">
@@ -42,7 +44,7 @@ const ProductPage = () => {
         />
       </div>
       <div className="product-right">
-        <ListDrinkItem listDrink={products} />
+        <ListDrinkItem listDrink={listProducts} />
       </div>
     </div>
   );

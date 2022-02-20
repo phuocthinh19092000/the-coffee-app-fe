@@ -1,11 +1,15 @@
 export default interface Product {
   id: string;
-  name?: string;
-  images?: string;
-  category?: string;
+  name: string;
+  images: string;
+  category: {
+    id: string;
+    name: string;
+  };
   price: number;
-  status?: string;
+  status: string;
   description?: string;
+  totalCount: number;
 }
 
 export interface ProductTable {

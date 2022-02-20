@@ -50,7 +50,7 @@ const Table = (props: Props) => {
                 } else if (key === 'images') {
                   return (
                     <td key={index}>
-                      <img className="table-body__img" src={value} alt="Avatar Drink"></img>
+                      <img className="table-body__img" src={value} alt="Avatar Drink" />
                     </td>
                   );
                 }
