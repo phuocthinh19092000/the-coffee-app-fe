@@ -2,7 +2,7 @@ import { ProductStatus, UserStatus } from '../../enum';
 import { ProductTable, UserTable } from '../../interfaces';
 import { moneyFormat } from '../../utils/MoneyFormat';
 import Dropdown from '../Dropdown/Dropdown';
-
+import BlackCoffee from '../../share/assets/img/blackcoffee.png';
 import './Table.scss';
 
 type Props = {
@@ -50,7 +50,7 @@ const Table = (props: Props) => {
                 } else if (key === 'images') {
                   return (
                     <td key={index}>
-                      <img className="table-body__img" src={value} alt="Avatar Drink" />
+                      <img className="table-body__img" src={value || BlackCoffee} alt="Avatar Drink" />
                     </td>
                   );
                 }
@@ -70,7 +70,7 @@ const Table = (props: Props) => {
               })}
 
               {props.isHaveDropdown && (
-                <td className="table-body__cell">
+                <td className="table-body__cell grid justify-items-center">
                   <Dropdown />
                 </td>
               )}
