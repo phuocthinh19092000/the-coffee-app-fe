@@ -16,3 +16,11 @@ export interface ProductTable {
   price: number;
   status: string;
 }
+export interface ProductTypeDto {
+  id?: string;
+  name: string;
+  images?: File | string;
+  category: string;
+  price: string | number;
+  status: string;
+}

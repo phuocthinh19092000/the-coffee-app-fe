@@ -45,6 +45,7 @@ const Table = (props: Props) => {
                 }
 
                 if (key === 'id') {
+                  // eslint-disable-next-line array-callback-return
                   return;
                 } else if (key === 'images') {
                   return (

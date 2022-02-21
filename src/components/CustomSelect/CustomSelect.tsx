@@ -4,10 +4,14 @@ import ExpandMore from '../../share/assets/vector/ExpandMore.svg';
 import ExpandLess from '../../share/assets/vector/ExpandLess.svg';
 import IconSelected from '../../share/assets/vector/IconSelected.svg';
 import useComponentVisible from '../../utils/useComponentVisible';
+import { InputParams } from '../../interfaces';
+
 type Props = {
-  listOptions: string[] | number[];
-  selectedValue?: string | number;
+  listOptions: (string | number)[];
+  name: string;
+  onChange: (inputParam: InputParams) => void;
   placeholder?: string;
+  selectedValue?: string | number;
 };
 
 const CustomSelect = (props: Props) => {
@@ -28,10 +32,19 @@ const CustomSelect = (props: Props) => {
     if (isComponentVisible || value) {
       setShowOutlineText(true);
       setColorSelect('text-black');
+      if (value) {
+        props.onChange({
+          body: {
+            name: props.name,
+            value: value,
+          },
+        });
+      }
     } else {
       setShowOutlineText(false);
       setColorSelect('text-grey-1');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isComponentVisible, value]);
 
   return (

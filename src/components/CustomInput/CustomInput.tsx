@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { InputParams } from '../../interfaces';
 import './CustomInput.scss';
 
 interface Props {
   placeholder: string;
   type?: string;
   value?: string | number;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  name: string;
+  onChange: (inputParam: InputParams) => void;
 }
 const CustomInput = (props: Props) => {
   const [outlinedText, setOutlinedText] = useState(false);
@@ -33,11 +35,12 @@ const CustomInput = (props: Props) => {
       <input
         className="form-control"
         placeholder={props.placeholder}
+        name={props.name}
         type={props.type || 'text'}
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
         value={props.value || ''}
-        onChange={props.onChange}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange({ event })}
       />
     </div>
   );

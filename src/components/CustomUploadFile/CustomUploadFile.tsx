@@ -1,26 +1,28 @@
 import { useEffect, useState } from 'react';
 import './CustomUploadFile.scss';
 import IconUpload from '../../share/assets/vector/IconUpload.svg';
+import { InputParams } from '../../interfaces';
 
 type Props = {
-  selectedImage?: string;
+  selectedImage?: File | string;
   setIsHavePreviewFile: React.Dispatch<React.SetStateAction<boolean>>;
   fileRef: React.RefObject<HTMLInputElement>;
   onClickBrowse: React.MouseEventHandler<HTMLElement>;
+  name: string;
+  onChange: (inputParam: InputParams) => void;
 };
 
 const CustomUploadFile = (props: Props) => {
   const [selectedFile, setSelectedFile] = useState<File>();
-  const [previewFile, setPreviewFile] = useState(props.selectedImage || '');
-  const [failMessage, setFailMessage] = useState(false);
-  const [errorTypeMessage, setErrorTypeMessage] = useState(false);
+  const [previewFile, setPreviewFile] = useState<File | string>(props.selectedImage || '');
+  const [failMessage, setFailMessage] = useState('');
 
   const countSizeInMB = (size: number) => {
     return Math.floor(size / (1024 * 1024));
   };
 
   const validateFileType = (file: File) => {
-    const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/svg+xml'];
     if (validTypes.indexOf(file.type) === -1) {
       return false;
     }
@@ -29,16 +31,30 @@ const CustomUploadFile = (props: Props) => {
 
   useEffect(() => {
     if (!selectedFile) {
-      props.setIsHavePreviewFile(false);
       return;
     }
     const objectUrl = URL.createObjectURL(selectedFile);
     setPreviewFile(objectUrl);
-    setFailMessage(false);
-    props.setIsHavePreviewFile(true);
-    setErrorTypeMessage(false);
+    setFailMessage('');
 
     return () => URL.revokeObjectURL(objectUrl);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedFile]);
+
+  useEffect(() => {
+    props.setIsHavePreviewFile(!!previewFile);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [previewFile]);
+
+  useEffect(() => {
+    if (selectedFile) {
+      props.onChange({
+        body: {
+          name: props.name,
+          value: selectedFile,
+        },
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFile]);
 
@@ -69,9 +85,9 @@ const CustomUploadFile = (props: Props) => {
 
   const handleFileUpload = (file: File) => {
     if (countSizeInMB(file.size) > 10) {
-      setFailMessage(true);
+      setFailMessage('The file being attached exceeds the size limit of 10 MB');
     } else if (!validateFileType(file)) {
-      setErrorTypeMessage(true);
+      setFailMessage('We only accept PNG, JPG, JPEG or SVG files.');
     } else {
       setSelectedFile(file);
     }
@@ -89,13 +105,18 @@ const CustomUploadFile = (props: Props) => {
       <div className="custom-upload__area">
         <input
           type="file"
-          accept=".jpg, .jpeg, .png"
+          name={props.name}
+          accept="image/*"
           ref={props.fileRef}
-          className={`custom-upload__file-upload ${previewFile ? 'absolute' : 'w-full h-full'}`}
+          className={`custom-upload__file-upload ${previewFile ? 'absolute w-0 h-0' : 'w-full h-full'}`}
           onChange={onChangeFile}
         />
         {previewFile ? (
-          <img className="w-full h-full" alt="previewFile" src={previewFile} />
+          <img
+            className="w-full h-full"
+            alt="previewFile"
+            src={typeof previewFile === 'string' ? previewFile : URL.createObjectURL(previewFile)}
+          />
         ) : (
           <>
             <img className="absolute" alt="iconUpload" src={IconUpload} onClick={props.onClickBrowse} />
@@ -105,10 +126,8 @@ const CustomUploadFile = (props: Props) => {
           </>
         )}
       </div>
-      {failMessage && (
-        <div className="custom-upload__error">The file being attached exceeds the size limit of 10 MB</div>
-      )}
-      {errorTypeMessage && <div className="custom-upload__error">We only accept PNG,JPG or JPEG files.</div>}
+      {failMessage && <div className="custom-upload__error">{failMessage}</div>}
+
       <div className="custom-upload__footer">Browse or Drag item image into the area</div>
     </div>
   );
