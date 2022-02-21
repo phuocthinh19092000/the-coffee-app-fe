@@ -1,32 +1,64 @@
 import AddButton from '../../../../components/AddButton/AddButton';
 import Table from '../../../../components/Table/Table';
 import CustomPagination from '../../../../components/CustomPagination/CustomPagination';
-import BlackCoffee from '../../../../share/assets/img/blackcoffee.png';
+import Product from '../../../../interfaces/product';
 import { ProductTable } from '../../../../interfaces';
 import { TableProductHeader } from '../../../../components/Table/constants/table.constant';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAppDispatch } from '../../../../storage/hooks';
+import { useSelector } from 'react-redux';
+import { getProductsPagination, selectProductState } from '../../../product/actions/getProductData';
 
 import './ListProductStaff.scss';
 
 const limit = 15;
 
+const prepareDataTableProduct = (listProducts: Product[]): ProductTable[] => {
+  const data: ProductTable[] = [];
+
+  listProducts.forEach((product) => {
+    const { description, ...rest } = product;
+    const dataProductTable = { ...rest, category: rest.category.name };
+    let objectOrder: ProductTable = {
+      id: '',
+      name: '',
+      images: '',
+      category: '',
+      price: 0,
+      status: '',
+    };
+    const reOrderDataProductTable: ProductTable = Object.assign(objectOrder, dataProductTable);
+    data.push(reOrderDataProductTable);
+  });
+
+  return data;
+};
+
 const ListProductStaff = () => {
-  // Replace totalProducts above here with total of products
-  const totalProducts = 0;
+  const dispatch = useAppDispatch();
+  const responseDataProduct = useSelector(selectProductState);
 
-  const [dataTable, setDataTable] = useState<ProductTable[]>([]);
-
-  const isCheckLastPage = totalProducts <= limit ? true : false;
-
-  const [isLastPage, setIsLastPage] = useState(isCheckLastPage);
+  const [isLastPage, setIsLastPage] = useState(false);
   const [isFirstPage, setIsFirstPage] = useState(true);
 
   const [startIndex, setStartIndex] = useState(1);
+  const [lastIndex, setLastIndex] = useState(0);
 
-  const lastIdx = isCheckLastPage ? dataTable.length : limit;
-  const [lastIndex, setLastIndex] = useState(lastIdx);
+  useEffect(() => {
+    async function getData() {
+      const dataProduct = await dispatch(getProductsPagination({ limit })).unwrap();
+      const isCheckLastPage = dataProduct.products.totalProducts <= limit ? true : false;
 
-  // Dispatch action api to get total of products and replace here totalProducts here
+      setIsLastPage(isCheckLastPage);
+      setLastIndex(dataProduct.products.length);
+    }
+    getData();
+  }, []);
+
+  const totalProducts = responseDataProduct.totalProduct;
+  const listProducts = responseDataProduct.products;
+
+  const dataTableProduct: ProductTable[] = prepareDataTableProduct(listProducts);
 
   const onClickMoveNextPage = (total: number) => {
     if (isLastPage) {
@@ -41,20 +73,13 @@ const ListProductStaff = () => {
       setStartIndex(lastIndex + 1);
       setLastIndex(total);
       setIsLastPage(true);
-      /** Dispatch action to call api get list product above here with:
-       * limit: limit in line 11
-       * offset: lastIndex
-       **/
-
+      dispatch(getProductsPagination({ limit, offset: lastIndex }));
       return;
     }
 
     setStartIndex(startIndex + limit);
     setLastIndex(lastIndex + limit);
-    /** Dispatch action to call api get list product above here with:
-     * limit: limit in line 11
-     * offset: startIndex + limit
-     **/
+    dispatch(getProductsPagination({ limit, offset: startIndex + limit - 1 }));
   };
 
   const onClickMovePreviousPage = (total: number) => {
@@ -66,10 +91,7 @@ const ListProductStaff = () => {
       setStartIndex(startIndex - limit);
       setLastIndex(startIndex - 1);
       setIsLastPage(false);
-      /** Dispatch action to call api get list product above here with:
-       * limit: limit in line 11
-       * offset: startIndex - limit
-       **/
+      dispatch(getProductsPagination({ limit, offset: startIndex - limit - 1 }));
 
       if (startIndex - limit === 1) {
         setIsFirstPage(true);
@@ -79,10 +101,7 @@ const ListProductStaff = () => {
     }
     setStartIndex(startIndex - limit);
     setLastIndex(lastIndex - limit);
-    /** Dispatch action to call api get list product above here with:
-     * limit: limit in line 11
-     * offset: startIndex - limit
-     **/
+    dispatch(getProductsPagination({ limit, offset: startIndex - limit - 1 }));
 
     if (startIndex - limit === 1) {
       setIsFirstPage(true);
@@ -109,7 +128,7 @@ const ListProductStaff = () => {
           </div>
 
           <div className="list-product-table">
-            <Table header={TableProductHeader} body={dataTable} isHaveDropdown={true} startIndex={startIndex} />
+            <Table header={TableProductHeader} body={dataTableProduct} isHaveDropdown={true} startIndex={startIndex} />
           </div>
         </div>
       </div>

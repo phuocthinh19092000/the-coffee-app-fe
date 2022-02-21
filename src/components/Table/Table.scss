@@ -1,6 +1,5 @@
 .table {
-  @apply bg-white rounded-[8px] pb-[8px] sm:w-[308px] md:w-[631px] lg:w-[841px] xl:w-[1052px] border-separate;
-  table-layout: fixed;
+  @apply bg-white rounded-[8px] pb-[8px] sm:w-[308px] md:w-[631px] lg:w-[841px] xl:w-[1052px] border-separate table-fixed;
 
   &-header {
     @apply font-semibold capitalize text-left sm:h-[23.2px] md:h-[47.4px] lg:h-[63.2] xl:h-[79px];
@@ -34,5 +33,5 @@ th:first-child {
 }
 
 th {
-  overflow-wrap: break-word;
+  @apply break-words;
 }

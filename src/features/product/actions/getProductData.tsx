@@ -6,21 +6,41 @@ import Product from '../../../interfaces/product';
 
 export interface ProductState {
   loading: string;
-  data: Product[];
+  data: {
+    products: Product[];
+    totalProduct: number;
+  };
 }
 export const initialState: ProductState = {
   loading: 'pending',
-  data: [],
+  data: {
+    products: [],
+    totalProduct: 0,
+  },
 };
 
 export const getAllProduct = createAsyncThunk('/products', async () => {
   const allProduct = await productApi.getAllProduct();
   return allProduct.data;
 });
+
+export const getProductsPagination = createAsyncThunk(
+  '/products?limit=&offset=',
+  async (queryParams: { limit?: number; offset?: number }, { rejectWithValue }) => {
+    try {
+      const products = await productApi.getProductPagination(queryParams);
+      return products.data;
+    } catch (error: any) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
 export const getProductsByCategory = createAsyncThunk('/categories/name-categories/products', async (name: string) => {
   const productByCategory = await productApi.getByCategory(name);
   return productByCategory.data;
 });
+
 const productSlice = createSlice({
   name: 'product',
   initialState,
@@ -32,9 +52,19 @@ const productSlice = createSlice({
       })
       .addCase(getProductsByCategory.fulfilled, (state, action) => {
         state.loading = 'fulfilled';
-        state.data = action.payload;
+        state.data.products = action.payload;
       })
       .addCase(getProductsByCategory.rejected, (state) => {
+        state.loading = 'rejected';
+      })
+      .addCase(getProductsPagination.pending, (state) => {
+        state.loading = 'pending';
+      })
+      .addCase(getProductsPagination.fulfilled, (state, action) => {
+        state.loading = 'fulfilled';
+        state.data = action.payload;
+      })
+      .addCase(getProductsPagination.rejected, (state) => {
         state.loading = 'rejected';
       });
   },
