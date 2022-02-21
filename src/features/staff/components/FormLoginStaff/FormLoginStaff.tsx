@@ -46,8 +46,12 @@ export default function FormLoginStaff() {
   const timeOutToast = 3000;
   const [showPassword, setShowPassword] = useState(false);
   const history = useHistory();
-  const goDashboard = () => {
+  const goStaffDashboard = () => {
     let path = `/staff`;
+    history.push(path);
+  };
+  const goAdminDashboard = () => {
+    let path = `/admin`;
     history.push(path);
   };
   const toggleShowPassword = () => {
@@ -57,10 +61,13 @@ export default function FormLoginStaff() {
   const dispatch = useAppDispatch();
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
     const accessToken = await dispatch(login({ username: data.username, password: data.password }));
-    dispatch(checkRole([ROLE.VENDOR]));
+    dispatch(checkRole([ROLE.VENDOR, ROLE.ADMIN]));
     if (accessToken.payload && accessToken.payload.userInfor.role === ROLE.VENDOR) {
       setLoginFailed(false);
-      goDashboard();
+      goStaffDashboard();
+    } else if (accessToken.payload && accessToken.payload.userInfor.role === ROLE.ADMIN) {
+      setLoginFailed(false);
+      goAdminDashboard();
     } else {
       setLoginFailed(true);
       reset({ username: '', password: '' });
