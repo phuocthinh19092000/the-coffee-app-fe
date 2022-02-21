@@ -47,13 +47,14 @@ const ListProductStaff = () => {
   useEffect(() => {
     async function getData() {
       const dataProduct = await dispatch(getProductsPagination({ limit })).unwrap();
-      const isCheckLastPage = dataProduct.products.totalProducts <= limit ? true : false;
+      const isCheckLastPage = dataProduct.products.totalProducts <= limit;
 
       setIsLastPage(isCheckLastPage);
       setLastIndex(dataProduct.products.length);
     }
+
     getData();
-  }, []);
+  }, [dispatch]);
 
   const totalProducts = responseDataProduct.totalProduct;
   const listProducts = responseDataProduct.products;
@@ -82,7 +83,7 @@ const ListProductStaff = () => {
     dispatch(getProductsPagination({ limit, offset: startIndex + limit - 1 }));
   };
 
-  const onClickMovePreviousPage = (total: number) => {
+  const onClickMovePreviousPage = () => {
     if (isFirstPage) {
       return;
     }
@@ -112,24 +113,20 @@ const ListProductStaff = () => {
   return (
     <>
       <div className="list-product">
-        <div>
-          <div className="list-product-header">
-            <div className="list-product-header__item">
-              <AddButton name="Add Item" />
-              {/* //TODO: Add component input here */}
-            </div>
-            <CustomPagination
-              startIndex={startIndex}
-              endIndex={lastIndex}
-              totalItems={totalProducts || 0}
-              onClickNextPage={() => onClickMoveNextPage(totalProducts)}
-              onClickPreviousPage={() => onClickMovePreviousPage(totalProducts)}
-            />
-          </div>
+        <div className="list-product-header">
+          <AddButton name="Add Item" />
+          {/* //TODO: Add component input here */}
+          <CustomPagination
+            startIndex={startIndex}
+            endIndex={lastIndex}
+            totalItems={totalProducts || 0}
+            onClickNextPage={() => onClickMoveNextPage(totalProducts)}
+            onClickPreviousPage={() => onClickMovePreviousPage()}
+          />
+        </div>
 
-          <div className="list-product-table">
-            <Table header={TableProductHeader} body={dataTableProduct} isHaveDropdown={true} startIndex={startIndex} />
-          </div>
+        <div className="list-product-table">
+          <Table header={TableProductHeader} body={dataTableProduct} isHaveDropdown={true} startIndex={startIndex} />
         </div>
       </div>
     </>

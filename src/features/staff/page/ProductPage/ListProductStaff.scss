@@ -1,13 +1,9 @@
 .list-product {
-  @apply w-full  pt-[16px] flex justify-center;
+  @apply md:pr-[2.5%] lg:pr-[1.5%] xl:px-[10%] pt-1 flex flex-col;
   &-header {
-    @apply flex flex-row justify-between;
-
-    &__item {
-      @apply flex flex-row justify-between items-center;
-    }
+    @apply flex justify-between sm:min-w-[308px] md:min-w-[631px] lg:min-w-[841px] xl:min-w-[1052px] w-full;
   }
   &-table {
-    @apply sm:mt-[7px] md:mt-[14.4px] lg:mt-[19.2px] xl:mt-[24px];
+    @apply sm:mt-0.5 md:mt-1 xl:mt-1.5;
   }
 }
