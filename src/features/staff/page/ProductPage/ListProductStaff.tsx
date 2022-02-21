@@ -1,12 +1,10 @@
 import AddButton from '../../../../components/AddButton/AddButton';
 import Table from '../../../../components/Table/Table';
 import CustomPagination from '../../../../components/CustomPagination/CustomPagination';
-import Product from '../../../../interfaces/product';
 import FormManageProduct from '../../components/FormManageProduct/FormManageProduct';
 import ToastNotification from '../../../../components/ToastNotification/ToatstNotification';
-
 import { FormName } from '../../../../enum';
-import { ProductTable } from '../../../../interfaces';
+import { Product, ProductTypeDto } from '../../../../interfaces';
 import { TableProductHeader } from '../../../../components/Table/constants/table.constant';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../../storage/hooks';
@@ -20,13 +18,13 @@ import './ListProductStaff.scss';
 const limit = 15;
 const timeoutShowNotification = 3000;
 
-const prepareDataTableProduct = (listProducts: Product[]): ProductTable[] => {
-  const data: ProductTable[] = [];
+const prepareDataTableProduct = (listProducts: Product[]): ProductTypeDto[] => {
+  const data: ProductTypeDto[] = [];
 
   listProducts.forEach((product) => {
     const { description, ...rest } = product;
     const dataProductTable = { ...rest, category: rest.category.name };
-    let objectOrder: ProductTable = {
+    let objectOrder: ProductTypeDto = {
       id: '',
       name: '',
       images: '',
@@ -34,7 +32,7 @@ const prepareDataTableProduct = (listProducts: Product[]): ProductTable[] => {
       price: 0,
       status: '',
     };
-    const reOrderDataProductTable: ProductTable = Object.assign(objectOrder, dataProductTable);
+    const reOrderDataProductTable: ProductTypeDto = Object.assign(objectOrder, dataProductTable);
     data.push(reOrderDataProductTable);
   });
 
@@ -71,7 +69,7 @@ const ListProductStaff = () => {
   const totalProducts = responseDataProduct.totalProduct;
   const listProducts = responseDataProduct.products;
 
-  const dataTableProduct: ProductTable[] = prepareDataTableProduct(listProducts);
+  const dataTableProduct: ProductTypeDto[] = prepareDataTableProduct(listProducts);
 
   const onClickMoveNextPage = (total: number) => {
     if (isLastPage) {

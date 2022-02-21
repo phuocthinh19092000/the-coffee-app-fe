@@ -7,16 +7,16 @@ import Category from '../../../../interfaces/category';
 import { useEffect, useRef, useState } from 'react';
 import { InputParams, ProductTypeDto } from '../../../../interfaces';
 import { ProductStatusList } from '../../../../constant';
-import { FormName } from '../../../../enum';
 import { useAppDispatch } from '../../../../storage/hooks';
+import { getAllCategory, selectCategoryState } from '../../../product/actions/getCategoryData';
+import { useSelector } from 'react-redux';
 import { createProduct } from '../../../product/actions/createProductData';
 
-import './FormManageProduct.scss';
-
 type Props = {
-  selectedValue?: ProductTypeDto;
-  listCategory: Category[];
-  formName: FormName;
+  selectedProduct?: ProductTypeDto;
+  listCategory: string[];
+  formName: string;
+  onClickExit?: React.MouseEventHandler<HTMLElement>;
   onSave: () => void;
 };
 
@@ -24,13 +24,20 @@ const statusCodeError = [400];
 
 const FormManageProduct = (props: Props) => {
   const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getAllCategory()).unwrap();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const categories = useSelector(selectCategoryState);
+
+  const listOptionsCategories: string[] = categories.map((item) => item.name);
 
   const fileRef = useRef<HTMLInputElement>(null);
   const [isHavePreviewFile, setIsHavePreviewFile] = useState(false);
   const [isFullFill, setIsFullFill] = useState(false);
 
   const [dataProduct, setDataProduct] = useState<ProductTypeDto>(
-    props.selectedValue || {
+    props.selectedProduct || {
       name: '',
       category: '',
       price: 0,
@@ -111,6 +118,8 @@ const FormManageProduct = (props: Props) => {
       isFullFill={isFullFill}
       onClickBrowseAgain={onClickBrowse}
       onClickSave={onSaveDataHandler}
+      onClickExit={props.onClickExit}
+      onClickCancel={props.onClickExit}
     >
       <div className="add-product">
         <div className="w-full h-fit">
@@ -124,7 +133,7 @@ const FormManageProduct = (props: Props) => {
         </div>
         <div className="w-full h-fit">
           <CustomSelect
-            listOptions={listNameCategory}
+            listOptions={listOptionsCategories}
             placeholder="Category"
             name="category"
             onChange={handleChange}

@@ -1,5 +1,5 @@
-export interface UserTable {
-  id: string;
+export interface UserTypeDto {
+  id?: string;
   name: string;
   status: string;
   phoneNumber: string;

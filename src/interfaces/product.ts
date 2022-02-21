@@ -1,4 +1,4 @@
-export default interface Product {
+export interface Product {
   id: string;
   name: string;
   images: string;
@@ -12,19 +12,11 @@ export default interface Product {
   totalCount: number;
 }
 
-export interface ProductTable {
-  id: string;
-  name: string;
-  images: string;
-  category: string;
-  price: number;
-  status: string;
-}
 export interface ProductTypeDto {
   id?: string;
   name: string;
   images?: File | string;
   category: string;
-  price: string | number;
+  price: number;
   status: string;
 }

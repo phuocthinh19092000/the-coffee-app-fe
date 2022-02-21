@@ -6,7 +6,7 @@
   &__list {
     @apply w-[200px] mt-0.5 bg-white rounded-lg shadow-[0_4px_16px_rgba(34,34,34,0.08)] absolute md:right-[10%] z-[1];
     &-group {
-      @apply w-fit h-fit flex flex-auto p-1;
+      @apply w-fit h-fit flex flex-auto p-1  hover:cursor-pointer;
     }
   }
 }
