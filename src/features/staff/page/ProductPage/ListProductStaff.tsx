@@ -126,12 +126,14 @@ const ListProductStaff = () => {
     setIsShowFormAddNewProduct(true);
   };
 
+  const onClickExit = () => {
+    setIsShowFormAddNewProduct(false);
+  };
+
   const onAddNewProductHandler = () => {
     dispatch(getProductsPagination({ limit, offset: startIndex - 1 }));
-
     setIsShowFormAddNewProduct(false);
-    setIsShowNotification(true);
-
+    onClickExit();
     setTimeout(() => {
       setIsShowNotification(false);
     }, timeoutShowNotification);
@@ -161,7 +163,12 @@ const ListProductStaff = () => {
         </div>
       </div>
       {isShowFormAddNewProduct && (
-        <FormManageProduct listCategory={categoryData} formName={FormName.ADD_ITEM} onSave={onAddNewProductHandler} />
+        <FormManageProduct
+          listCategory={categoryData}
+          formName={FormName.ADD_ITEM}
+          onSave={onAddNewProductHandler}
+          onClickExit={onClickExit}
+        />
       )}
 
       {isShowNotification && (

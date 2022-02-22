@@ -4,19 +4,39 @@ import ExpandMore from '../../share/assets/vector/ExpandMore.svg';
 import ExpandLess from '../../share/assets/vector/ExpandLess.svg';
 import IconSelected from '../../share/assets/vector/IconSelected.svg';
 import useComponentVisible from '../../utils/useComponentVisible';
-import { InputParams } from '../../interfaces';
+import { InputParams, OptionType } from '../../interfaces';
 
 type Props = {
-  listOptions: (string | number)[];
+  listOptions: OptionType[];
   name: string;
   onChange: (inputParam: InputParams) => void;
   placeholder?: string;
   selectedValue?: string | number;
 };
 
+const getValue = (item: OptionType, key: 'id' | 'name'): string | number => {
+  return typeof item === 'object' ? item[key] : item;
+};
+const getNameFromSelectedValue = (value: string | number, listOptions: OptionType[]): OptionType => {
+  let returnValue: OptionType = value;
+  if (listOptions.length && typeof listOptions[0] === 'object') {
+    const selectedItem = listOptions.find((item) => {
+      return typeof item === 'object' && item.id === value;
+    });
+    if (selectedItem) {
+      returnValue = selectedItem;
+    }
+  }
+  return returnValue;
+};
+
 const CustomSelect = (props: Props) => {
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
-  const [value, setValue] = useState<string | number>(props.selectedValue || '');
+
+  const [value, setValue] = useState<OptionType>(
+    props.selectedValue ? getNameFromSelectedValue(props.selectedValue, props.listOptions) : '',
+  );
+
   const [colorSelect, setColorSelect] = useState(value ? 'text-black' : 'text-grey-1');
   const [showOutlineText, setShowOutlineText] = useState(false);
 
@@ -24,7 +44,7 @@ const CustomSelect = (props: Props) => {
     setIsComponentVisible(!isComponentVisible);
   };
 
-  const handleOnSelectedOption = (item: string | number) => {
+  const handleOnSelectedOption = (item: OptionType) => {
     setValue(item);
   };
 
@@ -36,7 +56,7 @@ const CustomSelect = (props: Props) => {
         props.onChange({
           body: {
             name: props.name,
-            value: value,
+            value: getValue(value, 'id'),
           },
         });
       }
@@ -60,16 +80,16 @@ const CustomSelect = (props: Props) => {
         )}
         <div className={`custom-select ${isComponentVisible ? 'border-accent-1' : 'border-grey-3'}`}>
           <div className="custom-select-header">
-            <p className="custom-select-header__placeholder">{value || props.placeholder}</p>
+            <p className="custom-select-header__placeholder">{getValue(value, 'name') || props.placeholder}</p>
             <img alt="icon" src={isComponentVisible ? ExpandLess : ExpandMore} />
           </div>
         </div>
         {isComponentVisible && (
           <div className="custom-select__dropdown ">
-            {props.listOptions.map((item: string | number, index: number) => (
+            {props.listOptions.map((item, index) => (
               <div className="custom-select-option" key={index} onClick={() => handleOnSelectedOption(item)}>
-                <p className="custom-select-option__label">{item}</p>
-                {item === value ? <img alt="iconSelected" src={IconSelected} /> : <></>}
+                <p className="custom-select-option__label">{getValue(item, 'name')}</p>
+                {getValue(item, 'id') === value ? <img alt="iconSelected" src={IconSelected} /> : <></>}
               </div>
             ))}
           </div>

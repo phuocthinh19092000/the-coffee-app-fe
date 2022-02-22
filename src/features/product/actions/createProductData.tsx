@@ -1,4 +1,4 @@
-import Product from '../../../interfaces/product';
+import { Product } from '../../../interfaces';
 import productApi from '../api/productAPI';
 import { RootState } from '../../../storage';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';

@@ -2,19 +2,15 @@ import WrapperForm from '../../../../components/WrapperForm/WrapperForm';
 import CustomInput from '../../../../components/CustomInput/CustomInput';
 import CustomSelect from '../../../../components/CustomSelect/CustomSelect';
 import CustomUploadFile from '../../../../components/CustomUploadFile/CustomUploadFile';
-import Category from '../../../../interfaces/category';
-
 import { useEffect, useRef, useState } from 'react';
-import { InputParams, ProductTypeDto } from '../../../../interfaces';
+import { InputParams, OptionType, ProductTypeDto } from '../../../../interfaces';
 import { ProductStatusList } from '../../../../constant';
-import { useAppDispatch } from '../../../../storage/hooks';
-import { getAllCategory, selectCategoryState } from '../../../product/actions/getCategoryData';
-import { useSelector } from 'react-redux';
 import { createProduct } from '../../../product/actions/createProductData';
-
+import { useAppDispatch } from '../../../../storage/hooks';
+import './FormManageProduct.scss';
 type Props = {
   selectedProduct?: ProductTypeDto;
-  listCategory: string[];
+  listCategory: OptionType[];
   formName: string;
   onClickExit?: React.MouseEventHandler<HTMLElement>;
   onSave: () => void;
@@ -24,14 +20,6 @@ const statusCodeError = [400];
 
 const FormManageProduct = (props: Props) => {
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getAllCategory()).unwrap();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  const categories = useSelector(selectCategoryState);
-
-  const listOptionsCategories: string[] = categories.map((item) => item.name);
-
   const fileRef = useRef<HTMLInputElement>(null);
   const [isHavePreviewFile, setIsHavePreviewFile] = useState(false);
   const [isFullFill, setIsFullFill] = useState(false);
@@ -105,12 +93,6 @@ const FormManageProduct = (props: Props) => {
     }
   };
 
-  const listCategoryId: string[] = [];
-  const listNameCategory: string[] = [];
-  props.listCategory.forEach((category) => {
-    listCategoryId.push(category.id);
-    listNameCategory.push(category.name);
-  });
   return (
     <WrapperForm
       name={props.formName}
@@ -133,7 +115,7 @@ const FormManageProduct = (props: Props) => {
         </div>
         <div className="w-full h-fit">
           <CustomSelect
-            listOptions={listOptionsCategories}
+            listOptions={props.listCategory}
             placeholder="Category"
             name="category"
             onChange={handleChange}

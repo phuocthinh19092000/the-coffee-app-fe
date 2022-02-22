@@ -14,7 +14,7 @@ import { CgSun } from 'react-icons/cg';
 import { HiMoon } from 'react-icons/hi';
 import { useRef } from 'react';
 import { useHistory } from 'react-router';
-import Product from '../../interfaces/product';
+import { Product } from '../../interfaces';
 import { useAppDispatch } from '../../storage/hooks';
 import { useSelector } from 'react-redux';
 import { getSearchItems, selectSearchState } from '../../features/search/action/getSearchItemData';
@@ -113,7 +113,7 @@ const Header = (props: Props) => {
               </div>
             </div>
           ) : (
-            <div/>
+            <div />
           )}
         </div>
       </div>
