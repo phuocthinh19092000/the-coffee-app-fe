@@ -16,7 +16,7 @@ function ProtectedSwitch(props: Props) {
   const location = useLocation();
   const user = useSelector(selectUserState);
   const accessToken = useSelector(selectLoginState);
-  const userHasRequiredRole = user && roles?.includes(user.role as ROLE) ? true : false;
+  const userHasRequiredRole = !!(user && roles?.includes(user.role as ROLE));
   const currentPathName = location.pathname.endsWith('/') ? location.pathname.slice(0, -1) : location.pathname;
   return (
     <Route

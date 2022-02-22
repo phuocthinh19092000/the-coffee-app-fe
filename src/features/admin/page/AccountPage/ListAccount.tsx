@@ -1,19 +1,19 @@
+import './ListAccount.scss';
 import AddButton from '../../../../components/AddButton/AddButton';
-import Table from '../../../../components/Table/Table';
 import CustomPagination from '../../../../components/CustomPagination/CustomPagination';
-import Product from '../../../../interfaces/product';
-import { ProductTable } from '../../../../interfaces';
-import { TableProductHeader } from '../../../../components/Table/constants/table.constant';
-import { useEffect, useState } from 'react';
+import Table from '../../../../components/Table/Table';
+import { TableUserHeader } from '../../../../components/Table/constants/table.constant';
 import { useAppDispatch } from '../../../../storage/hooks';
 import { useSelector } from 'react-redux';
 import { getProductsPagination, selectProductState } from '../../../product/actions/getProductData';
-
-import './ListProductStaff.scss';
+import { useEffect, useState } from 'react';
+import { ProductTable } from '../../../../interfaces';
+import Product from '../../../../interfaces/product';
 
 const limit = 15;
 
 const prepareDataTableProduct = (listProducts: Product[]): ProductTable[] => {
+  //TODO: get API get all user
   const data: ProductTable[] = [];
 
   listProducts.forEach((product) => {
@@ -34,7 +34,7 @@ const prepareDataTableProduct = (listProducts: Product[]): ProductTable[] => {
   return data;
 };
 
-const ListProductStaff = () => {
+const ListAccount = () => {
   const dispatch = useAppDispatch();
   const responseDataProduct = useSelector(selectProductState);
 
@@ -111,8 +111,8 @@ const ListProductStaff = () => {
   };
 
   return (
-    <div className="list-product">
-      <div className="list-product-header">
+    <div className="list-account">
+      <div className="list-account-header">
         <AddButton name="Add Item" />
         {/* //TODO: Add component input here */}
         <CustomPagination
@@ -124,11 +124,10 @@ const ListProductStaff = () => {
         />
       </div>
 
-      <div className="list-product-table">
-        <Table header={TableProductHeader} body={dataTableProduct} isHaveDropdown={true} startIndex={startIndex} />
+      <div className="list-account-table">
+        <Table header={TableUserHeader} body={dataTableProduct} isHaveDropdown={true} startIndex={startIndex} />
       </div>
     </div>
   );
 };
-
-export default ListProductStaff;
+export default ListAccount;
