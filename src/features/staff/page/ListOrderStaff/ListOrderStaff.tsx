@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { ColumnOrderStatus, OrderStatus, SocketEvent } from '../../../../enum';
 import { getOrdersByStatus, selectOrderByStatusState, updateOrder } from '../../../orderStatus/action/orderStatus';
-
 import { onListenEvent } from '../../../../services/socketService';
 import { useAppDispatch } from '../../../../storage/hooks';
 import { SocketContext } from '../../../../utils/socketProvider';
