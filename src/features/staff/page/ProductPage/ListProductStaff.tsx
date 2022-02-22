@@ -2,16 +2,23 @@ import AddButton from '../../../../components/AddButton/AddButton';
 import Table from '../../../../components/Table/Table';
 import CustomPagination from '../../../../components/CustomPagination/CustomPagination';
 import Product from '../../../../interfaces/product';
+import FormManageProduct from '../../components/FormManageProduct/FormManageProduct';
+import ToastNotification from '../../../../components/ToastNotification/ToatstNotification';
+
+import { FormName } from '../../../../enum';
 import { ProductTable } from '../../../../interfaces';
 import { TableProductHeader } from '../../../../components/Table/constants/table.constant';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../../storage/hooks';
 import { useSelector } from 'react-redux';
 import { getProductsPagination, selectProductState } from '../../../product/actions/getProductData';
+import { NotificationType, PositionToast } from '../../../../enum';
+import { getAllCategory, selectCategoryState } from '../../../product/actions/getCategoryData';
 
 import './ListProductStaff.scss';
 
 const limit = 15;
+const timeoutShowNotification = 3000;
 
 const prepareDataTableProduct = (listProducts: Product[]): ProductTable[] => {
   const data: ProductTable[] = [];
@@ -37,6 +44,11 @@ const prepareDataTableProduct = (listProducts: Product[]): ProductTable[] => {
 const ListProductStaff = () => {
   const dispatch = useAppDispatch();
   const responseDataProduct = useSelector(selectProductState);
+  const categoryData = useSelector(selectCategoryState);
+
+  const [isShowNotification, setIsShowNotification] = useState(false);
+
+  const [isShowFormAddNewProduct, setIsShowFormAddNewProduct] = useState(false);
 
   const [isLastPage, setIsLastPage] = useState(false);
   const [isFirstPage, setIsFirstPage] = useState(true);
@@ -110,24 +122,58 @@ const ListProductStaff = () => {
     }
   };
 
-  return (
-    <div className="list-product">
-      <div className="list-product-header">
-        <AddButton name="Add Item" />
-        {/* //TODO: Add component input here */}
-        <CustomPagination
-          startIndex={startIndex}
-          endIndex={lastIndex}
-          totalItems={totalProducts || 0}
-          onClickNextPage={() => onClickMoveNextPage(totalProducts)}
-          onClickPreviousPage={() => onClickMovePreviousPage()}
-        />
-      </div>
+  const onShowFormAddNewProductHandler = () => {
+    dispatch(getAllCategory());
 
-      <div className="list-product-table">
-        <Table header={TableProductHeader} body={dataTableProduct} isHaveDropdown={true} startIndex={startIndex} />
+    setIsShowFormAddNewProduct(true);
+  };
+
+  const onAddNewProductHandler = () => {
+    dispatch(getProductsPagination({ limit, offset: startIndex - 1 }));
+
+    setIsShowFormAddNewProduct(false);
+    setIsShowNotification(true);
+
+    setTimeout(() => {
+      setIsShowNotification(false);
+    }, timeoutShowNotification);
+  };
+
+  return (
+    <>
+      <div className="list-product">
+        <div>
+          <div className="list-product-header">
+            <div className="list-product-header__item">
+              <AddButton name="Add Item" onClick={onShowFormAddNewProductHandler} />
+              {/* //TODO: Add component input here */}
+            </div>
+            <CustomPagination
+              startIndex={startIndex}
+              endIndex={lastIndex}
+              totalItems={totalProducts || 0}
+              onClickNextPage={() => onClickMoveNextPage(totalProducts)}
+              onClickPreviousPage={onClickMovePreviousPage}
+            />
+          </div>
+
+          <div className="list-product-table">
+            <Table header={TableProductHeader} body={dataTableProduct} isHaveDropdown={true} startIndex={startIndex} />
+          </div>
+        </div>
       </div>
-    </div>
+      {isShowFormAddNewProduct && (
+        <FormManageProduct listCategory={categoryData} formName={FormName.ADD_ITEM} onSave={onAddNewProductHandler} />
+      )}
+
+      {isShowNotification && (
+        <ToastNotification
+          type={NotificationType.SUCCESS}
+          message="New Item Added Successfully"
+          position={PositionToast.TOP_CENTER}
+        />
+      )}
+    </>
   );
 };
 

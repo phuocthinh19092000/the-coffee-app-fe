@@ -1,4 +1,3 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import authReducer from '../features/auth/actions/auth';
 import categoryReducer from '../features/product/actions/getCategoryData';
 import productReducer from '../features/product/actions/getProductData';
@@ -7,8 +6,12 @@ import myOrderReducer from '../features/my-order/actions/historyOrder';
 import orderByStatusReducer from '../features/orderStatus/action/orderStatus';
 import searchReducer from '../features/search/action/getSearchItemData';
 import updateStatusOrderReducer from '../features/updateOrder/action/updateOrder';
-import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import createProductReducer from '../features/product/actions/createProductData';
 import storage from 'redux-persist/lib/storage';
+
+import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+
 const customizedMiddleware = getDefaultMiddleware({
   serializableCheck: {
     ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
@@ -31,6 +34,7 @@ export const store = configureStore({
     orderByStatus: orderByStatusReducer,
     search: searchReducer,
     updateStatusOrder: updateStatusOrderReducer,
+    createProduct: createProductReducer,
   },
   middleware: customizedMiddleware,
 });
