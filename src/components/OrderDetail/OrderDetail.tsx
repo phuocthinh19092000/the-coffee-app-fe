@@ -25,7 +25,7 @@ const OrderDetail = (props: Props) => {
         <div className="dp-center">
           <img className="order-detail__img" src={CoffeeImg} alt="Avatar Drink" />
           <div className="order-detail__information-drink dp-center">
-            <p>{product.name}</p>
+            <p>{product?.name}</p>
             <div className="dp-row">
               <p>
                 {moneyFormat(product.price)} - Qty: {props.order.quantity} -&nbsp;

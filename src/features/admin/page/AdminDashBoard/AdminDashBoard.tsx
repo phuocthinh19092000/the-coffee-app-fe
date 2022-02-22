@@ -1,7 +1,7 @@
 import LeftSideBar from '../../../../components/LeftSideBar/LeftSideBar';
 import { TabIcon, TabName } from '../../../../constant';
 import { useState } from 'react';
-import ListAccount from '../AccountPage/ListAccount';
+import ListAccount from '../AccountPage/ListAccountAdmin';
 
 const AdminDashBoard = () => {
   const [tabName, setTabName] = useState(TabName.ADMIN.ACCOUNT);
