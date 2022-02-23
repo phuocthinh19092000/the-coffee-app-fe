@@ -9,6 +9,14 @@
     &__row {
       @apply sm:h-[18.75px] md:h-[38.4px] lg:h-[51.2] xl:h-[63px];
     }
+    
+    &__empty {
+      @apply w-full sm:min-w-[308px] md:min-w-[631px] lg:min-w-[841px] xl:min-w-[1052px] h-1/2 flex justify-center bg-white rounded-lg;
+    }
+
+    &__group {
+      @apply w-2/5 h-fit flex flex-col justify-center items-center text-center py-[10%];
+    }
 
     &__cell {
       @apply font-normal;
