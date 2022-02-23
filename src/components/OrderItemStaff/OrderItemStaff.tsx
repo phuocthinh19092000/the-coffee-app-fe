@@ -16,14 +16,13 @@ import useComponentVisible from '../../utils/useComponentVisible';
 import React from 'react';
 
 interface Props {
-    order: Order;
-    setIsShowNotification?: React.Dispatch<React.SetStateAction<boolean>>;
+  order: Order;
+  setIsShowNotification?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const OrderItemStaff = (props: Props) => {
-    const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
-
-    const dispatch = useAppDispatch();
+  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
+  const dispatch = useAppDispatch();
 
   let icon = props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP ? iconPickedUp : nextIcon;
 

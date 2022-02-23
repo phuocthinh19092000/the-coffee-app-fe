@@ -7,9 +7,10 @@ import orderByStatusReducer from '../features/orderStatus/action/orderStatus';
 import searchReducer from '../features/search/action/getSearchItemData';
 import updateStatusOrderReducer from '../features/updateOrder/action/updateOrder';
 import createProductReducer from '../features/product/actions/createProductData';
+import accountReducer from '../features/user/actions/getUserData';
 import storage from 'redux-persist/lib/storage';
 
-import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import { FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 
 const customizedMiddleware = getDefaultMiddleware({
@@ -35,6 +36,7 @@ export const store = configureStore({
     search: searchReducer,
     updateStatusOrder: updateStatusOrderReducer,
     createProduct: createProductReducer,
+    account: accountReducer,
   },
   middleware: customizedMiddleware,
 });

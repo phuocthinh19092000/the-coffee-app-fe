@@ -1,5 +1,5 @@
 .table {
-  @apply bg-white rounded-lg pb-0.5 sm:min-w-[308px] md:min-w-[631px] lg:min-w-[841px] xl:min-w-[1052px] w-full border-separate table-fixed;
+  @apply bg-white rounded-lg pb-0.5 sm:min-w-[308px] md:min-w-[631px] lg:min-w-[841px] xl:min-w-[1052px] w-full border-separate table-auto;
 
   &-header {
     @apply font-semibold capitalize text-left sm:h-[23.2px] md:h-[47.4px] lg:h-[63.2] xl:h-[79px];

@@ -4,16 +4,12 @@ export default interface Account {
   password: string;
   name: string;
   email: string;
-  status: string;
+  available: string;
   phoneNumber: string;
   avatarUrl: string;
-  roleName: string;
-}
-
-export interface AccountTable {
-  id: string;
-  name: string;
-  status: string;
-  phoneNumber: string;
-  email: string;
+  role: {
+    id: string;
+    name: string;
+  };
+  freeUnit: number;
 }

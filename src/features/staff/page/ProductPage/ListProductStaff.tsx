@@ -21,7 +21,8 @@ const timeoutShowNotification = 3000;
 const prepareDataTableProduct = (listProducts: Product[]): ProductTypeDto[] => {
   const data: ProductTypeDto[] = [];
 
-  listProducts.forEach((product) => {
+  // eslint-disable-next-line array-callback-return
+  listProducts.map((product) => {
     const { description, ...rest } = product;
     const dataProductTable = { ...rest, category: rest.category.name };
     let objectOrder: ProductTypeDto = {
@@ -57,7 +58,7 @@ const ListProductStaff = () => {
   useEffect(() => {
     async function getData() {
       const dataProduct = await dispatch(getProductsPagination({ limit })).unwrap();
-      const isCheckLastPage = dataProduct.products.totalProducts <= limit;
+      const isCheckLastPage = dataProduct.totalProducts <= limit;
 
       setIsLastPage(isCheckLastPage);
       setLastIndex(dataProduct.products.length);

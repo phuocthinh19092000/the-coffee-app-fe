@@ -1,43 +1,41 @@
-import './ListAccount.scss';
+import './ListAccountAdmin.scss';
 import AddButton from '../../../../components/AddButton/AddButton';
 import CustomPagination from '../../../../components/CustomPagination/CustomPagination';
 import Table from '../../../../components/Table/Table';
 import { TableUserHeader } from '../../../../components/Table/constants/table.constant';
 import { useAppDispatch } from '../../../../storage/hooks';
 import { useSelector } from 'react-redux';
-import { getProductsPagination, selectProductState } from '../../../product/actions/getProductData';
+import { getAccountPagination, selectAccountState } from '../../../user/actions/getUserData';
 import { useEffect, useState } from 'react';
-import { ProductTypeDto } from '../../../../interfaces';
-import { Product } from '../../../../interfaces';
+import Account from '../../../../interfaces/account';
+import { UserTypeDto } from '../../../../interfaces';
 
 const limit = 15;
 
-const prepareDataTableProduct = (listProducts: Product[]): ProductTypeDto[] => {
-  //TODO: get API get all user
-  const data: ProductTypeDto[] = [];
-
-  listProducts.forEach((product) => {
-    const { description, ...rest } = product;
-    const dataProductTable = { ...rest, category: rest.category.name };
-    let objectOrder: ProductTypeDto = {
+const prepareDataTableAccount = (listAccount: Account[]): UserTypeDto[] => {
+  const data: UserTypeDto[] = [];
+  // eslint-disable-next-line array-callback-return
+  listAccount.map((user) => {
+    const { avatarUrl, freeUnit, ...rest } = user;
+    const dataAccountTable = { ...rest, role: rest.role.name };
+    let objectAccount: UserTypeDto = {
       id: '',
       name: '',
-      images: '',
-      category: '',
-      price: 0,
-      status: '',
+      available: '',
+      phoneNumber: '',
+      email: '',
+      role: '',
     };
-    const reOrderDataProductTable: ProductTypeDto = Object.assign(objectOrder, dataProductTable);
-    data.push(reOrderDataProductTable);
+    const reAccountDataTable: UserTypeDto = Object.assign(objectAccount, dataAccountTable);
+    data.push(reAccountDataTable);
   });
 
   return data;
 };
 
-const ListAccount = () => {
+const ListAccountAdmin = () => {
   const dispatch = useAppDispatch();
-  const responseDataProduct = useSelector(selectProductState);
-
+  const responseDataAccount = useSelector(selectAccountState);
   const [isLastPage, setIsLastPage] = useState(false);
   const [isFirstPage, setIsFirstPage] = useState(true);
 
@@ -46,20 +44,18 @@ const ListAccount = () => {
 
   useEffect(() => {
     async function getData() {
-      const dataProduct = await dispatch(getProductsPagination({ limit })).unwrap();
-      const isCheckLastPage = dataProduct.products.totalProducts <= limit;
-
+      const dataAccount = await dispatch(getAccountPagination({ limit })).unwrap();
+      const isCheckLastPage = dataAccount.totalUser <= limit;
       setIsLastPage(isCheckLastPage);
-      setLastIndex(dataProduct.products.length);
+      setLastIndex(dataAccount.user.length);
     }
 
     getData();
   }, [dispatch]);
 
-  const totalProducts = responseDataProduct.totalProduct;
-  const listProducts = responseDataProduct.products;
-
-  const dataTableProduct: ProductTypeDto[] = prepareDataTableProduct(listProducts);
+  const totalAccount = responseDataAccount.totalUser;
+  const ListAccount = responseDataAccount.user;
+  const dataTableAccount: UserTypeDto[] = prepareDataTableAccount(ListAccount);
 
   const onClickMoveNextPage = (total: number) => {
     if (isLastPage) {
@@ -74,13 +70,13 @@ const ListAccount = () => {
       setStartIndex(lastIndex + 1);
       setLastIndex(total);
       setIsLastPage(true);
-      dispatch(getProductsPagination({ limit, offset: lastIndex }));
+      dispatch(getAccountPagination({ limit, offset: lastIndex }));
       return;
     }
 
     setStartIndex(startIndex + limit);
     setLastIndex(lastIndex + limit);
-    dispatch(getProductsPagination({ limit, offset: startIndex + limit - 1 }));
+    dispatch(getAccountPagination({ limit, offset: startIndex + limit - 1 }));
   };
 
   const onClickMovePreviousPage = () => {
@@ -92,7 +88,7 @@ const ListAccount = () => {
       setStartIndex(startIndex - limit);
       setLastIndex(startIndex - 1);
       setIsLastPage(false);
-      dispatch(getProductsPagination({ limit, offset: startIndex - limit - 1 }));
+      dispatch(getAccountPagination({ limit, offset: startIndex - limit - 1 }));
 
       if (startIndex - limit === 1) {
         setIsFirstPage(true);
@@ -102,7 +98,7 @@ const ListAccount = () => {
     }
     setStartIndex(startIndex - limit);
     setLastIndex(lastIndex - limit);
-    dispatch(getProductsPagination({ limit, offset: startIndex - limit - 1 }));
+    dispatch(getAccountPagination({ limit, offset: startIndex - limit - 1 }));
 
     if (startIndex - limit === 1) {
       setIsFirstPage(true);
@@ -118,16 +114,16 @@ const ListAccount = () => {
         <CustomPagination
           startIndex={startIndex}
           endIndex={lastIndex}
-          totalItems={totalProducts || 0}
-          onClickNextPage={() => onClickMoveNextPage(totalProducts)}
+          totalItems={totalAccount || 0}
+          onClickNextPage={() => onClickMoveNextPage(totalAccount)}
           onClickPreviousPage={() => onClickMovePreviousPage()}
         />
       </div>
 
       <div className="list-account-table">
-        <Table header={TableUserHeader} body={dataTableProduct} isHaveDropdown={true} startIndex={startIndex} />
+        <Table header={TableUserHeader} body={dataTableAccount} isHaveDropdown={true} startIndex={startIndex} />
       </div>
     </div>
   );
 };
-export default ListAccount;
+export default ListAccountAdmin;

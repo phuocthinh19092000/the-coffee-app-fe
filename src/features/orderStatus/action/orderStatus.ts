@@ -1,5 +1,5 @@
 import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { OrderStatus } from '../../../enum/Order';
+import { OrderStatus } from '../../../enum';
 import Order from '../../../interfaces/order';
 import { RootState } from '../../../storage';
 import OrderByStatusApi from '../api/orderStatusApi';

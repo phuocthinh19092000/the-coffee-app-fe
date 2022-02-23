@@ -2,6 +2,7 @@ import { ColumnOrderStatus } from '../../enum';
 import Order from '../../interfaces/order';
 import OrderItemStaff from '../OrderItemStaff/OrderItemStaff';
 import './ColumnOrderStaff.scss';
+import React from 'react';
 
 type Props = {
   title: ColumnOrderStatus;
