@@ -19,5 +19,9 @@ const productApi = {
     const url = `/categories/${name}/products`;
     return http.get(url);
   },
+
+  createProduct(body: FormData) {
+    return http.post(url, body);
+  },
 };
 export default productApi;

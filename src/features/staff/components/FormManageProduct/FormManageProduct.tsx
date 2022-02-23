@@ -1,21 +1,29 @@
 import WrapperForm from '../../../../components/WrapperForm/WrapperForm';
-import './FormManageProduct.scss';
 import CustomInput from '../../../../components/CustomInput/CustomInput';
 import CustomSelect from '../../../../components/CustomSelect/CustomSelect';
 import CustomUploadFile from '../../../../components/CustomUploadFile/CustomUploadFile';
+import Category from '../../../../interfaces/category';
+
 import { useEffect, useRef, useState } from 'react';
 import { InputParams, ProductTypeDto } from '../../../../interfaces';
 import { ProductStatusList } from '../../../../constant';
+import { FormName } from '../../../../enum';
+import { useAppDispatch } from '../../../../storage/hooks';
+import { createProduct } from '../../../product/actions/createProductData';
+
+import './FormManageProduct.scss';
 
 type Props = {
   selectedValue?: ProductTypeDto;
-  listCategory?: string[];
-  formName: string;
+  listCategory: Category[];
+  formName: FormName;
+  onSave: () => void;
 };
 
+const statusCodeError = [400];
+
 const FormManageProduct = (props: Props) => {
-  //TODO: Integrate API to get data category of option select
-  const data = ['Coffee', 'Ice Blended', 'Tea', 'Juice', 'Yogurt'];
+  const dispatch = useAppDispatch();
 
   const fileRef = useRef<HTMLInputElement>(null);
   const [isHavePreviewFile, setIsHavePreviewFile] = useState(false);
@@ -25,7 +33,7 @@ const FormManageProduct = (props: Props) => {
     props.selectedValue || {
       name: '',
       category: '',
-      price: '',
+      price: 0,
       status: '',
     },
   );
@@ -62,12 +70,47 @@ const FormManageProduct = (props: Props) => {
     });
   };
 
+  const onSaveDataHandler = async () => {
+    if (!isFullFill) {
+      return;
+    }
+
+    const { id, category, ...rest } = dataProduct;
+    const prepareDataAddNewProduct = {
+      ...rest,
+      categoryId: dataProduct.category,
+      price: dataProduct.price.toString(),
+    };
+
+    const dataForm = new FormData();
+    Object.entries(prepareDataAddNewProduct).forEach((obj) => {
+      const key = obj[0];
+      const value = obj[1];
+      dataForm.append(key, value);
+    });
+
+    const responseDataAddNewProduct = await dispatch(createProduct(dataForm));
+
+    if (statusCodeError.includes(responseDataAddNewProduct.payload?.data?.status)) {
+      alert(responseDataAddNewProduct.payload.data.description);
+    } else {
+      props.onSave();
+    }
+  };
+
+  const listCategoryId: string[] = [];
+  const listNameCategory: string[] = [];
+  props.listCategory.forEach((category) => {
+    listCategoryId.push(category.id);
+    listNameCategory.push(category.name);
+  });
   return (
     <WrapperForm
       name={props.formName}
       isHavePreviewFile={isHavePreviewFile}
       isFullFill={isFullFill}
       onClickBrowseAgain={onClickBrowse}
+      onClickSave={onSaveDataHandler}
     >
       <div className="add-product">
         <div className="w-full h-fit">
@@ -81,7 +124,7 @@ const FormManageProduct = (props: Props) => {
         </div>
         <div className="w-full h-fit">
           <CustomSelect
-            listOptions={data}
+            listOptions={listNameCategory}
             placeholder="Category"
             name="category"
             onChange={handleChange}
@@ -89,7 +132,13 @@ const FormManageProduct = (props: Props) => {
           />
         </div>
         <div className="w-full h-fit">
-          <CustomInput type="text" name="price" placeholder="Price" onChange={handleChange} value={dataProduct.price} />
+          <CustomInput
+            type="number"
+            name="price"
+            placeholder="Price"
+            onChange={handleChange}
+            value={dataProduct.price}
+          />
         </div>
         <div className="w-full h-fit">
           <CustomSelect
@@ -103,7 +152,7 @@ const FormManageProduct = (props: Props) => {
       </div>
       <div className="area-upload-file">
         <CustomUploadFile
-          name="image"
+          name="images"
           setIsHavePreviewFile={setIsHavePreviewFile}
           fileRef={fileRef}
           onClickBrowse={onClickBrowse}
