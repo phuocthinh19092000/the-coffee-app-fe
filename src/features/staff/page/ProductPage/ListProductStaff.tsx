@@ -58,6 +58,7 @@ const ListProductStaff = () => {
   useEffect(() => {
     async function getData() {
       const dataProduct = await dispatch(getProductsPagination({ limit })).unwrap();
+      await dispatch(getAllCategory()).unwrap();
       const isCheckLastPage = dataProduct.totalProducts <= limit;
 
       setIsLastPage(isCheckLastPage);
@@ -122,8 +123,6 @@ const ListProductStaff = () => {
   };
 
   const onShowFormAddNewProductHandler = () => {
-    dispatch(getAllCategory());
-
     setIsShowFormAddNewProduct(true);
   };
 
