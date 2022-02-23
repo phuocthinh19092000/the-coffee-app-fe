@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../../storage';
 import searchAPI from '../api/searchAPI';
-import Product from '../../../interfaces/product';
+import { Product } from '../../../interfaces/product';
 
 export interface ProductState {
   loading: string;

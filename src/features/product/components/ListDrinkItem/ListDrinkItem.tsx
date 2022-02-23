@@ -5,7 +5,7 @@ import DrinkItemDetail from '../../../order/components/DrinkDetail/DrinkItemDeta
 import PopUpFinishOrder from '../../../../components/PopUpFinishOrder/PopUpFinishOrder';
 import PopUpRanOutUnit from '../../../../components/PopUpRanOutUnit/PopUpRanOutUnit';
 import PopUpLoginCenter from '../../../auth/components/PopUpLoginCenter/PopUpLoginCenter';
-import Product from '../../../../interfaces/product';
+import { Product } from '../../../../interfaces';
 import { useSelector } from 'react-redux';
 import { getProductId, placeOrder, resetOrder, selectOrderState } from '../../../order/actions/order';
 import { selectSearchState } from '../../../search/action/getSearchItemData';

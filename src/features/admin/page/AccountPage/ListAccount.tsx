@@ -7,19 +7,19 @@ import { useAppDispatch } from '../../../../storage/hooks';
 import { useSelector } from 'react-redux';
 import { getProductsPagination, selectProductState } from '../../../product/actions/getProductData';
 import { useEffect, useState } from 'react';
-import { ProductTable } from '../../../../interfaces';
-import Product from '../../../../interfaces/product';
+import { ProductTypeDto } from '../../../../interfaces';
+import { Product } from '../../../../interfaces';
 
 const limit = 15;
 
-const prepareDataTableProduct = (listProducts: Product[]): ProductTable[] => {
+const prepareDataTableProduct = (listProducts: Product[]): ProductTypeDto[] => {
   //TODO: get API get all user
-  const data: ProductTable[] = [];
+  const data: ProductTypeDto[] = [];
 
   listProducts.forEach((product) => {
     const { description, ...rest } = product;
     const dataProductTable = { ...rest, category: rest.category.name };
-    let objectOrder: ProductTable = {
+    let objectOrder: ProductTypeDto = {
       id: '',
       name: '',
       images: '',
@@ -27,7 +27,7 @@ const prepareDataTableProduct = (listProducts: Product[]): ProductTable[] => {
       price: 0,
       status: '',
     };
-    const reOrderDataProductTable: ProductTable = Object.assign(objectOrder, dataProductTable);
+    const reOrderDataProductTable: ProductTypeDto = Object.assign(objectOrder, dataProductTable);
     data.push(reOrderDataProductTable);
   });
 
@@ -59,7 +59,7 @@ const ListAccount = () => {
   const totalProducts = responseDataProduct.totalProduct;
   const listProducts = responseDataProduct.products;
 
-  const dataTableProduct: ProductTable[] = prepareDataTableProduct(listProducts);
+  const dataTableProduct: ProductTypeDto[] = prepareDataTableProduct(listProducts);
 
   const onClickMoveNextPage = (total: number) => {
     if (isLastPage) {

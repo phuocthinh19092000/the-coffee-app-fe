@@ -2,21 +2,17 @@ import WrapperForm from '../../../../components/WrapperForm/WrapperForm';
 import CustomInput from '../../../../components/CustomInput/CustomInput';
 import CustomSelect from '../../../../components/CustomSelect/CustomSelect';
 import CustomUploadFile from '../../../../components/CustomUploadFile/CustomUploadFile';
-import Category from '../../../../interfaces/category';
-
 import { useEffect, useRef, useState } from 'react';
-import { InputParams, ProductTypeDto } from '../../../../interfaces';
+import { InputParams, OptionType, ProductTypeDto } from '../../../../interfaces';
 import { ProductStatusList } from '../../../../constant';
-import { FormName } from '../../../../enum';
-import { useAppDispatch } from '../../../../storage/hooks';
 import { createProduct } from '../../../product/actions/createProductData';
-
+import { useAppDispatch } from '../../../../storage/hooks';
 import './FormManageProduct.scss';
-
 type Props = {
-  selectedValue?: ProductTypeDto;
-  listCategory: Category[];
-  formName: FormName;
+  selectedProduct?: ProductTypeDto;
+  listCategory: OptionType[];
+  formName: string;
+  onClickExit?: React.MouseEventHandler<HTMLElement>;
   onSave: () => void;
 };
 
@@ -24,13 +20,12 @@ const statusCodeError = [400];
 
 const FormManageProduct = (props: Props) => {
   const dispatch = useAppDispatch();
-
   const fileRef = useRef<HTMLInputElement>(null);
   const [isHavePreviewFile, setIsHavePreviewFile] = useState(false);
   const [isFullFill, setIsFullFill] = useState(false);
 
   const [dataProduct, setDataProduct] = useState<ProductTypeDto>(
-    props.selectedValue || {
+    props.selectedProduct || {
       name: '',
       category: '',
       price: 0,
@@ -98,12 +93,6 @@ const FormManageProduct = (props: Props) => {
     }
   };
 
-  const listCategoryId: string[] = [];
-  const listNameCategory: string[] = [];
-  props.listCategory.forEach((category) => {
-    listCategoryId.push(category.id);
-    listNameCategory.push(category.name);
-  });
   return (
     <WrapperForm
       name={props.formName}
@@ -111,6 +100,8 @@ const FormManageProduct = (props: Props) => {
       isFullFill={isFullFill}
       onClickBrowseAgain={onClickBrowse}
       onClickSave={onSaveDataHandler}
+      onClickExit={props.onClickExit}
+      onClickCancel={props.onClickExit}
     >
       <div className="add-product">
         <div className="w-full h-fit">
@@ -124,7 +115,7 @@ const FormManageProduct = (props: Props) => {
         </div>
         <div className="w-full h-fit">
           <CustomSelect
-            listOptions={listNameCategory}
+            listOptions={props.listCategory}
             placeholder="Category"
             name="category"
             onChange={handleChange}

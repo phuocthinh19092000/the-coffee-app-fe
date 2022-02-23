@@ -8,7 +8,7 @@ import Card from '../../../../components/Card/Index';
 import Input from '../../../../components/Input/Input';
 import './DrinkItemDetail.scss';
 import DrinkItem from '../../../product/components/DrinkItem/DrinkItem';
-import Product from '../../../../interfaces/product';
+import { Product } from '../../../../interfaces';
 import { useDispatch, useSelector } from 'react-redux';
 import { getQuantity, getNote, selectOrderState } from '../../actions/order';
 import React from 'react';

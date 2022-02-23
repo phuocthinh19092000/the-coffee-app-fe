@@ -1,5 +1,5 @@
 import { ProductStatus, UserStatus } from '../../enum';
-import { ProductTable, UserTable } from '../../interfaces';
+import { ProductTypeDto, UserTypeDto } from '../../interfaces';
 import { moneyFormat } from '../../utils/MoneyFormat';
 import Dropdown from '../Dropdown/Dropdown';
 import BlackCoffee from '../../share/assets/img/blackcoffee.png';
@@ -7,7 +7,7 @@ import './Table.scss';
 
 type Props = {
   header: Array<string | JSX.Element>;
-  body: Array<ProductTable | UserTable>;
+  body: Array<ProductTypeDto | UserTypeDto>;
   startIndex?: number;
   isHaveDropdown: boolean;
 };
@@ -71,7 +71,7 @@ const Table = (props: Props) => {
 
               {props.isHaveDropdown && (
                 <td className="table-body__cell grid justify-items-center">
-                  <Dropdown />
+                  <Dropdown selectedValue={object} />
                 </td>
               )}
             </tr>
