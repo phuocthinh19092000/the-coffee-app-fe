@@ -30,6 +30,7 @@ const FormManageProduct = (props: Props) => {
       category: '',
       price: 0,
       status: '',
+      images: '',
     },
   );
 
