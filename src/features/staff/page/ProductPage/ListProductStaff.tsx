@@ -3,7 +3,7 @@ import Table from '../../../../components/Table/Table';
 import CustomPagination from '../../../../components/CustomPagination/CustomPagination';
 import FormManageProduct from '../../components/FormManageProduct/FormManageProduct';
 import ToastNotification from '../../../../components/ToastNotification/ToatstNotification';
-import { FormName, NotificationType, PositionToast } from '../../../../enum';
+import { FormName } from '../../../../enum';
 import { Product, ProductTypeDto } from '../../../../interfaces';
 import { TableProductHeader } from '../../../../components/Table/constants/table.constant';
 import { useEffect, useState } from 'react';
@@ -11,11 +11,9 @@ import { useAppDispatch } from '../../../../storage/hooks';
 import { useSelector } from 'react-redux';
 import { getProductsPagination, selectProductState } from '../../../product/actions/getProductData';
 import { getAllCategory, selectCategoryState } from '../../../product/actions/getCategoryData';
-
+import useClearNotification from '../../../../utils/useClearNotification';
 import './ListProductStaff.scss';
-
 const limit = 15;
-const timeoutShowNotification = 3000;
 
 const prepareDataTableProduct = (listProducts: Product[]): ProductTypeDto[] => {
   const data: ProductTypeDto[] = [];
@@ -44,7 +42,7 @@ const ListProductStaff = () => {
   const responseDataProduct = useSelector(selectProductState);
   const categoryData = useSelector(selectCategoryState);
 
-  const [isShowNotification, setIsShowNotification] = useState(false);
+  const { typeShowNotification, setTypeShowNotification } = useClearNotification();
 
   const [isShowFormAddNewProduct, setIsShowFormAddNewProduct] = useState(false);
 
@@ -133,9 +131,6 @@ const ListProductStaff = () => {
     dispatch(getProductsPagination({ limit, offset: startIndex - 1 }));
     setIsShowFormAddNewProduct(false);
     onClickExit();
-    setTimeout(() => {
-      setIsShowNotification(false);
-    }, timeoutShowNotification);
   };
 
   return (
@@ -165,15 +160,12 @@ const ListProductStaff = () => {
           formName={FormName.ADD_ITEM}
           onSave={onAddNewProductHandler}
           onClickExit={onClickExit}
+          setShowNotification={setTypeShowNotification}
         />
       )}
 
-      {isShowNotification && (
-        <ToastNotification
-          type={NotificationType.SUCCESS}
-          message="New Item Added Successfully"
-          position={PositionToast.TOP_CENTER}
-        />
+      {typeShowNotification.message && (
+        <ToastNotification type={typeShowNotification.type} message={typeShowNotification.message} />
       )}
     </>
   );

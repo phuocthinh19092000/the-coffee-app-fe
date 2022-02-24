@@ -3,21 +3,39 @@ import CustomInput from '../../../../components/CustomInput/CustomInput';
 import CustomSelect from '../../../../components/CustomSelect/CustomSelect';
 import CustomUploadFile from '../../../../components/CustomUploadFile/CustomUploadFile';
 import React, { useEffect, useRef, useState } from 'react';
-import { InputParams, OptionType, ProductTypeDto } from '../../../../interfaces';
-import { ProductStatusList } from '../../../../constant';
-import { createProduct } from '../../../product/actions/createProductData';
+import { InputParams, NotificationParams, OptionType, ProductTypeDto } from '../../../../interfaces';
+import { ProductStatusList, statusCodeError } from '../../../../constant';
+import { createProduct, updateProduct } from '../../../product/actions/createProductData';
 import { useAppDispatch } from '../../../../storage/hooks';
 import './FormManageProduct.scss';
+import { NotificationType } from '../../../../enum';
 
 type Props = {
   selectedProduct?: ProductTypeDto;
   listCategory: OptionType[];
   formName: string;
   onClickExit?: React.MouseEventHandler<HTMLElement>;
+  setShowNotification: React.Dispatch<React.SetStateAction<NotificationParams>>;
   onSave: () => void;
 };
 
-const statusCodeError = [400];
+const prepareDataToCallApi = (dataProduct: ProductTypeDto) => {
+  const { id, category, price, ...rest } = dataProduct;
+
+  const prepareDataProduct = {
+    ...rest,
+    categoryId: category,
+    price: price.toString(),
+  };
+
+  const dataForm = new FormData();
+  Object.entries(prepareDataProduct).forEach((obj) => {
+    const key = obj[0];
+    const value = obj[1];
+    dataForm.append(key, value);
+  });
+  return { id, dataForm };
+};
 
 const FormManageProduct = (props: Props) => {
   const dispatch = useAppDispatch();
@@ -67,31 +85,31 @@ const FormManageProduct = (props: Props) => {
     });
   };
 
+  const setContentNotification = (message: string, response: any) => {
+    if (statusCodeError.includes(response.payload?.status)) {
+      props.setShowNotification({
+        type: NotificationType.FAILURE,
+        message: response.payload.description,
+      });
+    } else {
+      props.setShowNotification({ message, type: NotificationType.SUCCESS });
+      props.onSave();
+    }
+  };
+
   const onSaveDataHandler = async () => {
     if (!isFullFill) {
       return;
     }
 
-    const { id, category, ...rest } = dataProduct;
-    const prepareDataAddNewProduct = {
-      ...rest,
-      categoryId: dataProduct.category,
-      price: dataProduct.price.toString(),
-    };
+    const { id, dataForm } = prepareDataToCallApi(dataProduct);
 
-    const dataForm = new FormData();
-    Object.entries(prepareDataAddNewProduct).forEach((obj) => {
-      const key = obj[0];
-      const value = obj[1];
-      dataForm.append(key, value);
-    });
-
-    const responseDataAddNewProduct = await dispatch(createProduct(dataForm));
-
-    if (statusCodeError.includes(responseDataAddNewProduct.payload?.data?.status)) {
-      alert(responseDataAddNewProduct.payload.data.description);
+    if (id) {
+      const response = await dispatch(updateProduct({ productId: id, body: dataForm }));
+      setContentNotification('Update item successfully!', response);
     } else {
-      props.onSave();
+      const response = await dispatch(createProduct(dataForm));
+      setContentNotification('New Item added successfully!', response);
     }
   };
 
