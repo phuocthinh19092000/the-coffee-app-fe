@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { InputParams } from '../../interfaces';
 import './CustomInput.scss';
 
@@ -10,7 +10,7 @@ interface Props {
   onChange: (inputParam: InputParams) => void;
 }
 const CustomInput = (props: Props) => {
-  const [outlinedText, setOutlinedText] = useState(false);
+  const [outlinedText, setOutlinedText] = useState(props.value ? true : false);
 
   const handleOnFocus: React.FocusEventHandler<HTMLInputElement> = (event: React.FocusEvent<HTMLInputElement>) => {
     if (!event.target.value) {
@@ -29,9 +29,11 @@ const CustomInput = (props: Props) => {
 
   return (
     <div className="outlined-text-input">
-      <label htmlFor="inputText" className="outlined-text-input__label">
-        {outlinedText && props.placeholder}
-      </label>
+      {outlinedText && (
+        <label htmlFor="inputText" className="outlined-text-input__label">
+          {props.placeholder}
+        </label>
+      )}
       <input
         className="form-control"
         placeholder={props.placeholder}
