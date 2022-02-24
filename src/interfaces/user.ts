@@ -5,4 +5,5 @@ export interface UserTypeDto {
   phoneNumber: string;
   email: string;
   role: string;
+  freeUnit?: number;
 }

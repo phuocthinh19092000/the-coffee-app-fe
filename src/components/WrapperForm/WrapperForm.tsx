@@ -8,9 +8,9 @@ type Props = {
   children?: React.ReactChild[] | ReactChild | JSX.Element | JSX.Element[];
   onClickExit?: React.MouseEventHandler<HTMLImageElement>;
   onClickCancel?: React.MouseEventHandler<HTMLButtonElement>;
-  onClickBrowseAgain: React.MouseEventHandler<HTMLButtonElement>;
+  onClickBrowseAgain?: React.MouseEventHandler<HTMLButtonElement>;
   onClickSave?: React.MouseEventHandler<HTMLButtonElement>;
-  isHavePreviewFile: boolean;
+  isHavePreviewFile?: boolean;
   isFullFill: boolean;
 };
 const WrapperForm = (props: Props) => {
