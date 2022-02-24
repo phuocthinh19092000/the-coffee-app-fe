@@ -7,21 +7,19 @@ import { checkRole, login } from '../../../auth/actions/auth';
 import { useEffect, useState } from 'react';
 import EyeIcon from '../../../../share/assets/vector/Eye.svg';
 import CloseEyeIcon from '../../../../share/assets/img/close-eye.png';
-import { NotificationType } from '../../../../enum/NotificationType';
+import { NotificationType, PositionToast, ROLE } from '../../../../enum';
 import ToastNotification from '../../../../components/ToastNotification/ToatstNotification';
-import { PositionToast } from '../../../../enum/PositionToast';
 import { useHistory } from 'react-router-dom';
-import { ROLE } from '../../../../enum';
 
 interface IFormInputs {
-  username: string;
+  email: string;
   password: string;
 }
 
 const schema = yup
   .object()
   .shape({
-    username: yup.string().min(6, 'Username must be at least 6 characters').required('Username is required'),
+    email: yup.string().email('Email must be a valid email address').required('Email is required'),
 
     password: yup.string().min(8, 'Password must be at least 6 characters').required('Password is required'),
   })
@@ -37,7 +35,7 @@ export default function FormLoginStaff() {
     mode: 'onChange',
 
     defaultValues: {
-      username: '',
+      email: '',
       password: '',
     },
   });
@@ -60,7 +58,7 @@ export default function FormLoginStaff() {
 
   const dispatch = useAppDispatch();
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
-    const accessToken = await dispatch(login({ username: data.username, password: data.password }));
+    const accessToken = await dispatch(login({ email: data.email, password: data.password }));
     dispatch(checkRole([ROLE.VENDOR, ROLE.ADMIN]));
     if (accessToken.payload && accessToken.payload.userInfor.role === ROLE.VENDOR) {
       setLoginFailed(false);
@@ -70,7 +68,7 @@ export default function FormLoginStaff() {
       goAdminDashboard();
     } else {
       setLoginFailed(true);
-      reset({ username: '', password: '' });
+      reset({ email: '', password: '' });
     }
   };
 
@@ -89,9 +87,9 @@ export default function FormLoginStaff() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="input-field-staff">
-        <input {...register('username')} placeholder="Username" className="staff-input" />
+        <input {...register('email')} placeholder="Email" className="staff-input" />
       </div>
-      {errors.username && <p className="error">{errors.username?.message}</p>}
+      {errors.email && <p className="error">{errors.email?.message}</p>}
 
       <div className="input-field-staff">
         <input
@@ -107,7 +105,7 @@ export default function FormLoginStaff() {
           alt="Icon Password"
         />
       </div>
-      {errors.password && <p className="error">{errors.password?.message}</p>}
+      {errors.password && <p className="error-staff">{errors.password?.message}</p>}
 
       {loginFailed && (
         <ToastNotification

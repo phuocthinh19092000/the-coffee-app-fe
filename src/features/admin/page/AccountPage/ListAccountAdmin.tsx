@@ -9,8 +9,12 @@ import { getAccountPagination, selectAccountState } from '../../../user/actions/
 import { useEffect, useState } from 'react';
 import Account from '../../../../interfaces/account';
 import { UserTypeDto } from '../../../../interfaces';
+import { FormName, NotificationType, PositionToast } from '../../../../enum';
+import ToastNotification from '../../../../components/ToastNotification/ToatstNotification';
+import FormManageAccount from '../../component/FormManageAccount';
 
 const limit = 15;
+const timeoutShowNotification = 3000;
 
 const prepareDataTableAccount = (listAccount: Account[]): UserTypeDto[] => {
   const data: UserTypeDto[] = [];
@@ -41,6 +45,8 @@ const ListAccountAdmin = () => {
 
   const [startIndex, setStartIndex] = useState(1);
   const [lastIndex, setLastIndex] = useState(0);
+  const [isShowFormAddNewAccount, setIsShowFormAddNewAccount] = useState(false);
+  const [isShowNotification, setIsShowNotification] = useState(false);
 
   useEffect(() => {
     async function getData() {
@@ -106,24 +112,53 @@ const ListAccountAdmin = () => {
     }
   };
 
-  return (
-    <div className="list-account">
-      <div className="list-account-header">
-        <AddButton name="Add Item" />
-        {/* //TODO: Add component input here */}
-        <CustomPagination
-          startIndex={startIndex}
-          endIndex={lastIndex}
-          totalItems={totalAccount || 0}
-          onClickNextPage={() => onClickMoveNextPage(totalAccount)}
-          onClickPreviousPage={() => onClickMovePreviousPage()}
-        />
-      </div>
+  const onClickExit = () => {
+    setIsShowFormAddNewAccount(false);
+  };
 
-      <div className="list-account-table">
-        <Table header={TableUserHeader} body={dataTableAccount} isHaveDropdown={true} startIndex={startIndex} />
+  const onShowFormAddNewAccountHandler = () => {
+    setIsShowFormAddNewAccount(true);
+  };
+
+  const onAddNewAccountHandler = () => {
+    dispatch(getAccountPagination({ limit, offset: startIndex - 1 }));
+    setIsShowFormAddNewAccount(false);
+    onClickExit();
+    setTimeout(() => {
+      setIsShowNotification(false);
+    }, timeoutShowNotification);
+  };
+  return (
+    <>
+      <div className="list-account">
+        <div className="list-account-header">
+          <AddButton name="Add Account" onClick={onShowFormAddNewAccountHandler} />
+          {/* //TODO: Add component input here */}
+          <CustomPagination
+            startIndex={startIndex}
+            endIndex={lastIndex}
+            totalItems={totalAccount || 0}
+            onClickNextPage={() => onClickMoveNextPage(totalAccount)}
+            onClickPreviousPage={() => onClickMovePreviousPage()}
+          />
+        </div>
+
+        <div className="list-account-table">
+          <Table header={TableUserHeader} body={dataTableAccount} isHaveDropdown={true} startIndex={startIndex} />
+        </div>
       </div>
-    </div>
+      {isShowFormAddNewAccount && (
+        <FormManageAccount formName={FormName.ADD_ACCOUNT} onSave={onAddNewAccountHandler} onClickExit={onClickExit} />
+      )}
+
+      {isShowNotification && (
+        <ToastNotification
+          type={NotificationType.SUCCESS}
+          message="New Account Added Successfully"
+          position={PositionToast.TOP_CENTER}
+        />
+      )}
+    </>
   );
 };
 export default ListAccountAdmin;

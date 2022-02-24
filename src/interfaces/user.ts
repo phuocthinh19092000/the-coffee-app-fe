@@ -1,5 +1,6 @@
 export interface UserTypeDto {
   id?: string;
+  password?: string;
   name: string;
   available: string;
   phoneNumber: string;
