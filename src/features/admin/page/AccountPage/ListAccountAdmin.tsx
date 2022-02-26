@@ -9,12 +9,12 @@ import { getAccountPagination, selectAccountState } from '../../../user/actions/
 import { useEffect, useState } from 'react';
 import Account from '../../../../interfaces/account';
 import { UserTypeDto } from '../../../../interfaces';
-import { FormName, NotificationType, PositionToast } from '../../../../enum';
+import { FormName } from '../../../../enum';
 import ToastNotification from '../../../../components/ToastNotification/ToatstNotification';
 import FormManageAccount from '../../component/FormManageAccount';
+import useClearNotification from '../../../../utils/useClearNotification';
 
 const limit = 15;
-const timeoutShowNotification = 3000;
 
 const prepareDataTableAccount = (listAccount: Account[]): UserTypeDto[] => {
   const data: UserTypeDto[] = [];
@@ -46,7 +46,7 @@ const ListAccountAdmin = () => {
   const [startIndex, setStartIndex] = useState(1);
   const [lastIndex, setLastIndex] = useState(0);
   const [isShowFormAddNewAccount, setIsShowFormAddNewAccount] = useState(false);
-  const [isShowNotification, setIsShowNotification] = useState(false);
+  const { typeShowNotification, setTypeShowNotification } = useClearNotification();
 
   useEffect(() => {
     async function getData() {
@@ -124,9 +124,6 @@ const ListAccountAdmin = () => {
     dispatch(getAccountPagination({ limit, offset: startIndex - 1 }));
     setIsShowFormAddNewAccount(false);
     onClickExit();
-    setTimeout(() => {
-      setIsShowNotification(false);
-    }, timeoutShowNotification);
   };
   return (
     <>
@@ -148,15 +145,16 @@ const ListAccountAdmin = () => {
         </div>
       </div>
       {isShowFormAddNewAccount && (
-        <FormManageAccount formName={FormName.ADD_ACCOUNT} onSave={onAddNewAccountHandler} onClickExit={onClickExit} />
+        <FormManageAccount
+          formName={FormName.ADD_ACCOUNT}
+          onSave={onAddNewAccountHandler}
+          onClickExit={onClickExit}
+          setShowNotification={setTypeShowNotification}
+        />
       )}
 
-      {isShowNotification && (
-        <ToastNotification
-          type={NotificationType.SUCCESS}
-          message="New Account Added Successfully"
-          position={PositionToast.TOP_CENTER}
-        />
+      {typeShowNotification.message && (
+        <ToastNotification type={typeShowNotification.type} message={typeShowNotification.message} />
       )}
     </>
   );

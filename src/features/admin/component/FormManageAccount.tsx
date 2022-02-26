@@ -2,20 +2,21 @@ import CustomInput from '../../../components/CustomInput/CustomInput';
 import CustomSelect from '../../../components/CustomSelect/CustomSelect';
 import WrapperForm from '../../../components/WrapperForm/WrapperForm';
 import { freeUnit, listRole, listStatusEmployee } from '../constant';
-import { InputParams, UserTypeDto } from '../../../interfaces';
+import { InputParams, NotificationParams, UserTypeDto } from '../../../interfaces';
 import React, { useEffect, useState } from 'react';
 import './FormManageAccount.scss';
 import { useAppDispatch } from '../../../storage/hooks';
 import { createAccount } from '../actions/createAccountData';
+import { statusCodeError } from '../../../constant';
+import { NotificationType } from '../../../enum';
 
 type Props = {
   selectedAccount?: UserTypeDto;
   formName: string;
   onClickExit?: React.MouseEventHandler<HTMLElement>;
   onSave: () => void;
+  setShowNotification: React.Dispatch<React.SetStateAction<NotificationParams>>;
 };
-
-const statusCodeError = [400];
 
 const FormManageAccount = (props: Props) => {
   const [dataAccount, setDataAccount] = useState<UserTypeDto>(
@@ -57,17 +58,30 @@ const FormManageAccount = (props: Props) => {
     });
   };
 
+  const setContentNotification = (message: string, response: any) => {
+    if (statusCodeError.includes(response.payload?.statusCode)) {
+      props.setShowNotification({
+        type: NotificationType.FAILURE,
+        message: response.payload.message,
+      });
+    } else {
+      props.setShowNotification({ message, type: NotificationType.SUCCESS });
+      props.onSave();
+    }
+  };
+
   const onSaveDataHandler = async () => {
     if (!isFullFill) {
       return;
     }
 
-    const responseDataAddNewAccount = await dispatch(createAccount(dataAccount));
+    dataAccount.email = dataAccount.email.trim();
 
-    if (statusCodeError.includes(responseDataAddNewAccount.payload?.data?.status)) {
-      alert(responseDataAddNewAccount.payload.data.description);
+    if (dataAccount.id) {
+      //TODO:  update information account
     } else {
-      props.onSave();
+      const response = await dispatch(createAccount(dataAccount));
+      setContentNotification('New Account added successfully!', response);
     }
   };
   return (
