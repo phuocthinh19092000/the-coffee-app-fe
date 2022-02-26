@@ -9,8 +9,14 @@ import FormManageProduct from '../../features/staff/components/FormManageProduct
 import { selectCategoryState } from '../../features/product/actions/getCategoryData';
 import { useSelector } from 'react-redux';
 import Category from '../../interfaces/category';
+import { FormName } from '../../enum';
+import ToastNotification from '../ToastNotification/ToatstNotification';
+import { getProductsPagination } from '../../features/product/actions/getProductData';
+import { useAppDispatch } from '../../storage/hooks';
+import useClearNotification from '../../utils/useClearNotification';
 type Props = {
   selectedValue: ProductTypeDto | UserTypeDto;
+  startIndex: number;
 };
 function isProductTypeDto(object: ProductTypeDto | UserTypeDto): object is ProductTypeDto {
   return (object as ProductTypeDto).category !== undefined;
@@ -22,11 +28,16 @@ function processingData(selectedValue: ProductTypeDto, listCategory: Category[])
   }
   return selectedValue;
 }
+const limit = 15;
 
 const Dropdown = (props: Props) => {
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
   const [isShowFormEdit, setIsShowFormEdit] = useState(false);
   const [isShowPopupDelete, setIsShowPopupDelete] = useState(false);
+
+  const dispatch = useAppDispatch();
+  const { typeShowNotification, setTypeShowNotification } = useClearNotification();
+
   const categories = useSelector(selectCategoryState);
   const listOptionsCategories = categories.map((item) => ({ id: item.id, name: item.name }));
 
@@ -47,7 +58,10 @@ const Dropdown = (props: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isShowFormEdit, isShowPopupDelete]);
 
-  const onUpdateProduct = () => {};
+  const onUpdateProduct = () => {
+    setIsShowFormEdit(false);
+    dispatch(getProductsPagination({ limit, offset: props.startIndex - 1 }));
+  };
   return (
     <div ref={ref}>
       <div className="dropdown">
@@ -68,15 +82,20 @@ const Dropdown = (props: Props) => {
         )}
         {isProductTypeDto(props.selectedValue) && isShowFormEdit && (
           <FormManageProduct
-            formName={'Edit New Item'}
+            formName={FormName.UPDATE_ITEM}
             onClickExit={showFormEdit}
             selectedProduct={processingData(props.selectedValue, categories)}
             listCategory={listOptionsCategories}
             onSave={onUpdateProduct}
+            setShowNotification={setTypeShowNotification}
           />
         )}
 
         {/* //TODO: show pop-up delete  */}
+
+        {typeShowNotification.message && (
+          <ToastNotification type={typeShowNotification.type} message={typeShowNotification.message} />
+        )}
       </div>
     </div>
   );

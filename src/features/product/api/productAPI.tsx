@@ -5,6 +5,11 @@ type PaginationParams = {
   offset?: number;
 };
 
+export type UpdateProductParams = {
+  productId: string;
+  body: FormData;
+};
+
 const url = `/products`;
 const productApi = {
   getAllProduct() {
@@ -22,6 +27,10 @@ const productApi = {
 
   createProduct(body: FormData) {
     return http.post(url, body);
+  },
+
+  updateProduct(updateProductParams: UpdateProductParams) {
+    return http.patch(`/products/${updateProductParams.productId}`, updateProductParams.body);
   },
 };
 export default productApi;

@@ -9,7 +9,7 @@ import ProductCart from '../../share/assets/vector/ProductCart.svg';
 type Props = {
   header: Array<string | JSX.Element>;
   body: Array<ProductTypeDto | UserTypeDto>;
-  startIndex?: number;
+  startIndex: number;
   isHaveDropdown: boolean;
 };
 
@@ -73,7 +73,7 @@ const Table = (props: Props) => {
 
                 {props.isHaveDropdown && (
                   <td className="table-body__cell grid justify-items-center">
-                    <Dropdown selectedValue={object} />
+                    <Dropdown selectedValue={object} startIndex={props.startIndex} />
                   </td>
                 )}
               </tr>
