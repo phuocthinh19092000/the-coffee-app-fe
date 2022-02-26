@@ -14,14 +14,14 @@ import { ROLE } from '../../enum';
 import { useSelector } from 'react-redux';
 
 interface IFormInputs {
-  username: string;
+  email: string;
   password: string;
 }
 
 const schema = yup
   .object()
   .shape({
-    username: yup.string().min(6, 'Username must be at least 6 characters').required('Username is required'),
+    email: yup.string().email('Email must be a valid email address').required('Email is required'),
 
     password: yup.string().min(8, 'Password must be at least 6 characters').required('Password is required'),
   })
@@ -38,7 +38,7 @@ export default function HookForm() {
     mode: 'onChange',
 
     defaultValues: {
-      username: '',
+      email: '',
       password: '',
     },
   });
@@ -51,13 +51,13 @@ export default function HookForm() {
   const dispatch = useAppDispatch();
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
     const deviceToken = await getDeviceToken();
-    await dispatch(login({ username: data.username, password: data.password, deviceToken: deviceToken }));
+    await dispatch(login({ email: data.email, password: data.password, deviceToken: deviceToken }));
     dispatch(checkRole([ROLE.CUSTOMER]));
     if (user.role === ROLE.CUSTOMER) {
       setLoginFailed(false);
     } else {
       setLoginFailed(true);
-      reset({ username: '', password: '' });
+      reset({ email: '', password: '' });
     }
   };
   const history = useHistory();
@@ -68,10 +68,10 @@ export default function HookForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="input-field">
-        <input {...register('username')} placeholder="Username" />
+        <input {...register('email')} placeholder="Email" />
         <img src={UserIcon} alt="User Icon" />
       </div>
-      {errors.username && <p className="error">{errors.username?.message}</p>}
+      {errors.email && <p className="error">{errors.email?.message}</p>}
 
       <div className="input-field">
         <input type={showPassword ? 'text' : 'password'} {...register('password')} placeholder="Password" />

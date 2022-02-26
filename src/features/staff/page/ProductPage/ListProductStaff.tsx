@@ -3,14 +3,13 @@ import Table from '../../../../components/Table/Table';
 import CustomPagination from '../../../../components/CustomPagination/CustomPagination';
 import FormManageProduct from '../../components/FormManageProduct/FormManageProduct';
 import ToastNotification from '../../../../components/ToastNotification/ToatstNotification';
-import { FormName } from '../../../../enum';
+import { FormName, NotificationType, PositionToast } from '../../../../enum';
 import { Product, ProductTypeDto } from '../../../../interfaces';
 import { TableProductHeader } from '../../../../components/Table/constants/table.constant';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../../storage/hooks';
 import { useSelector } from 'react-redux';
 import { getProductsPagination, selectProductState } from '../../../product/actions/getProductData';
-import { NotificationType, PositionToast } from '../../../../enum';
 import { getAllCategory, selectCategoryState } from '../../../product/actions/getCategoryData';
 
 import './ListProductStaff.scss';
@@ -142,24 +141,22 @@ const ListProductStaff = () => {
   return (
     <>
       <div className="list-product">
-        <div>
-          <div className="list-product-header">
-            <div className="list-product-header__item">
-              <AddButton name="Add Item" onClick={onShowFormAddNewProductHandler} />
-              {/* //TODO: Add component input here */}
-            </div>
-            <CustomPagination
-              startIndex={startIndex}
-              endIndex={lastIndex}
-              totalItems={totalProducts || 0}
-              onClickNextPage={() => onClickMoveNextPage(totalProducts)}
-              onClickPreviousPage={onClickMovePreviousPage}
-            />
+        <div className="list-product-header">
+          <div className="list-product-header__item">
+            <AddButton name="Add Item" onClick={onShowFormAddNewProductHandler} />
+            {/* //TODO: Add component input here */}
           </div>
+          <CustomPagination
+            startIndex={startIndex}
+            endIndex={lastIndex}
+            totalItems={totalProducts || 0}
+            onClickNextPage={() => onClickMoveNextPage(totalProducts)}
+            onClickPreviousPage={onClickMovePreviousPage}
+          />
+        </div>
 
-          <div className="list-product-table">
-            <Table header={TableProductHeader} body={dataTableProduct} isHaveDropdown={true} startIndex={startIndex} />
-          </div>
+        <div className="list-product-table">
+          <Table header={TableProductHeader} body={dataTableProduct} isHaveDropdown={true} startIndex={startIndex} />
         </div>
       </div>
       {isShowFormAddNewProduct && (

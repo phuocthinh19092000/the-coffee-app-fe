@@ -12,8 +12,8 @@
   }
 }
 
-.error {
-  @apply text-error ml-0.5 pb-1;
+.error-staff {
+  @apply text-error relative top-[-36px];
 }
 
 .forget-password {

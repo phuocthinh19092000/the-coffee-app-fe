@@ -2,12 +2,13 @@ import WrapperForm from '../../../../components/WrapperForm/WrapperForm';
 import CustomInput from '../../../../components/CustomInput/CustomInput';
 import CustomSelect from '../../../../components/CustomSelect/CustomSelect';
 import CustomUploadFile from '../../../../components/CustomUploadFile/CustomUploadFile';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { InputParams, OptionType, ProductTypeDto } from '../../../../interfaces';
 import { ProductStatusList } from '../../../../constant';
 import { createProduct } from '../../../product/actions/createProductData';
 import { useAppDispatch } from '../../../../storage/hooks';
 import './FormManageProduct.scss';
+
 type Props = {
   selectedProduct?: ProductTypeDto;
   listCategory: OptionType[];
