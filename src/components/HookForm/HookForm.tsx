@@ -12,6 +12,7 @@ import { getDeviceToken } from '../../services/firebase';
 import { useHistory } from 'react-router';
 import { ROLE } from '../../enum';
 import { useSelector } from 'react-redux';
+import { customerAccessRole } from '../../constant';
 
 interface IFormInputs {
   email: string;
@@ -51,7 +52,7 @@ export default function HookForm() {
     const deviceToken = await getDeviceToken();
     await dispatch(login({ email: data.email, password: data.password, deviceToken: deviceToken }));
     dispatch(checkRole([ROLE.CUSTOMER, ROLE.ADMIN]));
-    if (user.role === ROLE.CUSTOMER || user.role === ROLE.ADMIN) {
+    if (customerAccessRole.includes(user.role as ROLE)) {
       setLoginFailed(false);
     } else {
       setLoginFailed(true);

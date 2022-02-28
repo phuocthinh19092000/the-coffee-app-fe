@@ -12,6 +12,7 @@ import { selectSearchState } from '../../../search/action/getSearchItemData';
 import { useAppDispatch } from '../../../../storage/hooks';
 import { getFreeUnit, selectUserState, updateFreeUnit } from '../../../auth/actions/auth';
 import { ROLE } from '../../../../enum';
+import { customerAccessRole } from '../../../../constant';
 type Props = {
   listDrink: Product[];
   searchDrink?: Product[];
@@ -43,7 +44,7 @@ function ListDrinkItem(props: Props) {
   };
 
   const handleClickPlaceOrder = async () => {
-    if (user.role !== ROLE.CUSTOMER) {
+    if (!customerAccessRole.includes(user.role as ROLE)) {
       setStep(showPopupCase.PopUpLoginCenter);
       return;
     }
@@ -59,7 +60,7 @@ function ListDrinkItem(props: Props) {
   };
 
   useEffect(() => {
-    if (user.role === ROLE.CUSTOMER) {
+    if (customerAccessRole.includes(user.role as ROLE)) {
       setStep(showPopupCase.showDrinkItemDetail);
     }
   }, [user.role]);
