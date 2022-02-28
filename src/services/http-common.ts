@@ -9,7 +9,7 @@ axios.interceptors.request.use(
     const dataPersist = JSON.parse(localStorage.getItem('persist:auth') as string);
     const auth = JSON.parse(dataPersist.data).jwtAccessToken.replaceAll('"', '');
 
-    if (auth && config.headers) {
+    if (auth && config.headers && !config.headers['Authorization']) {
       config.headers['Authorization'] = `Bearer ${auth}`;
     }
 
