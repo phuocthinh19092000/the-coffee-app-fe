@@ -1,11 +1,7 @@
 @import '../../../../share/assets/scss/variables.scss';
 
 .drink-item {
-  @apply block text-center items-center cursor-pointer w-full rounded-lg duration-200;
-
-  &__image {
-    @apply flex justify-center items-center;
-  }
+  @apply flex flex-col justify-center text-center items-center cursor-pointer w-full rounded-lg duration-200;
 
   &__name {
     @apply mb-[10px] truncate w-full;
@@ -15,6 +11,6 @@
   }
 
   &__price {
-    @apply text-grey-1
+    @apply text-grey-1;
   }
 }

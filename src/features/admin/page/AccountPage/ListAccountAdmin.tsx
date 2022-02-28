@@ -135,6 +135,8 @@ const ListAccountAdmin = () => {
             startIndex={startIndex}
             endIndex={lastIndex}
             totalItems={totalAccount || 0}
+            isFirstPage={isFirstPage}
+            isLastPage={isLastPage}
             onClickNextPage={() => onClickMoveNextPage(totalAccount)}
             onClickPreviousPage={() => onClickMovePreviousPage()}
           />

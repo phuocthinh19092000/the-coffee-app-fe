@@ -9,9 +9,9 @@ type Props = {
 };
 const ButtonIcon = (props: Props) => {
   return (
-    <div onClick={props.onClickIcon} className={`button-icon ${props.className}`}>
+    <button onClick={props.onClickIcon} className={`button-icon ${props.className}`}>
       <img alt="icon" src={props.src} />
-    </div>
+    </button>
   );
 };
 

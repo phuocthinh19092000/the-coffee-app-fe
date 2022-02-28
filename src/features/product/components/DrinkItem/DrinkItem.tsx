@@ -1,7 +1,6 @@
 import './DrinkItem.scss';
 import { moneyPattern } from '../../../../utils/moneyRegex';
 import { Product } from '../../../../interfaces';
-import CoffeeImg from '../../../../share/assets/img/blackcoffee.png';
 import React from 'react';
 
 type Props = {
@@ -15,11 +14,7 @@ function DrinkItem(props: Props) {
   };
   return (
     <div className="drink-item" onClick={props.onClick}>
-      <div className="drink-item__image">
-        {/*// TODO: get image from API*/}
-        {/* <img src={props.item.avatarUrl} alt={props.item.name} /> */}
-        <img src={CoffeeImg} alt={props.item.name} />
-      </div>
+      <img className="w-[160px]" src={props.item.images} alt={props.item.name} />
       <div>
         <div>
           <span className="drink-item__name">

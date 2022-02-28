@@ -8,12 +8,13 @@ type Props = {
   startIndex: number;
   endIndex: number;
   totalItems: number;
+  isFirstPage?: boolean;
+  isLastPage?: boolean;
   onClickPreviousPage?: React.MouseEventHandler<HTMLElement>;
   onClickNextPage?: React.MouseEventHandler<HTMLElement>;
 };
 const CustomPagination = (props: Props) => {
   const isShowPagination = props.totalItems === 0 ? false : true;
-
   return (
     <>
       {isShowPagination && (
@@ -21,8 +22,16 @@ const CustomPagination = (props: Props) => {
           <p className="custom-pagination__label">
             {props.startIndex} to {props.endIndex} of {props.totalItems}
           </p>
-          <ButtonIcon onClickIcon={props.onClickPreviousPage} className="mr-[12px]" src={leftIcon} />
-          <ButtonIcon onClickIcon={props.onClickNextPage} src={rightIcon} />
+          <ButtonIcon
+            onClickIcon={props.onClickPreviousPage}
+            className={`mr-[12px] ${props.isFirstPage ? 'opacity-50 cursor-default' : 'hover:bg-grey-6'}`}
+            src={leftIcon}
+          />
+          <ButtonIcon
+            className={`${props.isLastPage ? 'opacity-50  cursor-default' : 'hover:bg-grey-6'}`}
+            onClickIcon={props.onClickNextPage}
+            src={rightIcon}
+          />
         </div>
       )}
     </>
