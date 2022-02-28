@@ -5,6 +5,9 @@ import LeftSideBarItem from './Items/LeftSideBarItem';
 import { useHistory } from 'react-router-dom';
 import { useAppDispatch } from '../../storage/hooks';
 import { resetAuthState } from '../../features/auth/actions/auth';
+import { useContext } from 'react';
+import { SocketContext } from '../../utils/socketProvider';
+import { leaveRoomStaff } from '../../services/socketService';
 
 type Props = {
   onClickChangeTab(tabName: string): void;
@@ -19,10 +22,11 @@ const LeftSideBar = (props: Props) => {
     let path = `/`;
     history.push(path);
   };
+  const socket = useContext(SocketContext);
 
   const handleClickLogout = () => {
     dispatch(resetAuthState());
-    history.push(`/login`);
+    leaveRoomStaff(socket);
   };
 
   return (
