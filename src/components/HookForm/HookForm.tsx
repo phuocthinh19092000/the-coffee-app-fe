@@ -52,8 +52,8 @@ export default function HookForm() {
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
     const deviceToken = await getDeviceToken();
     await dispatch(login({ email: data.email, password: data.password, deviceToken: deviceToken }));
-    dispatch(checkRole([ROLE.CUSTOMER]));
-    if (user.role === ROLE.CUSTOMER) {
+    dispatch(checkRole([ROLE.CUSTOMER, ROLE.ADMIN]));
+    if (user.role === ROLE.CUSTOMER || user.role === ROLE.ADMIN) {
       setLoginFailed(false);
     } else {
       setLoginFailed(true);

@@ -1,5 +1,4 @@
 import Order from '../../interfaces/order';
-import CoffeeImg from '../../share/assets/img/blackcoffee.png';
 import ADuyMai from '../../share/assets/img/aDuyMai.jpg';
 import nextIcon from '../../share/assets/vector/nextIcon.svg';
 import iconPickedUp from '../../share/assets/vector/iconpickedUp.svg';
@@ -66,7 +65,7 @@ const OrderItemStaff = (props: Props) => {
     <>
       <div className="order-item-staff" onClick={onShowDetailOrder}>
         {/* TODO:  get image from API<img src={props.order.product.images} className='order-item__img' alt={props.order.product.images} /> */}
-        <img src={CoffeeImg} className="order-item-staff__img" alt="Avatar Drink" />
+        <img src={props.order.product.images} className="order-item-staff__img" alt="Avatar Drink" />
 
         <div className="order-detail-staff">
           <div className="order-detail-staff__group">

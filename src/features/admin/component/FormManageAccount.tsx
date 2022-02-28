@@ -9,6 +9,7 @@ import { useAppDispatch } from '../../../storage/hooks';
 import { createAccount } from '../actions/createAccountData';
 import { statusCodeError } from '../../../constant';
 import { NotificationType } from '../../../enum';
+import { startCase } from 'lodash';
 
 type Props = {
   selectedAccount?: UserTypeDto;
@@ -76,6 +77,7 @@ const FormManageAccount = (props: Props) => {
     }
 
     dataAccount.email = dataAccount.email.trim();
+    dataAccount.name = startCase(dataAccount.name);
 
     if (dataAccount.id) {
       //TODO:  update information account

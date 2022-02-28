@@ -56,8 +56,7 @@ const ListProductStaff = () => {
     async function getData() {
       const dataProduct = await dispatch(getProductsPagination({ limit })).unwrap();
       await dispatch(getAllCategory()).unwrap();
-      const isCheckLastPage = dataProduct.totalProducts <= limit;
-
+      const isCheckLastPage = dataProduct.totalProduct <= limit;
       setIsLastPage(isCheckLastPage);
       setLastIndex(dataProduct.products.length);
     }
@@ -145,6 +144,8 @@ const ListProductStaff = () => {
             startIndex={startIndex}
             endIndex={lastIndex}
             totalItems={totalProducts || 0}
+            isLastPage={isLastPage}
+            isFirstPage={isFirstPage}
             onClickNextPage={() => onClickMoveNextPage(totalProducts)}
             onClickPreviousPage={onClickMovePreviousPage}
           />
