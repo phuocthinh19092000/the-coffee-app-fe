@@ -65,16 +65,26 @@ export default function HookForm() {
     let path = `/login`;
     history.push(path);
   };
+
+  const handleResetDefault = () => {
+    setLoginFailed(false);
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="input-field">
-        <input {...register('email')} placeholder="Email" />
+        <input {...register('email')} placeholder="Email" onFocus={handleResetDefault} />
         <img src={UserIcon} alt="User Icon" />
       </div>
       {errors.email && <p className="error">{errors.email?.message}</p>}
 
       <div className="input-field">
-        <input type={showPassword ? 'text' : 'password'} {...register('password')} placeholder="Password" />
+        <input
+          type={showPassword ? 'text' : 'password'}
+          {...register('password')}
+          placeholder="Password"
+          onFocus={handleResetDefault}
+        />
         <img
           src={showPassword ? CloseEyeIcon : EyeIcon}
           onClick={toggleShowPassword}

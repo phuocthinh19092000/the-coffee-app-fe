@@ -3,6 +3,7 @@ export enum OrderStatus {
   PROCESSING = 'processing',
   READY_FOR_PICKUP = 'ready for pickup',
   CANCELED = 'canceled',
+  DONE = 'done',
 }
 
 export enum ColumnOrderStatus {

@@ -86,6 +86,11 @@ const orderByStatusSlice = createSlice({
               (order) => order.id !== action.payload.order.id,
             );
             break;
+
+          case OrderStatus.DONE:
+            state.data.orderStatusReady = state.data.orderStatusReady.filter(
+              (order) => order.id !== action.payload.order.id,
+            );
         }
       })
       .addCase(getOrdersByStatus.pending, (state) => {
