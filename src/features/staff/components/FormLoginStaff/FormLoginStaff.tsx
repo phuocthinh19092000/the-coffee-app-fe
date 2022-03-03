@@ -89,7 +89,7 @@ export default function FormLoginStaff() {
       <div className="input-field-staff">
         <input {...register('email')} placeholder="Email" className="staff-input" />
       </div>
-      {errors.email && <p className="error">{errors.email?.message}</p>}
+      {errors.email && <p className="error-staff">{errors.email?.message}</p>}
 
       <div className="input-field-staff">
         <input

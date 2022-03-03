@@ -1,4 +1,4 @@
-import './OrderDate.scss';
+import './OrderDate.css';
 type Props = {
   date: string;
 }

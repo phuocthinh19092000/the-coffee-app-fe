@@ -74,7 +74,9 @@ const Dropdown = (props: Props) => {
               <img src={EditIcon} alt="" className="mr-1.5" />
               <p>Edit</p>
             </div>
-            <div className="dropdown__list-group text-error" onClick={showPopupDelete}>
+            {/*TODO: show Popup delete*/}
+            {/*<div className="dropdown__list-group text-error" onClick={showPopupDelete}>*/}
+            <div className="hidden" onClick={showPopupDelete}>
               <img src={DeleteIcon} alt="" className="mr-1.5" />
               <p>Delete</p>
             </div>

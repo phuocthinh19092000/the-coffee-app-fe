@@ -4,7 +4,7 @@ import WrapperForm from '../../../components/WrapperForm/WrapperForm';
 import { freeUnit, listRole, listStatusEmployee } from '../constant';
 import { InputParams, NotificationParams, UserTypeDto } from '../../../interfaces';
 import React, { useEffect, useState } from 'react';
-import './FormManageAccount.scss';
+import './FormManageAccount.css';
 import { useAppDispatch } from '../../../storage/hooks';
 import { createAccount } from '../actions/createAccountData';
 import { statusCodeError } from '../../../constant';
@@ -34,7 +34,8 @@ const FormManageAccount = (props: Props) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (Object.values(dataAccount).every(Boolean)) {
+    const {phoneNumber, ...rest} = dataAccount;
+    if (Object.values(rest).every(Boolean)) {
       setIsFullFill(true);
     } else {
       setIsFullFill(false);
