@@ -5,12 +5,16 @@ import ToastNotification from '../../../../components/ToastNotification/ToatstNo
 import { NotificationType } from '../../../../enum/NotificationType';
 import { PositionToast } from '../../../../enum/PositionToast';
 import { TabIcon, TabName } from '../../../../constant';
-import { SocketProvider } from '../../../../utils/socketProvider';
+import { SocketContext } from '../../../../utils/socketContext';
 import ListProductStaff from '../ProductPage/ListProductStaff';
+import { Socket } from 'socket.io-client';
+import { initSocketForStaff } from '../../../../services/socketService';
 
 const DashBoard = () => {
   const [tabName, setTabName] = useState(TabName.STAFF.ORDER);
   const [isShowNotification, setIsShowNotification] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [socket, setSocket] = useState<Socket>(initSocketForStaff);
   const timeOutNotification = 2000;
 
   useEffect(() => {
@@ -39,7 +43,7 @@ const DashBoard = () => {
   };
   return (
     <>
-      <SocketProvider>
+      <SocketContext.Provider value={socket}>
         <div className="flex">
           <LeftSideBar
             currentTab={tabName}
@@ -49,7 +53,7 @@ const DashBoard = () => {
           />
           <div className="w-full">{switchPage()}</div>
         </div>
-      </SocketProvider>
+      </SocketContext.Provider>
       {isShowNotification && (
         <ToastNotification
           type={NotificationType.SUCCESS}

@@ -1,15 +1,12 @@
 import { io, Socket } from 'socket.io-client';
 import { SocketEvent } from '../enum';
 import { OrderSocket } from '../interfaces/order';
-
+import { envVariable } from './envVariable';
 const ROOM_FOR_STAFF = 'staffRoom';
-
-export const initSocketForStaff = (URL: string, event: string) => {
-  const socket = io(URL, {
+export const initSocketForStaff = () => {
+  const socket = io(envVariable.API_ROOT, {
     reconnection: true,
-    reconnectionDelay: 1000,
-    reconnectionDelayMax: 5000,
-    reconnectionAttempts: 100,
+    reconnectionAttempts: 3,
   });
   return socket;
 };

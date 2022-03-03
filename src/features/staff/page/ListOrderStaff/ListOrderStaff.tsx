@@ -4,7 +4,7 @@ import { ColumnOrderStatus, OrderStatus, SocketEvent } from '../../../../enum';
 import { getOrdersByStatus, selectOrderByStatusState, updateOrder } from '../../../orderStatus/action/orderStatus';
 import { joinRoomStaff, onListenEvent } from '../../../../services/socketService';
 import { useAppDispatch } from '../../../../storage/hooks';
-import { SocketContext } from '../../../../utils/socketProvider';
+import { SocketContext } from '../../../../utils/socketContext';
 
 import ColumnOrderStaff from '../../../../components/ColumnOrderStaff/ColumnOrderStaff';
 import './ListOrderStaff.scss';
