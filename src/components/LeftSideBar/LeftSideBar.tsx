@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { useAppDispatch } from '../../storage/hooks';
 import { resetAuthState } from '../../features/auth/actions/auth';
 import { useContext } from 'react';
-import { SocketContext } from '../../utils/socketProvider';
+import { SocketContext } from '../../utils/socketContext';
 import { leaveRoomStaff } from '../../services/socketService';
 
 type Props = {
