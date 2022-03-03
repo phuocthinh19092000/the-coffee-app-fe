@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './CustomUploadFile.scss';
+import './CustomUploadFile.css';
 import IconUpload from '../../share/assets/vector/IconUpload.svg';
 import { InputParams } from '../../interfaces';
 

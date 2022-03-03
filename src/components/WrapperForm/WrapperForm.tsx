@@ -1,6 +1,6 @@
 import React, { ReactChild } from 'react';
 import Exit from '../../share/assets/vector/Exit.svg';
-import './WrapperForm.scss';
+import './WrapperForm.css';
 import Card from '../Card/Index';
 
 type Props = {

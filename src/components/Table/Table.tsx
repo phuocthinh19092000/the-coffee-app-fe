@@ -3,7 +3,7 @@ import { ProductTypeDto, UserTypeDto } from '../../interfaces';
 import { moneyFormat } from '../../utils/MoneyFormat';
 import Dropdown from '../Dropdown/Dropdown';
 import BlackCoffee from '../../share/assets/img/blackcoffee.png';
-import './Table.scss';
+import './Table.css';
 import ProductCart from '../../share/assets/vector/ProductCart.svg';
 
 type Props = {

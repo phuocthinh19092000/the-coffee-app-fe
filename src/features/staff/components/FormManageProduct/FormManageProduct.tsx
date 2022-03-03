@@ -7,7 +7,7 @@ import { InputParams, NotificationParams, OptionType, ProductTypeDto } from '../
 import { ProductStatusList, statusCodeError } from '../../../../constant';
 import { createProduct, updateProduct } from '../../../product/actions/createProductData';
 import { useAppDispatch } from '../../../../storage/hooks';
-import './FormManageProduct.scss';
+import './FormManageProduct.css';
 import { NotificationType } from '../../../../enum';
 
 type Props = {

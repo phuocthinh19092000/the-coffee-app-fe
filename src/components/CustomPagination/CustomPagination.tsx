@@ -1,7 +1,7 @@
 import ButtonIcon from '../ButtonIcon/ButtonIcon';
 import rightIcon from '../../share/assets/vector/RightIcon.svg';
 import leftIcon from '../../share/assets/vector/LeftIcon.svg';
-import './CustomPagination.scss';
+import './CustomPagination.css';
 import React from 'react';
 
 type Props = {

@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
@@ -65,5 +67,49 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [plugin(function ({ addUtilities, matchUtilities, theme }) {
+    addUtilities({
+      '.text-style-vendor-body-2': {
+        fontFamily: theme('fontFamily.proximaNova'),
+        fontWeight: "400",
+        fontSize: '16px',
+        lineHeight: '19px',
+        letterSpacing: '0.25px'
+      },
+      '.border-style': {
+        borderWidth: '1px',
+        borderStyle: 'border-box solid',
+        borderRadius: '4px'
+      },
+      '.text-style-upload': {
+        fontFamily: theme('fontFamily.proximaNova'),
+        height: '19px',
+        fontSize: '14px',
+        lineHeight: '19px',
+        color: theme('colors.black')
+      },
+      '.order-column-center': {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      '.background-blur': {
+        background: 'rgba(51, 51, 51, 0.3)',
+        backdropFilter: 'blur(5px)'
+      }
+    })
+    matchUtilities(
+      {
+        'status-color': (value) => {
+          const color = (value).toString().split('-').join('.');
+          return {
+            color: theme(`colors.${color}`),
+            textTransform: 'capitalize',
+          }
+        },
+      },
+      { values: theme('colors') }
+    )
+  })],
 };

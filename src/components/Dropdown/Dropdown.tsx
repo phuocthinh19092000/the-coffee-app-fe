@@ -1,4 +1,4 @@
-import './Dropdown.scss';
+import './Dropdown.css';
 import DropdownIcon from '../../share/assets/vector/Dropdown.svg';
 import React, { useEffect, useState } from 'react';
 import EditIcon from '../../share/assets/vector/IconEdit.svg';
