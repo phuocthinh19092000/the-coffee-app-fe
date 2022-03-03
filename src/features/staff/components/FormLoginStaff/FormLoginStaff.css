@@ -1,6 +1,5 @@
-
 .input-field-staff {
-  @apply flex-row mb-3 relative;
+  @apply flex-row mb-2 relative;
 }
 
 .staff-input {
@@ -10,9 +9,8 @@
   @apply outline outline-1 outline-outline;
 }
 
-
 .error-staff {
-  @apply text-error relative top-[-36px];
+  @apply text-error relative top-[-24px];
 }
 
 .forget-password {

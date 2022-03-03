@@ -1,8 +1,8 @@
-import './Footer.scss';
+import './Footer.css';
 const Footer = () => {
   return (
     <div className="footer">
-      <p>© 2021 Ocean Network Express Pte. Ltd. All rights reserved.</p>
+      <p>© 2022 Ocean Network Express Pte. Ltd. All rights reserved.</p>
     </div>
   );
 };
