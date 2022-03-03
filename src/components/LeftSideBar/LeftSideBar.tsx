@@ -1,4 +1,4 @@
-import './LeftSideBar.scss';
+import './LeftSideBar.css';
 import Logo from '../../share/assets/img/OTSVLogo.png';
 import LogoutIcon from '../../share/assets/img/logout-icon.png';
 import LeftSideBarItem from './Items/LeftSideBarItem';

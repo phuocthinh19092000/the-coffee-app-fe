@@ -1,4 +1,3 @@
-@import '../../../../share/assets/scss/variables';
 
 .input-field-staff {
   @apply flex-row mb-3 relative;
@@ -6,11 +5,11 @@
 
 .staff-input {
   @apply flex-1 rounded-lg w-full h-3 border border-grey-1 indent-2;
-
-  &:focus-within {
-    @apply outline outline-1 outline-outline;
-  }
 }
+.staff-input:focus-within {
+  @apply outline outline-1 outline-outline;
+}
+
 
 .error-staff {
   @apply text-error relative top-[-36px];

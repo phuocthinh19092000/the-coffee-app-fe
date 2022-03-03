@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './CustomSelect.scss';
+import './CustomSelect.css';
 import ExpandMore from '../../share/assets/vector/ExpandMore.svg';
 import ExpandLess from '../../share/assets/vector/ExpandLess.svg';
 import IconSelected from '../../share/assets/vector/IconSelected.svg';

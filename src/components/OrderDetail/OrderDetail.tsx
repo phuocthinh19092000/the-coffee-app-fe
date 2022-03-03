@@ -1,4 +1,4 @@
-import './OrderDetail.scss';
+import './OrderDetail.css';
 import CoffeeImg from '../../share/assets/img/blackcoffee.png';
 import avatarDuyMai from '../../share/assets/img/avatarDuyMai.png';
 import Order from '../../interfaces/order';

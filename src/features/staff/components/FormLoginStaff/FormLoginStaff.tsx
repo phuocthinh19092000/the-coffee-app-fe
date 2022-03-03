@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import './FormLoginStaff.scss';
+import './FormLoginStaff.css';
 import { useAppDispatch } from '../../../../storage/hooks';
 import { checkRole, login } from '../../../auth/actions/auth';
 import { useEffect, useState } from 'react';

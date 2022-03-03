@@ -1,9 +1,0 @@
-@import '../../share/assets/scss/variables.scss';
-
-.custom-pagination {
-  @apply flex flex-row items-center w-fit;
-  &__label {
-    @apply pr-[25px];
-    @include text-style-vendor-body-2();
-  }
-}

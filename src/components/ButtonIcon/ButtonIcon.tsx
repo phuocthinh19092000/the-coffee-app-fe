@@ -1,4 +1,4 @@
-import './ButtonIcon.scss';
+import './ButtonIcon.css';
 
 import React from 'react';
 
