@@ -13,10 +13,6 @@
   @apply text-error relative top-[-24px];
 }
 
-.forget-password {
-  @apply text-error text-right mt-6 cursor-pointer;
-}
-
 .staff-login-btn {
   @apply w-full h-3 rounded-lg border-none bg-accent-1 cursor-pointer text-white mb-3 ;
 }
