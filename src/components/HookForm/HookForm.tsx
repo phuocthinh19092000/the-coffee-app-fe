@@ -22,8 +22,7 @@ const schema = yup
   .object()
   .shape({
     email: yup.string().email('Email must be a valid email address').required('Email is required'),
-
-    password: yup.string().min(8, 'Password must be at least 6 characters').required('Password is required'),
+    password: yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
   })
   .required();
 
@@ -35,8 +34,7 @@ export default function HookForm() {
     handleSubmit,
   } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
-    mode: 'onChange',
-
+    mode: 'onBlur',
     defaultValues: {
       email: '',
       password: '',

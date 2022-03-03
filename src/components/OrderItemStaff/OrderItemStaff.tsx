@@ -14,7 +14,7 @@ import { moneyFormat } from '../../utils/MoneyFormat';
 import { VN_CURRENCY_SYMBOL } from '../../constant';
 import { getOrdersByStatus } from '../../features/orderStatus/action/orderStatus';
 import { sendNotificationRemindPickUpOrder } from '../../features/notifications/action/notification';
-
+import BlackCoffeeImg from '../../share/assets/img/blackcoffee.png';
 import './OrderItemStaff.scss';
 
 interface Props {
@@ -54,9 +54,7 @@ const OrderItemStaff = (props: Props) => {
 
   const onFinishOrderHandler = async (e: React.SyntheticEvent) => {
     e.stopPropagation();
-
     const valueNewStatus = props.order.orderStatus.value + 1;
-
     await dispatch(updateStatusOrder({ id: props.order.id, newStatus: valueNewStatus }));
     await dispatch(getOrdersByStatus(OrderStatus.READY_FOR_PICKUP)).unwrap();
   };
@@ -64,9 +62,7 @@ const OrderItemStaff = (props: Props) => {
   return (
     <>
       <div className="order-item-staff" onClick={onShowDetailOrder}>
-        {/* TODO:  get image from API<img src={props.order.product.images} className='order-item__img' alt={props.order.product.images} /> */}
-        <img src={props.order.product.images} className="order-item-staff__img" alt="Avatar Drink" />
-
+        <img src={props.order.product.images || BlackCoffeeImg} className="order-item-staff__img" alt="Avatar Drink" />
         <div className="order-detail-staff">
           <div className="order-detail-staff__group">
             <div className="flex flex-row items-start justify-between">
