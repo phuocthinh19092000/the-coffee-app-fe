@@ -55,6 +55,16 @@ function prepare(order: Order, newStatus: OrderStatus) {
 }
 export const updateOrder = createAction('orderByStatus/addOrder', prepare);
 
+const removeOrderInColumn = (order: Order, listOrderStatus: Order[]) =>
+  listOrderStatus.filter((item) => item.id !== order.id);
+
+const addOrderInColumn = (order: Order, listOrderStatus: Order[]) => {
+  const duplicateOrder = listOrderStatus.find((ord) => ord === order);
+  if (!duplicateOrder) {
+    listOrderStatus.push(order);
+  }
+};
+
 const orderByStatusSlice = createSlice({
   name: 'orderByStatus',
   initialState,
@@ -64,33 +74,31 @@ const orderByStatusSlice = createSlice({
       .addCase(updateOrder, (state, action) => {
         switch (action.payload.newStatus) {
           case OrderStatus.NEW:
-            state.data.orderStatusNew.push(action.payload.order);
+            addOrderInColumn(action.payload.order, state.data.orderStatusNew);
             break;
-
           case OrderStatus.PROCESSING:
-            state.data.orderStatusProcessing.push(action.payload.order);
-            state.data.orderStatusNew = state.data.orderStatusNew.filter(
-              (order) => order.id !== action.payload.order.id,
-            );
+            state.data.orderStatusNew = removeOrderInColumn(action.payload.order, state.data.orderStatusNew);
+            addOrderInColumn(action.payload.order, state.data.orderStatusProcessing);
             break;
-
           case OrderStatus.READY_FOR_PICKUP:
-            state.data.orderStatusReady.push(action.payload.order);
-            state.data.orderStatusProcessing = state.data.orderStatusProcessing.filter(
-              (order) => order.id !== action.payload.order.id,
+            state.data.orderStatusProcessing = removeOrderInColumn(
+              action.payload.order,
+              state.data.orderStatusProcessing,
             );
+            addOrderInColumn(action.payload.order, state.data.orderStatusReady);
             break;
-
           case OrderStatus.CANCELED:
-            state.data.orderStatusNew = state.data.orderStatusNew.filter(
-              (order) => order.id !== action.payload.order.id,
-            );
+            if (action.payload.order.orderStatus.name === OrderStatus.NEW) {
+              state.data.orderStatusNew = removeOrderInColumn(action.payload.order, state.data.orderStatusNew);
+            } else {
+              state.data.orderStatusProcessing = removeOrderInColumn(
+                action.payload.order,
+                state.data.orderStatusProcessing,
+              );
+            }
             break;
-
           case OrderStatus.DONE:
-            state.data.orderStatusReady = state.data.orderStatusReady.filter(
-              (order) => order.id !== action.payload.order.id,
-            );
+            state.data.orderStatusReady = removeOrderInColumn(action.payload.order, state.data.orderStatusReady);
         }
       })
       .addCase(getOrdersByStatus.pending, (state) => {
@@ -98,7 +106,6 @@ const orderByStatusSlice = createSlice({
       })
       .addCase(getOrdersByStatus.fulfilled, (state, action) => {
         state.loading = 'fulfilled';
-
         switch (action.payload.status) {
           case OrderStatus.NEW:
             state.data.orderStatusNew = action.payload.orders;

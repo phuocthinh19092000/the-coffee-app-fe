@@ -5,7 +5,7 @@ import iconPickedUp from '../../share/assets/vector/iconpickedUp.svg';
 import alarmIcon from '../../share/assets/vector/AlarmIcon.svg';
 import OrderDetail from '../OrderDetail/OrderDetail';
 import useComponentVisible from '../../utils/useComponentVisible';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { OrderStatus } from '../../enum';
 import { useAppDispatch } from '../../storage/hooks';
@@ -23,15 +23,25 @@ interface Props {
 }
 
 const OrderItemStaff = (props: Props) => {
+  const [isDisabledUpdateOrder, setIsDisabledUpdateOrder] = useState(false);
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
+
   const dispatch = useAppDispatch();
 
   let icon = props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP ? iconPickedUp : nextIcon;
 
   const onUpdateStatusHandler = async (e: React.SyntheticEvent) => {
     e.stopPropagation();
+
+    if (isDisabledUpdateOrder) {
+      return;
+    }
+    setIsDisabledUpdateOrder(true);
+
     const valueNewStatus = props.order.orderStatus.value + 1;
     await dispatch(updateStatusOrder({ id: props.order.id, newStatus: valueNewStatus }));
+
+    setIsDisabledUpdateOrder(false);
   };
 
   const onShowDetailOrder = () => {
@@ -48,7 +58,7 @@ const OrderItemStaff = (props: Props) => {
     props.setIsShowNotification && props.setIsShowNotification(true);
   };
 
-  const onExitFormHandler = () => {
+  const onExitFormHandler = (e: React.SyntheticEvent) => {
     setIsComponentVisible(false);
   };
 
