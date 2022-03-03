@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { selectUserState } from '../../features/auth/actions/auth';
 import MyOrder from '../../features/my-order/page/MyOrder/MyOrder';
 import { ROLE } from '../../enum';
+import { customerAccessRole } from '../../constant';
 
 type Props = {
   children?: React.ReactChild[] | ReactChild | JSX.Element | JSX.Element[];
@@ -19,7 +20,7 @@ const WrapperPage = (props: Props) => {
   const [isShowMyOrder, setIsShowMyOrder] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const user = useSelector(selectUserState);
-  const isLoggedInCustomer = user.role === ROLE.CUSTOMER;
+  const isLoggedInCustomer = customerAccessRole.includes(user.role as ROLE);
 
   const hideFormHandler = (event: KeyboardEvent) => {
     if (event.key === 'Escape' || event.key === 'Esc') {
