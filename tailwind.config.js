@@ -142,7 +142,13 @@ module.exports = {
         '.background-blur': {
           background: 'rgba(51, 51, 51, 0.3)',
           backdropFilter: 'blur(5px)',
-        },
+          zIndex: '1',
+          top: '0',
+          left: '0',
+          width: '100%',
+          height: '100%',
+          position: 'fixed',
+      }
       });
       matchUtilities(
         {

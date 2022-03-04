@@ -4,12 +4,6 @@
   @apply font-proximaNova text-grey-5 font-semibold leading-[19px] text-2 not-italic tracking-[0.1px];
 }
 
-.order-detail--blur {
-  @apply fixed left-0 top-0 w-full h-full overflow-auto;
-  z-index: 1;
-  @include background-blur;
-}
-
 @mixin textFlow {
   @apply md:w-[90px] lg:w-[140px] xl:w-[220px] text-ellipsis overflow-hidden whitespace-nowrap;
 }

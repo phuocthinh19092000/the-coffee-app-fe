@@ -31,7 +31,7 @@ const MyOrder = (props: Props) => {
     return dayjs(date.createdAt).format(datePattern);
   });
   return (
-    <div className="my-order--blur">
+    <div className="background-blur">
       <div className="out-side" onClick={props.onClick} />
       <Card className={`card card-login card--right my-order`}>
         {loading === 'pending' ? (

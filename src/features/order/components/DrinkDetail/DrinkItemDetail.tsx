@@ -37,35 +37,33 @@ function DrinkItemDetail(props: Props) {
   };
 
   return (
-    <div className="popup-detail--blur">
-      <Card className="card card--center popup-detail">
-        <img src={Exit} className="popup-detail__exit" onClick={props.handleClickExitPopUp} alt="Exit Icon" />
-        <div className="popup-detail__drink-item">
-          <DrinkItem item={props.item} />
-        </div>
+    <Card className="card card--center popup-detail">
+      <img src={Exit} className="popup-detail__exit" onClick={props.handleClickExitPopUp} alt="Exit Icon" />
+      <div className="popup-detail__drink-item">
+        <DrinkItem item={props.item} />
+      </div>
 
-        <div className="popup-detail__input-group">
-          <Input
-            placeholder="Quantity: "
-            src={order.quantity <= 1 ? Subtraction : VectorSub}
-            src2={Summation}
-            className="popup-detail__input"
-            type="number"
-            value={order.quantity}
-            onClickFirstIcon={onSubOneUnit}
-            onClickSecondIcon={onPlusOneUnit}
-            readOnly={true}
-          />
-          <Input placeholder="Note" src={Edit} onChange={onChangeNote} value={order.note} />
-        </div>
-
-        <Button
-          className="btn btn-primary btn--enabled popup-detail__button"
-          titleButton="PLACE ORDER"
-          onClick={() => props.handleClickPlaceOrder()}
+      <div className="popup-detail__input-group">
+        <Input
+          placeholder="Quantity: "
+          src={order.quantity <= 1 ? Subtraction : VectorSub}
+          src2={Summation}
+          className="popup-detail__input"
+          type="number"
+          value={order.quantity}
+          onClickFirstIcon={onSubOneUnit}
+          onClickSecondIcon={onPlusOneUnit}
+          readOnly={true}
         />
-      </Card>
-    </div>
+        <Input placeholder="Note" src={Edit} onChange={onChangeNote} value={order.note} />
+      </div>
+
+      <Button
+        className="btn btn-primary btn--enabled popup-detail__button"
+        titleButton="PLACE ORDER"
+        onClick={() => props.handleClickPlaceOrder()}
+      />
+    </Card>
   );
 }
 

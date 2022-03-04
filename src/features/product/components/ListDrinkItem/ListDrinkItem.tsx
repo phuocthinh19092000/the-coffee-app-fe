@@ -121,7 +121,7 @@ function ListDrinkItem(props: Props) {
         <DrinkItem item={item} key={item.id} onClick={() => togglePopup(item)} />
       ))}
 
-      {isOpenPopUp && switchStep()}
+      {isOpenPopUp && <div className="background-blur">{switchStep()}</div>}
     </div>
   );
 }

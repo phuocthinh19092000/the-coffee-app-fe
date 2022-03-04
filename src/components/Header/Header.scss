@@ -61,9 +61,7 @@
   background-color: $grey-4-color;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-  &::before {
-    @include background-blur-header-search;
-  }
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -82,8 +80,5 @@
   @apply bg-white absolute top-[70px] w-[440px] rounded-lg;
   &__group {
     @apply flex flex-col justify-center text-center items-center p-1;
-  }
-  &::before {
-    @include background-blur-header-search;
   }
 }

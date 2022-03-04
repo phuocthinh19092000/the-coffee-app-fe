@@ -24,25 +24,11 @@ $warning-color: #fe5d18;
 $success-color: #499e3b;
 $error-color: #e51616;
 $cancel-order-bg-btn: #fff3f9;
-@mixin background-blur {
-  background: rgba(51, 51, 51, 0.3);
-  backdrop-filter: blur(5px);
-}
 
 @mixin text-style-vendor-body-2 {
   @apply font-proximaNova font-normal text-2 leading-[19px] tracking-[0.25px];
 }
 
-@mixin background-blur-header-search {
-  content: '';
-  position: fixed;
-  left: -5%;
-  top: -5%;
-  z-index: -1;
-  width: 110%;
-  height: 110%;
-  @include background-blur;
-}
 @mixin icon-active {
   filter: invert(14%) sepia(55%) saturate(7500%) hue-rotate(324deg) brightness(90%) contrast(94%);
 }

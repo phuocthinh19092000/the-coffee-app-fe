@@ -98,7 +98,7 @@ const OrderItemStaff = (props: Props) => {
         </div>
       </div>
       {isComponentVisible && (
-        <div ref={ref} className="order-detail--blur">
+        <div ref={ref} className="background-blur">
           <OrderDetail order={props.order} onClickExit={onExitFormHandler} />
         </div>
       )}
