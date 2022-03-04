@@ -1,4 +1,4 @@
-const plugin = require('tailwindcss/plugin')
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
@@ -68,49 +68,93 @@ module.exports = {
       },
     },
   },
-  plugins: [plugin(function ({ addUtilities, matchUtilities, theme }) {
-    addUtilities({
-      '.text-style-vendor-body-2': {
-        fontFamily: theme('fontFamily.proximaNova'),
-        fontWeight: "400",
-        fontSize: '16px',
-        lineHeight: '19px',
-        letterSpacing: '0.25px'
-      },
-      '.border-style': {
-        borderWidth: '1px',
-        borderStyle: 'border-box solid',
-        borderRadius: '4px'
-      },
-      '.text-style-upload': {
-        fontFamily: theme('fontFamily.proximaNova'),
-        height: '19px',
-        fontSize: '14px',
-        lineHeight: '19px',
-        color: theme('colors.black')
-      },
-      '.order-column-center': {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      '.background-blur': {
-        background: 'rgba(51, 51, 51, 0.3)',
-        backdropFilter: 'blur(5px)'
-      }
-    })
-    matchUtilities(
-      {
-        'status-color': (value) => {
-          const color = (value).toString().split('-').join('.');
-          return {
-            color: theme(`colors.${color}`),
-            textTransform: 'capitalize',
-          }
+  plugins: [
+    plugin(function ({ addUtilities, matchUtilities, theme }) {
+      addUtilities({
+        '.text-style-vendor-h1': {
+          fontFamily: theme('fontFamily.proximaNova'),
+          fontWeight: '600',
+          fontSize: '26px',
+          lineHeight: '26px',
+          letterSpacing: '0.15px',
         },
-      },
-      { values: theme('colors') }
-    )
-  })],
+        '.text-style-vendor-h2': {
+          fontFamily: theme('fontFamily.proximaNova'),
+          fontWeight: '600',
+          fontSize: '22x',
+          lineHeight: '25px',
+          letterSpacing: '0.15px',
+        },
+        '.text-style-vendor-sub-1': {
+          fontFamily: theme('fontFamily.proximaNova'),
+          fontWeight: '400',
+          fontSize: '18px',
+          lineHeight: '21px',
+          letterSpacing: '0.15px',
+        },
+        '.text-style-vendor-sub-2': {
+          fontFamily: theme('fontFamily.proximaNova'),
+          fontWeight: '600',
+          fontSize: '16px',
+          lineHeight: '19px',
+          letterSpacing: '0.1px',
+        },
+        '.text-style-vendor-body-1': {
+          fontFamily: theme('fontFamily.proximaNova'),
+          fontWeight: '400',
+          fontSize: '18px',
+          lineHeight: '21px',
+          letterSpacing: '0.5px',
+        },
+        '.text-style-vendor-body-2': {
+          fontFamily: theme('fontFamily.proximaNova'),
+          fontWeight: '400',
+          fontSize: '16px',
+          lineHeight: '19px',
+          letterSpacing: '0.25px',
+        },
+        '.text-style-vendor-caption': {
+          fontFamily: theme('fontFamily.proximaNova'),
+          fontWeight: '400',
+          fontSize: '12px',
+          lineHeight: '16px',
+          letterSpacing: '0.4px',
+        },
+        '.border-style': {
+          borderWidth: '1px',
+          borderStyle: 'border-box solid',
+          borderRadius: '4px',
+        },
+        '.text-style-upload': {
+          fontFamily: theme('fontFamily.proximaNova'),
+          height: '19px',
+          fontSize: '14px',
+          lineHeight: '19px',
+          color: theme('colors.black'),
+        },
+        '.order-column-center': {
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+        '.background-blur': {
+          background: 'rgba(51, 51, 51, 0.3)',
+          backdropFilter: 'blur(5px)',
+        },
+      });
+      matchUtilities(
+        {
+          'status-color': (value) => {
+            const color = value.toString().split('-').join('.');
+            return {
+              color: theme(`colors.${color}`),
+              textTransform: 'capitalize',
+            };
+          },
+        },
+        { values: theme('colors') },
+      );
+    }),
+  ],
 };
