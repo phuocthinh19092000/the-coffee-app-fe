@@ -11,7 +11,7 @@
 }
 
 .card-change-webhook__description {
-  @apply text-style-customer-body xl:px-[51px] xl:mt-[32px] md:px-[65.5px] md:mt-[40px];
+  @apply text-style-1440-body xl:px-[51px] xl:mt-[32px] md:px-[65.5px] md:mt-[40px];
 }
 
 .card-change-webhook__input {

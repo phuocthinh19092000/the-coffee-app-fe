@@ -15,10 +15,17 @@ type Props = {
   error?: FieldError;
 };
 const FormInput = (props: Props) => {
+  const { register } = useFormContext();
   return (
     <div className={props.className}>
       <div className="block-form-input">
-        <input placeholder={props.placeholder} type={props.type} readOnly={props.readOnly} />
+        <input
+          placeholder={props.placeholder}
+          type={props.type}
+          readOnly={props.readOnly}
+          autoComplete="off"
+          {...register(props.name)}
+        />
         <img src={props.src} className="icon-input" alt={props.src} onClick={props.onClickFirstIcon} />
       </div>
       {props.error && <p className="text-error ml-[10px] mt-[5px]">{props.error.message}</p>}

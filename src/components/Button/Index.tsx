@@ -5,11 +5,12 @@ type Props = {
   titleButton: string;
   type?: string | 'submit';
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  isDisabled?: boolean | false;
 };
 
 const Button = (props: Props) => {
   return (
-    <button className={props.className} onClick={props.onClick} type="submit">
+    <button disabled={props.isDisabled} className={props.className} onClick={props.onClick} type="submit">
       {props.titleButton}
     </button>
   );
