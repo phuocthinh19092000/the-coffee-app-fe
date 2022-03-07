@@ -67,6 +67,10 @@ module.exports = {
         15: '15%',
         50: '50%',
       },
+      boxShadow: {
+        input: '0px 4px 12px rgba(146, 146, 146, 0.12)',
+        button: '0px 4px 12px rgba(189, 15, 114, 0.3)',
+      },
     },
   },
   plugins: [
@@ -121,6 +125,23 @@ module.exports = {
           lineHeight: '16px',
           letterSpacing: '0.4px',
         },
+        '.text-style-1440-h1': {
+          fontFamily: theme('fontFamily.proximaNova'),
+          fontWeight: '700',
+          fontSize: '24px',
+          lineHeight: '30px',
+          textAlign: 'center',
+          letterSpacing: '0.07px',
+        },
+        '.text-style-customer-body': {
+          fontFamily: theme('fontFamily.proximaNova'),
+          fontWeight: '600',
+          fontSize: '16px',
+          lineHeight: '21px',
+          textAlign: 'center',
+          letterSpacing: '-0.31px',
+          color: theme('colors.black'),
+        },
         '.border-style': {
           borderWidth: '1px',
           borderStyle: 'border-box solid',
@@ -148,7 +169,7 @@ module.exports = {
           width: '100%',
           height: '100%',
           position: 'fixed',
-      }
+        },
       });
       matchUtilities(
         {
