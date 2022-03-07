@@ -31,7 +31,6 @@
 
   &__button {
     display: flex;
-    z-index: -2;
     &-toggle {
       background-color: inherit;
       margin-right: 30px;
@@ -77,8 +76,5 @@
   }
 }
 .not-found {
-  @apply bg-white absolute top-[70px] w-[440px] rounded-lg;
-  &__group {
-    @apply flex flex-col justify-center text-center items-center p-1;
-  }
+  @apply bg-white absolute top-[60px] w-[440px] h-[150px] rounded-lg flex flex-col justify-center text-center items-center;
 }

@@ -1,7 +1,7 @@
 @import '../../share/assets/scss/variables.scss';
 
 .loader {
-    @apply text-black text-3 m-auto w-1 mt-1.25 h-1.25 rounded-full relative;
+    @apply text-black text-3 m-auto w-1 h-1.25 rounded-full relative;
     -webkit-animation: load4 1.3s infinite linear;
     animation: load4 1s infinite linear;
     -webkit-transform: translateZ(0);

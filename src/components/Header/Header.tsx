@@ -15,10 +15,11 @@ import { useHistory } from 'react-router';
 import { Product } from '../../interfaces';
 import { useAppDispatch } from '../../storage/hooks';
 import { useSelector } from 'react-redux';
-import { getSearchItems, selectSearchState } from '../../features/search/action/getSearchItemData';
+import { getSearchItems, selectSearchState, searchLoadingState } from '../../features/search/action/getSearchItemData';
 import useDebounce from '../../Hook/useDebounce';
 import { getProductId } from '../../features/order/actions/order';
 import useComponentVisible from '../../utils/useComponentVisible';
+import Spinner from '../Spinner/Spinner';
 type Props = {
   className: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -29,6 +30,7 @@ type Props = {
 const Header = (props: Props) => {
   const [keyword, setKeyword] = useState('');
   const searchItems = useSelector(selectSearchState);
+  const isLoading = useSelector(searchLoadingState);
   const debouncedKeyword = useDebounce(keyword, 500);
   const dispatch = useAppDispatch();
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
@@ -68,7 +70,6 @@ const Header = (props: Props) => {
   const resetValue = () => {
     setKeyword('');
   };
-
   return (
     <div className={props.className}>
       <div className="header__logo">
@@ -86,30 +87,31 @@ const Header = (props: Props) => {
           onClickFirstIcon={resetValue}
           onFocus={handleOnFocus}
         />
-        {isComponentVisible && searchItems.length !== 0 ? (
-          <div className="search-list">
-            {searchItems.map((searchItem: Product) => (
-              <SearchItem
-                key={searchItem.id}
-                avatarUrl={searchItem.images}
-                name={searchItem.name}
-                price={searchItem.price.toString()}
-                onClick={() => handleClickSearchItem(searchItem.id)}
-              />
-            ))}
-          </div>
-        ) : isComponentVisible && searchItems.length === 0 ? (
-          <div className="not-found">
-            <div className="not-found__group">
-              <img src={NotFound} alt="Not Found" className="mb-1" />
+        {isComponentVisible &&
+          (isLoading === 'pending' ? (
+            <div className="search-list h-[150px] bg-white">
+              <Spinner />
+            </div>
+          ) : searchItems.length ? (
+            <div className="search-list">
+              {searchItems.map((searchItem: Product) => (
+                <SearchItem
+                  key={searchItem.id}
+                  avatarUrl={searchItem.images}
+                  name={searchItem.name}
+                  price={searchItem.price.toString()}
+                  onClick={() => handleClickSearchItem(searchItem.id)}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="not-found">
+              <img src={NotFound} alt="Not Found" className="w-4 mb-1" />
               <p className="text-grey-1">No Drink is Found</p>
             </div>
-          </div>
-        ) : (
-          <div />
-        )}
+          ))}
       </div>
-      <div className="header__button">
+      <div className={`${isComponentVisible ? '' : 'z-[2]'} header__button`}>
         {props.isLoggedIn ? (
           <>
             <button className="header__button-toggle" onClick={toggleTheme}>
