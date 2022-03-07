@@ -49,5 +49,11 @@
     width: 480px;
     padding-top: 80px;
     background-color: $grey-4-color;
+    overflow: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }

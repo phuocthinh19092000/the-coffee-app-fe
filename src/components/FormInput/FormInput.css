@@ -1,0 +1,29 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.block-form-input {
+  @apply flex flex-row w-[440px] relative rounded-[50px] bg-white text-2;
+}
+
+.block-form-input:focus-within {
+  outline: 1px solid rgb(202, 195, 195);
+}
+.block-form-input input {
+  background-color: inherit;
+  @apply rounded-[50px] w-full m-0 border-none indent-[5%];
+}
+
+.block-form-input input:focus {
+  @apply outline-none;
+}
+
+.block-form-input img {
+  @apply relative cursor-pointer my-[15px] mr-[27px];
+}
