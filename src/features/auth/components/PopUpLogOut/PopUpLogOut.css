@@ -1,0 +1,7 @@
+.span-log-out {
+  @apply text-3.5 text-brown absolute top-1/4;
+}
+
+.card__content {
+  @apply justify-center;
+}

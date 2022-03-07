@@ -1,0 +1,19 @@
+.input-field {
+  @apply flex flex-row relative mb-1.25;
+}
+
+.hook-form-input {
+  @apply flex-1 bg-white w-full h-3.5 border-none text-2 indent-[5%] rounded-full focus-within:outline-1 focus-within:outline focus-within:outline-outline;
+}
+
+.error {
+  @apply text-error ml-0.5 pb-1;
+}
+
+.forget-password {
+  @apply text-error text-2.5 text-right mt-3 cursor-pointer;
+}
+
+.submit-btn {
+  @apply w-full h-3.5 rounded-full border-none bg-accent-1 text-2 text-white cursor-pointer mt-2;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import './PopUpLogOut.scss';
+import './PopUpLogOut.css';
 import Card from '../../../../components/Card/Index';
 import Button from '../../../../components/Button/Index';
 import { useAppDispatch } from '../../../../storage/hooks';
@@ -20,13 +20,13 @@ const PopUpLogOut = (props: Props) => {
 
   return (
     <Card className="card card--right card__content">
-      <span id="span-log-out"> Are you sure you want to log out ?</span>
-      <Button
-        onClick={LogOutHandler}
-        className="btn btn-primary btn--enabled btn-logout"
-        type="submit"
-        titleButton="LOGOUT"
-      />
+        <span className="span-log-out"> Are you sure you want to log out ?</span>
+        <Button
+            onClick={LogOutHandler}
+            className="btn btn-primary btn--enabled btn-logout"
+            type="submit"
+            titleButton="LOGOUT"
+        />
       <Button
         onClick={props.onClick}
         className="btn btn-primary btn-secondary btn-logout"

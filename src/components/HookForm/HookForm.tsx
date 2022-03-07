@@ -1,8 +1,8 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import './HookForm.scss';
-import { useAppDispatch } from '../../storage/hooks';
+import './HookForm.css';
+import {useAppDispatch} from '../../storage/hooks';
 import { checkRole, login, selectUserState } from '../../features/auth/actions/auth';
 import { useState } from 'react';
 import UserIcon from '../../share/assets/vector/User.svg';
@@ -72,23 +72,27 @@ export default function HookForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="input-field">
-        <input {...register('email')} placeholder="Email" onFocus={handleResetDefault} />
-        <img src={UserIcon} alt="User Icon" />
+        <input {...register('email')}
+               placeholder="Email"
+               onFocus={handleResetDefault}
+               className="hook-form-input"/>
+        <img src={UserIcon} alt="User Icon" className="w-1.5 h-1.5 absolute right-1 top-[30%]"/>
       </div>
       {errors.email && <p className="error">{errors.email?.message}</p>}
 
       <div className="input-field">
         <input
-          type={showPassword ? 'text' : 'password'}
-          {...register('password')}
-          placeholder="Password"
-          onFocus={handleResetDefault}
+            type={showPassword ? 'text' : 'password'}
+            {...register('password')}
+            placeholder="Password"
+            onFocus={handleResetDefault}
+            className="hook-form-input"
         />
         <img
-          src={showPassword ? CloseEyeIcon : EyeIcon}
-          onClick={toggleShowPassword}
-          className="toggle"
-          alt="Icon Password"
+            src={showPassword ? CloseEyeIcon : EyeIcon}
+            onClick={toggleShowPassword}
+            className="w-1.5 h-1.5 absolute right-1 top-[30%] cursor-pointer"
+            alt="Icon Password"
         />
       </div>
       {errors.password && <p className="error">{errors.password?.message}</p>}

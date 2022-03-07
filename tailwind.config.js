@@ -12,6 +12,7 @@ module.exports = {
       2: '16px',
       2.5: '18px',
       3: '22px',
+      3.5: '24px',
       4: '26px',
     },
     colors: {
