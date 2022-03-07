@@ -12,7 +12,7 @@ export default function useComponentVisible(initialIsVisible: Boolean) {
   };
 
   const handleClickOutside = (event: Event) => {
-    if (ref.current && !ref.current.children[0].contains(event.target as Node)) {
+    if (ref.current && Array.from(ref.current.children).every((item) => !item.contains(event.target as Node))) {
       setIsComponentVisible(false);
     }
   };

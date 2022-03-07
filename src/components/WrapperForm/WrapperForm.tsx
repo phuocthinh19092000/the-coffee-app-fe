@@ -15,7 +15,7 @@ type Props = {
 };
 const WrapperForm = (props: Props) => {
   return (
-    <div className="form-add-item--blur">
+    <div className="background-blur">
       <Card className="card--new-center">
         <div className="form-add-item">
           <div className="form-add-item__header">

@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext, ChangeEvent } from 'react';
 import OTSVLogo from '../../share/assets/img/OTSVLogo.png';
 import SearchVector from '../../share/assets/vector/iconSearch.svg';
 import CancelVector from '../../share/assets/vector/cancelVector.svg';
-import CoffeeImg from '../../share/assets/img/CoffeeImg.png';
 import NotFound from '../../share/assets/vector/NotFoundIcon.svg';
 import Input from '../Input/Input';
 import Button from '../Button/Index';
@@ -12,7 +11,6 @@ import CustomerInformation from '../CustomerInformation/CustomerInformation';
 import { DarkMode } from '../../utils/ThemeProvider';
 import { CgSun } from 'react-icons/cg';
 import { HiMoon } from 'react-icons/hi';
-import { useRef } from 'react';
 import { useHistory } from 'react-router';
 import { Product } from '../../interfaces';
 import { useAppDispatch } from '../../storage/hooks';
@@ -20,6 +18,7 @@ import { useSelector } from 'react-redux';
 import { getSearchItems, selectSearchState } from '../../features/search/action/getSearchItemData';
 import useDebounce from '../../Hook/useDebounce';
 import { getProductId } from '../../features/order/actions/order';
+import useComponentVisible from '../../utils/useComponentVisible';
 type Props = {
   className: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -29,20 +28,13 @@ type Props = {
 };
 const Header = (props: Props) => {
   const [keyword, setKeyword] = useState('');
-  const [displaySearchList, setDisplaySearchList] = useState(false);
   const searchItems = useSelector(selectSearchState);
   const debouncedKeyword = useDebounce(keyword, 500);
   const dispatch = useAppDispatch();
-  const DivSearchItemsRef = useRef<HTMLDivElement>(null);
+  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
 
   const handleSearchDrink: React.ChangeEventHandler<HTMLInputElement> = (event: ChangeEvent<HTMLInputElement>) => {
     setKeyword(event.target.value);
-  };
-
-  const clickOutsideHandler = (event: Event) => {
-    if (DivSearchItemsRef.current && !DivSearchItemsRef.current.contains(event.target as Node)) {
-      setDisplaySearchList(false);
-    }
   };
 
   const handleClickSearchItem = (productId: string) => {
@@ -50,19 +42,18 @@ const Header = (props: Props) => {
     resetValue();
   };
 
-  useEffect(() => {
-    document.addEventListener('click', clickOutsideHandler, true);
-    return () => {
-      document.removeEventListener('click', clickOutsideHandler, true);
-    };
-  }, [displaySearchList]);
+  const handleOnFocus = () => {
+    if (keyword.length >= 2) {
+      setIsComponentVisible(true);
+    }
+  };
 
   useEffect(() => {
     if (keyword.length >= 2) {
       dispatch(getSearchItems(keyword.toLocaleLowerCase())).unwrap();
-      setDisplaySearchList(true);
+      setIsComponentVisible(true);
     } else {
-      setDisplaySearchList(false);
+      setIsComponentVisible(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedKeyword]);
@@ -83,7 +74,9 @@ const Header = (props: Props) => {
       <div className="header__logo">
         <img src={OTSVLogo} alt={OTSVLogo} onClick={goHome} />
       </div>
-      <div className="header__search-block">
+      {isComponentVisible && <div className="background-blur" />}
+
+      <div className="header__search-block z-[2]" ref={ref}>
         <Input
           placeholder="Search drink"
           src={keyword.length === 0 ? SearchVector : CancelVector}
@@ -91,31 +84,30 @@ const Header = (props: Props) => {
           value={keyword}
           onChange={handleSearchDrink}
           onClickFirstIcon={resetValue}
+          onFocus={handleOnFocus}
         />
-        <div ref={DivSearchItemsRef}>
-          {displaySearchList && searchItems.length !== 0 ? (
-            <div className="search-list">
-              {searchItems.map((searchItem: Product) => (
-                <SearchItem
-                  key={searchItem.id}
-                  avatarUrl={CoffeeImg}
-                  name={searchItem.name}
-                  price={searchItem.price.toString()}
-                  onClick={() => handleClickSearchItem(searchItem.id)}
-                />
-              ))}
+        {isComponentVisible && searchItems.length !== 0 ? (
+          <div className="search-list">
+            {searchItems.map((searchItem: Product) => (
+              <SearchItem
+                key={searchItem.id}
+                avatarUrl={searchItem.images}
+                name={searchItem.name}
+                price={searchItem.price.toString()}
+                onClick={() => handleClickSearchItem(searchItem.id)}
+              />
+            ))}
+          </div>
+        ) : isComponentVisible && searchItems.length === 0 ? (
+          <div className="not-found">
+            <div className="not-found__group">
+              <img src={NotFound} alt="Not Found" className="mb-1" />
+              <p className="text-grey-1">No Drink is Found</p>
             </div>
-          ) : displaySearchList && searchItems.length === 0 ? (
-            <div className="not-found">
-              <div className="not-found__group">
-                <img src={NotFound} alt="Not Found" className="mb-1" />
-                <p className="text-grey-1">No Drink is Found</p>
-              </div>
-            </div>
-          ) : (
-            <div />
-          )}
-        </div>
+          </div>
+        ) : (
+          <div />
+        )}
       </div>
       <div className="header__button">
         {props.isLoggedIn ? (
