@@ -1,10 +1,8 @@
 import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { OrderStatus } from '../../../enum';
+import { OrderStatus, RequestState } from '../../../enum';
 import Order from '../../../interfaces/order';
 import { RootState } from '../../../storage';
 import OrderByStatusApi from '../api/orderStatusApi';
-
-type RequestState = 'pending' | 'fulfilled' | 'rejected';
 
 export interface OrderByStatusState {
   data: {
@@ -22,7 +20,7 @@ export const initialState: OrderByStatusState = {
     orderStatusProcessing: [],
     orderStatusReady: [],
   },
-  loading: 'pending',
+  loading: RequestState.PENDING,
   error: {
     message: '',
     status: null,
@@ -102,10 +100,10 @@ const orderByStatusSlice = createSlice({
         }
       })
       .addCase(getOrdersByStatus.pending, (state) => {
-        state.loading = 'pending';
+        state.loading = RequestState.PENDING;
       })
       .addCase(getOrdersByStatus.fulfilled, (state, action) => {
-        state.loading = 'fulfilled';
+        state.loading = RequestState.FULFILLED;
         switch (action.payload.status) {
           case OrderStatus.NEW:
             state.data.orderStatusNew = action.payload.orders;
@@ -121,7 +119,7 @@ const orderByStatusSlice = createSlice({
         }
       })
       .addCase(getOrdersByStatus.rejected, (state, action) => {
-        state.loading = 'rejected';
+        state.loading = RequestState.REJECTED;
         state.error = action.payload;
       });
   },

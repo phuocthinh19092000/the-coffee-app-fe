@@ -5,8 +5,7 @@ import { RootState } from '../../../storage';
 import http from '../../../services/http-common';
 import GetUserData from '../api/UserData/GetUserData';
 import { UserInfor } from '../types/userInfor.type';
-import { ROLE } from '../../../enum';
-type RequestState = 'pending' | 'fulfilled' | 'rejected';
+import { RequestState, ROLE } from '../../../enum';
 
 export interface AuthState {
   loading?: RequestState;
@@ -26,7 +25,7 @@ export const initialState: AuthState = {
       name: '',
     },
   },
-  loading: 'pending',
+  loading: RequestState.PENDING,
   error: {
     message: '',
     status: null,
@@ -78,36 +77,36 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
-        state.loading = 'pending';
+        state.loading = RequestState.PENDING;
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.loading = 'fulfilled';
+        state.loading = RequestState.FULFILLED;
         state.data = action.payload;
       })
       .addCase(login.rejected, (state, action) => {
-        state.loading = 'rejected';
+        state.loading = RequestState.REJECTED;
         state.error = action.payload;
         state.data = initialState.data;
       })
       .addCase(logout.pending, (state) => {
-        state.loading = 'fulfilled';
+        state.loading = RequestState.PENDING;
       })
       .addCase(logout.fulfilled, () => {
         return initialState;
       })
       .addCase(logout.rejected, (state, action) => {
-        state.loading = 'rejected';
+        state.loading = RequestState.REJECTED;
         state.error = action.payload;
       })
       .addCase(getFreeUnit.pending, (state) => {
-        state.loading = 'pending';
+        state.loading = RequestState.PENDING;
       })
       .addCase(getFreeUnit.fulfilled, (state, action) => {
-        state.loading = 'fulfilled';
+        state.loading = RequestState.FULFILLED;
         state.data.userInfor.freeUnit = action.payload;
       })
       .addCase(getFreeUnit.rejected, (state, action) => {
-        state.loading = 'rejected';
+        state.loading = RequestState.REJECTED;
         state.error = action.payload;
       });
   },

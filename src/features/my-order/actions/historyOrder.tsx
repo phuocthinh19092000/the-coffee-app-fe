@@ -3,7 +3,7 @@ import OrderHistory from '../api/historyAPI';
 import { RootState } from '../../../storage';
 import Order from '../../../interfaces/order';
 import { logout } from '../../auth/actions/auth';
-type RequestState = 'pending' | 'fulfilled' | 'rejected';
+import { RequestState } from '../../../enum';
 
 export interface myOrdersDetails {
   loading: RequestState;
@@ -11,7 +11,7 @@ export interface myOrdersDetails {
   data: Order[];
 }
 export const initialState: myOrdersDetails = {
-  loading: 'pending',
+  loading: RequestState.PENDING,
   data: [],
   error: {
     message: '',
@@ -34,14 +34,14 @@ const myOrderSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getMyOrders.pending, (state) => {
-        state.loading = 'pending';
+        state.loading = RequestState.PENDING;
       })
       .addCase(getMyOrders.fulfilled, (state, action) => {
-        state.loading = 'fulfilled';
+        state.loading = RequestState.FULFILLED;
         state.data = action.payload;
       })
       .addCase(getMyOrders.rejected, (state, action) => {
-        state.loading = 'rejected';
+        state.loading = RequestState.REJECTED;
         state.error = action.payload;
       })
       .addCase(logout.fulfilled, () => {

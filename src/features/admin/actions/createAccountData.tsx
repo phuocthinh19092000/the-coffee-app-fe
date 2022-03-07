@@ -3,15 +3,16 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import Account from '../../../interfaces/account';
 import accountApi from '../api/accountAPI';
 import { UserTypeDto } from '../../../interfaces';
+import { RequestState } from '../../../enum';
 
 export interface CreateAccountState {
-  loading: string;
+  loading: RequestState;
   data: Account;
   error?: any;
 }
 
 export const initialState: CreateAccountState = {
-  loading: 'pending',
+  loading: RequestState.PENDING,
   data: {
     id: '',
     username: '',
@@ -49,14 +50,14 @@ const createAccountSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createAccount.pending, (state) => {
-        state.loading = 'pending';
+        state.loading = RequestState.PENDING;
       })
       .addCase(createAccount.fulfilled, (state, action) => {
-        state.loading = 'fulfilled';
+        state.loading = RequestState.FULFILLED;
         state.data = action.payload;
       })
       .addCase(createAccount.rejected, (state, action) => {
-        state.loading = 'rejected';
+        state.loading = RequestState.REJECTED;
         state.error = action.payload;
       });
   },
