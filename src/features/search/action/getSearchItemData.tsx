@@ -51,5 +51,5 @@ const searchSlice = createSlice({
 });
 
 export const selectSearchState = (state: RootState) => state.search.data;
-
+export const searchLoadingState = (state: RootState) => state.search.loading;
 export default searchSlice.reducer;
