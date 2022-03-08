@@ -31,7 +31,7 @@ const getNameFromSelectedValue = (value: string | number, listOptions: OptionTyp
 };
 
 const CustomSelect = (props: Props) => {
-  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
+  const [ref, isComponentVisible, setIsComponentVisible] = useComponentVisible(false);
 
   const [value, setValue] = useState<OptionType>(
     props.selectedValue ? getNameFromSelectedValue(props.selectedValue, props.listOptions) : '',

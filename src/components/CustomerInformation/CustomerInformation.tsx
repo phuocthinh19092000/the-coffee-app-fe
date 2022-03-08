@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import UserInformation from '../../share/assets/vector/UserInformation.svg';
 import ExpandMore from '../../share/assets/vector/ExpandMore.svg';
 import './CustomerInformation.scss';
@@ -6,37 +6,47 @@ import { useSelector } from 'react-redux';
 import { selectUserState } from '../../features/auth/actions/auth';
 import PopUpChangeWebhook from '../../features/auth/components/PopUpChangeWebhook/PopUpChangeWebhook';
 import useComponentVisible from '../../utils/useComponentVisible';
-type Props = {
-  onClick: React.MouseEventHandler<HTMLAnchorElement>;
-  showMyOrder: React.MouseEventHandler<HTMLAnchorElement>;
+import MyOrder from '../../features/my-order/page/MyOrder/MyOrder';
+import PopUpChangePassword from '../../features/auth/components/PopUpChangePassword/PopUpChangePassword';
+import PopUpLogOut from '../../features/auth/components/PopUpLogOut/PopUpLogOut';
+
+type PopUpObjectType = {
+  [key: string]: JSX.Element;
 };
 
-const CustomerInformation = (props: Props) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const CustomerInformation = () => {
   const { name, freeUnit } = useSelector(selectUserState);
-  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
+  const [dropdownMenuRef, isMenuOpen, setIsMenuOpen] = useComponentVisible(false);
+  const [popUpRef, isPopUpOpen, setIsPopUpOpen] = useComponentVisible(false);
+  const [popUpCase, setShowPopUpCase] = useState<string>('');
+
   const handleClickInside = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const dropdownMenuRef = useRef<HTMLDivElement>(null);
-
-  const handleClickOutside = (event: Event) => {
-    if (dropdownMenuRef.current && !dropdownMenuRef.current.contains(event.target as Node)) {
-      setIsMenuOpen(false);
-    }
+  const handleClickCancelLogOut = () => {
+    setIsPopUpOpen(false);
   };
 
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [isMenuOpen]);
+  const handleClickChangeWebHook = () => {
+    // TODO: Handle click change web hook in here
+    // after dispatch successfuly ,  setIsPopUpOpen(false);
+  };
 
-  const openPopUpChangeWebhook = () => {
-    setIsComponentVisible(true);
-    setIsMenuOpen(false);
+  const showPopUpCase: PopUpObjectType = {
+    MY_ORDERS: <MyOrder />,
+    CHANGE_WEBHOOK: <PopUpChangeWebhook onClickChangeWebhook={handleClickChangeWebHook} />,
+    CHANGE_PASSWORD: <PopUpChangePassword />,
+    LOG_OUT: <PopUpLogOut onClick={handleClickCancelLogOut} />,
+  };
+
+  const setShowPopUp = (popUp: string) => {
+    setShowPopUpCase(popUp);
+    setIsPopUpOpen(true);
+  };
+
+  const switchPopUp = () => {
+    return showPopUpCase[popUpCase];
   };
 
   return (
@@ -51,23 +61,20 @@ const CustomerInformation = (props: Props) => {
               <span className="menu-dropdown__item">
                 Today Free Unit: <span className="menu-dropdown__item--accent">{freeUnit}</span>
               </span>
-              <span className="menu-dropdown__item" onClick={props.showMyOrder}>
+              <span className="menu-dropdown__item" onClick={() => setShowPopUp('MY_ORDERS')}>
                 My Orders
               </span>
-              <a className="menu-dropdown__item" href="/user/changeAvatar">
+              {/* //TODO: Add component change avatar  */}
+              {/* <span className="menu-dropdown__item" onClick={() => setShowPopUp('CHANGE_AVATAR')}>
                 Change Avatar
-              </a>
-              <span className="menu-dropdown__item" onClick={openPopUpChangeWebhook}>
+              </span> */}
+              <span className="menu-dropdown__item" onClick={() => setShowPopUp('CHANGE_WEBHOOK')}>
                 Change Webhook
               </span>
-              <a className="menu-dropdown__item" href="/user/changePassword">
+              <span className="menu-dropdown__item" onClick={() => setShowPopUp('CHANGE_PASSWORD')}>
                 Change Password
-              </a>
-              <span
-                className="menu-dropdown__item menu-dropdown__item--accent"
-                onClick={props.onClick}
-                id="accent-color"
-              >
+              </span>
+              <span className="menu-dropdown__item menu-dropdown__item--accent" onClick={() => setShowPopUp('LOG_OUT')}>
                 Log out
               </span>
             </div>
@@ -75,12 +82,9 @@ const CustomerInformation = (props: Props) => {
         </div>
       </div>
 
-      {isComponentVisible && (
-        <div className="background-blur" ref={ref}>
-          {/* TODO:
-           **  CHANGE DEFAULT VALUE HERE WHEN DISPATCH API GET WEBHOOK
-           */}
-          <PopUpChangeWebhook webHook="Default Value" />
+      {isPopUpOpen && (
+        <div ref={popUpRef} className="background-blur">
+          {switchPopUp()}
         </div>
       )}
     </>

@@ -24,7 +24,7 @@ interface Props {
 
 const OrderItemStaff = (props: Props) => {
   const [isDisabledUpdateOrder, setIsDisabledUpdateOrder] = useState(false);
-  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
+  const [ref, isComponentVisible, setIsComponentVisible] = useComponentVisible(false);
 
   const dispatch = useAppDispatch();
 
