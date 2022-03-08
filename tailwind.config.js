@@ -86,7 +86,7 @@ module.exports = {
         '.text-style-vendor-h2': {
           fontFamily: theme('fontFamily.proximaNova'),
           fontWeight: '600',
-          fontSize: '22x',
+          fontSize: '22px',
           lineHeight: '25px',
           letterSpacing: '0.15px',
         },
