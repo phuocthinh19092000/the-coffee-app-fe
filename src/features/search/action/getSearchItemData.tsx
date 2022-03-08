@@ -2,15 +2,16 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../../storage';
 import searchAPI from '../api/searchAPI';
 import { Product } from '../../../interfaces/product';
+import { RequestState } from '../../../enum';
 
 export interface ProductState {
-  loading: string;
+  loading: RequestState;
   data: Product[];
   error?: any;
 }
 
 export const initialState: ProductState = {
-  loading: 'pending',
+  loading: RequestState.PENDING,
   data: [],
   error: {
     message: '',
@@ -37,14 +38,14 @@ const searchSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getSearchItems.pending, (state) => {
-        state.loading = 'pending';
+        state.loading = RequestState.PENDING;
       })
       .addCase(getSearchItems.fulfilled, (state, action) => {
-        state.loading = 'fulfilled';
+        state.loading = RequestState.FULFILLED;
         state.data = action.payload;
       })
       .addCase(getSearchItems.rejected, (state, action) => {
-        state.loading = 'rejected';
+        state.loading = RequestState.REJECTED;
         state.error = action.payload;
       });
   },

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { RequestState } from '../../../enum';
 import NotificationPickUpOrderApi, { BodyApiNotificationPickUpOrder } from '../api/sendNotificationPickUpOrder';
-type RequestState = 'pending' | 'fulfilled' | 'rejected';
 
 export interface NotificationState {
   loading?: RequestState;
@@ -8,7 +8,7 @@ export interface NotificationState {
 }
 
 export const initialState: NotificationState = {
-  loading: 'pending',
+  loading: RequestState.PENDING,
   error: {
     message: '',
     status: null,
@@ -34,13 +34,13 @@ const notificationSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(sendNotificationRemindPickUpOrder.pending, (state) => {
-        state.loading = 'pending';
+        state.loading = RequestState.PENDING;
       })
       .addCase(sendNotificationRemindPickUpOrder.fulfilled, (state) => {
-        state.loading = 'fulfilled';
+        state.loading = RequestState.FULFILLED;
       })
       .addCase(sendNotificationRemindPickUpOrder.rejected, (state, action) => {
-        state.loading = 'rejected';
+        state.loading = RequestState.REJECTED;
         state.error = action.payload;
       });
   },

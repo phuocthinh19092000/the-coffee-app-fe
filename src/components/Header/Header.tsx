@@ -20,6 +20,7 @@ import useDebounce from '../../Hook/useDebounce';
 import { getProductId } from '../../features/order/actions/order';
 import useComponentVisible from '../../utils/useComponentVisible';
 import Spinner from '../Spinner/Spinner';
+import { RequestState } from '../../enum';
 type Props = {
   className: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -88,7 +89,7 @@ const Header = (props: Props) => {
           onFocus={handleOnFocus}
         />
         {isComponentVisible &&
-          (isLoading === 'pending' ? (
+          (isLoading === RequestState.PENDING ? (
             <div className="search-list h-[150px] bg-white">
               <Spinner />
             </div>

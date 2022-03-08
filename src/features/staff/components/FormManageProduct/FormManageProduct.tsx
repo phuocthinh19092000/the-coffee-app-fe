@@ -5,10 +5,12 @@ import CustomUploadFile from '../../../../components/CustomUploadFile/CustomUplo
 import React, { useEffect, useRef, useState } from 'react';
 import { InputParams, NotificationParams, OptionType, ProductTypeDto } from '../../../../interfaces';
 import { ProductStatusList, statusCodeError } from '../../../../constant';
-import { createProduct, updateProduct } from '../../../product/actions/createProductData';
+import { createProduct, updateProduct, createProductLoadingState } from '../../../product/actions/createProductData';
 import { useAppDispatch } from '../../../../storage/hooks';
 import './FormManageProduct.css';
-import { NotificationType } from '../../../../enum';
+import { NotificationType, RequestState } from '../../../../enum';
+import Spinner from '../../../../components/Spinner/Spinner';
+import { useSelector } from 'react-redux';
 
 type Props = {
   selectedProduct?: ProductTypeDto;
@@ -42,7 +44,7 @@ const FormManageProduct = (props: Props) => {
   const fileRef = useRef<HTMLInputElement>(null);
   const [isHavePreviewFile, setIsHavePreviewFile] = useState(false);
   const [isFullFill, setIsFullFill] = useState(false);
-
+  const isLoading = useSelector(createProductLoadingState);
   const [dataProduct, setDataProduct] = useState<ProductTypeDto>(
     props.selectedProduct || {
       name: '',
@@ -114,64 +116,71 @@ const FormManageProduct = (props: Props) => {
   };
 
   return (
-    <WrapperForm
-      name={props.formName}
-      isHavePreviewFile={isHavePreviewFile}
-      isFullFill={isFullFill}
-      onClickBrowseAgain={onClickBrowse}
-      onClickSave={onSaveDataHandler}
-      onClickExit={props.onClickExit}
-      onClickCancel={props.onClickExit}
-    >
-      <div className="add-product">
-        <div className="w-full h-fit">
-          <CustomInput
-            type="text"
-            name="name"
-            placeholder="Item Name"
+    <>
+      <WrapperForm
+        name={props.formName}
+        isHavePreviewFile={isHavePreviewFile}
+        isFullFill={isFullFill}
+        onClickBrowseAgain={onClickBrowse}
+        onClickSave={onSaveDataHandler}
+        onClickExit={props.onClickExit}
+        onClickCancel={props.onClickExit}
+      >
+        <div className="add-product">
+          <div className="w-full h-fit">
+            <CustomInput
+              type="text"
+              name="name"
+              placeholder="Item Name"
+              onChange={handleChange}
+              value={dataProduct.name}
+            />
+          </div>
+          <div className="w-full h-fit">
+            <CustomSelect
+              listOptions={props.listCategory}
+              placeholder="Category"
+              name="category"
+              onChange={handleChange}
+              selectedValue={dataProduct.category}
+            />
+          </div>
+          <div className="w-full h-fit">
+            <CustomInput
+              type="number"
+              name="price"
+              placeholder="Price"
+              onChange={handleChange}
+              value={dataProduct.price}
+            />
+          </div>
+          <div className="w-full h-fit">
+            <CustomSelect
+              listOptions={ProductStatusList}
+              placeholder="Status"
+              name="status"
+              onChange={handleChange}
+              selectedValue={dataProduct.status}
+            />
+          </div>
+        </div>
+        <div className="area-upload-file">
+          <CustomUploadFile
+            name="images"
+            setIsHavePreviewFile={setIsHavePreviewFile}
+            fileRef={fileRef}
+            onClickBrowse={onClickBrowse}
             onChange={handleChange}
-            value={dataProduct.name}
+            selectedImage={dataProduct.images}
           />
         </div>
-        <div className="w-full h-fit">
-          <CustomSelect
-            listOptions={props.listCategory}
-            placeholder="Category"
-            name="category"
-            onChange={handleChange}
-            selectedValue={dataProduct.category}
-          />
+      </WrapperForm>
+      {isLoading === RequestState.PENDING && (
+        <div className="background-blur flex flex-col justify-center">
+          <Spinner />
         </div>
-        <div className="w-full h-fit">
-          <CustomInput
-            type="number"
-            name="price"
-            placeholder="Price"
-            onChange={handleChange}
-            value={dataProduct.price}
-          />
-        </div>
-        <div className="w-full h-fit">
-          <CustomSelect
-            listOptions={ProductStatusList}
-            placeholder="Status"
-            name="status"
-            onChange={handleChange}
-            selectedValue={dataProduct.status}
-          />
-        </div>
-      </div>
-      <div className="area-upload-file">
-        <CustomUploadFile
-          name="images"
-          setIsHavePreviewFile={setIsHavePreviewFile}
-          fileRef={fileRef}
-          onClickBrowse={onClickBrowse}
-          onChange={handleChange}
-          selectedImage={dataProduct.images}
-        />
-      </div>
-    </WrapperForm>
+      )}
+    </>
   );
 };
 export default FormManageProduct;

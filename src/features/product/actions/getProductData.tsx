@@ -3,16 +3,17 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import productApi from '../api/productAPI';
 import { RootState } from '../../../storage';
 import { Product } from '../../../interfaces';
+import { RequestState } from '../../../enum';
 
 export interface ProductState {
-  loading: string;
+  loading: RequestState;
   data: {
     products: Product[];
     totalProduct: number;
   };
 }
 export const initialState: ProductState = {
-  loading: 'pending',
+  loading: RequestState.PENDING,
   data: {
     products: [],
     totalProduct: 0,
@@ -48,24 +49,24 @@ const productSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getProductsByCategory.pending, (state) => {
-        state.loading = 'pending';
+        state.loading = RequestState.PENDING;
       })
       .addCase(getProductsByCategory.fulfilled, (state, action) => {
-        state.loading = 'fulfilled';
+        state.loading = RequestState.FULFILLED;
         state.data.products = action.payload;
       })
       .addCase(getProductsByCategory.rejected, (state) => {
-        state.loading = 'rejected';
+        state.loading = RequestState.REJECTED;
       })
       .addCase(getProductsPagination.pending, (state) => {
-        state.loading = 'pending';
+        state.loading = RequestState.PENDING;
       })
       .addCase(getProductsPagination.fulfilled, (state, action) => {
-        state.loading = 'fulfilled';
+        state.loading = RequestState.FULFILLED;
         state.data = action.payload;
       })
       .addCase(getProductsPagination.rejected, (state) => {
-        state.loading = 'rejected';
+        state.loading = RequestState.REJECTED;
       });
   },
 });

@@ -12,6 +12,7 @@ import OrderDate from '../../components/OrderDate/OrderDate';
 import { useAppDispatch } from '../../../../storage/hooks';
 import { getMyOrderLoading, getMyOrders, getMyOrderState } from '../../actions/historyOrder';
 import Spinner from '../../../../components/Spinner/Spinner';
+import { RequestState } from '../../../../enum';
 
 type Props = {
   onClick?: React.MouseEventHandler<HTMLElement>;
@@ -34,7 +35,7 @@ const MyOrder = (props: Props) => {
     <div className="background-blur">
       <div className="out-side" onClick={props.onClick} />
       <Card className={`card card-login card--right my-order`}>
-        {loading === 'pending' ? (
+        {loading === RequestState.PENDING ? (
           <Spinner />
         ) : Object.keys(orderData).length > 0 ? (
           <>

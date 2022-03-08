@@ -6,3 +6,4 @@ export * from './User';
 export * from './FormName';
 export * from './NotificationType';
 export * from './PositionToast';
+export * from './RequestState';

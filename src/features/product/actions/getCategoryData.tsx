@@ -3,12 +3,13 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import categoryApi from '../api/categoryAPI';
 import { RootState } from '../../../storage';
 import Category from '../../../interfaces/category';
+import { RequestState } from '../../../enum';
 export interface CategoryState {
-  loading: string;
+  loading: RequestState;
   data: Category[];
 }
 export const initialState: CategoryState = {
-  loading: 'pending',
+  loading: RequestState.PENDING,
   data: [],
 };
 
@@ -29,14 +30,14 @@ const categorySlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAllCategory.pending, (state) => {
-        state.loading = 'pending';
+        state.loading = RequestState.PENDING;
       })
       .addCase(getAllCategory.fulfilled, (state, action) => {
-        state.loading = 'fulfilled';
+        state.loading = RequestState.FULFILLED;
         state.data = action.payload;
       })
       .addCase(getAllCategory.rejected, (state) => {
-        state.loading = 'rejected';
+        state.loading = RequestState.REJECTED;
       });
   },
 });

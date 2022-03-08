@@ -1,9 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { RequestState } from '../../../enum';
 import Order from '../../../interfaces/order';
 import { RootState } from '../../../storage';
 import UpdateStatusOrderApi from '../api/updateOrderApi';
-
-type RequestState = 'pending' | 'fulfilled' | 'rejected';
 
 export interface UpdateStatusOrder {
   order: Order;
@@ -35,7 +34,7 @@ export const initialState: UpdateStatusOrder = {
     createdAt: '',
     id: '',
   },
-  loading: 'pending',
+  loading: RequestState.PENDING,
   error: {
     message: '',
     status: null,
@@ -61,14 +60,14 @@ const updateStatusOrderSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(updateStatusOrder.pending, (state) => {
-        state.loading = 'pending';
+        state.loading = RequestState.PENDING;
       })
       .addCase(updateStatusOrder.fulfilled, (state, action) => {
-        state.loading = 'fulfilled';
+        state.loading = RequestState.FULFILLED;
         state.order = action.payload;
       })
       .addCase(updateStatusOrder.rejected, (state, action) => {
-        state.loading = 'rejected';
+        state.loading = RequestState.REJECTED;
         state.error = action.payload;
       });
   },

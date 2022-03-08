@@ -2,14 +2,15 @@ import { Product } from '../../../interfaces';
 import productApi, { UpdateProductParams } from '../api/productAPI';
 import { RootState } from '../../../storage';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { RequestState } from '../../../enum';
 
 export interface CreateProductState {
-  loading: string;
+  loading: RequestState;
   data: Product;
   error?: any;
 }
 export const initialState: CreateProductState = {
-  loading: 'pending',
+  loading: RequestState.INITIAL,
   data: {
     id: '',
     name: '',
@@ -57,31 +58,32 @@ const createProductSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createProduct.pending, (state) => {
-        state.loading = 'pending';
+        state.loading = RequestState.PENDING;
       })
       .addCase(createProduct.fulfilled, (state, action) => {
-        state.loading = 'fulfilled';
+        state.loading = RequestState.FULFILLED;
         state.data = action.payload;
         state.error = initialState.error;
       })
       .addCase(createProduct.rejected, (state, action) => {
-        state.loading = 'rejected';
+        state.loading = RequestState.REJECTED;
         state.error = action.payload;
       })
       .addCase(updateProduct.pending, (state) => {
-        state.loading = 'pending';
+        state.loading = RequestState.PENDING;
       })
       .addCase(updateProduct.fulfilled, (state, action) => {
-        state.loading = 'fulfilled';
+        state.loading = RequestState.FULFILLED;
         state.data = action.payload;
         state.error = initialState.error;
       })
       .addCase(updateProduct.rejected, (state, action) => {
-        state.loading = 'rejected';
+        state.loading = RequestState.REJECTED;
         state.error = action.payload;
       });
   },
 });
 
 export const selectCreateProductState = (state: RootState) => state.createProduct.data;
+export const createProductLoadingState = (state: RootState) => state.createProduct.loading;
 export default createProductSlice.reducer;
