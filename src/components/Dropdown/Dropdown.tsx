@@ -36,7 +36,7 @@ const Dropdown = (props: Props) => {
   const [isShowPopupDelete, setIsShowPopupDelete] = useState(false);
 
   const dispatch = useAppDispatch();
-  const { typeShowNotification, setTypeShowNotification } = useClearNotification();
+  const [typeShowNotification, setTypeShowNotification] = useClearNotification();
 
   const categories = useSelector(selectCategoryState);
   const listOptionsCategories = categories.map((item) => ({ id: item.id, name: item.name }));

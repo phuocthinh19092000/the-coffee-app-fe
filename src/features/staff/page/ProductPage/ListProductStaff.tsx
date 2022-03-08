@@ -42,7 +42,7 @@ const ListProductStaff = () => {
   const responseDataProduct = useSelector(selectProductState);
   const categoryData = useSelector(selectCategoryState);
 
-  const { typeShowNotification, setTypeShowNotification } = useClearNotification();
+  const [typeShowNotification, setTypeShowNotification] = useClearNotification();
 
   const [isShowFormAddNewProduct, setIsShowFormAddNewProduct] = useState(false);
 
