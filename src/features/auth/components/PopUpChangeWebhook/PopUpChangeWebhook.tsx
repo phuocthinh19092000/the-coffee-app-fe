@@ -7,6 +7,7 @@ type Inputs = {
 };
 
 type Props = {
+  onClickChangeWebhook?: React.MouseEventHandler<HTMLButtonElement>;
   webHook?: string | '';
 };
 
@@ -53,6 +54,7 @@ const PopUpChangeWebhook = (props: Props) => {
         </div>
         <button
           type="submit"
+          onClick={props.onClickChangeWebhook}
           disabled={!isDisabledButton}
           className={`card-change-webhook__button ${isDisabledButton ? 'bg-accent-1' : 'bg-accent-3'}`}
         >

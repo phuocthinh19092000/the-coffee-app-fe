@@ -21,11 +21,10 @@ import { getProductId } from '../../features/order/actions/order';
 import useComponentVisible from '../../utils/useComponentVisible';
 import Spinner from '../Spinner/Spinner';
 import { RequestState } from '../../enum';
+import { getFreeUnit } from '../../features/auth/actions/auth';
 type Props = {
   className: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-  onClickShowLogOut: React.MouseEventHandler<HTMLAnchorElement>;
-  onClickShowMyOrder: React.MouseEventHandler<HTMLAnchorElement>;
   isLoggedIn: boolean;
 };
 const Header = (props: Props) => {
@@ -34,7 +33,12 @@ const Header = (props: Props) => {
   const isLoading = useSelector(searchLoadingState);
   const debouncedKeyword = useDebounce(keyword, 500);
   const dispatch = useAppDispatch();
-  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
+  const [ref, isComponentVisible, setIsComponentVisible] = useComponentVisible(false);
+
+  useEffect(() => {
+    dispatch(getFreeUnit());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSearchDrink: React.ChangeEventHandler<HTMLInputElement> = (event: ChangeEvent<HTMLInputElement>) => {
     setKeyword(event.target.value);
@@ -115,10 +119,7 @@ const Header = (props: Props) => {
       <div className={`${isComponentVisible ? '' : 'z-[2]'} header__button`}>
         {props.isLoggedIn ? (
           <>
-            <button className="header__button-toggle" onClick={toggleTheme}>
-              {theme === 'Light' ? <HiMoon size={40} /> : <CgSun size={40} />}
-            </button>
-            <CustomerInformation onClick={props.onClickShowLogOut} showMyOrder={props.onClickShowMyOrder} />
+            <CustomerInformation />
           </>
         ) : (
           <>

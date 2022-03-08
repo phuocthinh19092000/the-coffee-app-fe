@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 
-export default function useComponentVisible(initialIsVisible: Boolean) {
+export default function useComponentVisible(
+  initialIsVisible: Boolean,
+): [React.RefObject<HTMLDivElement>, Boolean, React.Dispatch<React.SetStateAction<Boolean>>] {
   const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible);
   const ref = useRef<HTMLDivElement>(null);
   const escKeyCode = 27;
@@ -26,5 +28,5 @@ export default function useComponentVisible(initialIsVisible: Boolean) {
     };
   }, []);
 
-  return { ref, isComponentVisible, setIsComponentVisible };
+  return [ref, isComponentVisible, setIsComponentVisible];
 }

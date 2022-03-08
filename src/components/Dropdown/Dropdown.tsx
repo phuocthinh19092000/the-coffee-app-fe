@@ -31,7 +31,7 @@ function processingData(selectedValue: ProductTypeDto, listCategory: Category[])
 const limit = 15;
 
 const Dropdown = (props: Props) => {
-  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
+  const [ref, isComponentVisible, setIsComponentVisible] = useComponentVisible(false);
   const [isShowFormEdit, setIsShowFormEdit] = useState(false);
   const [isShowPopupDelete, setIsShowPopupDelete] = useState(false);
 

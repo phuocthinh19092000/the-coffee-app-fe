@@ -14,10 +14,7 @@ import { getMyOrderLoading, getMyOrders, getMyOrderState } from '../../actions/h
 import Spinner from '../../../../components/Spinner/Spinner';
 import { RequestState } from '../../../../enum';
 
-type Props = {
-  onClick?: React.MouseEventHandler<HTMLElement>;
-};
-const MyOrder = (props: Props) => {
+const MyOrder = () => {
   const { freeUnit } = useSelector(selectUserState);
   const dispatch = useAppDispatch();
   const myOrder = useSelector(getMyOrderState);
@@ -32,36 +29,33 @@ const MyOrder = (props: Props) => {
     return dayjs(date.createdAt).format(datePattern);
   });
   return (
-    <div className="background-blur">
-      <div className="out-side" onClick={props.onClick} />
-      <Card className={`card card-login card--right my-order`}>
-        {loading === RequestState.PENDING ? (
-          <Spinner />
-        ) : Object.keys(orderData).length > 0 ? (
-          <>
-            <span className="my-order__title">My Orders</span>
-            <span className="my-order__freeUnit">
-              Today Free Units: <span className="accent">{freeUnit} </span>
-            </span>
-            <div className="my-order__list-order">
-              {Object.keys(orderData).map((date) => (
-                <div className="my-order__list-order" key={date}>
-                  <OrderDate date={date} />
-                  {orderData[date].map((order) => (
-                    <OrderItem item={order} key={order.id} />
-                  ))}
-                </div>
-              ))}
-            </div>
-          </>
-        ) : (
-          <div>
-            <img src={Empty} alt="empty" />
-            <h1 className="my-order__warning">No Order Yet!</h1>
+    <Card className={`card card-login card--right my-order`}>
+      {loading === RequestState.PENDING ? (
+        <Spinner />
+      ) : Object.keys(orderData).length > 0 ? (
+        <>
+          <span className="my-order__title">My Orders</span>
+          <span className="my-order__freeUnit">
+            Today Free Units: <span className="accent">{freeUnit} </span>
+          </span>
+          <div className="my-order__list-order">
+            {Object.keys(orderData).map((date) => (
+              <div className="my-order__list-order" key={date}>
+                <OrderDate date={date} />
+                {orderData[date].map((order) => (
+                  <OrderItem item={order} key={order.id} />
+                ))}
+              </div>
+            ))}
           </div>
-        )}
-      </Card>
-    </div>
+        </>
+      ) : (
+        <div>
+          <img src={Empty} alt="empty" />
+          <h1 className="my-order__warning">No Order Yet!</h1>
+        </div>
+      )}
+    </Card>
   );
 };
 export default MyOrder;
