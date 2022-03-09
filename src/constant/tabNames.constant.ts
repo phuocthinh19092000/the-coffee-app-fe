@@ -2,11 +2,12 @@ import OrderIcon from '../share/assets/vector/OrderVector.svg';
 import ReportIcon from '../share/assets/vector/ReportVector.svg';
 import ItemIcon from '../share/assets/vector/MenuVector.svg';
 import AccountIcon from '../share/assets/vector/AccountIcon.svg';
-
+import CategoryIcon from '../share/assets/vector/CategoriesVector.svg';
 export const TabName = {
   STAFF: {
     ORDER: 'Orders',
     ITEM: 'Items',
+    CATEGORIES: 'Categories',
     REPORT: 'Reports',
   },
   ADMIN: {
@@ -18,8 +19,9 @@ export const TabName = {
 export const TabIcon = {
   STAFF: {
     ORDER_ICON: OrderIcon,
-    ITEM_ICON: ReportIcon,
-    REPORT_ICON: ItemIcon,
+    ITEM_ICON: ItemIcon,
+    CATEGORIES_ICON: CategoryIcon,
+    REPORT_ICON: ReportIcon,
   },
   ADMIN: {
     ACCOUNT_ICON: AccountIcon,
