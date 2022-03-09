@@ -8,18 +8,21 @@ import useComponentVisible from '../../utils/useComponentVisible';
 import FormManageProduct from '../../features/staff/components/FormManageProduct/FormManageProduct';
 import { selectCategoryState } from '../../features/product/actions/getCategoryData';
 import { useSelector } from 'react-redux';
-import Category from '../../interfaces/category';
+import Category, { CategoryTypeDto } from '../../interfaces/category';
 import { FormName } from '../../enum';
 import ToastNotification from '../ToastNotification/ToatstNotification';
 import { getProductsPagination } from '../../features/product/actions/getProductData';
 import { useAppDispatch } from '../../storage/hooks';
 import useClearNotification from '../../utils/useClearNotification';
 type Props = {
-  selectedValue: ProductTypeDto | UserTypeDto;
+  selectedValue: ProductTypeDto | UserTypeDto | CategoryTypeDto;
   startIndex: number;
 };
-function isProductTypeDto(object: ProductTypeDto | UserTypeDto): object is ProductTypeDto {
+function isProductTypeDto(object: ProductTypeDto | UserTypeDto | CategoryTypeDto): object is ProductTypeDto {
   return (object as ProductTypeDto).category !== undefined;
+}
+function isCategotyDto(object: ProductTypeDto | UserTypeDto | CategoryTypeDto): object is ProductTypeDto {
+  return (object as CategoryTypeDto).name !== undefined;
 }
 function processingData(selectedValue: ProductTypeDto, listCategory: Category[]): ProductTypeDto {
   const categoryId = listCategory.find((item) => item.name === selectedValue.category)?.id;
@@ -92,6 +95,10 @@ const Dropdown = (props: Props) => {
             setShowNotification={setTypeShowNotification}
           />
         )}
+        {
+          isCategotyDto(props.selectedValue) && isShowFormEdit
+          // TODO:Show form edit category
+        }
 
         {/* //TODO: show pop-up delete  */}
 

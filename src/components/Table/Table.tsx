@@ -5,17 +5,18 @@ import Dropdown from '../Dropdown/Dropdown';
 import BlackCoffee from '../../share/assets/img/blackcoffee.png';
 import './Table.css';
 import ProductCart from '../../share/assets/vector/ProductCart.svg';
+import { CategoryTypeDto } from '../../interfaces/category';
 
 type Props = {
   header: Array<string | JSX.Element>;
-  body: Array<ProductTypeDto | UserTypeDto>;
+  body: Array<ProductTypeDto | UserTypeDto | CategoryTypeDto>;
   startIndex: number;
   isHaveDropdown: boolean;
+  className?: string;
 };
 
 const Table = (props: Props) => {
-  const header = props.header;
-  const body = props.body;
+  const { header, body } = props;
 
   return (
     <>
@@ -23,7 +24,9 @@ const Table = (props: Props) => {
         <thead className="table-header">
           <tr>
             {header.map((header, index) => (
-              <th key={index}>{header}</th>
+              <th className={props.className} key={index}>
+                {header}
+              </th>
             ))}
           </tr>
         </thead>
@@ -31,9 +34,9 @@ const Table = (props: Props) => {
         {body.length > 0 && (
           <tbody>
             {body.map((object, index) => (
-              <tr key={index} className="table-body__row">
+              <tr key={index} className={`table-body__row ${props.className}`}>
                 {props.startIndex && (
-                  <td key={object.id} className="table-body__cell">
+                  <td key={object.id} className={'table-body__cell'}>
                     {props.startIndex + index}
                   </td>
                 )}
@@ -60,7 +63,7 @@ const Table = (props: Props) => {
                   return (
                     <td
                       key={index}
-                      className={`table-body__cell ${
+                      className={`table-body__cell  ${
                         value === ProductStatus.OUT_OF_STOCK || value === UserStatus.IN_ACTIVE
                           ? 'table-body__cell--accent'
                           : ''

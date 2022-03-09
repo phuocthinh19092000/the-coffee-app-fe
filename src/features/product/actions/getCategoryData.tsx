@@ -4,17 +4,24 @@ import categoryApi from '../api/categoryAPI';
 import { RootState } from '../../../storage';
 import Category from '../../../interfaces/category';
 import { RequestState } from '../../../enum';
+import { PaginationParams } from '../../../interfaces';
 export interface CategoryState {
   loading: RequestState;
-  data: Category[];
+  data: {
+    categories: Category[];
+    totalCategories: number;
+  };
 }
 export const initialState: CategoryState = {
   loading: RequestState.PENDING,
-  data: [],
+  data: {
+    categories: [],
+    totalCategories: 0,
+  },
 };
 
-export const getAllCategory = createAsyncThunk('/categories', async () => {
-  const allCategory = await categoryApi.getAll();
+export const getAllCategory = createAsyncThunk('/categories', async (paginationParams?: PaginationParams) => {
+  const allCategory = await categoryApi.getAll(paginationParams);
   return allCategory.data;
 });
 
@@ -34,7 +41,11 @@ const categorySlice = createSlice({
       })
       .addCase(getAllCategory.fulfilled, (state, action) => {
         state.loading = RequestState.FULFILLED;
-        state.data = action.payload;
+        if (action.payload.totalCategories) {
+          state.data = action.payload;
+        } else {
+          state.data.categories = action.payload;
+        }
       })
       .addCase(getAllCategory.rejected, (state) => {
         state.loading = RequestState.REJECTED;
@@ -42,6 +53,7 @@ const categorySlice = createSlice({
   },
 });
 
-export const selectCategoryState = (state: RootState) => state.category.data;
+export const selectCategoryState = (state: RootState) => state.category.data.categories;
+export const selectCategoryTotalCountState = (state: RootState) => state.category.data.totalCategories;
 
 export default categorySlice.reducer;

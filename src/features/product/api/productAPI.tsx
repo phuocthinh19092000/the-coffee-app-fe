@@ -1,9 +1,5 @@
+import { PaginationParams } from '../../../interfaces';
 import http from '../../../services/http-common';
-
-type PaginationParams = {
-  limit?: number;
-  offset?: number;
-};
 
 export type UpdateProductParams = {
   productId: string;
