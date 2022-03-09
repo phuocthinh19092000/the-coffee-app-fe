@@ -25,3 +25,6 @@
 .form-cancel-order__reason:focus-within {
   outline: 1px solid rgb(202, 195, 195);
 }
+.form-cancel-order__button-cancel:disabled {
+  @apply bg-grey-1 text-white
+}

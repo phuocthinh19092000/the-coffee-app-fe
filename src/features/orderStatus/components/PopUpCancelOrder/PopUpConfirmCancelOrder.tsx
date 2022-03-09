@@ -11,24 +11,29 @@ type Props = {
 };
 
 const PopUpConfirmCancelOrder = (props: Props) => {
-  const [dataReason, setDataReason] = useState({ reason: '' });
+  const [txtAreaValue, setTxtAreaValue] = useState('');
+  const [dataReason, setDataReason] = useState({
+    reason: '',
+    description: '',
+  });
 
-  const handleChange = (inputParams: InputParams) => {
-    let name: string = '';
-    let value: string | number | File = '';
-
-    if (inputParams.event) {
-      name = inputParams.event.target.name;
-      value = inputParams.event.target.value;
-    } else if (inputParams.body) {
-      name = inputParams.body.name;
-      value = inputParams.body.value;
-    }
-
+  const handleChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTxtAreaValue(e.target.value);
     setDataReason({
       ...dataReason,
-      [name]: value,
+      description: e.target.value,
     });
+  };
+
+  const handleChange = (inputParams: InputParams) => {
+    if (inputParams.body) {
+      const name = inputParams.body.name;
+      const value = inputParams.body.value;
+      setDataReason({
+        ...dataReason,
+        [name]: value,
+      });
+    }
   };
 
   const closeFormCancelOrder = () => {
@@ -58,7 +63,13 @@ const PopUpConfirmCancelOrder = (props: Props) => {
             selectedValue={dataReason.reason}
           />
           {dataReason.reason === 'Other' ? (
-            <textarea rows={3} className="form-cancel-order__reason mt-1.5" placeholder="Reason (Optional)" />
+            <textarea
+              onChange={handleChangeTextArea}
+              rows={3}
+              className="form-cancel-order__reason mt-1.5"
+              placeholder="Reason (Optional)"
+              value={txtAreaValue}
+            />
           ) : (
             ''
           )}

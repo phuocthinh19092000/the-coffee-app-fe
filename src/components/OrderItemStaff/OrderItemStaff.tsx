@@ -12,7 +12,6 @@ import { useAppDispatch } from '../../storage/hooks';
 import { updateStatusOrder } from '../../features/updateOrder/action/updateOrder';
 import { moneyFormat } from '../../utils/MoneyFormat';
 import { VN_CURRENCY_SYMBOL } from '../../constant';
-import { getOrdersByStatus } from '../../features/orderStatus/action/orderStatus';
 import { sendNotificationRemindPickUpOrder } from '../../features/notifications/action/notification';
 import BlackCoffeeImg from '../../share/assets/img/blackcoffee.png';
 import './OrderItemStaff.scss';
@@ -62,13 +61,6 @@ const OrderItemStaff = (props: Props) => {
     setIsComponentVisible(false);
   };
 
-  const onFinishOrderHandler = async (e: React.SyntheticEvent) => {
-    e.stopPropagation();
-    const valueNewStatus = props.order.orderStatus.value + 1;
-    await dispatch(updateStatusOrder({ id: props.order.id, newStatus: valueNewStatus }));
-    await dispatch(getOrdersByStatus(OrderStatus.READY_FOR_PICKUP)).unwrap();
-  };
-
   return (
     <>
       <div className="order-item-staff" onClick={onShowDetailOrder}>
@@ -87,11 +79,16 @@ const OrderItemStaff = (props: Props) => {
               {props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP && (
                 <img src={alarmIcon} alt={alarmIcon} className="order-detail-staff__alarm" onClick={onRemindOrder} />
               )}
-              {props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP ? (
-                <img src={icon} alt={icon} className="order-detail-staff__icon" onClick={onFinishOrderHandler} />
-              ) : (
-                <img src={icon} alt={icon} className="order-detail-staff__icon__next" onClick={onUpdateStatusHandler} />
-              )}
+              <img
+                src={icon}
+                alt={icon}
+                className={
+                  props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP
+                    ? 'order-detail-staff__icon'
+                    : 'order-detail-staff__icon__next'
+                }
+                onClick={onUpdateStatusHandler}
+              />
             </div>
             {props.order.note ? <p className="order-detail-staff__note">Note: {props.order.note}</p> : ''}
           </div>
