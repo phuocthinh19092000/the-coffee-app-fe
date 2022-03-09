@@ -20,3 +20,10 @@ export interface ProductTypeDto {
   price: number;
   status: string;
 }
+
+export interface ProductItem {
+  id: string;
+  name: string;
+  images: string;
+  price: number;
+}
