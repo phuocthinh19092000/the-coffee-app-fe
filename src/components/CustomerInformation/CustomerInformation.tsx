@@ -32,15 +32,12 @@ const CustomerInformation = () => {
     setIsPopUpOpen(false);
   };
 
-  const handleClickChangeWebHook = () => {
-    // TODO: Handle click change web hook in here
-    // after dispatch successfuly ,  setIsPopUpOpen(false);
-  };
-
   const showPopUpCase: PopUpObjectType = useMemo(() => {
     return {
       MY_ORDERS: <MyOrder />,
-      CHANGE_WEBHOOK: <PopUpChangeWebhook onClickChangeWebhook={handleClickChangeWebHook} />,
+      CHANGE_WEBHOOK: (
+        <PopUpChangeWebhook setShowNotification={setTypeShowNotification} onClickClosePopUp={onClickClosePopUp} />
+      ),
       CHANGE_PASSWORD: (
         <PopUpChangePassword setShowNotification={setTypeShowNotification} onClickClosePopUp={onClickClosePopUp} />
       ),
@@ -78,7 +75,7 @@ const CustomerInformation = () => {
                 Change Avatar
               </span> */}
               <span className="menu-dropdown__item" onClick={() => setShowPopUp('CHANGE_WEBHOOK')}>
-                Change Webhook
+                Notification Settings
               </span>
               <span className="menu-dropdown__item" onClick={() => setShowPopUp('CHANGE_PASSWORD')}>
                 Change Password

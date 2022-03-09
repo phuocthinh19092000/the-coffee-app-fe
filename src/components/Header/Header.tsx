@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, ChangeEvent } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import OTSVLogo from '../../share/assets/img/OTSVLogo.png';
 import SearchVector from '../../share/assets/vector/iconSearch.svg';
 import CancelVector from '../../share/assets/vector/cancelVector.svg';
@@ -9,19 +9,18 @@ import './Header.scss';
 import SearchItem from '../SearchItem/SearchItem';
 import CustomerInformation from '../CustomerInformation/CustomerInformation';
 import { DarkMode } from '../../utils/ThemeProvider';
-import { CgSun } from 'react-icons/cg';
-import { HiMoon } from 'react-icons/hi';
 import { useHistory } from 'react-router';
 import { Product } from '../../interfaces';
 import { useAppDispatch } from '../../storage/hooks';
 import { useSelector } from 'react-redux';
-import { getSearchItems, selectSearchState, searchLoadingState } from '../../features/search/action/getSearchItemData';
+import { getSearchItems, searchLoadingState, selectSearchState } from '../../features/search/action/getSearchItemData';
 import useDebounce from '../../Hook/useDebounce';
 import { getProductId } from '../../features/order/actions/order';
 import useComponentVisible from '../../utils/useComponentVisible';
 import Spinner from '../Spinner/Spinner';
 import { RequestState } from '../../enum';
 import { getFreeUnit } from '../../features/auth/actions/auth';
+import { getWebhook } from '../../features/webhook/action/webhook';
 type Props = {
   className: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -37,6 +36,7 @@ const Header = (props: Props) => {
 
   useEffect(() => {
     dispatch(getFreeUnit());
+    dispatch(getWebhook());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -70,7 +70,6 @@ const Header = (props: Props) => {
     let path = `/`;
     history.push(path);
   };
-  const { theme, toggleTheme } = useContext(DarkMode);
 
   const resetValue = () => {
     setKeyword('');
@@ -118,16 +117,9 @@ const Header = (props: Props) => {
       </div>
       <div className={`${isComponentVisible ? '' : 'z-[2]'} header__button`}>
         {props.isLoggedIn ? (
-          <>
-            <CustomerInformation />
-          </>
+          <CustomerInformation />
         ) : (
-          <>
-            <button className="header__button-toggle mt-1" onClick={toggleTheme}>
-              {theme === 'Light' ? <HiMoon size={40} /> : <CgSun size={40} />}
-            </button>
-            <Button className="btn btn-primary btn-login" titleButton="Login" onClick={props.onClick} />
-          </>
+          <Button className="btn btn-primary btn-login" titleButton="Login" onClick={props.onClick} />
         )}
       </div>
     </div>
