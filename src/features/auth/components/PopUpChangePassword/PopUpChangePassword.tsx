@@ -7,6 +7,10 @@ import * as yup from 'yup';
 import { useForm, FormProvider } from 'react-hook-form';
 import FormInput from '../../../../components/FormInput/FormInput';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { changePassword } from '../../actions/managePassword';
+import { useAppDispatch } from '../../../../storage/hooks';
+import { NotificationParams } from '../../../../interfaces';
+import { NotificationType, PositionToast } from '../../../../enum';
 interface ChangePasswordDto {
   currentPassword: string;
   newPassword: string;
@@ -32,21 +36,42 @@ const schemaFormChangePassword = yup.object().shape({
     .oneOf([yup.ref('newPassword')], 'Password does not match'),
 });
 
-const PopUpChangePassword = () => {
+type Props = {
+  setShowNotification: React.Dispatch<React.SetStateAction<NotificationParams>>;
+  onClickClosePopUp: () => void;
+};
+
+const PopUpChangePassword = (props: Props) => {
   const [isShowCurrentPassword, setIsShowCurrentPassword] = useState(false);
   const [isShowNewPassword, setIsShowNewPassword] = useState(false);
   const [isShowReEnterPassword, setIsShowReEnterPassword] = useState(false);
+  const dispatch = useAppDispatch();
 
   const methods = useForm<ChangePasswordDto>({
     resolver: yupResolver(schemaFormChangePassword),
     mode: 'onTouched',
   });
 
-  const { handleSubmit, formState } = methods;
+  const { handleSubmit, formState, setError, setFocus } = methods;
   const { errors, isValid } = formState;
 
-  const onSubmit = (data: any) => {
-    //TODO: Call API change password when user submit in this function
+  const onSubmit = async (dataForm: ChangePasswordDto) => {
+    const { reEnterPassword, ...changePassWordParams } = dataForm;
+    const responseApi = await dispatch(changePassword(changePassWordParams));
+
+    if (changePassword.fulfilled.match(responseApi)) {
+      props.onClickClosePopUp();
+      props.setShowNotification({
+        message: 'Password changed successfully!',
+        type: NotificationType.SUCCESS,
+        position: PositionToast.TOP_RIGHT,
+      });
+    } else {
+      setError('currentPassword', {
+        message: 'Wrong password. Please try again',
+      });
+      setFocus('currentPassword');
+    }
   };
 
   return (

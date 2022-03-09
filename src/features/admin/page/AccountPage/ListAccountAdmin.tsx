@@ -46,7 +46,7 @@ const ListAccountAdmin = () => {
   const [startIndex, setStartIndex] = useState(1);
   const [lastIndex, setLastIndex] = useState(0);
   const [isShowFormAddNewAccount, setIsShowFormAddNewAccount] = useState(false);
-  const { typeShowNotification, setTypeShowNotification } = useClearNotification();
+  const [typeShowNotification, setTypeShowNotification] = useClearNotification();
 
   useEffect(() => {
     async function getData() {

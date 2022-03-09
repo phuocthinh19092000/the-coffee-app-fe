@@ -17,6 +17,11 @@
     transform: translateX(-50%);
     @apply top-2 left-1/2;
   }
+  &--top-right {
+    transition: transform 0.6s ease-in-out;
+    animation: ToastInRight 0.7s;
+    @apply top-5 right-1.25;
+  }
 }
 
 .toast-container {
@@ -35,5 +40,14 @@
   }
   to {
     @apply top-8 opacity-100;
+  }
+}
+
+@keyframes ToastInRight {
+  from {
+    @apply right-0 opacity-0;
+  }
+  to {
+    @apply right-1.25 opacity-100;
   }
 }
