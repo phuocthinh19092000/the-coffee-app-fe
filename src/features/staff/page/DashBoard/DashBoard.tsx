@@ -39,6 +39,8 @@ const DashBoard = () => {
         return <ListOrderStaff setIsShowNotification={setIsShowNotification} />;
       case TabName.STAFF.ITEM:
         return <ListProductStaff />;
+      case TabName.STAFF.CATEGORIES:
+      // TODO: return staff categories component
     }
   };
   return (
