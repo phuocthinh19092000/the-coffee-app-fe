@@ -40,7 +40,7 @@ const ProductPage = () => {
         <CategoryBar
           categoryId={categoryId}
           onGetIdHandler={(categoryId: string) => handleGetProductsByCategory(categoryId)}
-          listCategory={categories}
+          listCategory={categories.categories}
         />
       </div>
       <div className="product-right">

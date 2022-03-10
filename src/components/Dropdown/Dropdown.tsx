@@ -42,7 +42,7 @@ const Dropdown = (props: Props) => {
   const [typeShowNotification, setTypeShowNotification] = useClearNotification();
 
   const categories = useSelector(selectCategoryState);
-  const listOptionsCategories = categories.map((item) => ({ id: item.id, name: item.name }));
+  const listOptionsCategories = categories.categories.map((item) => ({ id: item.id, name: item.name }));
 
   const showDropdown = () => {
     setIsComponentVisible(!isComponentVisible);
@@ -89,7 +89,7 @@ const Dropdown = (props: Props) => {
           <FormManageProduct
             formName={FormName.UPDATE_ITEM}
             onClickExit={showFormEdit}
-            selectedProduct={processingData(props.selectedValue, categories)}
+            selectedProduct={processingData(props.selectedValue, categories.categories)}
             listCategory={listOptionsCategories}
             onSave={onUpdateProduct}
             setShowNotification={setTypeShowNotification}

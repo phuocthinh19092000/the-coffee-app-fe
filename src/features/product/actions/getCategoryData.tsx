@@ -49,11 +49,10 @@ const categorySlice = createSlice({
       })
       .addCase(getAllCategory.rejected, (state) => {
         state.loading = RequestState.REJECTED;
-      });
+      })
   },
 });
 
-export const selectCategoryState = (state: RootState) => state.category.data.categories;
-export const selectCategoryTotalCountState = (state: RootState) => state.category.data.totalCategories;
+export const selectCategoryState = (state: RootState) => state.category.data;
 
 export default categorySlice.reducer;

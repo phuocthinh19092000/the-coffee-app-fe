@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import OTSVLogo from '../../share/assets/img/OTSVLogo.png';
 import SearchVector from '../../share/assets/vector/iconSearch.svg';
 import CancelVector from '../../share/assets/vector/cancelVector.svg';
@@ -8,7 +8,6 @@ import Button from '../Button/Index';
 import './Header.scss';
 import SearchItem from '../SearchItem/SearchItem';
 import CustomerInformation from '../CustomerInformation/CustomerInformation';
-import { DarkMode } from '../../utils/ThemeProvider';
 import { useHistory } from 'react-router';
 import { Product } from '../../interfaces';
 import { useAppDispatch } from '../../storage/hooks';

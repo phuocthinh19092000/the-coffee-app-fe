@@ -157,7 +157,7 @@ const ListProductStaff = () => {
       </div>
       {isShowFormAddNewProduct && (
         <FormManageProduct
-          listCategory={categoryData}
+          listCategory={categoryData.categories}
           formName={FormName.ADD_ITEM}
           onSave={onAddNewProductHandler}
           onClickExit={onClickExit}
