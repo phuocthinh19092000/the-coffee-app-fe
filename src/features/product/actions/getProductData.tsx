@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import productApi from '../api/productAPI';
 import { RootState } from '../../../storage';
-import { Product } from '../../../interfaces';
+import { PaginationParams, Product } from '../../../interfaces';
 import { RequestState } from '../../../enum';
 
 export interface ProductState {
@@ -27,7 +27,7 @@ export const getAllProduct = createAsyncThunk('/products', async () => {
 
 export const getProductsPagination = createAsyncThunk(
   '/products?limit=&offset=',
-  async (queryParams: { limit?: number; offset?: number }, { rejectWithValue }) => {
+  async (queryParams: PaginationParams, { rejectWithValue }) => {
     try {
       const products = await productApi.getProductPagination(queryParams);
       return products.data;

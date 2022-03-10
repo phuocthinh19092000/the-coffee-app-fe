@@ -4,3 +4,8 @@ export default interface Category {
   name: string;
   products: Product[];
 }
+
+export interface CategoryTypeDto {
+  id?: string;
+  name: string;
+}

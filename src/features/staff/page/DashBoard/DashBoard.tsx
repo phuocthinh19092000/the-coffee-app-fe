@@ -9,6 +9,7 @@ import { SocketContext } from '../../../../utils/socketContext';
 import ListProductStaff from '../ProductPage/ListProductStaff';
 import { Socket } from 'socket.io-client';
 import { initSocketForStaff } from '../../../../services/socketService';
+import ListCategoryStaff from '../ListCategoryStaff/ListCategoryStaff';
 
 const DashBoard = () => {
   const [tabName, setTabName] = useState(TabName.STAFF.ORDER);
@@ -40,7 +41,7 @@ const DashBoard = () => {
       case TabName.STAFF.ITEM:
         return <ListProductStaff />;
       case TabName.STAFF.CATEGORIES:
-      // TODO: return staff categories component
+        return <ListCategoryStaff />;
     }
   };
   return (

@@ -1,9 +1,10 @@
+import { PaginationParams } from '../../../interfaces';
 import http from '../../../services/http-common';
 
 const categoryApi = {
-  getAll() {
+  getAll(paginationParams?: PaginationParams) {
     const url = '/categories';
-    return http.get(url);
+    return http.get(url, paginationParams);
   },
 
   get(name: string) {
