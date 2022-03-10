@@ -6,7 +6,7 @@ import DeleteIcon from '../../share/assets/vector/DeleteIcon.svg';
 import { ProductTypeDto, UserTypeDto } from '../../interfaces';
 import useComponentVisible from '../../utils/useComponentVisible';
 import FormManageProduct from '../../features/staff/components/FormManageProduct/FormManageProduct';
-import { selectCategoryState } from '../../features/product/actions/getCategoryData';
+import { getAllCategory, selectCategoryState } from '../../features/product/actions/getCategoryData';
 import { useSelector } from 'react-redux';
 import Category, { CategoryTypeDto } from '../../interfaces/category';
 import { FormName } from '../../enum';
@@ -14,6 +14,7 @@ import ToastNotification from '../ToastNotification/ToatstNotification';
 import { getProductsPagination } from '../../features/product/actions/getProductData';
 import { useAppDispatch } from '../../storage/hooks';
 import useClearNotification from '../../utils/useClearNotification';
+import FormManageCategory from '../../features/staff/components/FormManageCategory/FormManageCategory';
 type Props = {
   selectedValue: ProductTypeDto | UserTypeDto | CategoryTypeDto;
   startIndex: number;
@@ -22,8 +23,9 @@ function isProductTypeDto(object: ProductTypeDto | UserTypeDto | CategoryTypeDto
   return (object as ProductTypeDto).category !== undefined;
 }
 function isCategotyDto(object: ProductTypeDto | UserTypeDto | CategoryTypeDto): object is ProductTypeDto {
-  return (object as CategoryTypeDto).name !== undefined;
+  return (object as ProductTypeDto).images === undefined && (object as CategoryTypeDto).name !== undefined;
 }
+
 function processingData(selectedValue: ProductTypeDto, listCategory: Category[]): ProductTypeDto {
   const categoryId = listCategory.find((item) => item.name === selectedValue.category)?.id;
   if (categoryId) {
@@ -65,6 +67,11 @@ const Dropdown = (props: Props) => {
     setIsShowFormEdit(false);
     dispatch(getProductsPagination({ limit, offset: props.startIndex - 1 }));
   };
+
+  const onUpdateCategory = () => {
+    setIsShowFormEdit(false);
+    dispatch(getAllCategory({ limit, offset: props.startIndex - 1 }));
+  };
   return (
     <div ref={ref}>
       <div className="dropdown">
@@ -95,10 +102,15 @@ const Dropdown = (props: Props) => {
             setShowNotification={setTypeShowNotification}
           />
         )}
-        {
-          isCategotyDto(props.selectedValue) && isShowFormEdit
-          // TODO:Show form edit category
-        }
+        {isCategotyDto(props.selectedValue) && isShowFormEdit && (
+          <FormManageCategory
+            formName="Update Category"
+            selectedCategory={props.selectedValue}
+            setShowNotification={setTypeShowNotification}
+            onSave={onUpdateCategory}
+            onClickExit={showFormEdit}
+          />
+        )}
 
         {/* //TODO: show pop-up delete  */}
 
