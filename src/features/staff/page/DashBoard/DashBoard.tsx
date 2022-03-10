@@ -7,15 +7,17 @@ import { PositionToast } from '../../../../enum/PositionToast';
 import { TabIcon, TabName } from '../../../../constant';
 import { SocketContext } from '../../../../utils/socketContext';
 import ListProductStaff from '../ProductPage/ListProductStaff';
-import { Socket } from 'socket.io-client';
-import { initSocketForStaff } from '../../../../services/socketService';
+import { initSocket } from '../../../../services/socketService';
 import ListCategoryStaff from '../ListCategoryStaff/ListCategoryStaff';
+import { Socket } from 'socket.io-client';
 
 const DashBoard = () => {
   const [tabName, setTabName] = useState(TabName.STAFF.ORDER);
   const [isShowNotification, setIsShowNotification] = useState(false);
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [socket, setSocket] = useState<Socket>(initSocketForStaff);
+  const [socket, setSocket] = useState<Socket>(initSocket());
+
   const timeOutNotification = 2000;
 
   useEffect(() => {
@@ -29,6 +31,13 @@ const DashBoard = () => {
       };
     }
   }, [isShowNotification]);
+
+  useEffect(() => {
+    return () => {
+      socket.close();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleClickChangeTab = (tabName: string) => {
     setTabName(tabName);

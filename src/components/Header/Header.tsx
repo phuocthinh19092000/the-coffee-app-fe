@@ -18,7 +18,7 @@ import { getProductId } from '../../features/order/actions/order';
 import useComponentVisible from '../../utils/useComponentVisible';
 import Spinner from '../Spinner/Spinner';
 import { RequestState } from '../../enum';
-import { getFreeUnit } from '../../features/auth/actions/auth';
+import { getFreeUnit, selectLoginState } from '../../features/auth/actions/auth';
 import { getWebhook } from '../../features/webhook/action/webhook';
 type Props = {
   className: string;
@@ -26,16 +26,22 @@ type Props = {
   isLoggedIn: boolean;
 };
 const Header = (props: Props) => {
+  const dispatch = useAppDispatch();
   const [keyword, setKeyword] = useState('');
+
+  const auth = useSelector(selectLoginState);
   const searchItems = useSelector(selectSearchState);
   const isLoading = useSelector(searchLoadingState);
+
   const debouncedKeyword = useDebounce(keyword, 500);
-  const dispatch = useAppDispatch();
+
   const [ref, isComponentVisible, setIsComponentVisible] = useComponentVisible(false);
 
   useEffect(() => {
-    dispatch(getFreeUnit());
-    dispatch(getWebhook());
+    if (auth) {
+      dispatch(getWebhook());
+      dispatch(getFreeUnit());
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

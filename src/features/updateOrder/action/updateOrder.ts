@@ -33,6 +33,7 @@ export const initialState: UpdateStatusOrder = {
     },
     createdAt: '',
     id: '',
+    reason: '',
   },
   loading: RequestState.PENDING,
   error: {
