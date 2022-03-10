@@ -28,7 +28,7 @@ const FormInput = (props: Props) => {
         />
         <img src={props.src} className="icon-input" alt={props.src} onClick={props.onClickFirstIcon} />
       </div>
-      {props.error && <p className="text-error ml-[10px] mt-[5px]">{props.error.message}</p>}
+      {props.error && <p className="text-error ml-[20px] mt-[5px]">{props.error.message}</p>}
     </div>
   );
 };

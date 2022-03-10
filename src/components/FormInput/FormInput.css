@@ -9,7 +9,7 @@ input[type='number'] {
 }
 
 .block-form-input {
-  @apply flex flex-row w-[440px] relative rounded-[50px] bg-white text-2;
+  @apply flex flex-row w-[440px] h-[54px] relative rounded-[50px] bg-white text-2;
 }
 
 .block-form-input:focus-within {
