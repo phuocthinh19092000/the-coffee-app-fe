@@ -42,7 +42,6 @@ function ListDrinkItem(props: Props) {
   const handleClickBackForm = () => {
     setStep(step - 1);
   };
-
   const handleClickPlaceOrder = async () => {
     if (!customerAccessRole.includes(user.role as ROLE)) {
       setStep(showPopupCase.PopUpLoginCenter);
@@ -54,6 +53,7 @@ function ListDrinkItem(props: Props) {
       setStep(showPopupCase.showPopUpRanOutUnit);
     } else {
       dispatch(placeOrder(order));
+      dispatch(resetOrder());
       dispatch(updateFreeUnit(order.quantity));
       setStep(showPopupCase.PopUpFinishOrder);
     }

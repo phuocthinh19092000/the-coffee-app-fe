@@ -38,8 +38,9 @@ const ListOrderStaff = (props: Props) => {
           break;
 
         case OrderStatus.CANCELED:
-          dispatch(updateOrder(data.order, OrderStatus.CANCELED));
+          dispatch(updateOrder(data.order, OrderStatus.CANCELED, data.currentOrderStatus as OrderStatus));
           break;
+
         case OrderStatus.DONE: {
           dispatch(updateOrder(data.order, OrderStatus.DONE));
           break;

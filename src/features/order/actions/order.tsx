@@ -59,7 +59,6 @@ const orderSlice = createSlice({
     });
     builder.addCase(placeOrder.fulfilled, (state, action) => {
       state.loading = RequestState.FULFILLED;
-      state.orderData = action.payload;
     });
     builder.addCase(placeOrder.rejected, (state, action) => {
       state.loading = RequestState.REJECTED;

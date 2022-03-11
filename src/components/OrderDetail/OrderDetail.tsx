@@ -26,7 +26,7 @@ const OrderDetail = (props: Props) => {
   return (
     <>
       {isShowConfirmCancel ? (
-        <PopUpConfirmCancelOrder onClosePopUpConfirmCancel={props.onClosePopUpConfirmCancel} />
+        <PopUpConfirmCancelOrder order={props.order} onClosePopUpConfirmCancel={props.onClosePopUpConfirmCancel} />
       ) : (
         <div className="order-detail">
           <div className="order-detail__title">

@@ -43,11 +43,12 @@ export const getOrdersByStatus = createAsyncThunk(
   },
 );
 
-function prepare(order: Order, newStatus: OrderStatus) {
+function prepare(order: Order, newStatus?: OrderStatus, currentStatus?: OrderStatus) {
   return {
     payload: {
       order,
       newStatus,
+      currentStatus,
     },
   };
 }
@@ -86,7 +87,7 @@ const orderByStatusSlice = createSlice({
             addOrderInColumn(action.payload.order, state.data.orderStatusReady);
             break;
           case OrderStatus.CANCELED:
-            if (action.payload.order.orderStatus.name === OrderStatus.NEW) {
+            if (action.payload.currentStatus === OrderStatus.NEW) {
               state.data.orderStatusNew = removeOrderInColumn(action.payload.order, state.data.orderStatusNew);
             } else {
               state.data.orderStatusProcessing = removeOrderInColumn(

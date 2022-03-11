@@ -5,13 +5,18 @@ import { useState } from 'react';
 import { InputParams } from '../../../../interfaces';
 import { listReason } from '../../../../constant/index';
 import './PopUpConfirmCancelOrder.css';
+import Order from '../../../../interfaces/order';
+import { useAppDispatch } from '../../../../storage/hooks';
+import { updateStatusOrder } from '../../../updateOrder/action/updateOrder';
 
 type Props = {
+  order: Order;
   onClosePopUpConfirmCancel: React.Dispatch<React.SetStateAction<Boolean>>;
 };
 
 const PopUpConfirmCancelOrder = (props: Props) => {
   const [txtAreaValue, setTxtAreaValue] = useState('');
+  const dispatch = useAppDispatch();
   const [dataReason, setDataReason] = useState({
     reason: '',
     description: '',
@@ -41,10 +46,11 @@ const PopUpConfirmCancelOrder = (props: Props) => {
   };
 
   const onCancelOrderHandler = () => {
-    // TODO: CALL API CANCEL ORDER
-    /**
-     *  NOTICE: CHECK THE OTHER REASON
-     **/
+    const cancelStatusNumber = -1;
+    const description = dataReason.description.trim() ? `: ${dataReason.description}` : '';
+    const reason = dataReason.reason === 'Other' ? `${dataReason.reason}${description}` : dataReason.reason;
+    dispatch(updateStatusOrder({ id: props.order.id, newStatus: cancelStatusNumber, reason: reason }));
+    props.onClosePopUpConfirmCancel(false);
   };
   return (
     <>
