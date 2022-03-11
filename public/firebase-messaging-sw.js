@@ -4,19 +4,14 @@ importScripts('https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.9.0/firebase-analytics.js');
 importScripts('https://www.gstatic.com/firebasejs/8.9.0/firebase-messaging.js');
 
-console.log('Registration SW in here ');
 let CACHE_NAME = 'React App';
 let urlsToCache = ['/'];
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
     .register('./firebase-messaging-sw.js')
-    .then(function (registration) {
-      console.log('Registration successful, scope is:', registration.scope);
-    })
-    .catch(function (err) {
-      console.log('Service worker registration failed, error:', err);
-    });
+    .then(function (registration) {})
+    .catch(function (err) {});
 }
 
 // Install a service worker
@@ -25,7 +20,6 @@ self.addEventListener('install', (event) => {
   // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
-      console.log('Opened cache');
       return cache.addAll(urlsToCache);
     }),
   );

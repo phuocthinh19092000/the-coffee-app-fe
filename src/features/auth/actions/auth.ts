@@ -24,6 +24,7 @@ export const initialState: AuthState = {
       email: '',
       name: '',
       _id: '',
+      deviceToken: '',
     },
   },
   loading: RequestState.PENDING,
@@ -73,6 +74,9 @@ const authSlice = createSlice({
         return initialState;
       }
     },
+    setDeviceToken: (state, action: PayloadAction<string>) => {
+      state.data.userInfor.deviceToken = action.payload;
+    },
     resetAuthState: () => initialState,
   },
   extraReducers: (builder) => {
@@ -115,5 +119,5 @@ const authSlice = createSlice({
 
 export const selectLoginState = (state: RootState) => state.authData.data.jwtAccessToken;
 export const selectUserState = (state: RootState) => state.authData.data.userInfor;
-export const { updateFreeUnit, checkRole, resetAuthState } = authSlice.actions;
+export const { updateFreeUnit, checkRole, resetAuthState, setDeviceToken } = authSlice.actions;
 export default authSlice.reducer;

@@ -4,7 +4,6 @@ import Card from '../../../../components/Card/Index';
 import Button from '../../../../components/Button/Index';
 import { useAppDispatch } from '../../../../storage/hooks';
 import { logout, selectUserState } from '../../actions/auth';
-import { getDeviceToken } from '../../../../services/firebase';
 import { SocketContext } from '../../../../utils/socketContext';
 import { leaveRoomCustomer } from '../../../../services/socketService';
 import { useSelector } from 'react-redux';
@@ -17,8 +16,9 @@ const PopUpLogOut = (props: Props) => {
   const user = useSelector(selectUserState);
   const dispatch = useAppDispatch();
   const socket = useContext(SocketContext);
+
+  const { deviceToken } = useSelector(selectUserState);
   const LogOutHandler = async () => {
-    const deviceToken = await getDeviceToken();
     dispatch(logout({ deviceToken }));
     leaveRoomCustomer(socket, user._id);
     socket.close();
