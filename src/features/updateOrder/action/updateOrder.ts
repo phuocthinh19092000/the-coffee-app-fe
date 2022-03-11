@@ -9,7 +9,6 @@ export interface UpdateStatusOrder {
   loading?: RequestState;
   error?: any;
 }
-
 export const initialState: UpdateStatusOrder = {
   order: {
     product: {
@@ -44,9 +43,9 @@ export const initialState: UpdateStatusOrder = {
 
 export const updateStatusOrder = createAsyncThunk(
   '/orders/{id}',
-  async (data: { id: string; newStatus: number }, { rejectWithValue }) => {
+  async (data: { id: string; newStatus: number; reason?: string }, { rejectWithValue }) => {
     try {
-      const response = await UpdateStatusOrderApi.updateStatusOrder(data.id, data.newStatus);
+      const response = await UpdateStatusOrderApi.updateStatusOrder(data.id, data.newStatus, data.reason);
       return response.data;
     } catch (error: any) {
       return rejectWithValue(error.response);

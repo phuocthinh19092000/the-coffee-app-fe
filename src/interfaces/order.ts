@@ -26,4 +26,5 @@ export default interface Order {
 export interface OrderSocket {
   order: Order;
   newOrderStatus?: string;
+  currentOrderStatus?: string;
 }
