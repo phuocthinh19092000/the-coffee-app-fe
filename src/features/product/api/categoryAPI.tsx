@@ -1,9 +1,8 @@
 import { PaginationParams } from '../../../interfaces';
 import http from '../../../services/http-common';
-
+const url = '/categories';
 const categoryApi = {
   getAll(paginationParams?: PaginationParams) {
-    const url = '/categories';
     return http.get(url, paginationParams);
   },
 

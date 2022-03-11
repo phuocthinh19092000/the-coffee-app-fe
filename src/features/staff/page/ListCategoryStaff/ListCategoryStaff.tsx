@@ -4,35 +4,96 @@ import CustomPagination from '../../../../components/CustomPagination/CustomPagi
 import { TableCategoryHeader } from '../../../../components/Table/constants/table.constant';
 import Table from '../../../../components/Table/Table';
 import { useAppDispatch } from '../../../../storage/hooks';
-import useClearNotification from '../../../../utils/useClearNotification';
-import { getAllCategory } from '../../../product/actions/getCategoryData';
+import {useSelector} from "react-redux";
+import {getAllCategory, selectCategoryState} from "../../../product/actions/getCategoryData";
+import Category, {CategoryTypeDto} from "../../../../interfaces/category";
+
+
 const limit = 15;
+
+const prepareDataTableCategory = (listCategory: Category[]): CategoryTypeDto[] => {
+  const data: CategoryTypeDto[] = [];
+  // eslint-disable-next-line array-callback-return
+  listCategory.map((category) => {
+    const { products, ...categoryTypeDto } = category;
+    data.push(categoryTypeDto);
+  });
+  return data;
+};
 
 const ListCategoryStaff = () => {
   const dispatch = useAppDispatch();
+  const responseDataCategory = useSelector(selectCategoryState);
+
   const [isLastPage, setIsLastPage] = useState(false);
   const [isFirstPage, setIsFirstPage] = useState(true);
+
   const [startIndex, setStartIndex] = useState(1);
   const [lastIndex, setLastIndex] = useState(0);
 
   useEffect(() => {
     async function getData() {
       const dataCategory = await dispatch(getAllCategory({ limit })).unwrap();
-      await dispatch(getAllCategory()).unwrap();
       const isCheckLastPage = dataCategory.totalCategories <= limit;
       setIsLastPage(isCheckLastPage);
-      setLastIndex(dataCategory.products.length);
+      setLastIndex(dataCategory.categories.length);
     }
-
     getData();
   }, [dispatch]);
-  // TODO: After interrate API get all categories , i will remove this line
-  const dataTableAccount = [
-    { id: '1', name: 'Juice' },
-    { id: '2', name: 'Juice' },
-    { id: '3', name: 'Juice' },
-    { id: '4', name: 'Juice' },
-  ];
+
+  const totalCategory = responseDataCategory.totalCategories;
+  const listCategory = responseDataCategory.categories;
+  const dataTableCategory: CategoryTypeDto[] = prepareDataTableCategory(listCategory);
+
+  const onClickMoveNextPage = (total: number) => {
+    if (isLastPage) {
+      return;
+    }
+
+    if (isFirstPage) {
+      setIsFirstPage(false);
+    }
+
+    if (lastIndex + limit >= total) {
+      setStartIndex(lastIndex + 1);
+      setLastIndex(total);
+      setIsLastPage(true);
+      dispatch(getAllCategory({ limit, offset: lastIndex }));
+      return;
+    }
+
+    setStartIndex(startIndex + limit);
+    setLastIndex(lastIndex + limit);
+    dispatch(getAllCategory({ limit, offset: startIndex + limit - 1 }));
+  };
+
+  const onClickMovePreviousPage = () => {
+    if (isFirstPage) {
+      return;
+    }
+
+    if (isLastPage) {
+      setStartIndex(startIndex - limit);
+      setLastIndex(startIndex - 1);
+      setIsLastPage(false);
+      dispatch(getAllCategory({ limit, offset: startIndex - limit - 1 }));
+
+      if (startIndex - limit === 1) {
+        setIsFirstPage(true);
+      }
+
+      return;
+    }
+    setStartIndex(startIndex - limit);
+    setLastIndex(lastIndex - limit);
+    dispatch(getAllCategory({ limit, offset: startIndex - limit - 1 }));
+
+    if (startIndex - limit === 1) {
+      setIsFirstPage(true);
+      return;
+    }
+  };
+  
   return (
     <>
       <div className="list-account">
@@ -42,16 +103,18 @@ const ListCategoryStaff = () => {
           <CustomPagination
             startIndex={startIndex}
             endIndex={lastIndex}
-            totalItems={100}
+            totalItems={totalCategory || 0}
             isFirstPage={isFirstPage}
             isLastPage={isLastPage}
+            onClickNextPage={() => onClickMoveNextPage(totalCategory)}
+            onClickPreviousPage={() => onClickMovePreviousPage()}
           />
         </div>
 
         <div className="list-account-table">
           <Table
             header={TableCategoryHeader}
-            body={dataTableAccount}
+            body={dataTableCategory}
             isHaveDropdown={true}
             startIndex={startIndex}
             className="text-center"
