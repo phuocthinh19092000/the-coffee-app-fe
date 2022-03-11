@@ -8,5 +8,6 @@ export type UserInfor = {
     email: string;
     name: string;
     _id: string;
+    deviceToken?: string;
   };
 };

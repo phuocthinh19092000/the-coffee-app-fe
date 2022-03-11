@@ -2,8 +2,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import './HookForm.css';
-import {useAppDispatch} from '../../storage/hooks';
-import { checkRole, login, selectUserState } from '../../features/auth/actions/auth';
+import { useAppDispatch } from '../../storage/hooks';
+import { checkRole, login, setDeviceToken } from '../../features/auth/actions/auth';
 import { useState } from 'react';
 import UserIcon from '../../share/assets/vector/User.svg';
 import EyeIcon from '../../share/assets/vector/Eye.svg';
@@ -11,7 +11,6 @@ import CloseEyeIcon from '../../share/assets/img/close-eye.png';
 import { getDeviceToken } from '../../services/firebase';
 import { useHistory } from 'react-router';
 import { ROLE } from '../../enum';
-import { useSelector } from 'react-redux';
 import { customerAccessRole } from '../../constant';
 
 interface IFormInputs {
@@ -43,16 +42,24 @@ export default function HookForm() {
   });
   const [loginFailed, setLoginFailed] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const user = useSelector(selectUserState);
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
   const dispatch = useAppDispatch();
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
     const deviceToken = await getDeviceToken();
-    await dispatch(login({ email: data.email, password: data.password, deviceToken: deviceToken }));
+    const respone = await dispatch(
+      login({ email: data.email, password: data.password, deviceToken: deviceToken }),
+    ).unwrap();
+
+    const { role } = respone.userInfor;
+
     dispatch(checkRole([ROLE.CUSTOMER, ROLE.ADMIN]));
-    if (customerAccessRole.includes(user.role as ROLE)) {
+    if (customerAccessRole.includes(role as ROLE)) {
+      if (deviceToken) {
+        dispatch(setDeviceToken(deviceToken));
+      }
       setLoginFailed(false);
     } else {
       setLoginFailed(true);
@@ -72,27 +79,24 @@ export default function HookForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="input-field">
-        <input {...register('email')}
-               placeholder="Email"
-               onFocus={handleResetDefault}
-               className="hook-form-input"/>
-        <img src={UserIcon} alt="User Icon" className="w-1.5 h-1.5 absolute right-1 top-[30%]"/>
+        <input {...register('email')} placeholder="Email" onFocus={handleResetDefault} className="hook-form-input" />
+        <img src={UserIcon} alt="User Icon" className="w-1.5 h-1.5 absolute right-1 top-[30%]" />
       </div>
       {errors.email && <p className="error">{errors.email?.message}</p>}
 
       <div className="input-field">
         <input
-            type={showPassword ? 'text' : 'password'}
-            {...register('password')}
-            placeholder="Password"
-            onFocus={handleResetDefault}
-            className="hook-form-input"
+          type={showPassword ? 'text' : 'password'}
+          {...register('password')}
+          placeholder="Password"
+          onFocus={handleResetDefault}
+          className="hook-form-input"
         />
         <img
-            src={showPassword ? CloseEyeIcon : EyeIcon}
-            onClick={toggleShowPassword}
-            className="w-1.5 h-1.5 absolute right-1 top-[30%] cursor-pointer"
-            alt="Icon Password"
+          src={showPassword ? CloseEyeIcon : EyeIcon}
+          onClick={toggleShowPassword}
+          className="w-1.5 h-1.5 absolute right-1 top-[30%] cursor-pointer"
+          alt="Icon Password"
         />
       </div>
       {errors.password && <p className="error">{errors.password?.message}</p>}
