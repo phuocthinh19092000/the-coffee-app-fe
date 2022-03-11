@@ -37,8 +37,8 @@ const HomePage = () => {
       socket.off(SocketEvent.ORDER_CANCELED);
       socket.close();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   useEffect(() => {
     if (Object.entries(dataNotification).length > 0) {
