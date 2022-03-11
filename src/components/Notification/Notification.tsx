@@ -10,6 +10,7 @@ interface Props {
   title: string;
   quantity: number;
   status: string;
+  image: string;
   onClickButton?: React.MouseEventHandler<HTMLButtonElement>;
   onClickNotification?: React.MouseEventHandler<HTMLDivElement>;
 }
@@ -25,7 +26,7 @@ const Notification = (props: Props) => {
   return (
     <div className="notification" onClick={props.onClickNotification}>
       <div className="notification-item">
-        <img src={CoffeeImg} className="notification-item__img" alt={CoffeeImg} />
+        <img src={props.image || CoffeeImg} className="notification-item__img" alt={CoffeeImg} />
         <div className="notification-item__detail dp-space-between">
           <div>
             <b className="notification-item__title">{props.title}</b>

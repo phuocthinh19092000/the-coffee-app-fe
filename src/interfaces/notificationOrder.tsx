@@ -3,4 +3,5 @@ export default interface NotificationOrder {
   title: string;
   quantity: number;
   status: string;
+  image: string;
 }
