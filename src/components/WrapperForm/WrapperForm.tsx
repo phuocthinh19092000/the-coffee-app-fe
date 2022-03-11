@@ -5,7 +5,7 @@ import Card from '../Card/Index';
 
 type Props = {
   name: string;
-  children?: React.ReactChild[] | ReactChild | JSX.Element | JSX.Element[];
+  children: React.ReactChild[] | ReactChild | JSX.Element | JSX.Element[];
   onClickExit?: React.MouseEventHandler<HTMLImageElement>;
   onClickCancel?: React.MouseEventHandler<HTMLButtonElement>;
   onClickBrowseAgain?: React.MouseEventHandler<HTMLButtonElement>;

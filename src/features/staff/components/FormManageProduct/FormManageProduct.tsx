@@ -22,11 +22,10 @@ type Props = {
 };
 
 const prepareDataToCallApi = (dataProduct: ProductTypeDto) => {
-  const { id, category, price, ...rest } = dataProduct;
+  const { id, price, ...rest } = dataProduct;
 
   const prepareDataProduct = {
     ...rest,
-    categoryId: category,
     price: price.toString(),
   };
 

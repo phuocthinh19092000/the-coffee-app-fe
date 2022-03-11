@@ -3,11 +3,13 @@ import AddButton from '../../../../components/AddButton/AddButton';
 import CustomPagination from '../../../../components/CustomPagination/CustomPagination';
 import { TableCategoryHeader } from '../../../../components/Table/constants/table.constant';
 import Table from '../../../../components/Table/Table';
+import ToastNotification from '../../../../components/ToastNotification/ToatstNotification';
 import { useAppDispatch } from '../../../../storage/hooks';
-import {useSelector} from "react-redux";
-import {getAllCategory, selectCategoryState} from "../../../product/actions/getCategoryData";
-import Category, {CategoryTypeDto} from "../../../../interfaces/category";
-
+import { useSelector } from 'react-redux';
+import { getAllCategory, selectCategoryState } from '../../../product/actions/getCategoryData';
+import Category, { CategoryTypeDto } from '../../../../interfaces/category';
+import useClearNotification from '../../../../utils/useClearNotification';
+import FormManageCategory from '../../components/FormManageCategory/FormManageCategory';
 
 const limit = 15;
 
@@ -30,6 +32,8 @@ const ListCategoryStaff = () => {
 
   const [startIndex, setStartIndex] = useState(1);
   const [lastIndex, setLastIndex] = useState(0);
+  const [isShowFormAdd, setIsShowFormAdd] = useState(false);
+  const [typeShowNotification, setTypeShowNotification] = useClearNotification();
 
   useEffect(() => {
     async function getData() {
@@ -93,12 +97,23 @@ const ListCategoryStaff = () => {
       return;
     }
   };
-  
+
+  const handleShowFormAddCategory = () => {
+    setIsShowFormAdd(true);
+  };
+
+  const onClickExit = () => {
+    setIsShowFormAdd(false);
+  };
+
+  const onAddNewCategotyHandler = () => {
+    // TODO: Call API add new category
+  };
   return (
     <>
       <div className="list-account">
         <div className="list-account-header">
-          <AddButton name="Add Category" />
+          <AddButton name="Add Category" onClick={handleShowFormAddCategory} />
           {/* //TODO: Add component input search here */}
           <CustomPagination
             startIndex={startIndex}
@@ -121,6 +136,19 @@ const ListCategoryStaff = () => {
           />
         </div>
       </div>
+
+      {isShowFormAdd && (
+        <FormManageCategory
+          formName="Add New Category"
+          setShowNotification={setTypeShowNotification}
+          onSave={onAddNewCategotyHandler}
+          onClickExit={onClickExit}
+        />
+      )}
+
+      {typeShowNotification.message && (
+        <ToastNotification type={typeShowNotification.type} message={typeShowNotification.message} />
+      )}
     </>
   );
 };
