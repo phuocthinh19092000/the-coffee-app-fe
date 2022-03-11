@@ -10,7 +10,7 @@ import createProductReducer from '../features/product/actions/createProductData'
 import accountReducer from '../features/user/actions/getUserData';
 import createAccountReducer from '../features/admin/actions/createAccountData';
 import webhookReducer from '../features/webhook/action/webhook';
-
+import createCategoryReducer from '../features/product/actions/createCategoryData';
 import storage from 'redux-persist/lib/storage';
 
 import { FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
@@ -42,6 +42,7 @@ export const store = configureStore({
     account: accountReducer,
     createAccount: createAccountReducer,
     webhook: webhookReducer,
+    createCategory: createCategoryReducer,
   },
   middleware: customizedMiddleware,
 });

@@ -107,7 +107,9 @@ const ListCategoryStaff = () => {
   };
 
   const onAddNewCategotyHandler = () => {
-    // TODO: Call API add new category
+    dispatch(getAllCategory({ limit, offset: startIndex - 1 }));
+    setIsShowFormAdd(false);
+    onClickExit();
   };
   return (
     <>
