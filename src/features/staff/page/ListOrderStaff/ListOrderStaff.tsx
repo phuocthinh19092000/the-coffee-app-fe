@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { ColumnOrderStatus, OrderStatus, SocketEvent } from '../../../../enum';
 import { getOrdersByStatus, selectOrderByStatusState, updateOrder } from '../../../orderStatus/action/orderStatus';
-import { joinRoomStaff, onListenEvent } from '../../../../services/socketService';
+import { joinRoomStaff, onListenEventStaff } from '../../../../services/socketService';
 import { useAppDispatch } from '../../../../storage/hooks';
 import { SocketContext } from '../../../../utils/socketContext';
 
@@ -55,7 +55,7 @@ const ListOrderStaff = (props: Props) => {
 
   useEffect(() => {
     joinRoomStaff(socket);
-    onListenEvent(socket, SocketEvent.HANDLE_ORDER_EVENT, handleOrder);
+    onListenEventStaff(socket, SocketEvent.HANDLE_ORDER_EVENT, handleOrder);
     return () => {
       socket.off(SocketEvent.HANDLE_ORDER_EVENT);
     };

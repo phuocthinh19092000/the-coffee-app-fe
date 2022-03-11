@@ -20,6 +20,7 @@ export default interface Order {
     phoneNumber: string;
   };
   quantityBilled: number;
+  reason: string;
 }
 
 export interface OrderSocket {

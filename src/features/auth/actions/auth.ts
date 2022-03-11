@@ -23,6 +23,7 @@ export const initialState: AuthState = {
       phoneNumber: '',
       email: '',
       name: '',
+      _id: '',
     },
   },
   loading: RequestState.PENDING,

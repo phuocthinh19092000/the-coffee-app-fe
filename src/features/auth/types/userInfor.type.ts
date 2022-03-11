@@ -7,5 +7,6 @@ export type UserInfor = {
     phoneNumber: string;
     email: string;
     name: string;
+    _id: string;
   };
 };

@@ -2,28 +2,23 @@ import Button from '../../../../components/Button/Index';
 import Card from '../../../../components/Card/Index';
 import DrinkItem from '../../../product/components/DrinkItem/DrinkItem';
 import Exit from '../../../../share/assets/vector/Exit.svg';
+import Order from '../../../../interfaces/order';
+
 import './PopUpReceiveCanceledOrderCustomer.css';
 import '../../../../features/order/components/DrinkDetail/DrinkItemDetail.scss';
-import Order from '../../../../interfaces/order';
 
 type Props = {
   order: Order;
-  onClickCloseForm: React.MouseEventHandler;
+  onCloseForm: React.MouseEventHandler;
 };
-const PopUpReceiveCanceledOrderCustomer = (props: Props) => {
-  const product = props.order.product;
 
-  /** TODO:
-   * ADD Field reason into interface Order and add Reason for cancel order in line 34:
-   *
-   *    const reason = props.order.reason
-   *
-   **/
+const PopUpReceiveCanceledOrderCustomer = (props: Props) => {
+  const { product, reason } = props.order;
 
   return (
     <>
       <Card className="card card--center ">
-        <img src={Exit} className="popup-detail__exit" alt="Exit Icon" onClick={props.onClickCloseForm} />
+        <img src={Exit} className="popup-detail__exit" alt="Exit Icon" onClick={props.onCloseForm} />
         <div className="order-canceled">
           <div>
             <p className="order-canceled__title">ORDER CANCELED</p>
@@ -31,9 +26,9 @@ const PopUpReceiveCanceledOrderCustomer = (props: Props) => {
           </div>
           <div className="w-full">
             <p className="order-canceled__reason mb-[16px]">We’re sorry that your order has been canceled.</p>
-            {/* <p className="order-canceled__reason">Reason: {reason}.</p> */}
+            <p className="order-canceled__reason">Reason: {reason}.</p>
           </div>
-          <Button className="btn btn-primary btn--enabled" titleButton="OKAY, I SEE" onClick={props.onClickCloseForm} />
+          <Button className="btn btn-primary btn--enabled" titleButton="OKAY, I SEE" onClick={props.onCloseForm} />
         </div>
       </Card>
     </>
