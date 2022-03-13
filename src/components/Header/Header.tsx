@@ -20,9 +20,9 @@ import Spinner from '../Spinner/Spinner';
 import { RequestState } from '../../enum';
 import { getFreeUnit, selectLoginState } from '../../features/auth/actions/auth';
 import { getWebhook } from '../../features/webhook/action/webhook';
+import PopUpLoginRight from '../../features/auth/components/PopUpLoginRight/PopUpLoginRight';
 type Props = {
   className: string;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
   isLoggedIn: boolean;
 };
 const Header = (props: Props) => {
@@ -36,6 +36,7 @@ const Header = (props: Props) => {
   const debouncedKeyword = useDebounce(keyword, 500);
 
   const [ref, isComponentVisible, setIsComponentVisible] = useComponentVisible(false);
+  const [popUpLoginRightRef, isShowPopUpLoginRight, setIsShowPopupLoginRight] = useComponentVisible(false);
 
   useEffect(() => {
     if (auth) {
@@ -79,6 +80,14 @@ const Header = (props: Props) => {
   const resetValue = () => {
     setKeyword('');
   };
+
+  useEffect(() => {
+    if (auth) {
+      setIsShowPopupLoginRight(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth]);
+
   return (
     <div className={props.className}>
       <div className="header__logo">
@@ -86,7 +95,7 @@ const Header = (props: Props) => {
       </div>
       {isComponentVisible && <div className="background-blur" />}
 
-      <div className="header__search-block z-[2]" ref={ref}>
+      <div className={`header__search-block ${isShowPopUpLoginRight ? '' : 'z-[2]'}`} ref={ref}>
         <Input
           placeholder="Search drink"
           src={keyword.length === 0 ? SearchVector : CancelVector}
@@ -120,13 +129,25 @@ const Header = (props: Props) => {
             </div>
           ))}
       </div>
-      <div className={`${isComponentVisible ? '' : 'z-[2]'} header__button`}>
+      <div className={`${isComponentVisible || isShowPopUpLoginRight ? '' : 'z-[2]'} header__button`}>
         {props.isLoggedIn ? (
           <CustomerInformation />
         ) : (
-          <Button className="btn btn-primary btn-login" titleButton="Login" onClick={props.onClick} />
+          <Button
+            className="btn btn-primary btn-login"
+            titleButton="Login"
+            onClick={() => {
+              setIsShowPopupLoginRight(true);
+            }}
+          />
         )}
       </div>
+
+      {isShowPopUpLoginRight && (
+        <div ref={popUpLoginRightRef} className="background-blur">
+          <PopUpLoginRight />
+        </div>
+      )}
     </div>
   );
 };
