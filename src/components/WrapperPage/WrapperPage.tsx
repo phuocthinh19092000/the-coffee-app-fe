@@ -18,7 +18,7 @@ const WrapperPage = (props: Props) => {
   return (
     <div className="w-full h-full relative bg-grey-4">
       <div>
-        <Header className={isLoggedInCustomer ? 'header header--grey' : 'header'} isLoggedIn={isLoggedInCustomer} />
+        <Header className={`header ${isLoggedInCustomer ? 'header--grey' : ''}`} isLoggedIn={isLoggedInCustomer} />
         <div className="w-full h-full">{props.children}</div>
         <div className="w-full bottom-0 left-0">
           <Footer />

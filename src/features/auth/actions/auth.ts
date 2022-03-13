@@ -61,6 +61,18 @@ export const getFreeUnit = createAsyncThunk('/users/freeunit', async (_, { rejec
   }
 });
 
+export const addDeviceToken = createAsyncThunk(
+  '/users/deviceToken',
+  async (body: { deviceToken: string }, { rejectWithValue }) => {
+    try {
+      const reponseDeviceToken = await GetUserData.addDeviceToken(body);
+      return reponseDeviceToken.data;
+    } catch (error: any) {
+      return rejectWithValue(error.data);
+    }
+  },
+);
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,

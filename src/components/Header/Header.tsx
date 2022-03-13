@@ -17,10 +17,11 @@ import useDebounce from '../../Hook/useDebounce';
 import { getProductId } from '../../features/order/actions/order';
 import useComponentVisible from '../../utils/useComponentVisible';
 import Spinner from '../Spinner/Spinner';
-import { RequestState } from '../../enum';
-import { getFreeUnit, selectLoginState } from '../../features/auth/actions/auth';
+import { RequestState, ROLE } from '../../enum';
+import { getFreeUnit, selectLoginState, selectUserState } from '../../features/auth/actions/auth';
 import { getWebhook } from '../../features/webhook/action/webhook';
 import PopUpLoginRight from '../../features/auth/components/PopUpLoginRight/PopUpLoginRight';
+import { customerAccessRole } from '../../constant';
 type Props = {
   className: string;
   isLoggedIn: boolean;
@@ -30,6 +31,7 @@ const Header = (props: Props) => {
   const [keyword, setKeyword] = useState('');
 
   const auth = useSelector(selectLoginState);
+  const { role } = useSelector(selectUserState);
   const searchItems = useSelector(selectSearchState);
   const isLoading = useSelector(searchLoadingState);
 
@@ -39,7 +41,7 @@ const Header = (props: Props) => {
   const [popUpLoginRightRef, isShowPopUpLoginRight, setIsShowPopupLoginRight] = useComponentVisible(false);
 
   useEffect(() => {
-    if (auth) {
+    if (auth && customerAccessRole.includes(role as ROLE)) {
       dispatch(getWebhook());
       dispatch(getFreeUnit());
     }
@@ -82,7 +84,7 @@ const Header = (props: Props) => {
   };
 
   useEffect(() => {
-    if (auth) {
+    if (auth && customerAccessRole.includes(role as ROLE)) {
       setIsShowPopupLoginRight(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
