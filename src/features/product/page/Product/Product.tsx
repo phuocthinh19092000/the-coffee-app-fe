@@ -44,7 +44,7 @@ const ProductPage = () => {
         />
       </div>
       <div className="product-right">
-        <ListDrinkItem listDrink={listProducts} />
+        <ListDrinkItem categoryId={categoryId} listDrink={listProducts} />
       </div>
     </div>
   );
