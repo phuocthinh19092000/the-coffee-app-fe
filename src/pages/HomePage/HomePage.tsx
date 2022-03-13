@@ -77,6 +77,7 @@ const HomePage = () => {
                 title={dataNotification.title}
                 quantity={dataNotification.quantity}
                 status={dataNotification.status}
+                image={dataNotification.image}
               />
             ) : (
               <></>

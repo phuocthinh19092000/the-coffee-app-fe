@@ -1,9 +1,8 @@
 import './OrderItem.scss';
-import CoffeeImg from '../../../../share/assets/img/CoffeeImg.png';
 import { moneyFormat } from '../../../../utils/MoneyFormat'
 import { camelCase, startCase } from 'lodash';
 import Order from '../../../../interfaces/order';
-
+import CoffeeImg from '../../../../share/assets/img/CoffeeImg.png';
 type Props = {
   item: Order;
 }
@@ -36,7 +35,7 @@ const OrderItem = (props: Props) => {
 
       <div className="order-item__contain">
         <div className="order-item__contain-left">
-          <img src={CoffeeImg} alt="Drink" />
+          <img src={props.item.product.images || CoffeeImg} alt="Drink" className="w-[100px] h-[100px] object-contain" />
         </div>
         <div className="order-item__contain-center">
           <p className="order-item__name">{props.item.product.name}</p>
