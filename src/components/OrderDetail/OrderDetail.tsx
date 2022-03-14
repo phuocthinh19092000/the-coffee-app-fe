@@ -1,6 +1,6 @@
 import './OrderDetail.css';
 import CoffeeImg from '../../share/assets/img/blackcoffee.png';
-import avatarDuyMai from '../../share/assets/img/avatarDuyMai.png';
+import avatarDefaultUser from '../../share/assets/vector/AvatarDefault.svg';
 import Order from '../../interfaces/order';
 import Exit from '../../share/assets/vector/Exit.svg';
 import { moneyFormat } from '../../utils/MoneyFormat';
@@ -48,7 +48,7 @@ const OrderDetail = (props: Props) => {
               </div>
             </div>
             <div className="dp-center">
-              <img className="order-detail__img" src={avatarDuyMai} alt="Avatar Customer" />
+              <img className="order-detail__img" src={avatarDefaultUser} alt="Avatar Customer" />
               <div className="order-detail__information-drink dp-center">
                 <p>{user.name}</p>
                 {/* <p> {user.phoneNumber} </p> */}
