@@ -12,12 +12,13 @@ import { useEffect, useState } from 'react';
 import { initSocket, joinRoomCustomer, onListenEventCustomer } from '../../services/socketService';
 import { SocketContext } from '../../utils/socketContext';
 import { useSelector } from 'react-redux';
-import { selectUserState } from '../../features/auth/actions/auth';
+import {getFreeUnit, selectUserState} from '../../features/auth/actions/auth';
 import { customerAccessRole } from '../../constant';
 import { ROLE, SocketEvent } from '../../enum';
 import { timeoutNotification } from '../../constant';
 
 import './HomePage.scss';
+import {useAppDispatch} from "../../storage/hooks";
 
 const HomePage = () => {
   const [dataNotification, setDataNotification] = useState({} as NotificationOrder);
@@ -51,12 +52,13 @@ const HomePage = () => {
       };
     }
   }, [dataNotification]);
-
+  const dispatch = useAppDispatch();
   const receiveCanceledOrder = (order: Order) => {
     setDataFormCanceledOrder(order);
+    dispatch(getFreeUnit());
   };
 
-  const onCloseFormCanceledORder = () => {
+  const onCloseFormCanceledOrder = () => {
     setDataFormCanceledOrder({} as Order);
   };
 
@@ -92,7 +94,7 @@ const HomePage = () => {
 
         {Object.keys(dataFormCanceledOrder).length > 0 && (
             <div className="background-blur">
-              <PopUpReceiveCanceledOrderCustomer order={dataFormCanceledOrder} onCloseForm={onCloseFormCanceledORder} />
+              <PopUpReceiveCanceledOrderCustomer order={dataFormCanceledOrder} onCloseForm={onCloseFormCanceledOrder} />
             </div>
         )}
       </>
