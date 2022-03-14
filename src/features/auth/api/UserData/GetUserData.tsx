@@ -7,4 +7,8 @@ export default class GetUserData {
   static getFreeUnit() {
     return http.get('/users/freeunit');
   }
+
+  static addDeviceToken(body: { deviceToken: string }) {
+    return http.post('/users/deviceToken', body);
+  }
 }

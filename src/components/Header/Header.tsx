@@ -17,12 +17,13 @@ import useDebounce from '../../Hook/useDebounce';
 import { getProductId } from '../../features/order/actions/order';
 import useComponentVisible from '../../utils/useComponentVisible';
 import Spinner from '../Spinner/Spinner';
-import { RequestState } from '../../enum';
-import { getFreeUnit, selectLoginState } from '../../features/auth/actions/auth';
+import { RequestState, ROLE } from '../../enum';
+import { getFreeUnit, selectLoginState, selectUserState } from '../../features/auth/actions/auth';
 import { getWebhook } from '../../features/webhook/action/webhook';
+import PopUpLoginRight from '../../features/auth/components/PopUpLoginRight/PopUpLoginRight';
+import { customerAccessRole } from '../../constant';
 type Props = {
   className: string;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
   isLoggedIn: boolean;
 };
 const Header = (props: Props) => {
@@ -30,15 +31,17 @@ const Header = (props: Props) => {
   const [keyword, setKeyword] = useState('');
 
   const auth = useSelector(selectLoginState);
+  const { role } = useSelector(selectUserState);
   const searchItems = useSelector(selectSearchState);
   const isLoading = useSelector(searchLoadingState);
 
   const debouncedKeyword = useDebounce(keyword, 500);
 
   const [ref, isComponentVisible, setIsComponentVisible] = useComponentVisible(false);
+  const [popUpLoginRightRef, isShowPopUpLoginRight, setIsShowPopupLoginRight] = useComponentVisible(false);
 
   useEffect(() => {
-    if (auth) {
+    if (auth && customerAccessRole.includes(role as ROLE)) {
       dispatch(getWebhook());
       dispatch(getFreeUnit());
     }
@@ -79,6 +82,14 @@ const Header = (props: Props) => {
   const resetValue = () => {
     setKeyword('');
   };
+
+  useEffect(() => {
+    if (auth && customerAccessRole.includes(role as ROLE)) {
+      setIsShowPopupLoginRight(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth]);
+
   return (
     <div className={props.className}>
       <div className="header__logo">
@@ -86,7 +97,7 @@ const Header = (props: Props) => {
       </div>
       {isComponentVisible && <div className="background-blur" />}
 
-      <div className="header__search-block z-[2]" ref={ref}>
+      <div className={`header__search-block ${isShowPopUpLoginRight ? '' : 'z-[2]'}`} ref={ref}>
         <Input
           placeholder="Search drink"
           src={keyword.length === 0 ? SearchVector : CancelVector}
@@ -120,13 +131,25 @@ const Header = (props: Props) => {
             </div>
           ))}
       </div>
-      <div className={`${isComponentVisible ? '' : 'z-[2]'} header__button`}>
+      <div className={`${isComponentVisible || isShowPopUpLoginRight ? '' : 'z-[2]'} header__button`}>
         {props.isLoggedIn ? (
           <CustomerInformation />
         ) : (
-          <Button className="btn btn-primary btn-login" titleButton="Login" onClick={props.onClick} />
+          <Button
+            className="btn btn-primary btn-login"
+            titleButton="Login"
+            onClick={() => {
+              setIsShowPopupLoginRight(true);
+            }}
+          />
         )}
       </div>
+
+      {isShowPopUpLoginRight && (
+        <div ref={popUpLoginRightRef} className="background-blur">
+          <PopUpLoginRight />
+        </div>
+      )}
     </div>
   );
 };
