@@ -67,35 +67,35 @@ const HomePage = () => {
     }
   });
   return (
-    <>
-      <SocketContext.Provider value={socket}>
-        <div className="home-page">
-          <WrapperPage>
-            {Object.entries(dataNotification).length > 0 ? (
-              <Notification
-                price={dataNotification.price}
-                title={dataNotification.title}
-                quantity={dataNotification.quantity}
-                status={dataNotification.status}
-                image={dataNotification.image}
-              />
-            ) : (
-              <></>
-            )}
-            <div>
-              <Background />
-              <Product />
-            </div>
-          </WrapperPage>
-        </div>
-      </SocketContext.Provider>
+      <>
+        <SocketContext.Provider value={socket}>
+          <div className="home-page">
+            <WrapperPage>
+              {Object.entries(dataNotification).length > 0 ? (
+                  <Notification
+                      price={dataNotification.price}
+                      title={dataNotification.title}
+                      quantity={dataNotification.quantity}
+                      status={dataNotification.status}
+                      image={dataNotification.image}
+                  />
+              ) : (
+                  <></>
+              )}
+              <div>
+                <Background />
+                <Product />
+              </div>
+            </WrapperPage>
+          </div>
+        </SocketContext.Provider>
 
-      {Object.keys(dataFormCanceledOrder).length > 0 && (
-        <div className="background-blur">
-          <PopUpReceiveCanceledOrderCustomer order={dataFormCanceledOrder} onCloseForm={onCloseFormCanceledORder} />
-        </div>
-      )}
-    </>
+        {Object.keys(dataFormCanceledOrder).length > 0 && (
+            <div className="background-blur">
+              <PopUpReceiveCanceledOrderCustomer order={dataFormCanceledOrder} onCloseForm={onCloseFormCanceledORder} />
+            </div>
+        )}
+      </>
   );
 };
 export default HomePage;

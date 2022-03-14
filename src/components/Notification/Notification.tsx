@@ -1,9 +1,9 @@
 import './Notification.scss';
 import CoffeeImg from '../../share/assets/img/blackcoffee.png';
 import { moneyFormat } from '../../utils/MoneyFormat';
-import EditIcon from '../../share/assets/vector/EditIcon.svg';
-import SuccessIcon from '../../share/assets/vector/SuccessIcon.svg';
-import { OrderStatus } from '../../enum';
+// import EditIcon from '../../share/assets/vector/EditIcon.svg';
+// import SuccessIcon from '../../share/assets/vector/SuccessIcon.svg';
+// import { OrderStatus } from '../../enum';
 import React from 'react';
 interface Props {
   price: number;
@@ -16,12 +16,13 @@ interface Props {
 }
 
 const Notification = (props: Props) => {
-  let btnSrc = '';
-  if (props.status === OrderStatus.NEW) {
-    btnSrc = EditIcon;
-  } else if (props.status === OrderStatus.READY_FOR_PICKUP) {
-    btnSrc = SuccessIcon;
-  }
+  {/*TODO: Edit Order in Notification*/}
+  // let btnSrc = '';
+  // if (props.status === OrderStatus.NEW) {
+  //   btnSrc = EditIcon;
+  // } else if (props.status === OrderStatus.READY_FOR_PICKUP) {
+  //   btnSrc = SuccessIcon;
+  // }
 
   return (
     <div className="notification" onClick={props.onClickNotification}>
@@ -37,13 +38,13 @@ const Notification = (props: Props) => {
               <pre className={`notification--${props.status}`}> {props.status}</pre>
             </div>
           </div>
-          {btnSrc ? (
-            <button className="notification__btn" onClick={props.onClickButton}>
-              <img src={btnSrc} alt={btnSrc} />
-            </button>
-          ) : (
-            ''
-          )}
+          {/*{btnSrc ? (*/}
+          {/*  <button className="notification__btn" onClick={props.onClickButton}>*/}
+          {/*    <img src={btnSrc} alt={btnSrc} />*/}
+          {/*  </button>*/}
+          {/*) : (*/}
+          {/*  ''*/}
+          {/*)}*/}
         </div>
       </div>
     </div>

@@ -29,7 +29,7 @@ const OrderItemStaff = (props: Props) => {
 
   let icon = props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP ? iconPickedUp : nextIcon;
 
-  const onUpdateStatusHandler = async (e: React.SyntheticEvent) => {
+  const onUpdateStatusHandler =  (e: React.SyntheticEvent) => {
     e.stopPropagation();
 
     if (isDisabledUpdateOrder) {
@@ -38,7 +38,7 @@ const OrderItemStaff = (props: Props) => {
     setIsDisabledUpdateOrder(true);
 
     const valueNewStatus = props.order.orderStatus.value + 1;
-    await dispatch(updateStatusOrder({ id: props.order.id, newStatus: valueNewStatus }));
+    dispatch(updateStatusOrder({ id: props.order.id, newStatus: valueNewStatus }));
 
     setIsDisabledUpdateOrder(false);
   };
@@ -57,7 +57,7 @@ const OrderItemStaff = (props: Props) => {
     props.setIsShowNotification && props.setIsShowNotification(true);
   };
 
-  const onExitFormHandler = (e: React.SyntheticEvent) => {
+  const onExitFormHandler = () => {
     setIsComponentVisible(false);
   };
 
