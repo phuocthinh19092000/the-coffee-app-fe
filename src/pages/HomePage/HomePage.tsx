@@ -12,12 +12,13 @@ import { useEffect, useState } from 'react';
 import { initSocket, joinRoomCustomer, onListenEventCustomer } from '../../services/socketService';
 import { SocketContext } from '../../utils/socketContext';
 import { useSelector } from 'react-redux';
-import { selectUserState } from '../../features/auth/actions/auth';
+import {getFreeUnit, selectUserState} from '../../features/auth/actions/auth';
 import { customerAccessRole } from '../../constant';
 import { ROLE, SocketEvent } from '../../enum';
 import { timeoutNotification } from '../../constant';
 
 import './HomePage.scss';
+import {useAppDispatch} from "../../storage/hooks";
 
 const HomePage = () => {
   const [dataNotification, setDataNotification] = useState({} as NotificationOrder);
@@ -51,12 +52,13 @@ const HomePage = () => {
       };
     }
   }, [dataNotification]);
-
+  const dispatch = useAppDispatch();
   const receiveCanceledOrder = (order: Order) => {
     setDataFormCanceledOrder(order);
+    dispatch(getFreeUnit());
   };
 
-  const onCloseFormCanceledORder = () => {
+  const onCloseFormCanceledOrder = () => {
     setDataFormCanceledOrder({} as Order);
   };
 
@@ -67,35 +69,35 @@ const HomePage = () => {
     }
   });
   return (
-    <>
-      <SocketContext.Provider value={socket}>
-        <div className="home-page">
-          <WrapperPage>
-            {Object.entries(dataNotification).length > 0 ? (
-              <Notification
-                price={dataNotification.price}
-                title={dataNotification.title}
-                quantity={dataNotification.quantity}
-                status={dataNotification.status}
-                image={dataNotification.image}
-              />
-            ) : (
-              <></>
-            )}
-            <div>
-              <Background />
-              <Product />
-            </div>
-          </WrapperPage>
-        </div>
-      </SocketContext.Provider>
+      <>
+        <SocketContext.Provider value={socket}>
+          <div className="home-page">
+            <WrapperPage>
+              {Object.entries(dataNotification).length > 0 ? (
+                  <Notification
+                      price={dataNotification.price}
+                      title={dataNotification.title}
+                      quantity={dataNotification.quantity}
+                      status={dataNotification.status}
+                      image={dataNotification.image}
+                  />
+              ) : (
+                  <></>
+              )}
+              <div>
+                <Background />
+                <Product />
+              </div>
+            </WrapperPage>
+          </div>
+        </SocketContext.Provider>
 
-      {Object.keys(dataFormCanceledOrder).length > 0 && (
-        <div className="background-blur">
-          <PopUpReceiveCanceledOrderCustomer order={dataFormCanceledOrder} onCloseForm={onCloseFormCanceledORder} />
-        </div>
-      )}
-    </>
+        {Object.keys(dataFormCanceledOrder).length > 0 && (
+            <div className="background-blur">
+              <PopUpReceiveCanceledOrderCustomer order={dataFormCanceledOrder} onCloseForm={onCloseFormCanceledOrder} />
+            </div>
+        )}
+      </>
   );
 };
 export default HomePage;

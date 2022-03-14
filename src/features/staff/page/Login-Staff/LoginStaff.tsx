@@ -15,6 +15,10 @@ const LoginStaff = () => {
   const user = useSelector(selectUserState);
   const accessToken = useSelector(selectLoginState);
   const history = useHistory();
+  
+  const goHomePage = () => {
+    history.push('/');
+  }
 
   useEffect(() => {
     if (accessToken && user.role === ROLE.VENDOR) {
@@ -29,7 +33,7 @@ const LoginStaff = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       <Card className="card card--center">
-        <img src={StaffImg} alt="Login Staff" className="mb-5" />
+        <img src={StaffImg} alt="Login Staff" className="mb-5" onClick={goHomePage} />
         <div className="w-full">
           <FormLoginStaff />
         </div>

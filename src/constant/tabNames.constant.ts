@@ -1,18 +1,19 @@
 import OrderIcon from '../share/assets/vector/OrderVector.svg';
-import ReportIcon from '../share/assets/vector/ReportVector.svg';
+// import ReportIcon from '../share/assets/vector/ReportVector.svg';
 import ItemIcon from '../share/assets/vector/MenuVector.svg';
 import AccountIcon from '../share/assets/vector/AccountIcon.svg';
 import CategoryIcon from '../share/assets/vector/CategoriesVector.svg';
+// TODO: Add Report page for staff and admin
 export const TabName = {
   STAFF: {
     ORDER: 'Orders',
     ITEM: 'Items',
     CATEGORIES: 'Categories',
-    REPORT: 'Reports',
+    // REPORT: 'Reports',
   },
   ADMIN: {
     ACCOUNT: 'Accounts',
-    REPORT: 'Reports',
+    // REPORT: 'Reports',
   },
 };
 
@@ -21,10 +22,10 @@ export const TabIcon = {
     ORDER_ICON: OrderIcon,
     ITEM_ICON: ItemIcon,
     CATEGORIES_ICON: CategoryIcon,
-    REPORT_ICON: ReportIcon,
+    // REPORT_ICON: ReportIcon,
   },
   ADMIN: {
     ACCOUNT_ICON: AccountIcon,
-    REPORT_ICON: ItemIcon,
+    // REPORT_ICON: ItemIcon,
   },
 };
