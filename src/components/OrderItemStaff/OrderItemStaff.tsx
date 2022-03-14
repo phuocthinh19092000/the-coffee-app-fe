@@ -1,12 +1,11 @@
 import Order from '../../interfaces/order';
-import ADuyMai from '../../share/assets/img/aDuyMai.jpg';
+import avatarMiniUser from '../../share/assets/vector/AvatarMiniUser.svg';
 import nextIcon from '../../share/assets/vector/nextIcon.svg';
 import iconPickedUp from '../../share/assets/vector/iconpickedUp.svg';
 import alarmIcon from '../../share/assets/vector/AlarmIcon.svg';
 import OrderDetail from '../OrderDetail/OrderDetail';
 import useComponentVisible from '../../utils/useComponentVisible';
 import React, { useState } from 'react';
-
 import { OrderStatus } from '../../enum';
 import { useAppDispatch } from '../../storage/hooks';
 import { updateStatusOrder } from '../../features/updateOrder/action/updateOrder';
@@ -69,7 +68,7 @@ const OrderItemStaff = (props: Props) => {
           <div className="order-detail-staff__group">
             <div className="flex flex-row items-start justify-between">
               <b className="order-detail-staff__product">{props.order.product.name}</b>
-              <img className="order-detail-staff__avatar" src={ADuyMai} alt="Avatar Customer" />
+              <img className="order-detail-staff__avatar" src={avatarMiniUser} alt="Avatar Customer" />
             </div>
             <div className="flex">
               <p className="order-detail-staff__price">
