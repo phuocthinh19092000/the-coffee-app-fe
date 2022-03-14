@@ -17,7 +17,7 @@ function DrinkItem(props: Props) {
       <img className="w-[160px]" src={props.item.images} alt={props.item.name} />
       <div>
         <div>
-          <span className="drink-item__name mt-1.5 text-style-1440-h1">
+          <span className="drink-item__name mt-1.5 text-style-1440-h2">
             {props.item.name}
             <br />
           </span>
