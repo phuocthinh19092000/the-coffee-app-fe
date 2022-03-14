@@ -13,9 +13,10 @@ import { useAppDispatch } from '../../../../storage/hooks';
 import { getFreeUnit, selectUserState, updateFreeUnit } from '../../../auth/actions/auth';
 import { ROLE } from '../../../../enum';
 import { customerAccessRole } from '../../../../constant';
+import { getProductsByCategory } from '../../actions/getProductData';
 type Props = {
   listDrink: Product[];
-  searchDrink?: Product[];
+  categoryId: string;
 };
 
 enum showPopupCase {
@@ -23,6 +24,7 @@ enum showPopupCase {
   showPopUpRanOutUnit = 2,
   PopUpFinishOrder = 3,
   PopUpLoginCenter = 4,
+  PopUpOutOfStock = 5,
 }
 
 function ListDrinkItem(props: Props) {
@@ -52,10 +54,15 @@ function ListDrinkItem(props: Props) {
     if (freeUnit < order.quantity) {
       setStep(showPopupCase.showPopUpRanOutUnit);
     } else {
-      dispatch(placeOrder(order));
-      dispatch(resetOrder());
-      dispatch(updateFreeUnit(order.quantity));
-      setStep(showPopupCase.PopUpFinishOrder);
+      const response = await dispatch(placeOrder(order));
+      if (placeOrder.fulfilled.match(response)) {
+        dispatch(resetOrder());
+        dispatch(updateFreeUnit(order.quantity));
+        setStep(showPopupCase.PopUpFinishOrder);
+      } else {
+        setStep(showPopupCase.PopUpOutOfStock);
+        dispatch(getProductsByCategory(props.categoryId));
+      }
     }
   };
 
@@ -110,6 +117,14 @@ function ListDrinkItem(props: Props) {
         return <PopUpFinishOrder onClick={exitPopUp} />;
       case showPopupCase.PopUpLoginCenter:
         return <PopUpLoginCenter onClick={exitPopUp} />;
+      case showPopupCase.PopUpOutOfStock:
+        return (
+          <PopUpFinishOrder
+            onClick={exitPopUp}
+            title="PRODUCT OUT OF STOCK"
+            description="Sorry! Please choose other drink, this product is out of stock!"
+          />
+        );
       default:
         break;
     }

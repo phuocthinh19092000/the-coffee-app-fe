@@ -6,6 +6,8 @@ import '../PopUpFinishOrder/PopUpFinishOrder.scss';
 
 type Props = {
   onClick?: React.MouseEventHandler<HTMLElement>;
+  description?: string;
+  title?: string;
 };
 
 function PopUpFinishOrder(props: Props) {
@@ -16,8 +18,10 @@ function PopUpFinishOrder(props: Props) {
       <div className="card-confirm-order__img">
         <img src={OrderImage} alt="Order Confirmed" />
       </div>
-      <h2 className="card-confirm-order__title">ORDER PLACED!</h2>
-      <p className="card-confirm-order__description">You will be notified to pick up when drink is ready.</p>
+      <h2 className="card-confirm-order__title">{props.title || 'ORDER PLACED!'}</h2>
+      <p className="card-confirm-order__description">
+        {props.description || 'You will be notified to pick up when drink is ready.'}
+      </p>
 
       <Button
         onClick={props.onClick}
