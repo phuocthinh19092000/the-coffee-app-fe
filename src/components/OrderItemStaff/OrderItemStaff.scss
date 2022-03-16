@@ -9,9 +9,9 @@
 }
 
 .order-item-staff {
-  @apply flex flex-row h-fit items-center rounded-[8px] bg-white px-1.25 py-0.5 relative;
+  @apply flex flex-row items-center rounded-lg shadow-order bg-white px-1.25 py-0.5 relative;
   &__img {
-    @apply md:w-[37px] lg:w-[56px] md:h-[37px] lg:h-[56px]  md:mr-1 lg:mr-1.5;
+    @apply md:w-2 lg:w-3 md:h-2 lg:h-3 md:mr-1 lg:mr-1.5;
   }
 }
 
