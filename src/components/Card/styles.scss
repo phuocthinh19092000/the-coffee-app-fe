@@ -44,7 +44,7 @@
   &--right {
     position: fixed;
     top: 0;
-    right: 0;
+    right: -100%;
     height: 100vh;
     width: 480px;
     padding-top: 80px;
@@ -55,5 +55,12 @@
     &::-webkit-scrollbar {
       display: none;
     }
+    animation: slideRightToLeft 0.4s ease-out forwards;
+  }
+}
+
+@keyframes slideRightToLeft {
+  to {
+    right: 0;
   }
 }
