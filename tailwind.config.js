@@ -43,6 +43,7 @@ module.exports = {
       warning: '#FE5D18',
       outline: '#cac3c3',
       green: '#499e3b',
+      'border-color': '#cccccc',
     },
     screens: {
       sm: '375px', //mobile screen
@@ -53,6 +54,7 @@ module.exports = {
     extend: {
       spacing: {
         0.5: '0.5rem',
+        0.75: '0.75rem',
         1: '1rem',
         1.25: '1.25rem',
         1.5: '1.5rem',
