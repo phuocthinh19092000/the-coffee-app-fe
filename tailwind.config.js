@@ -182,8 +182,8 @@ module.exports = {
           justifyContent: 'center',
         },
         '.background-blur': {
-          background: 'rgba(51, 51, 51, 0.3)',
-          backdropFilter: 'blur(5px)',
+          background: 'rgba(0, 0, 0, 0.24);',
+          backdropFilter: 'blur(20px)',
           zIndex: '1',
           top: '0',
           left: '0',
