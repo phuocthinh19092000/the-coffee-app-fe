@@ -1,0 +1,7 @@
+.background {
+  @apply w-full pt-3 pb-[56px] flex justify-center;
+}
+
+.background-img {
+  @apply w-[90%] xxl:w-[1000px] md:w-[70%] bg-cover rounded-[12px];
+}

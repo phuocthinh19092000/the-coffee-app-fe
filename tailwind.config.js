@@ -50,6 +50,7 @@ module.exports = {
       md: '768px', //tablet screen
       lg: '1024px', //laptop screen
       xl: '1366px', //desktop screen
+      xxl: '1440px',
     },
     extend: {
       spacing: {

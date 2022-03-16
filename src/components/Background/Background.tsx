@@ -1,10 +1,10 @@
-import image4 from '../../share/assets/img/image4.png';
-import './Background.scss';
+import MaskGroup from '../../share/assets/img/MaskGroup.jpg';
+import './Background.css';
 
 function Background() {
   return (
     <div className="background">
-      <img src={image4} alt={image4} className="background-img" />
+      <img src={MaskGroup} alt="Mask Group Background" className="background-img" />
     </div>
   );
 }

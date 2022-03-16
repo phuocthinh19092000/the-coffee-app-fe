@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import OTSVLogo from '../../share/assets/img/OTSVLogo.png';
+import OTSLogo from '../../share/assets/img/OTSLogo.png';
 import SearchVector from '../../share/assets/vector/iconSearch.svg';
 import CancelVector from '../../share/assets/vector/cancelVector.svg';
 import NotFound from '../../share/assets/vector/NotFoundIcon.svg';
@@ -93,7 +93,7 @@ const Header = (props: Props) => {
   return (
     <div className={props.className}>
       <div className="header__logo">
-        <img src={OTSVLogo} alt={OTSVLogo} onClick={goHome} />
+        <img className="h-full" src={OTSLogo} alt="Logo One Tech Stop" onClick={goHome} />
       </div>
       {isComponentVisible && <div className="background-blur" />}
 

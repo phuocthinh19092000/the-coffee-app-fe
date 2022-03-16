@@ -1,5 +1,5 @@
 .card-change-webhook {
-  @apply h-screen xl:w-[480px] md:w-[501px] xl:px-[20px] xl:pt-[200px] md:px-[16px] md:pt-[262px] pb-[80px] flex flex-col justify-between fixed top-0 right-0 z-[2] items-center bg-grey-4;
+  @apply overflow-scroll h-screen xl:w-[480px] md:w-[501px] xl:px-[20px] xl:pt-[200px] md:px-[16px] md:pt-[262px] pb-[80px] flex flex-col justify-between fixed top-0 right-0 z-[2] items-center bg-grey-4;
 }
 
 .card-change-webhook-center {

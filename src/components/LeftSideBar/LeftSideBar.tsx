@@ -1,5 +1,5 @@
 import './LeftSideBar.css';
-import Logo from '../../share/assets/img/OTSVLogo.png';
+import OTSLogo from '../../share/assets/img/OTSLogo.png';
 import LogoutIcon from '../../share/assets/img/logout-icon.png';
 import LeftSideBarItem from './Items/LeftSideBarItem';
 import { useHistory } from 'react-router-dom';
@@ -32,7 +32,7 @@ const LeftSideBar = (props: Props) => {
   return (
     <div className="left-side-bar">
       <div className="left-side-bar__img">
-        <img src={Logo} alt="logo" className="left-side-bar__img-logo" onClick={goHome} />
+        <img src={OTSLogo} alt="logo" className="left-side-bar__img-logo" onClick={goHome} />
       </div>
       <div className="left-side-bar__group-item">
         {props.listTabName.map((val, index) => (
