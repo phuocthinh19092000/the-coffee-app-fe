@@ -71,6 +71,7 @@ module.exports = {
         50: '50%',
       },
       boxShadow: {
+        order: '0px 2px 4px rgba(34, 34, 34, 0.08)',
         input: '0px 4px 12px rgba(146, 146, 146, 0.12)',
         button: '0px 4px 12px rgba(189, 15, 114, 0.3)',
       },
