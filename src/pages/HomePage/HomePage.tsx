@@ -12,13 +12,14 @@ import { useEffect, useState } from 'react';
 import { initSocket, joinRoomCustomer, onListenEventCustomer } from '../../services/socketService';
 import { SocketContext } from '../../utils/socketContext';
 import { useSelector } from 'react-redux';
-import {getFreeUnit, selectUserState} from '../../features/auth/actions/auth';
+import { getFreeUnit, selectUserState } from '../../features/auth/actions/auth';
 import { customerAccessRole } from '../../constant';
 import { ROLE, SocketEvent } from '../../enum';
 import { timeoutNotification } from '../../constant';
 
 import './HomePage.scss';
-import {useAppDispatch} from "../../storage/hooks";
+import { useAppDispatch } from '../../storage/hooks';
+import SplashScreen from '../SplashScreen/SplashScreen';
 
 const HomePage = () => {
   const [dataNotification, setDataNotification] = useState({} as NotificationOrder);
@@ -27,6 +28,15 @@ const HomePage = () => {
   const socket = initSocket();
   const user = useSelector(selectUserState);
   const isLoggedInCustomer = customerAccessRole.includes(user.role as ROLE);
+  const [isAccessed, setIsAccessed] = useState(!!window.sessionStorage.getItem('isAccessed'));
+  const timeOutSplashScreen = 2000;
+  useEffect(() => {
+    !isAccessed &&
+      setTimeout(() => {
+        setIsAccessed(true);
+        window.sessionStorage.setItem('isAccessed', 'true');
+      }, timeOutSplashScreen);
+  }, []);
 
   useEffect(() => {
     if (isLoggedInCustomer) {
@@ -68,36 +78,38 @@ const HomePage = () => {
       setDataNotification(dataOrder);
     }
   });
-  return (
-      <>
-        <SocketContext.Provider value={socket}>
-          <div className="home-page">
-            <WrapperPage>
-              {Object.entries(dataNotification).length > 0 ? (
-                  <Notification
-                      price={dataNotification.price}
-                      title={dataNotification.title}
-                      quantity={dataNotification.quantity}
-                      status={dataNotification.status}
-                      image={dataNotification.image}
-                  />
-              ) : (
-                  <></>
-              )}
-              <div>
-                <Background />
-                <Product />
-              </div>
-            </WrapperPage>
-          </div>
-        </SocketContext.Provider>
-
-        {Object.keys(dataFormCanceledOrder).length > 0 && (
-            <div className="background-blur">
-              <PopUpReceiveCanceledOrderCustomer order={dataFormCanceledOrder} onCloseForm={onCloseFormCanceledOrder} />
+  return isAccessed ? (
+    <>
+      <SocketContext.Provider value={socket}>
+        <div className="home-page">
+          <WrapperPage>
+            {Object.entries(dataNotification).length > 0 ? (
+              <Notification
+                price={dataNotification.price}
+                title={dataNotification.title}
+                quantity={dataNotification.quantity}
+                status={dataNotification.status}
+                image={dataNotification.image}
+              />
+            ) : (
+              <></>
+            )}
+            <div>
+              <Background />
+              <Product />
             </div>
-        )}
-      </>
+          </WrapperPage>
+        </div>
+      </SocketContext.Provider>
+
+      {Object.keys(dataFormCanceledOrder).length > 0 && (
+        <div className="background-blur">
+          <PopUpReceiveCanceledOrderCustomer order={dataFormCanceledOrder} onCloseForm={onCloseFormCanceledOrder} />
+        </div>
+      )}
+    </>
+  ) : (
+    <SplashScreen />
   );
 };
 export default HomePage;
