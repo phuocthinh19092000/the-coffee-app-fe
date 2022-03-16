@@ -1,3 +1,6 @@
 .menu-drink {
-  @apply grid grid-cols-4 gap-8;
+  @apply grid grid-cols-4 gap-1;
+  &:first-child {
+    @apply mt-1.25 mr-1.25;
+  }
 }
