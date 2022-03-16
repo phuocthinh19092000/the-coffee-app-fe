@@ -16,7 +16,7 @@ interface Props {
 }
 
 const Notification = (props: Props) => {
-  {/*TODO: Edit Order in Notification*/}
+  //TODO: Edit Order in Notification
   // let btnSrc = '';
   // if (props.status === OrderStatus.NEW) {
   //   btnSrc = EditIcon;

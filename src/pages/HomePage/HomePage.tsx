@@ -36,6 +36,7 @@ const HomePage = () => {
         setIsAccessed(true);
         window.sessionStorage.setItem('isAccessed', 'true');
       }, timeOutSplashScreen);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
