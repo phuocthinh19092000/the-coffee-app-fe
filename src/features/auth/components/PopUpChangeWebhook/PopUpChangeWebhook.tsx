@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import FormInput from '../../../../components/FormInput/FormInput';
 import { NotificationType, PositionToast } from '../../../../enum';
 import { useAppDispatch } from '../../../../storage/hooks';
+import Card from '../../../../components/Card/Index';
 
 type ChangeWebHookDto = {
   webHook: string;
@@ -46,10 +47,10 @@ const PopUpChangeWebhook = (props: Props) => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="card-change-webhook">
-          <div className="card-change-webhook-center">
+        <Card className="card card--right">
+          <div className="flex flex-col h-full justify-evenly">
             <div className="card-change-webhook__title">
-              <p className="text-style-customer-h1 text-brown">Change Webhook</p>
+              <p className="text-style-1440-h1 text-brown">Notification Settings</p>
               <p className="card-change-webhook__description">
                 Go to Google Chat &gt; Create Space &gt; Manage Webhook &gt; Create Webhook &gt; Copy URL
               </p>
@@ -67,16 +68,18 @@ const PopUpChangeWebhook = (props: Props) => {
               </p>
             </div>
             <FormInput name="webHook" placeholder="Enter your webhook" error={errors.webHook} />
-          </div>
 
-          <button
-            type="submit"
-            disabled={!(isValid && dirtyFields.webHook)}
-            className={`card-change-webhook__button ${isValid && dirtyFields.webHook ? 'bg-accent-1' : 'bg-accent-3'}`}
-          >
-            SAVE WEBHOOK
-          </button>
-        </div>
+            <button
+              type="submit"
+              disabled={!(isValid && dirtyFields.webHook)}
+              className={`card-change-webhook__button ${
+                isValid && dirtyFields.webHook ? 'bg-accent-1' : 'bg-accent-3'
+              }`}
+            >
+              SAVE WEBHOOK
+            </button>
+          </div>
+        </Card>
       </form>
     </FormProvider>
   );
