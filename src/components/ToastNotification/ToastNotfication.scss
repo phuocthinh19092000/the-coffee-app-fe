@@ -31,7 +31,7 @@
     @apply w-1.5 h-1.5 mr-0.5;
   }
   &__message {
-    @apply text-white font-proximaNova text-2.5 font-semibold not-italic leading-[21px] text-center tracking-[0.15px] w-fit;
+    @apply text-white text-2.5 font-semibold not-italic leading-[21px] text-center tracking-[0.15px] w-fit;
   }
 }
 @keyframes TopToBottom {

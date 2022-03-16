@@ -1,7 +1,7 @@
 @import '../../../../share/assets/scss/variables.scss';
 
 .category-item {
-  @apply border-none py-0.75 pl-1.25 cursor-pointer;
+  @apply border-none py-0.75 pl-1.25 mb-1 cursor-pointer;
 
   &:first-child {
     @apply mt-2.5;
