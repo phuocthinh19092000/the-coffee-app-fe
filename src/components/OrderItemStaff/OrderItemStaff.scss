@@ -1,7 +1,7 @@
 @import '../../share/assets/scss/variables.scss';
 
 @mixin textPriceAndNote {
-  @apply font-proximaNova text-grey-5 font-semibold leading-[19px] text-2 not-italic tracking-[0.1px];
+  @apply text-grey-5 font-semibold leading-[19px] text-2 not-italic tracking-[0.1px];
 }
 
 @mixin textFlow {

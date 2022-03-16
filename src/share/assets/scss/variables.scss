@@ -26,7 +26,7 @@ $error-color: #e51616;
 $cancel-order-bg-btn: #fff3f9;
 
 @mixin text-style-vendor-body-2 {
-  @apply font-proximaNova font-normal text-2 leading-[19px] tracking-[0.25px];
+  @apply font-normal text-2 leading-[19px] tracking-[0.25px];
 }
 
 @mixin icon-active {

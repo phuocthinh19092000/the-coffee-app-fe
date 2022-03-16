@@ -45,7 +45,6 @@ function DrinkItemDetail(props: Props) {
 
       <div className="popup-detail__input-group">
         <Input
-          placeholder="Quantity: "
           src={order.quantity <= 1 ? Subtraction : VectorSub}
           src2={Summation}
           className="popup-detail__input"
@@ -59,7 +58,7 @@ function DrinkItemDetail(props: Props) {
       </div>
 
       <Button
-        className="btn btn-primary btn--enabled popup-detail__button"
+        className="btn btn-primary btn--enabled popup-detail__button text-style-1440-button"
         titleButton="PLACE ORDER"
         onClick={() => props.handleClickPlaceOrder()}
       />
