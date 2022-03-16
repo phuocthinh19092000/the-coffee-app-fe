@@ -4,7 +4,7 @@ import './MyOrder.scss';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUserState } from '../../../auth/actions/auth';
-import Empty from '../../../../share/assets/img/Empty.png';
+import Empty from '../../../../share/assets/animations/Empty.gif';
 import { groupBy } from 'lodash';
 import { datePattern } from '../../../../utils/dateRegex';
 import dayjs from 'dayjs';
