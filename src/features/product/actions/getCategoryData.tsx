@@ -49,7 +49,7 @@ const categorySlice = createSlice({
       })
       .addCase(getAllCategory.rejected, (state) => {
         state.loading = RequestState.REJECTED;
-      })
+      });
   },
 });
 

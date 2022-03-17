@@ -43,7 +43,6 @@ const CustomerInformation = () => {
       ),
       LOG_OUT: <PopUpLogOut onClick={onClickClosePopUp} />,
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const setShowPopUp = (popUp: string) => {

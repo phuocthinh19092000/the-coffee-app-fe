@@ -10,12 +10,12 @@ type Props = {
 };
 
 const ToastNotification = (props: Props) => {
-  let iconSrc = props.type === NotificationType.SUCCESS ? IconSuccess : IconFail;
+  const iconSrc = props.type === NotificationType.SUCCESS ? IconSuccess : IconFail;
 
   return (
     <div
       className={`toast-notification toast-notification--${props.type} toast-notification--${
-        props.position || PositionToast.TOP_CENTER
+        props.position ?? PositionToast.TOP_CENTER
       }`}
     >
       <div className="toast-container">

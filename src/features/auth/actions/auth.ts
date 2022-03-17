@@ -9,6 +9,7 @@ import { RequestState, ROLE } from '../../../enum';
 
 export interface AuthState {
   loading?: RequestState;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
   data: UserInfor;
 }
@@ -39,6 +40,7 @@ export const login = createAsyncThunk('/auth/login', async (body: UserParams, { 
     const response = await Auth.login(body);
     http.setAuthorizationHeader(response.data.data.jwtAccessToken);
     return response.data.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return rejectWithValue(error.response);
   }
@@ -47,6 +49,7 @@ export const login = createAsyncThunk('/auth/login', async (body: UserParams, { 
 export const logout = createAsyncThunk('/auth/logout', async (body: LogoutParams, { rejectWithValue }) => {
   try {
     await Auth.logout(body);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return rejectWithValue(error.response);
   }
@@ -67,6 +70,7 @@ export const addDeviceToken = createAsyncThunk(
     try {
       const reponseDeviceToken = await GetUserData.addDeviceToken(body);
       return reponseDeviceToken.data;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       return rejectWithValue(error.data);
     }

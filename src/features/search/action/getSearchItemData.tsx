@@ -7,6 +7,7 @@ import { RequestState } from '../../../enum';
 export interface ProductState {
   loading: RequestState;
   data: Product[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
 }
 
@@ -25,6 +26,7 @@ export const getSearchItems = createAsyncThunk(
     try {
       const allItems = await searchAPI.getByName(name);
       return allItems.data;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       return rejectWithValue(error.response);
     }

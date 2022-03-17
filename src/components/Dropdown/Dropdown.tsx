@@ -60,7 +60,6 @@ const Dropdown = (props: Props) => {
     if (isShowFormEdit || isShowPopupDelete) {
       setIsComponentVisible(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isShowFormEdit, isShowPopupDelete]);
 
   const onUpdateProduct = () => {

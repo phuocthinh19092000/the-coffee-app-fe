@@ -20,9 +20,10 @@ const prepareDataTableProduct = (listProducts: Product[]): ProductTypeDto[] => {
 
   // eslint-disable-next-line array-callback-return
   listProducts.map((product) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { description, ...rest } = product;
     const dataProductTable = { ...rest, category: rest.category.name };
-    let objectOrder: ProductTypeDto = {
+    const objectOrder: ProductTypeDto = {
       id: '',
       name: '',
       images: '',

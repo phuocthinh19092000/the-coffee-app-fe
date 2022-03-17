@@ -7,6 +7,7 @@ export const changePassword = createAsyncThunk(
     try {
       const response = await ManagePasswordApi.changePassword(body);
       return response.data;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       return rejectWithValue(error.data);
     }

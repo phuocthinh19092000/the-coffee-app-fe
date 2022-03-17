@@ -6,6 +6,7 @@ import { RequestState } from '../../../enum';
 
 export interface WebhookDetail {
   loading: RequestState;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
   webhookData: string;
 }
@@ -23,6 +24,7 @@ export const getWebhook = createAsyncThunk('/users/get-webhook', async (_, { rej
   try {
     const responseWebhookData = await Webhook.getWebhook();
     return responseWebhookData.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return rejectWithValue(error.data);
   }
@@ -34,6 +36,7 @@ export const updateWebhook = createAsyncThunk(
     try {
       const updateWebhookData = await Webhook.updateWebhook(webHook);
       return updateWebhookData.data;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       return rejectWithValue(error.data);
     }

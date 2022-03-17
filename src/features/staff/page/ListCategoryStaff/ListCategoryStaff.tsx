@@ -17,6 +17,7 @@ const prepareDataTableCategory = (listCategory: Category[]): CategoryTypeDto[] =
   const data: CategoryTypeDto[] = [];
   // eslint-disable-next-line array-callback-return
   listCategory.map((category) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { products, ...categoryTypeDto } = category;
     data.push(categoryTypeDto);
   });

@@ -6,7 +6,7 @@ import './Error.scss';
 const Error = () => {
   const history = useHistory();
   const goHome = () => {
-    let path = `/`;
+    const path = `/`;
     history.push(path);
   };
   return (

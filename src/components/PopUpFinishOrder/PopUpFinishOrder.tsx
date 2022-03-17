@@ -18,9 +18,9 @@ function PopUpFinishOrder(props: Props) {
       <div className="card-confirm-order__img">
         <img src={OrderImage} alt="Order Confirmed" />
       </div>
-      <h2 className="card-confirm-order__title">{props.title || 'ORDER PLACED!'}</h2>
+      <h2 className="card-confirm-order__title">{props.title ?? 'ORDER PLACED!'}</h2>
       <p className="card-confirm-order__description">
-        {props.description || 'You will be notified to pick up when drink is ready.'}
+        {props.description ?? 'You will be notified to pick up when drink is ready.'}
       </p>
 
       <Button

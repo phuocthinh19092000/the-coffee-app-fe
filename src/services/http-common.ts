@@ -25,23 +25,29 @@ axios.interceptors.response.use(
 
 const http = {
   setAuthorizationHeader(jwtAccessToken: string) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const headers = axios?.defaults?.headers as any;
     if (headers) {
       headers.Authorization = `Bearer ${jwtAccessToken}`;
     }
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   request(config: AxiosRequestConfig<any>) {
     return axios.request(config);
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   get(url: string, data?: any) {
     return axios.get(url, { params: data });
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   post(url: string, data?: any) {
     return axios.post(url, data);
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   put(url: string, data?: any) {
     return axios.put(url, data);
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   patch(url: string, data?: any) {
     return axios.patch(url, data);
   },

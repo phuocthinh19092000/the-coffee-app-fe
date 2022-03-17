@@ -43,10 +43,10 @@ const CustomInput = (props: Props) => {
         className="form-control"
         placeholder={props.placeholder}
         name={props.name}
-        type={props.type || 'text'}
+        type={props.type ?? 'text'}
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
-        value={props.value || ''}
+        value={props.value ?? ''}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange({ event })}
       />
       {props.icon && (

@@ -45,7 +45,7 @@ const FormManageProduct = (props: Props) => {
   const [isFullFill, setIsFullFill] = useState(false);
   const isLoading = useSelector(createProductLoadingState);
   const [dataProduct, setDataProduct] = useState<ProductTypeDto>(
-    props.selectedProduct || {
+    props.selectedProduct ?? {
       name: '',
       category: '',
       price: 0,
@@ -69,7 +69,7 @@ const FormManageProduct = (props: Props) => {
   };
 
   const handleChange = (inputParams: InputParams) => {
-    let name: string = '';
+    let name = '';
     let value: string | number | File = '';
 
     if (inputParams.event) {
@@ -86,6 +86,7 @@ const FormManageProduct = (props: Props) => {
     });
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const setContentNotification = (message: string, response: any) => {
     if (statusCodeError.includes(response.payload?.status)) {
       props.setShowNotification({
@@ -102,7 +103,7 @@ const FormManageProduct = (props: Props) => {
     if (!isFullFill) {
       return;
     }
-    
+
     const { id, dataForm } = prepareDataToCallApi(dataProduct);
 
     if (id) {

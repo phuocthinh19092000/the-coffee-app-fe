@@ -11,14 +11,12 @@ export default function useClearNotification(
     if (typeShowNotification.message) {
       const timer = setTimeout(() => {
         setTypeShowNotification({} as NotificationParams);
-      }, timeOut || timeoutShowNotification);
+      }, timeOut ?? timeoutShowNotification);
 
       return () => {
         clearTimeout(timer);
       };
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typeShowNotification]);
 
   return [typeShowNotification, setTypeShowNotification];

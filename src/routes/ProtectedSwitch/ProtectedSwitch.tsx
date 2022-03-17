@@ -33,6 +33,7 @@ function ProtectedSwitch(props: Props) {
         ) : (
           <Redirect
             to={{
+              // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
               pathname: redirectPath || '/',
               state: { from: location },
             }}

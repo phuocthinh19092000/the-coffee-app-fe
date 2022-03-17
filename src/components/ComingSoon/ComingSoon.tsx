@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 const ComingSoon = () => {
   const history = useHistory();
   const goHome = () => {
-    let path = `/`;
+    const path = `/`;
     history.push(path);
   };
   return (

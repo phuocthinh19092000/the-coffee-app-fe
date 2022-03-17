@@ -6,6 +6,7 @@ import { RequestState } from '../../../enum';
 
 export interface OrderDetail {
   loading: RequestState;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
   orderData: orderParams;
 }
@@ -27,6 +28,7 @@ export const placeOrder = createAsyncThunk('/orders', async (body: orderParams, 
   try {
     const responseOrderData = await Order.placeOrder(body);
     return responseOrderData.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return rejectWithValue(error.data);
   }
@@ -57,7 +59,7 @@ const orderSlice = createSlice({
     builder.addCase(placeOrder.pending, (state) => {
       state.loading = RequestState.PENDING;
     });
-    builder.addCase(placeOrder.fulfilled, (state, action) => {
+    builder.addCase(placeOrder.fulfilled, (state) => {
       state.loading = RequestState.FULFILLED;
     });
     builder.addCase(placeOrder.rejected, (state, action) => {

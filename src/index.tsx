@@ -8,7 +8,7 @@ import { store } from './storage';
 import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
-let persistor = persistStore(store);
+const persistor = persistStore(store);
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider>

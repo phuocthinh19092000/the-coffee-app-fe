@@ -7,6 +7,7 @@ import { RequestState } from '../../../enum';
 export interface CreateProductState {
   loading: RequestState;
   data: Product;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
 }
 export const initialState: CreateProductState = {
@@ -34,6 +35,7 @@ export const createProduct = createAsyncThunk('/create-products', async (body: F
   try {
     const products = await productApi.createProduct(body);
     return products.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return rejectWithValue(error.data);
   }
@@ -45,6 +47,7 @@ export const updateProduct = createAsyncThunk(
     try {
       const products = await productApi.updateProduct(updateProductParams);
       return products.data;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       return rejectWithValue(error.data);
     }

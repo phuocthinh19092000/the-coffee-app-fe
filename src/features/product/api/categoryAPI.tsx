@@ -14,7 +14,7 @@ const categoryApi = {
     const url = `/categories/${name}`;
     return http.get(url);
   },
-  createCategory(body: {name: string}) {
+  createCategory(body: { name: string }) {
     return http.post(url, body);
   },
   updateCategory(updateCategoryParams: UpdateCategoryParams) {

@@ -1,1 +1,1 @@
-export const datePattern = "MMMM DD, YYYY";
+export const datePattern = 'MMMM DD, YYYY';

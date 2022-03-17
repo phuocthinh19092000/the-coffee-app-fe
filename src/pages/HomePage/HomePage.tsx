@@ -38,7 +38,6 @@ const HomePage = () => {
         setIsAccessed(true);
         window.sessionStorage.setItem('isAccessed', 'true');
       }, timeOutSplashScreen);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -51,7 +50,6 @@ const HomePage = () => {
       socket.off(SocketEvent.ORDER_CANCELED);
       socket.close();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   useEffect(() => {

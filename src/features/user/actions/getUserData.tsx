@@ -32,6 +32,7 @@ export const getAccountPagination = createAsyncThunk(
     try {
       const account = await accountAPI.getUserPagination(queryParams);
       return account.data;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       return rejectWithValue(error);
     }

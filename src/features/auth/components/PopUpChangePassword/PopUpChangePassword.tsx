@@ -57,6 +57,7 @@ const PopUpChangePassword = (props: Props) => {
   const { errors, isValid } = formState;
 
   const onSubmit = async (dataForm: ChangePasswordDto) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { reEnterPassword, ...changePassWordParams } = dataForm;
     const responseApi = await dispatch(changePassword(changePassWordParams));
 

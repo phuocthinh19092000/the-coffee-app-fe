@@ -23,7 +23,6 @@ const ListOrderStaff = (props: Props) => {
     dispatch(getOrdersByStatus(OrderStatus.NEW)).unwrap();
     dispatch(getOrdersByStatus(OrderStatus.PROCESSING)).unwrap();
     dispatch(getOrdersByStatus(OrderStatus.READY_FOR_PICKUP)).unwrap();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleOrder = (data: OrderSocket) => {
@@ -51,7 +50,6 @@ const ListOrderStaff = (props: Props) => {
       const audio = new Audio('order.mp3');
       audio.play();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   };
 
   useEffect(() => {
@@ -60,7 +58,6 @@ const ListOrderStaff = (props: Props) => {
     return () => {
       socket.off(SocketEvent.HANDLE_ORDER_EVENT);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
 
   return (

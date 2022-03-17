@@ -11,6 +11,7 @@ export interface OrderByStatusState {
     orderStatusReady: Order[];
   };
   loading?: RequestState;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
 }
 
@@ -37,6 +38,7 @@ export const getOrdersByStatus = createAsyncThunk(
         status: orderStatus,
         orders: response.data,
       };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       return rejectWithValue(error.response);
     }

@@ -48,7 +48,6 @@ const Header = (props: Props) => {
       dispatch(getWebhook());
       dispatch(getFreeUnit());
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -58,14 +57,12 @@ const Header = (props: Props) => {
     } else {
       setIsShowSearchDrink(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedKeyword]);
 
   useEffect(() => {
     if (auth && customerAccessRole.includes(role as ROLE)) {
       setIsShowPopupLoginRight(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth]);
 
   const handleSearchDrink: React.ChangeEventHandler<HTMLInputElement> = (event: ChangeEvent<HTMLInputElement>) => {
@@ -83,14 +80,29 @@ const Header = (props: Props) => {
     }
   };
 
+  useEffect(() => {
+    if (keyword.length >= 2) {
+      dispatch(getSearchItems(keyword.toLocaleLowerCase())).unwrap();
+      setIsShowSearchDrink(true);
+    } else {
+      setIsShowSearchDrink(false);
+    }
+  }, [debouncedKeyword]);
+
   const goHome = () => {
-    let path = `/`;
+    const path = `/`;
     history.push(path);
   };
 
   const resetValue = () => {
     setKeyword('');
   };
+
+  useEffect(() => {
+    if (auth && customerAccessRole.includes(role as ROLE)) {
+      setIsShowPopupLoginRight(false);
+    }
+  }, [auth]);
 
   return (
     <>

@@ -14,7 +14,7 @@ type Props = {
 
 const CustomUploadFile = (props: Props) => {
   const [selectedFile, setSelectedFile] = useState<File>();
-  const [previewFile, setPreviewFile] = useState<File | string>(props.selectedImage || '');
+  const [previewFile, setPreviewFile] = useState<File | string>(props.selectedImage ?? '');
   const [failMessage, setFailMessage] = useState('');
 
   const countSizeInMB = (size: number) => {
@@ -38,12 +38,10 @@ const CustomUploadFile = (props: Props) => {
     setFailMessage('');
 
     return () => URL.revokeObjectURL(objectUrl);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFile]);
 
   useEffect(() => {
     props.setIsHavePreviewFile(!!previewFile);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [previewFile]);
 
   useEffect(() => {
@@ -55,7 +53,6 @@ const CustomUploadFile = (props: Props) => {
         },
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFile]);
 
   const dragOver = (e: React.DragEvent<HTMLDivElement>) => {

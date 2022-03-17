@@ -31,6 +31,7 @@ export const getProductsPagination = createAsyncThunk(
     try {
       const products = await productApi.getProductPagination(queryParams);
       return products.data;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       return rejectWithValue(error);
     }

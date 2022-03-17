@@ -19,7 +19,7 @@ const LeftSideBar = (props: Props) => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const goHome = () => {
-    let path = `/`;
+    const path = `/`;
     history.push(path);
   };
   const socket = useContext(SocketContext);

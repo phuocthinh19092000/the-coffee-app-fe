@@ -11,7 +11,7 @@ import { updateStatusOrder } from '../../../updateOrder/action/updateOrder';
 
 type Props = {
   order: Order;
-  onClosePopUpConfirmCancel: React.Dispatch<React.SetStateAction<Boolean>>;
+  onClosePopUpConfirmCancel: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const PopUpConfirmCancelOrder = (props: Props) => {

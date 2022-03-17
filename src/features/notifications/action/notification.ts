@@ -4,6 +4,7 @@ import NotificationPickUpOrderApi, { BodyApiNotificationPickUpOrder } from '../a
 
 export interface NotificationState {
   loading?: RequestState;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
 }
 
@@ -21,6 +22,7 @@ export const sendNotificationRemindPickUpOrder = createAsyncThunk(
     try {
       const response = await NotificationPickUpOrderApi.send(body);
       return response.data;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       return rejectWithValue(error.response);
     }

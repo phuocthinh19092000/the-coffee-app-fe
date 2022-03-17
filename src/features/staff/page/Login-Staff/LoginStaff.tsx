@@ -44,7 +44,6 @@ const LoginStaff = () => {
     if (accessToken && user.role === ROLE.ADMIN) {
       history.push('/admin');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmitForm = async (dataFrom: FormLogin) => {

@@ -64,7 +64,6 @@ const CustomSelect = (props: Props) => {
       setShowOutlineText(false);
       setColorSelect('text-grey-1');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isComponentVisible, value]);
 
   return (

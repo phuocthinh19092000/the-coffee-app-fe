@@ -36,7 +36,6 @@ const DashBoard = () => {
     return () => {
       socket.close();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleClickChangeTab = (tabName: string) => {

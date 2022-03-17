@@ -20,9 +20,10 @@ const prepareDataTableAccount = (listAccount: Account[]): UserTypeDto[] => {
   const data: UserTypeDto[] = [];
   // eslint-disable-next-line array-callback-return
   listAccount.map((user) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { avatarUrl, freeUnit, ...rest } = user;
     const dataAccountTable = { ...rest, role: rest.role.name };
-    let objectAccount: UserTypeDto = {
+    const objectAccount: UserTypeDto = {
       id: '',
       name: '',
       available: '',

@@ -11,7 +11,7 @@ import { OrderStatus } from '../../enum';
 interface Props {
   order: Order;
   onClickExit: React.MouseEventHandler<HTMLImageElement>;
-  onClosePopUpConfirmCancel: React.Dispatch<React.SetStateAction<Boolean>>;
+  onClosePopUpConfirmCancel: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const OrderDetail = (props: Props) => {

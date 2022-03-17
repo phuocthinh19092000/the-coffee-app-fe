@@ -22,10 +22,9 @@ const MyOrder = () => {
 
   useEffect(() => {
     dispatch(getMyOrders()).unwrap();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  let orderData = groupBy(myOrder, function (date) {
+  const orderData = groupBy(myOrder, function (date) {
     return dayjs(date.createdAt).format(datePattern);
   });
   return (

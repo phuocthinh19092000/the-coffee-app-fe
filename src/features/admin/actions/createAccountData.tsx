@@ -8,6 +8,7 @@ import { RequestState } from '../../../enum';
 export interface CreateAccountState {
   loading: RequestState;
   data: Account;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
 }
 
@@ -38,6 +39,7 @@ export const createAccount = createAsyncThunk('/admin/account', async (body: Use
   try {
     const account = await accountApi.createAccount(body);
     return account.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return rejectWithValue(error.data);
   }

@@ -21,7 +21,7 @@ type Props = {
 
 const FormManageAccount = (props: Props) => {
   const [dataAccount, setDataAccount] = useState<UserTypeDto>(
-    props.selectedAccount || {
+    props.selectedAccount ?? {
       name: '',
       available: '',
       phoneNumber: '',
@@ -34,7 +34,8 @@ const FormManageAccount = (props: Props) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const {phoneNumber, ...rest} = dataAccount;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { phoneNumber, ...rest } = dataAccount;
     if (Object.values(rest).every(Boolean)) {
       setIsFullFill(true);
     } else {
@@ -43,7 +44,7 @@ const FormManageAccount = (props: Props) => {
   }, [dataAccount]);
 
   const handleChange = (inputParams: InputParams) => {
-    let name: string = '';
+    let name = '';
     let value: string | number | File = '';
 
     if (inputParams.event) {
@@ -60,6 +61,7 @@ const FormManageAccount = (props: Props) => {
     });
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const setContentNotification = (message: string, response: any) => {
     if (statusCodeError.includes(response.payload?.statusCode)) {
       props.setShowNotification({

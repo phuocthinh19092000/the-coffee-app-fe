@@ -26,9 +26,9 @@ const OrderItemStaff = (props: Props) => {
 
   const dispatch = useAppDispatch();
 
-  let icon = props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP ? iconPickedUp : nextIcon;
+  const icon = props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP ? iconPickedUp : nextIcon;
 
-  const onUpdateStatusHandler =  (e: React.SyntheticEvent) => {
+  const onUpdateStatusHandler = (e: React.SyntheticEvent) => {
     e.stopPropagation();
 
     if (isDisabledUpdateOrder) {
@@ -53,7 +53,7 @@ const OrderItemStaff = (props: Props) => {
       orderId: props.order.id,
     };
     await dispatch(sendNotificationRemindPickUpOrder(bodyNotificationPickUpOrderApi));
-    props.setIsShowNotification && props.setIsShowNotification(true);
+    props.setIsShowNotification?.(true);
   };
 
   const onExitFormHandler = () => {

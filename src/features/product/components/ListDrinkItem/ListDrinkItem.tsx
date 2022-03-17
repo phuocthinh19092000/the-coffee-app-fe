@@ -80,7 +80,6 @@ function ListDrinkItem(props: Props) {
         setIsOpenPopUp(true);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [order.productId]);
 
   const exitPopUp = () => {

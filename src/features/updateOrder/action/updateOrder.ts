@@ -7,6 +7,7 @@ import UpdateStatusOrderApi from '../api/updateOrderApi';
 export interface UpdateStatusOrder {
   order: Order;
   loading?: RequestState;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
 }
 export const initialState: UpdateStatusOrder = {
@@ -47,6 +48,7 @@ export const updateStatusOrder = createAsyncThunk(
     try {
       const response = await UpdateStatusOrderApi.updateStatusOrder(data.id, data.newStatus, data.reason);
       return response.data;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       return rejectWithValue(error.response);
     }

@@ -7,6 +7,7 @@ import { RequestState } from '../../../enum';
 
 export interface myOrdersDetails {
   loading: RequestState;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
   data: Order[];
 }
@@ -22,6 +23,7 @@ export const getMyOrders = createAsyncThunk('/user/orders', async (_, { rejectWi
   try {
     const responseMyOrderData = await OrderHistory.myOrders();
     return responseMyOrderData.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return rejectWithValue(error.data);
   }

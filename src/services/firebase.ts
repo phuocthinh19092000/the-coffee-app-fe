@@ -18,7 +18,7 @@ export default firebase;
 
 export const getDeviceToken = async () => {
   const message = firebase.messaging();
-  let deviceToken: string = '';
+  let deviceToken = '';
 
   try {
     deviceToken = await message.getToken({ vapidKey: process.env.KEY_PAIR });
@@ -28,6 +28,7 @@ export const getDeviceToken = async () => {
      * firebase version 8 getToken() function will throw an error and
      * i won't do anything about it because it's the user's choice
      */
+    // eslint-disable-next-line no-console
     console.error('If you refuse to receive notifications, you will not receive the status of your order');
   }
 };
