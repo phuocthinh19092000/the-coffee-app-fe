@@ -5,3 +5,4 @@ export * from './optionType';
 export * from './account';
 export * from './notificationParams';
 export * from './paginationParams';
+export * from './formLogin';
