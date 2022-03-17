@@ -1,7 +1,6 @@
 import React, { ReactChild } from 'react';
 import Exit from '../../share/assets/vector/Exit.svg';
 import './WrapperForm.css';
-import Card from '../Card/Index';
 
 type Props = {
   name: string;
@@ -16,7 +15,7 @@ type Props = {
 const WrapperForm = (props: Props) => {
   return (
     <div className="background-blur">
-      <Card className="card--new-center">
+      <div className="card-staff-center">
         <div className="form-add-item">
           <div className="form-add-item__header">
             <p className="form-add-item__title">{props?.name}</p>
@@ -40,7 +39,7 @@ const WrapperForm = (props: Props) => {
             </div>
           </div>
         </div>
-      </Card>
+      </div>
     </div>
   );
 };

@@ -28,9 +28,9 @@ const Input = (props: Props) => {
           onFocus={props.onFocus}
           value={props.value}
         />
-        {props.src && <img src={props.src} alt={props.src} className="right-1.5" onClick={props.onClickFirstIcon} />}
+        {props.src && <img src={props.src} alt="icon-input-1" className="right-1.5" onClick={props.onClickFirstIcon} />}
         {props.src2 && (
-          <img src={props.src2} alt={props.src2} className="right-[74px]" onClick={props.onClickSecondIcon} />
+          <img src={props.src2} alt="icon-input-2" className="right-[74px]" onClick={props.onClickSecondIcon} />
         )}
       </div>
       {props.error && <p className="text-error ml-[20px] my-[10px]">{props.error.message}</p>}
