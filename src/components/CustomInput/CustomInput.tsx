@@ -47,7 +47,7 @@ const CustomInput = (props: Props) => {
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
         value={props.value || ''}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange && props.onChange({ event })}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => props.onChange({ event })}
       />
       {props.icon && (
         <img

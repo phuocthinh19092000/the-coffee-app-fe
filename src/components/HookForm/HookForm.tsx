@@ -1,6 +1,5 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import { useAppDispatch } from '../../storage/hooks';
 import { addDeviceToken, checkRole, login, setDeviceToken } from '../../features/auth/actions/auth';
 import { useState } from 'react';
@@ -13,16 +12,7 @@ import { ROLE } from '../../enum';
 import FormInput from '../FormInput/FormInput';
 import Button from '../Button/Index';
 import { customerAccessRole } from '../../constant';
-
-interface FormLogin {
-  email: string;
-  password: string;
-}
-
-const schemaFormLogin = yup.object().shape({
-  email: yup.string().required('Email is required').email('Email must be a valid email address'),
-  password: yup.string().required('Password is required').min(8, 'Password must be at least 8 characters'),
-});
+import { FormLogin, schemaFormLogin } from '../../interfaces';
 
 const HookForm = () => {
   const history = useHistory();
@@ -52,7 +42,7 @@ const HookForm = () => {
       }
     } else {
       setError('password', {
-        message: 'Username or password incorrect',
+        message: 'Email or password incorrect',
       });
     }
   };
