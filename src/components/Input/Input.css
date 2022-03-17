@@ -15,7 +15,6 @@ input[type='number'] {
   @apply w-full sm:min-w-[319px] sm:max-w-[343px] md:min-w-[440px] md:w-[472px];
   @apply sm:h-3 md:h-3.5;
   @apply sm:text-style-375-body md:text-style-768-body xxl:text-style-1440-body;
-  @apply pl-1.5 sm:py-[14px] md:py-1 xxl:py-[17.5px];
 }
 
 .block-input--white {
