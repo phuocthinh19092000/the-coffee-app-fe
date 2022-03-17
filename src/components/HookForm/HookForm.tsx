@@ -1,4 +1,4 @@
-import { FormProvider, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAppDispatch } from '../../storage/hooks';
 import { addDeviceToken, checkRole, login, setDeviceToken } from '../../features/auth/actions/auth';
@@ -9,10 +9,10 @@ import CloseEyeIcon from '../../share/assets/img/close-eye.png';
 import { getDeviceToken } from '../../services/firebase';
 import { useHistory } from 'react-router';
 import { ROLE } from '../../enum';
-import FormInput from '../FormInput/FormInput';
 import Button from '../Button/Index';
 import { customerAccessRole } from '../../constant';
 import { FormLogin, schemaFormLogin } from '../../interfaces';
+import Input from '../Input/Input';
 
 const HookForm = () => {
   const history = useHistory();
@@ -26,6 +26,7 @@ const HookForm = () => {
     setError,
     formState: { errors, isValid },
     handleSubmit,
+    control,
   } = methods;
   const [isShowPassword, setIsShowPassword] = useState(false);
 
@@ -51,29 +52,49 @@ const HookForm = () => {
   };
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <FormInput name="email" className="mb-1.25" placeholder="Email" src={UserIcon} error={errors.email} />
-        <FormInput
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="mt-4 mb-3">
+        <Controller
+          name="email"
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <Input
+              placeholder="Email"
+              onChange={(event) => onChange(event.target.value)}
+              value={value}
+              error={errors.email}
+              className="block-input--white"
+              src={UserIcon}
+            />
+          )}
+        />
+        <Controller
           name="password"
-          className="mb-1.25"
-          placeholder="Password"
-          type={isShowPassword ? 'text' : 'password'}
-          onClickFirstIcon={() => setIsShowPassword(!isShowPassword)}
-          src={isShowPassword ? CloseEyeIcon : EyeIcon}
-          error={errors.password}
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <Input
+              placeholder="Password"
+              type={isShowPassword ? 'text' : 'password'}
+              onChange={(event) => onChange(event.target.value)}
+              value={value}
+              src={isShowPassword ? CloseEyeIcon : EyeIcon}
+              onClickFirstIcon={() => setIsShowPassword(!isShowPassword)}
+              error={errors.password}
+              className="mt-1.5 block-input--white"
+            />
+          )}
         />
-        <Button
-          type="submit"
-          isDisabled={!isValid}
-          className={`btn btn-primary ${isValid ? 'btn--enabled' : 'btn--disabled'}`}
-          titleButton="LOGIN"
-        />
-        <p className="text-error text-2.5 text-right mt-3 cursor-pointer" onClick={moveToLoginStaff}>
-          You are Staff?
-        </p>
-      </form>
-    </FormProvider>
+      </div>
+      <Button
+        type="submit"
+        isDisabled={!isValid}
+        className={`btn btn-primary ${isValid ? 'btn--enabled' : 'btn--disabled'}`}
+        titleButton="LOGIN"
+      />
+      <p className="text-error text-2.5 text-right mt-3 cursor-pointer" onClick={moveToLoginStaff}>
+        You are Staff?
+      </p>
+    </form>
   );
 };
 
