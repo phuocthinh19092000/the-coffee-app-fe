@@ -1,5 +1,5 @@
 import React from 'react';
-import './Input.scss';
+import './Input.css';
 
 type Props = {
   src?: string;
@@ -25,8 +25,10 @@ const Input = (props: Props) => {
         onFocus={props.onFocus}
         value={props.value}
       />
-      <img src={props.src} alt={props.src} className="icon-input" onClick={props.onClickFirstIcon} />
-      {props.src2 && <img src={props.src2} alt={props.src2} className="icon-input" onClick={props.onClickSecondIcon} />}
+      {props.src && <img src={props.src} alt={props.src} className="right-1.5" onClick={props.onClickFirstIcon} />}
+      {props.src2 && (
+        <img src={props.src2} alt={props.src2} className="right-[74px]" onClick={props.onClickSecondIcon} />
+      )}
     </div>
   );
 };
