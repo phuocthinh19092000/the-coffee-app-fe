@@ -35,7 +35,7 @@ const OrderDetail = (props: Props) => {
           </div>
           <div className="order-detail__information">
             <div className="dp-center">
-              <img className="order-detail__img" src={CoffeeImg} alt="Avatar Drink" />
+              <img className="order-detail__img" src={props.order.product.images || CoffeeImg} alt="Avatar Drink" />
               <div className="order-detail__information-drink dp-center">
                 <p>{product?.name}</p>
                 <div className="dp-row">
