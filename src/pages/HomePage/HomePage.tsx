@@ -1,10 +1,10 @@
 import Product from '../../features/product/page/Product/Product';
 import WrapperPage from '../../components/WrapperPage/WrapperPage';
-import Background from '../../components/Background/Background';
 import NotificationOrder from '../../interfaces/notificationOrder';
 import Order from '../../interfaces/order';
 import PopUpReceiveCanceledOrderCustomer from '../../features/orderStatus/components/PopUpReceiveCanceledOrderCustomer/PopUpReceiveCanceledOrderCustomer';
 import Notification from '../../components/Notification/Notification';
+import SplashScreen from '../SplashScreen/SplashScreen';
 
 import { onMessageListener } from '../../services/firebase';
 import { MessagingPayload } from 'firebase-admin/lib/messaging/messaging-api';
@@ -15,21 +15,23 @@ import { useSelector } from 'react-redux';
 import { getFreeUnit, selectUserState } from '../../features/auth/actions/auth';
 import { customerAccessRole } from '../../constant';
 import { ROLE, SocketEvent } from '../../enum';
-import { timeoutNotification } from '../../constant';
+import { timeoutNotification, timeOutSplashScreen } from '../../constant';
+import { useAppDispatch } from '../../storage/hooks';
 
 import './HomePage.scss';
-import { useAppDispatch } from '../../storage/hooks';
-import SplashScreen from '../SplashScreen/SplashScreen';
 
 const HomePage = () => {
   const [dataNotification, setDataNotification] = useState({} as NotificationOrder);
   const [dataFormCanceledOrder, setDataFormCanceledOrder] = useState({} as Order);
+  const [isAccessed, setIsAccessed] = useState(!!window.sessionStorage.getItem('isAccessed'));
+
+  const dispatch = useAppDispatch();
 
   const socket = initSocket();
+
   const user = useSelector(selectUserState);
   const isLoggedInCustomer = customerAccessRole.includes(user.role as ROLE);
-  const [isAccessed, setIsAccessed] = useState(!!window.sessionStorage.getItem('isAccessed'));
-  const timeOutSplashScreen = 2000;
+
   useEffect(() => {
     !isAccessed &&
       setTimeout(() => {
@@ -63,7 +65,7 @@ const HomePage = () => {
       };
     }
   }, [dataNotification]);
-  const dispatch = useAppDispatch();
+
   const receiveCanceledOrder = (order: Order) => {
     setDataFormCanceledOrder(order);
     dispatch(getFreeUnit());
@@ -79,6 +81,7 @@ const HomePage = () => {
       setDataNotification(dataOrder);
     }
   });
+
   return isAccessed ? (
     <>
       <SocketContext.Provider value={socket}>
@@ -96,7 +99,6 @@ const HomePage = () => {
               <></>
             )}
             <div>
-              <Background />
               <Product />
             </div>
           </WrapperPage>
