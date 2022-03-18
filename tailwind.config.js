@@ -61,6 +61,7 @@ module.exports = {
         1.5: '1.5rem',
         1.875: '1.875rem',
         2: '2rem',
+        2.25: '2.25rem',
         2.5: '2.5rem',
         3: '3rem',
         3.5: '3.5rem',
@@ -70,10 +71,14 @@ module.exports = {
         15: '15%',
         50: '50%',
       },
+      zIndex: {
+        '1': '1',
+      },
       boxShadow: {
         order: '0px 2px 4px rgba(34, 34, 34, 0.08)',
         input: '0px 4px 12px rgba(146, 146, 146, 0.12)',
         button: '0px 4px 12px rgba(189, 15, 114, 0.3)',
+        card_center: '0 4px 12px rgba(7, 7, 7, 0.12)',
         footer: '0px -2px 8px rgba(51, 51, 51, 0.04)',
       },
     },

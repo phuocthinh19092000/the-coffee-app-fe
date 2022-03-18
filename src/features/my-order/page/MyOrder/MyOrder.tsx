@@ -28,33 +28,33 @@ const MyOrder = () => {
     return dayjs(date.createdAt).format(datePattern);
   });
   return (
-    <Card className={`card card-login card--right my-order`}>
-      {loading === RequestState.PENDING ? (
-        <Spinner />
-      ) : Object.keys(orderData).length > 0 ? (
-        <>
-          <span className="my-order__title">My Orders</span>
-          <span className="my-order__freeUnit">
+      <Card className={`card card-login card--right my-order`}>
+        {loading === RequestState.PENDING ? (
+            <Spinner />
+        ) : Object.keys(orderData).length > 0 ? (
+            <>
+              <span className="my-order__title">My Orders</span>
+              <span className="my-order__freeUnit">
             Today Free Units: <span className="accent">{freeUnit} </span>
           </span>
-          <div className="my-order__list-order">
-            {Object.keys(orderData).map((date) => (
-              <div className="my-order__list-order" key={date}>
-                <OrderDate date={date} />
-                {orderData[date].map((order) => (
-                  <OrderItem item={order} key={order.id} />
+              <div className="my-order__list-order">
+                {Object.keys(orderData).map((date) => (
+                    <div className="my-order__list-order" key={date}>
+                      <OrderDate date={date} />
+                      {orderData[date].map((order) => (
+                          <OrderItem item={order} key={order.id} />
+                      ))}
+                    </div>
                 ))}
               </div>
-            ))}
-          </div>
-        </>
-      ) : (
-        <div>
-          <img src={Empty} alt="empty" />
-          <h1 className="my-order__warning">No Order Yet!</h1>
-        </div>
-      )}
-    </Card>
+            </>
+        ) : (
+            <div>
+              <img src={Empty} alt="empty" />
+              <h1 className="my-order__warning">No Order Yet!</h1>
+            </div>
+        )}
+      </Card>
   );
 };
 export default MyOrder;
