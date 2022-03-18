@@ -3,7 +3,7 @@
 }
 
 .scroll-popup-right {
-  @apply overflow-scroll;
+  @apply overflow-y-scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
