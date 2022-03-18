@@ -1,6 +1,7 @@
 import './CategoryBar.scss';
 import CategoryItem from '../CategoryItem/CategoryItem';
 import Category from '../../../../interfaces/category';
+import { createRef, useMemo, useRef } from 'react';
 
 type Props = {
   onGetIdHandler(id: number | string): void;
@@ -9,22 +10,33 @@ type Props = {
 };
 
 function CategoryBar(props: Props) {
+  const divRef = useRef([]);
+  divRef.current = useMemo(
+    () => props.listCategory.map((_, i) => divRef.current[i] ?? createRef()),
+    [props.listCategory],
+  );
+
+  const handleClickCategoryItem = (itemId: string, index: number) => {
+    props.onGetIdHandler(itemId);
+    (divRef.current[index] as React.MutableRefObject<HTMLDivElement>).current.scrollIntoView({
+      behavior: 'smooth',
+      inline: 'center',
+    });
+  };
+
   return (
-    <div>
-      {props.listCategory.map((item) => (
+    <>
+      {props.listCategory.map((item, i) => (
         <div
+          ref={divRef.current[i]}
           key={item.id}
-          className={
-            item.id === props.categoryId
-              ? 'category-item text-style-1440-h2 active'
-              : 'category-item text-style-1440-h2'
-          }
-          onClick={() => props.onGetIdHandler(item.id)}
+          className={`category-item ${item.id === props.categoryId ? 'active' : ''}`}
+          onClick={() => handleClickCategoryItem(item.id, i)}
         >
           <CategoryItem item={item} />
         </div>
       ))}
-    </div>
+    </>
   );
 }
 

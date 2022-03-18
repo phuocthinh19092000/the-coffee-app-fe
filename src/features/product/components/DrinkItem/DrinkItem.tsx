@@ -14,16 +14,16 @@ function DrinkItem(props: Props) {
   };
   return (
     <div className="drink-item" onClick={props.onClick}>
-      <img className="w-[160px]" src={props.item.images} alt={props.item.name} />
+      <img className="xxl:w-[160px] md:w-[140px] sm:w-[100px]" src={props.item.images} alt={props.item.name} />
       <div>
         <div>
-          <span className="drink-item__name mt-1.5 text-style-1440-h2">
+          <span className="drink-item__name ">
             {props.item.name}
             <br />
           </span>
         </div>
         <div>
-          <span className="drink-item__price text-style-1440-h2">{moneyFormat(props.item.price)}đ</span>
+          <span className="drink-item__price">{moneyFormat(props.item.price)}đ</span>
         </div>
       </div>
     </div>

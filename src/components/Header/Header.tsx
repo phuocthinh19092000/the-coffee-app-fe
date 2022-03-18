@@ -25,15 +25,10 @@ import { customerAccessRole } from '../../constant';
 
 import './Header.scss';
 
-type Props = {
-  isLoggedIn: boolean;
-};
-
-const Header = (props: Props) => {
+const Header = () => {
   const [keyword, setKeyword] = useState('');
   const [ref, isShowSearchDrink, setIsShowSearchDrink] = useComponentVisible(false);
   const [popUpLoginRightRef, isShowPopUpLoginRight, setIsShowPopupLoginRight] = useComponentVisible(false);
-
   const debouncedKeyword = useDebounce(keyword, 500);
   const history = useHistory();
   const dispatch = useAppDispatch();
@@ -42,9 +37,9 @@ const Header = (props: Props) => {
   const auth = useSelector(selectLoginState);
   const searchItems = useSelector(selectSearchState);
   const isLoading = useSelector(searchLoadingState);
-
+  const checkUser = auth && customerAccessRole.includes(role as ROLE);
   useEffect(() => {
-    if (auth && customerAccessRole.includes(role as ROLE)) {
+    if (checkUser) {
       dispatch(getWebhook());
       dispatch(getFreeUnit());
     }
@@ -60,7 +55,7 @@ const Header = (props: Props) => {
   }, [debouncedKeyword]);
 
   useEffect(() => {
-    if (auth && customerAccessRole.includes(role as ROLE)) {
+    if (checkUser) {
       setIsShowPopupLoginRight(false);
     }
   }, [auth]);
@@ -98,15 +93,9 @@ const Header = (props: Props) => {
     setKeyword('');
   };
 
-  useEffect(() => {
-    if (auth && customerAccessRole.includes(role as ROLE)) {
-      setIsShowPopupLoginRight(false);
-    }
-  }, [auth]);
-
   return (
     <>
-      <div className="header md:px-1 xxl:px-[20px];">
+      <div className="header md:px-1 xxl:px-[20px] z-[1]">
         <div className="header__logo">
           <img className="h-full" src={OTSLogo} alt="Logo One Tech Stop" onClick={goHome} />
         </div>
@@ -150,7 +139,7 @@ const Header = (props: Props) => {
             ))}
         </div>
         <div className={`${isShowSearchDrink || isShowPopUpLoginRight ? '' : 'z-[2]'} header__button`}>
-          {props.isLoggedIn ? (
+          {checkUser ? (
             <CustomerInformation />
           ) : (
             <div className="md:min-w-[100px] xxl:min-w-[120px] ">

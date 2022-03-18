@@ -32,5 +32,5 @@ input[type='number'] {
   outline: none;
 }
 .block-input img {
-  @apply cursor-pointer absolute top-1;
+  @apply cursor-pointer absolute sm:top-0.75 md:top-1;
 }

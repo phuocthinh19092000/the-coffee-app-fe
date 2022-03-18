@@ -4,12 +4,6 @@ import Footer from '../Footer/Footer';
 import SearchVector from '../../share/assets/vector/iconSearch.svg';
 import MaskGroup from '../../share/assets/img/MaskGroup.jpg';
 import Input from '../Input/Input';
-
-import { useSelector } from 'react-redux';
-import { selectUserState } from '../../features/auth/actions/auth';
-import { ROLE } from '../../enum';
-import { customerAccessRole } from '../../constant';
-
 import './WrapperPage.css';
 
 type Props = {
@@ -17,13 +11,10 @@ type Props = {
 };
 
 const WrapperPage = (props: Props) => {
-  const user = useSelector(selectUserState);
-  const isLoggedInCustomer = customerAccessRole.includes(user.role as ROLE);
-
   return (
     <div className="w-full h-full relative bg-grey-4">
       <div className="md:block hidden">
-        <Header isLoggedIn={isLoggedInCustomer} />
+        <Header />
       </div>
       <div className="background">
         <img src={MaskGroup} alt="Mask Group Background" className="background-img" />
@@ -31,7 +22,7 @@ const WrapperPage = (props: Props) => {
           <Input
             placeholder="Search drink"
             src={SearchVector}
-            className={'block-input--white block-input relative sm:bottom-1.5 md:bottom-[28px] m-auto'}
+            className="block-input--white block-input relative sm:bottom-1.5 md:bottom-[28px] m-auto"
           />
         </div>
       </div>

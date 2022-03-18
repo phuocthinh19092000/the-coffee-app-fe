@@ -27,6 +27,7 @@ const HookForm = () => {
     formState: { errors, isValid },
     handleSubmit,
     control,
+    reset,
   } = methods;
   const [isShowPassword, setIsShowPassword] = useState(false);
 
@@ -42,6 +43,7 @@ const HookForm = () => {
         dispatch(setDeviceToken(deviceToken));
       }
     } else {
+      reset({ email: '', password: '' });
       setError('password', {
         message: 'Email or password incorrect',
       });
