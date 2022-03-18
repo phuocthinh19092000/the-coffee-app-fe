@@ -14,7 +14,7 @@ function DrinkItem(props: Props) {
   };
   return (
     <div className="drink-item" onClick={props.onClick}>
-      <img className="xxl:w-[160px] md:w-[140px] sm:w-[100px]" src={props.item.images} alt={props.item.name} />
+      <img className="sm:w-[100px] md:w-[140px] xxl:w-[160px]" src={props.item.images} alt={props.item.name} />
       <div>
         <div>
           <span className="drink-item__name ">

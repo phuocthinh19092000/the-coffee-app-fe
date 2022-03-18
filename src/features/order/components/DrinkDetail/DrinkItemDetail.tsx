@@ -6,11 +6,11 @@ import Edit from '../../../../share/assets/vector/EditIcon.svg';
 import Button from '../../../../components/Button/Index';
 import Card from '../../../../components/Card/Index';
 import Input from '../../../../components/Input/Input';
-import './DrinkItemDetail.scss';
+import './DrinkItemDetail.css';
 import DrinkItem from '../../../product/components/DrinkItem/DrinkItem';
 import { Product } from '../../../../interfaces';
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuantity, getNote, selectOrderState } from '../../actions/order';
+import { getNote, getQuantity, selectOrderState } from '../../actions/order';
 import React from 'react';
 
 type Props = {
@@ -54,7 +54,7 @@ function DrinkItemDetail(props: Props) {
           onClickSecondIcon={onPlusOneUnit}
           readOnly={true}
         />
-        <Input placeholder="Note" src={Edit} onChange={onChangeNote} value={order.note} />
+        <Input placeholder="Note" src2={Edit} onChange={onChangeNote} value={order.note} />
       </div>
 
       <Button

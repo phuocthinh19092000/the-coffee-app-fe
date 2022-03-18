@@ -1,5 +1,5 @@
 import React from 'react';
-import './PopUpRanOutUnit.scss';
+import './PopUpRanOutUnit.css';
 import Card from '../Card/Index';
 import Button from '../Button/Index';
 import Exit from '../../share/assets/vector/Exit.svg';
@@ -15,15 +15,10 @@ type Props = {
 const PopUpRanOutUnit = (props: Props) => {
   const { freeUnit } = useSelector(selectUserState);
   return (
-    <Card className="card card--center card-ran-out-unit">
+    <Card className="card card--center">
       <img src={Exit} className="card-ran-out-unit__exit" onClick={props.onClickExit} alt="Exit" />
-      <div className="pt-50">
+      <div className="pt-[40%]">
         <p className="card-ran-out-unit__title">You ran out of free units</p>
-        {/*<p className="card-ran-out-unit__message">*/}
-        {/*  Are you sure you want to proceed this order?*/}
-        {/*  <br />*/}
-        {/*  Excceeding orders will be sent to you by month-end.*/}
-        {/*</p>*/}
         {freeUnit !== 0 ? (
           <p className="card-ran-out-unit__message">
             You have only {freeUnit} today.

@@ -3,9 +3,9 @@ import Card from '../../../../components/Card/Index';
 import DrinkItem from '../../../product/components/DrinkItem/DrinkItem';
 import Exit from '../../../../share/assets/vector/Exit.svg';
 import Order from '../../../../interfaces/order';
-
 import './PopUpReceiveCanceledOrderCustomer.css';
-import '../../../../features/order/components/DrinkDetail/DrinkItemDetail.scss';
+import '../../../order/components/DrinkDetail/DrinkItemDetail.css';
+import React from 'react';
 
 type Props = {
   order: Order;
@@ -22,7 +22,7 @@ const PopUpReceiveCanceledOrderCustomer = (props: Props) => {
         <div className="order-canceled">
           <div>
             <p className="order-canceled__title">ORDER CANCELED</p>
-            <DrinkItem item={product}></DrinkItem>
+            <DrinkItem item={product} />
           </div>
           <div className="w-full">
             <p className="order-canceled__reason mb-[16px]">We’re sorry that your order has been canceled.</p>

@@ -2,7 +2,8 @@ import Card from '../Card/Index';
 import Button from '../Button/Index';
 import Exit from '../../share/assets/vector/Exit.svg';
 import OrderImage from '../../share/assets/img/finish-order.png';
-import '../PopUpFinishOrder/PopUpFinishOrder.scss';
+import './PopUpFinishOrder.css';
+import React from 'react';
 
 type Props = {
   onClick?: React.MouseEventHandler<HTMLElement>;

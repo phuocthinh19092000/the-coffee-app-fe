@@ -66,7 +66,7 @@ const HookForm = () => {
               value={value}
               error={errors.email}
               className="block-input--white"
-              src={UserIcon}
+              src2={UserIcon}
             />
           )}
         />
@@ -79,8 +79,8 @@ const HookForm = () => {
               type={isShowPassword ? 'text' : 'password'}
               onChange={(event) => onChange(event.target.value)}
               value={value}
-              src={isShowPassword ? CloseEyeIcon : EyeIcon}
-              onClickFirstIcon={() => setIsShowPassword(!isShowPassword)}
+              src2={isShowPassword ? CloseEyeIcon : EyeIcon}
+              onClickSecondIcon={() => setIsShowPassword(!isShowPassword)}
               error={errors.password}
               className="mt-1.5 block-input--white"
             />
