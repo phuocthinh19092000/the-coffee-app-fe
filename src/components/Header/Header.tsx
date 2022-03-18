@@ -149,21 +149,21 @@ const Header = (props: Props) => {
               </div>
             ))}
         </div>
-
         <div className={`${isShowSearchDrink || isShowPopUpLoginRight ? '' : 'z-[2]'} header__button`}>
           {props.isLoggedIn ? (
             <CustomerInformation />
           ) : (
-            <Button
-              className="btn btn-primary btn-login"
-              titleButton="Login"
-              onClick={() => {
-                setIsShowPopupLoginRight(true);
-              }}
-            />
+            <div className="md:min-w-[100px] xxl:min-w-[120px] ">
+              <Button
+                className="btn btn-primary btn-login"
+                titleButton="Login"
+                onClick={() => {
+                  setIsShowPopupLoginRight(true);
+                }}
+              />
+            </div>
           )}
         </div>
-
         {isShowPopUpLoginRight && (
           <div ref={popUpLoginRightRef} className="background-blur">
             <PopUpLoginRight />

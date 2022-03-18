@@ -1,8 +1,8 @@
-import './styles.scss';
+import './styles.css';
 import React from 'react';
 type Props = {
-  className: string;
   titleButton: string;
+  className?: string;
   type?: string | 'submit';
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   isDisabled?: boolean | false;
@@ -10,7 +10,7 @@ type Props = {
 
 const Button = (props: Props) => {
   return (
-    <button disabled={props.isDisabled} className={props.className} onClick={props.onClick} type="submit">
+    <button disabled={props.isDisabled} className={`btn ${props.className}`} onClick={props.onClick} type="submit">
       {props.titleButton}
     </button>
   );

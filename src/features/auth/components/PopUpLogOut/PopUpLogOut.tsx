@@ -29,16 +29,11 @@ const PopUpLogOut = (props: Props) => {
       <span className="span-log-out"> Are you sure you want to log out ?</span>
       <Button
         onClick={LogOutHandler}
-        className="btn btn-primary btn--enabled btn-logout"
+        className="btn btn-primary btn--enabled mb-1.5"
         type="submit"
         titleButton="LOGOUT"
       />
-      <Button
-        onClick={props.onClick}
-        className="btn btn-primary btn-secondary btn-logout"
-        type="submit"
-        titleButton="CANCEL"
-      />
+      <Button onClick={props.onClick} className="btn btn-primary btn-secondary" type="submit" titleButton="CANCEL" />
     </Card>
   );
 };

@@ -15,7 +15,7 @@
 }
 
 .card-change-webhook__button {
-  @apply w-full xl:h-[56px] md:h-[59px] shadow-button rounded-[50px] px-[16px] pt-[18px] pb-[17px] text-white;
+  @apply w-full xl:h-[56px] md:h-[59px] shadow-buttonPrimary rounded-[50px] px-[16px] pt-[18px] pb-[17px] text-white;
 }
 
 .card-change-webhook__input:focus-within {
