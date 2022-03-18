@@ -4,13 +4,13 @@ import CloseEyeIcon from '../../../../share/assets/img/close-eye.png';
 import Button from '../../../../components/Button/Index';
 import React, { useState } from 'react';
 import * as yup from 'yup';
-import { useForm, FormProvider } from 'react-hook-form';
-import FormInput from '../../../../components/FormInput/FormInput';
+import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { changePassword } from '../../actions/managePassword';
 import { useAppDispatch } from '../../../../storage/hooks';
 import { NotificationParams } from '../../../../interfaces';
 import { NotificationType, PositionToast } from '../../../../enum';
+import Input from '../../../../components/Input/Input';
 interface ChangePasswordDto {
   currentPassword: string;
   newPassword: string;
@@ -49,10 +49,11 @@ const PopUpChangePassword = (props: Props) => {
 
   const methods = useForm<ChangePasswordDto>({
     resolver: yupResolver(schemaFormChangePassword),
-    mode: 'onTouched',
+    mode: 'onChange',
+    defaultValues: { currentPassword: '', newPassword: '', reEnterPassword: '' },
   });
 
-  const { handleSubmit, formState, setError, setFocus } = methods;
+  const { handleSubmit, formState, setError, control } = methods;
   const { errors, isValid } = formState;
 
   const onSubmit = async (dataForm: ChangePasswordDto) => {
@@ -70,51 +71,71 @@ const PopUpChangePassword = (props: Props) => {
       setError('currentPassword', {
         message: 'Wrong password. Please try again',
       });
-      setFocus('currentPassword');
     }
   };
 
   return (
-    <Card className="card card--right">
-      <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <p className="text-style-1440-h1 text-brown pt-[120px] py-[100px] text-center">Change Password</p>
-          <FormInput
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Card className="card card--right">
+        <p className="text-style-1440-h1 text-brown text-center py-[100px] ">Change Password</p>
+        <div className="space-y-1 mb-[200px]">
+          <Controller
             name="currentPassword"
-            type={isShowCurrentPassword ? 'text' : 'password'}
-            onClickFirstIcon={() => setIsShowCurrentPassword(!isShowCurrentPassword)}
-            className="mb-1"
-            placeholder="Current Password"
-            src={isShowCurrentPassword ? CloseEyeIcon : EyeIcon}
-            error={errors.currentPassword}
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                placeholder="Current Password"
+                type={isShowCurrentPassword ? 'text' : 'password'}
+                onChange={(event) => onChange(event.target.value)}
+                value={value}
+                src={isShowCurrentPassword ? CloseEyeIcon : EyeIcon}
+                onClickFirstIcon={() => setIsShowCurrentPassword(!isShowCurrentPassword)}
+                error={errors.currentPassword}
+                className="block-input--white"
+              />
+            )}
           />
-          <FormInput
+          <Controller
             name="newPassword"
-            type={isShowNewPassword ? 'text' : 'password'}
-            onClickFirstIcon={() => setIsShowNewPassword(!isShowNewPassword)}
-            className="mb-1.5"
-            placeholder="New Password"
-            src={isShowNewPassword ? CloseEyeIcon : EyeIcon}
-            error={errors.newPassword}
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                placeholder="New Password"
+                type={isShowNewPassword ? 'text' : 'password'}
+                onChange={(event) => onChange(event.target.value)}
+                value={value}
+                src={isShowNewPassword ? CloseEyeIcon : EyeIcon}
+                onClickFirstIcon={() => setIsShowNewPassword(!isShowNewPassword)}
+                error={errors.newPassword}
+                className="block-input--white"
+              />
+            )}
           />
-          <FormInput
+          <Controller
             name="reEnterPassword"
-            type={isShowReEnterPassword ? 'text' : 'password'}
-            onClickFirstIcon={() => setIsShowReEnterPassword(!isShowReEnterPassword)}
-            className="mb-[200px]"
-            placeholder="Re-enter New Password"
-            src={isShowReEnterPassword ? CloseEyeIcon : EyeIcon}
-            error={errors.reEnterPassword}
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Input
+                placeholder="Re-enter New Password"
+                type={isShowReEnterPassword ? 'text' : 'password'}
+                onChange={(event) => onChange(event.target.value)}
+                value={value}
+                src={isShowReEnterPassword ? CloseEyeIcon : EyeIcon}
+                onClickFirstIcon={() => setIsShowReEnterPassword(!isShowReEnterPassword)}
+                error={errors.reEnterPassword}
+                className="block-input--white"
+              />
+            )}
           />
-          <Button
-            type="submit"
-            isDisabled={!isValid}
-            className={`btn btn-primary ${isValid ? 'btn--enabled' : 'btn--disabled'}`}
-            titleButton="CHANGE PASSWORD"
-          />
-        </form>
-      </FormProvider>
-    </Card>
+        </div>
+        <Button
+          type="submit"
+          isDisabled={!isValid}
+          className={`btn btn-primary ${isValid ? 'btn--enabled' : 'btn--disabled'}`}
+          titleButton="CHANGE PASSWORD"
+        />
+      </Card>
+    </form>
   );
 };
 
