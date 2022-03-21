@@ -14,6 +14,7 @@ import { getFreeUnit, selectUserState, updateFreeUnit } from '../../../auth/acti
 import { ROLE } from '../../../../enum';
 import { customerAccessRole } from '../../../../constant';
 import { getProductsByCategory } from '../../actions/getProductData';
+import useComponentVisible from '../../../../utils/useComponentVisible';
 type Props = {
   listDrink: Product[];
   categoryId: string;
@@ -29,7 +30,7 @@ enum showPopupCase {
 
 function ListDrinkItem(props: Props) {
   const [step, setStep] = useState(1);
-  const [isOpenPopUp, setIsOpenPopUp] = useState(false);
+  const [ref, isOpenPopUp, setIsOpenPopUp] = useComponentVisible(false);
   const [itemDrink, setItemDrink] = useState({} as Product);
   const dispatch = useAppDispatch();
   const order = useSelector(selectOrderState);
@@ -135,7 +136,11 @@ function ListDrinkItem(props: Props) {
         <DrinkItem item={item} key={item.id} onClick={() => togglePopup(item)} />
       ))}
 
-      {isOpenPopUp && <div className="background-blur">{switchStep()}</div>}
+      {isOpenPopUp && (
+        <div ref={ref} className="background-blur">
+          {switchStep()}
+        </div>
+      )}
     </div>
   );
 }
