@@ -11,7 +11,6 @@ import CustomerInformation from '../CustomerInformation/CustomerInformation';
 import useComponentVisible from '../../utils/useComponentVisible';
 import Spinner from '../Spinner/Spinner';
 import useDebounce from '../../Hook/useDebounce';
-
 import { useHistory } from 'react-router';
 import { Product } from '../../interfaces';
 import { useAppDispatch } from '../../storage/hooks';

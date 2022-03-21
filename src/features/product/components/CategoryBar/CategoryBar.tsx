@@ -1,7 +1,7 @@
 import './CategoryBar.scss';
 import CategoryItem from '../CategoryItem/CategoryItem';
 import Category from '../../../../interfaces/category';
-import { createRef, useMemo, useRef } from 'react';
+import React, { createRef, useMemo, useRef } from 'react';
 
 type Props = {
   onGetIdHandler(id: number | string): void;

@@ -1,8 +1,8 @@
-import { NotificationType } from '../../enum/NotificationType';
+import { NotificationType, PositionToast } from '../../enum';
 import './ToastNotfication.scss';
 import IconFail from '../../share/assets/vector/IconFail.svg';
 import IconSuccess from '../../share/assets/vector/IconSucess.svg';
-import { PositionToast } from '../../enum/PositionToast';
+
 type Props = {
   type: NotificationType;
   message: string;
