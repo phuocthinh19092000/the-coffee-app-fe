@@ -18,6 +18,7 @@ export const initialState: OrderDetail = {
     status: null,
   },
   orderData: {
+    orderId: '',
     quantity: 1,
     note: '',
     productId: '',
@@ -53,6 +54,9 @@ const orderSlice = createSlice({
     getQuantity: (state, action: PayloadAction<number>) => {
       state.orderData.quantity += action.payload;
     },
+    setOrderData: (state, action: PayloadAction<orderParams>) => {
+      state.orderData = action.payload;
+    },
     resetOrder: () => initialState,
   },
   extraReducers: (builder) => {
@@ -70,5 +74,6 @@ const orderSlice = createSlice({
 });
 
 export const selectOrderState = (state: RootState) => state.order.orderData;
-export const { increment, decrement, resetOrder, getProductId, getNote, getQuantity } = orderSlice.actions;
+export const { increment, decrement, resetOrder, getProductId, getNote, getQuantity, setOrderData } =
+  orderSlice.actions;
 export default orderSlice.reducer;

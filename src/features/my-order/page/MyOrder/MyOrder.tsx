@@ -32,7 +32,7 @@ const MyOrder = () => {
       {loading === RequestState.PENDING ? (
         <Spinner />
       ) : Object.keys(orderData).length > 0 ? (
-        <>
+        <div className="h-full pt-0.5">
           <div className="flex justify-between w-full pt-1">
             <p className="my-order__title">My Orders</p>
             <p className="my-order__freeUnit">
@@ -49,7 +49,7 @@ const MyOrder = () => {
               </div>
             ))}
           </div>
-        </>
+        </div>
       ) : (
         <div>
           <img src={Empty} alt="empty" />

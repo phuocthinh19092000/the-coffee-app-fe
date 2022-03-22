@@ -8,15 +8,17 @@ import Card from '../../../../components/Card/Index';
 import Input from '../../../../components/Input/Input';
 import './DrinkItemDetail.css';
 import DrinkItem from '../../../product/components/DrinkItem/DrinkItem';
-import { Product } from '../../../../interfaces';
+import { Product, ProductItem } from '../../../../interfaces';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNote, getQuantity, selectOrderState } from '../../actions/order';
 import React from 'react';
 
 type Props = {
-  item: Product;
+  item: Product | ProductItem;
   handleClickExitPopUp?: React.MouseEventHandler<HTMLImageElement>;
-  handleClickPlaceOrder(): void;
+  handleClickPlaceOrder?: () => void;
+  handleClickCancelOrder?: () => void;
+  isFormEditOrder?: boolean;
 };
 
 function DrinkItemDetail(props: Props) {
@@ -45,8 +47,9 @@ function DrinkItemDetail(props: Props) {
 
       <div className="popup-detail__input-group">
         <Input
-          src={order.quantity <= 1 ? Subtraction : VectorSub}
-          src2={Summation}
+          // TODO: remove this line when do feature customer can edit order
+          src2={props.isFormEditOrder ? '' : order.quantity <= 1 ? Subtraction : VectorSub}
+          src={props.isFormEditOrder ? '' : Summation}
           className="popup-detail__input"
           type="number"
           value={order.quantity}
@@ -54,14 +57,29 @@ function DrinkItemDetail(props: Props) {
           onClickSecondIcon={onPlusOneUnit}
           readOnly={true}
         />
-        <Input placeholder="Note" src2={Edit} onChange={onChangeNote} value={order.note} />
+        <Input
+          placeholder="Note"
+          src={Edit}
+          onChange={onChangeNote}
+          value={order.note}
+          readOnly={props.isFormEditOrder}
+        />
       </div>
+      {props.isFormEditOrder ? (
+        //TODO: Add Button Save Change and change button cancel order to paragraph
 
-      <Button
-        className="btn btn-primary btn--enabled popup-detail__button text-style-1440-button"
-        titleButton="PLACE ORDER"
-        onClick={() => props.handleClickPlaceOrder()}
-      />
+        <Button
+          className="btn btn-primary btn--enabled popup-detail__button text-style-1440-button"
+          titleButton="Cancel Order"
+          onClick={props.handleClickCancelOrder}
+        />
+      ) : (
+        <Button
+          className="btn btn-primary btn--enabled popup-detail__button text-style-1440-button"
+          titleButton="PLACE ORDER"
+          onClick={props.handleClickPlaceOrder}
+        />
+      )}
     </Card>
   );
 }
