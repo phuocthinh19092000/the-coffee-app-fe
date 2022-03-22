@@ -1,13 +1,21 @@
-@import '../../../../share/assets/scss/variables.scss';
 
 .product {
   @apply w-full flex flex-col xxl:flex-row xxl:border-t border-border-color;
-  
-  &-left {
-    @apply xxl:w-1/5 xxl:pl-1.25 xxl:pr-1 flex flex-row xxl:flex-col justify-start overflow-x-auto xxl:overflow-hidden sm:mx-1 md:mx-1;
-  }
+}
 
-  &-right {
-    @apply w-full border-l border-border-color;
-  }
+.product-left {
+  @apply xxl:w-1/5 xxl:pl-1.25 xxl:pr-1 xxl:overflow-hidden overflow-scroll w-[100vw] flex flex-row xxl:flex-col justify-start sm:mx-1 md:mx-1;
+}
+
+.product-left::-webkit-scrollbar {
+  @apply hidden;
+}
+
+.product-left {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.product-right {
+  @apply w-full border-l border-border-color;
 }

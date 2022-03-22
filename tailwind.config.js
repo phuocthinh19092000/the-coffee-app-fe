@@ -80,7 +80,35 @@ module.exports = {
         footer: '0px -2px 8px rgba(51, 51, 51, 0.04)',
         buttonPrimary: '0px 4px 12px rgba(189, 15, 114, 0.3)',
         buttonSecondary: '0px 4px 12px rgba(146, 146, 146, 0.12)',
+        vendorSuccess: '0px 4px 28px rgba(22, 153, 19, 0.24)',
+        vendorFail: '0px 4px 28px rgba(219, 0, 0, 0.24)',
       },
+      keyframes: {
+        'TopToBottom': {
+          'from': {
+            opacity: '0',
+            top: '0px',
+          },
+          'to': {
+            opacity: '1',
+            top: '1.5rem'
+          }
+        },
+        'ToastInRight': {
+          'from': {
+            opacity: '0',
+            right: '0px',
+          },
+          'to': {
+            opacity: '1',
+            right: '1.25rem'
+          }
+        }
+      },
+      animation: {
+        'TopToBottom': 'TopToBottom 0.7s',
+        'ToastInRight': 'ToastInRight 0.7s',
+      }
     },
   },
   plugins: [

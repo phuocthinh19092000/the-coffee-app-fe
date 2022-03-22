@@ -31,6 +31,7 @@ const LoginStaff = () => {
     formState: { errors },
     control,
     handleSubmit,
+    reset,
   } = useForm<FormLogin>({
     resolver: yupResolver(schemaFormLogin),
     mode: 'onChange',
@@ -60,6 +61,7 @@ const LoginStaff = () => {
           break;
       }
     } else {
+      reset({ email: '', password: '' });
       setTypeShowNotification({
         type: NotificationType.FAILURE,
         message: 'Email or password incorrect',

@@ -1,4 +1,4 @@
-import './Notification.scss';
+import './Notification.css';
 import CoffeeImg from '../../share/assets/img/blackcoffee.png';
 import { moneyFormat } from '../../utils/MoneyFormat';
 // import EditIcon from '../../share/assets/vector/EditIcon.svg';
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const Notification = (props: Props) => {
-  //TODO: Edit Order in Notification
+  // TODO: Edit Order in Notification
   // let btnSrc = '';
   // if (props.status === OrderStatus.NEW) {
   //   btnSrc = EditIcon;
@@ -28,23 +28,23 @@ const Notification = (props: Props) => {
     <div className="notification" onClick={props.onClickNotification}>
       <div className="notification-item">
         <img src={props.image || CoffeeImg} className="notification-item__img" alt={CoffeeImg} />
-        <div className="notification-item__detail dp-space-between">
+        <div className="notification-item__detail flex flex-row justify-between">
           <div>
             <b className="notification-item__title">{props.title}</b>
-            <div className="dp-row mt-10">
+            <div className="flex flex-row mt-[10px]">
               <p>
                 {moneyFormat(Number(props.price))}đ - Qty: {props.quantity} -
               </p>
               <pre className={`notification--${props.status}`}> {props.status}</pre>
             </div>
           </div>
-          {/*{btnSrc ? (*/}
-          {/*  <button className="notification__btn" onClick={props.onClickButton}>*/}
-          {/*    <img src={btnSrc} alt={btnSrc} />*/}
-          {/*  </button>*/}
-          {/*) : (*/}
-          {/*  ''*/}
-          {/*)}*/}
+          {/* {btnSrc ? (
+            <button className="notification__btn" onClick={props.onClickButton}>
+              <img src={btnSrc} alt={btnSrc} />
+            </button>
+          ) : (
+            ''
+          )} */}
         </div>
       </div>
     </div>
