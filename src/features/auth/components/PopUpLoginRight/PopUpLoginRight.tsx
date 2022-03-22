@@ -9,14 +9,14 @@ import HookForm from '../../../../components/HookForm/HookForm';
 
 const PopUpLoginRight = () => {
   return (
-    <Card className={`card card-login card--right scroll-popup-right`}>
-      <div>
-        <img src={LoginIcon} alt="" />
+    <Card className="card card-login card--right scroll-popup-right">
+      <div className="sm:pt-3.5 md:pt-[140px] xxl:pt-[120px]">
+        <img src={LoginIcon} alt="Login Icon" />
         <div>
           <HookForm />
         </div>
       </div>
-      <div>
+      <div className="sm:hidden md:block">
         <div className="brand-media">
           <Icon href="https://www.facebook.com/OneTechStopVietnam/" src={FacebookIcon} className="icon" />
           <Icon href="https://www.instagram.com/OneTechStopVietnam/" src={InstaIcon} className="icon" />

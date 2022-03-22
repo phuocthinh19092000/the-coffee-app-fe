@@ -65,8 +65,8 @@ const HookForm = () => {
               onChange={(event) => onChange(event.target.value)}
               value={value}
               error={errors.email}
-              className="block-input--white"
-              src2={UserIcon}
+              className="block-input--white m-auto"
+              src={UserIcon}
             />
           )}
         />
@@ -82,18 +82,23 @@ const HookForm = () => {
               src2={isShowPassword ? CloseEyeIcon : EyeIcon}
               onClickSecondIcon={() => setIsShowPassword(!isShowPassword)}
               error={errors.password}
-              className="mt-1.5 block-input--white"
+              className="mt-1.5 block-input--white m-auto"
             />
           )}
         />
       </div>
-      <Button
-        type="submit"
-        isDisabled={!isValid}
-        className={`btn btn-primary ${isValid ? 'btn--enabled' : 'btn--disabled'}`}
-        titleButton="LOGIN"
-      />
-      <p className="text-error text-2.5 text-right mt-3 cursor-pointer" onClick={moveToLoginStaff}>
+      <div className="w-full flex justify-center">
+        <Button
+          type="submit"
+          isDisabled={!isValid}
+          className={`btn btn-primary ${isValid ? 'btn--enabled' : 'btn--disabled'}`}
+          titleButton="LOGIN"
+        />
+      </div>
+      <p
+        className="text-error cursor-pointer text-right  mt-2.5 sm:text-style-375-body md:text-style-768-body xxl:text-style-1440-body sm:mr-0.75"
+        onClick={moveToLoginStaff}
+      >
         You are Staff?
       </p>
     </form>
