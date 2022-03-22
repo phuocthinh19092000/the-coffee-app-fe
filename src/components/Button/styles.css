@@ -9,7 +9,7 @@
   @apply shadow-buttonPrimary text-white;
 }
 .btn-secondary {
-  @apply shadow-buttonPrimary bg-white text-black;
+  @apply shadow-card_center bg-white text-black;
 }
 
 .btn-enabled {
