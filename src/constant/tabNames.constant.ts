@@ -29,3 +29,9 @@ export const TabIcon = {
     // REPORT_ICON: ItemIcon,
   },
 };
+
+export const TabNameNavbar = {
+  HOME_PAGE: 'homePage',
+  MY_ORDER: 'myOrder',
+  INFORMATION: 'information',
+};

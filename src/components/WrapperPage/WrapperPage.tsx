@@ -1,9 +1,9 @@
 import React, { ReactChild } from 'react';
 import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 import SearchVector from '../../share/assets/vector/iconSearch.svg';
 import MaskGroup from '../../share/assets/img/MaskGroup.jpg';
 import Input from '../Input/Input';
+
 import './WrapperPage.css';
 
 type Props = {
@@ -27,11 +27,7 @@ const WrapperPage = (props: Props) => {
         </div>
       </div>
       <div className="w-full h-full">{props.children}</div>
-      <div className="w-full bottom-0 left-0">
-        <Footer />
-      </div>
     </div>
   );
 };
-
 export default WrapperPage;

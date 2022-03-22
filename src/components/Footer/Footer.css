@@ -1,3 +1,7 @@
 .footer {
   @apply w-full h-3.5 bg-white flex justify-around items-center shadow-footer;
 }
+
+.footer-navbar-icon {
+  @apply m-auto;
+}

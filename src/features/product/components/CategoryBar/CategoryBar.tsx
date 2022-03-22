@@ -11,6 +11,7 @@ type Props = {
 
 function CategoryBar(props: Props) {
   const divRef = useRef([]);
+
   divRef.current = useMemo(
     () => props.listCategory.map((_, i) => divRef.current[i] ?? createRef()),
     [props.listCategory],
