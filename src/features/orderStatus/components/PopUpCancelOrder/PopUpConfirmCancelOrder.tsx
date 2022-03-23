@@ -3,7 +3,7 @@ import CustomSelect from '../../../../components/CustomSelect/CustomSelect';
 import React from 'react';
 import { useState } from 'react';
 import { InputParams } from '../../../../interfaces';
-import { listReason } from '../../../../constant/index';
+import { listReason } from '../../../../constant';
 import './PopUpConfirmCancelOrder.css';
 import Order from '../../../../interfaces/order';
 import { useAppDispatch } from '../../../../storage/hooks';
@@ -82,7 +82,7 @@ const PopUpConfirmCancelOrder = (props: Props) => {
         </div>
         <div className="form-cancel-order__bottom">
           <button
-            disabled={dataReason.reason !== '' ? false : true}
+            disabled={dataReason.reason === ''}
             className="bg-error text-white form-cancel-order__button-cancel mr-1"
             onClick={onCancelOrderHandler}
           >

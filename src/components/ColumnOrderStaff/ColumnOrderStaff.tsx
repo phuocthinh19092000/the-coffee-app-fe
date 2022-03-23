@@ -1,6 +1,6 @@
 import { ColumnOrderStatus } from '../../enum';
 import Order from '../../interfaces/order';
-import OrderItemStaff from '../OrderItemStaff/OrderItemStaff';
+import OrderItemStaff from '../../features/staff/components/OrderItemStaff/OrderItemStaff';
 import './ColumnOrderStaff.css';
 import React from 'react';
 
