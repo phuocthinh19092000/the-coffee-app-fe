@@ -15,6 +15,8 @@ import { getProductsPagination } from '../../features/product/actions/getProduct
 import { useAppDispatch } from '../../storage/hooks';
 import useClearNotification from '../../utils/useClearNotification';
 import FormManageCategory from '../../features/staff/components/FormManageCategory/FormManageCategory';
+import FormManageAccount from '../../features/admin/component/FormManageAccount';
+import { getAccountPagination } from '../../features/user/actions/getUserData';
 type Props = {
   selectedValue: ProductTypeDto | UserTypeDto | CategoryTypeDto;
   startIndex: number;
@@ -24,6 +26,9 @@ function isProductTypeDto(object: ProductTypeDto | UserTypeDto | CategoryTypeDto
 }
 function isCategotyDto(object: ProductTypeDto | UserTypeDto | CategoryTypeDto): object is ProductTypeDto {
   return (object as ProductTypeDto).images === undefined && (object as CategoryTypeDto).name !== undefined;
+}
+function isUserDto(object: ProductTypeDto | UserTypeDto | CategoryTypeDto): object is ProductTypeDto | UserTypeDto {
+  return (object as ProductTypeDto).images === undefined && (object as UserTypeDto).email !== undefined;
 }
 
 function processingData(selectedValue: ProductTypeDto, listCategory: Category[]): ProductTypeDto {
@@ -49,7 +54,7 @@ const Dropdown = (props: Props) => {
   const showDropdown = () => {
     setIsComponentVisible(!isComponentVisible);
   };
-  const showFormEdit = () => {
+  const setShowFormEdit = () => {
     setIsShowFormEdit(!isShowFormEdit);
   };
   const showPopupDelete = () => {
@@ -71,6 +76,12 @@ const Dropdown = (props: Props) => {
     setIsShowFormEdit(false);
     dispatch(getAllCategory({ limit, offset: props.startIndex - 1 }));
   };
+
+  const onUpdateAccount = () => {
+    setIsShowFormEdit(false);
+    dispatch(getAccountPagination({ limit, offset: props.startIndex - 1 }));
+  };
+
   return (
     <div ref={ref}>
       <div className="dropdown">
@@ -79,7 +90,7 @@ const Dropdown = (props: Props) => {
         </div>
         {isComponentVisible && (
           <div className="dropdown__list">
-            <div className="dropdown__list-group" onClick={showFormEdit}>
+            <div className="dropdown__list-group" onClick={setShowFormEdit}>
               <img src={EditIcon} alt="" className="mr-1.5" />
               <p>Edit</p>
             </div>
@@ -94,7 +105,7 @@ const Dropdown = (props: Props) => {
         {isProductTypeDto(props.selectedValue) && isShowFormEdit && (
           <FormManageProduct
             formName={FormName.UPDATE_ITEM}
-            onClickExit={showFormEdit}
+            onClickExit={setShowFormEdit}
             selectedProduct={processingData(props.selectedValue, categories.categories)}
             listCategory={listOptionsCategories}
             onSave={onUpdateProduct}
@@ -107,11 +118,19 @@ const Dropdown = (props: Props) => {
             selectedCategory={props.selectedValue}
             setShowNotification={setTypeShowNotification}
             onSave={onUpdateCategory}
-            onClickExit={showFormEdit}
+            onClickExit={setShowFormEdit}
           />
         )}
 
-        {/* //TODO: show pop-up delete  */}
+        {isUserDto(props.selectedValue) && isShowFormEdit && (
+          <FormManageAccount
+            selectedAccount={props.selectedValue as UserTypeDto}
+            formName={FormName.UPDATE_ACCOUNT}
+            onSave={onUpdateAccount}
+            onClickExit={setShowFormEdit}
+            setShowNotification={setTypeShowNotification}
+          />
+        )}
 
         {typeShowNotification.message && (
           <ToastNotification type={typeShowNotification.type} message={typeShowNotification.message} />
