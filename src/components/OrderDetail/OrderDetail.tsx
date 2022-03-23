@@ -42,7 +42,7 @@ const OrderDetail = (props: Props) => {
                   <p>
                     {moneyFormat(product.price)} - Qty: {props.order.quantity} -&nbsp;
                   </p>
-                  <p className={`order-detail--${props.order.orderStatus.name}`}> {props.order.orderStatus.name}</p>
+                  <pre className={`order-detail--${props.order.orderStatus.name}`}> {props.order.orderStatus.name}</pre>
                 </div>
                 {props.order.note && <p>Note: {props.order.note}.</p>}
               </div>

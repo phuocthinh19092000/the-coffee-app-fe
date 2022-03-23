@@ -1,5 +1,5 @@
 import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { OrderStatus, RequestState } from '../../../enum';
+import { OrderStatus, OrderStatusNumber, RequestState } from '../../../enum';
 import Order from '../../../interfaces/order';
 import { RootState } from '../../../storage';
 import OrderByStatusApi from '../api/orderStatusApi';
@@ -54,16 +54,49 @@ function prepare(order: Order, newStatus?: OrderStatus, currentStatus?: OrderSta
     },
   };
 }
+
+function prepareActionUndoUpdateOrder(order: Order, index: number, newStatus?: OrderStatus) {
+  return {
+    payload: {
+      order,
+      index,
+      newStatus,
+    },
+  };
+}
 export const updateOrder = createAction('orderByStatus/addOrder', prepare);
+
+export const undoUpdateOrder = createAction('orderByStatus/undo', prepareActionUndoUpdateOrder);
 
 const removeOrderInColumn = (order: Order, listOrderStatus: Order[]) =>
   listOrderStatus.filter((item) => item.id !== order.id);
 
-const addOrderInColumn = (order: Order, listOrderStatus: Order[]) => {
-  const duplicateOrder = listOrderStatus.find((ord) => ord === order);
-  if (!duplicateOrder) {
-    listOrderStatus.push(order);
+const addOrderInColumn = (order: Order, listOrderStatus: Order[], newStatus?: string) => {
+  const duplicateOrder = listOrderStatus.find((ord) => ord.id === order.id);
+
+  if (duplicateOrder) {
+    return;
   }
+
+  if (newStatus && order.orderStatus.name !== newStatus) {
+    const cloneOrder = JSON.parse(JSON.stringify(order));
+    cloneOrder.orderStatus.name = newStatus;
+
+    switch (newStatus) {
+      case OrderStatus.PROCESSING:
+        cloneOrder.orderStatus.value = OrderStatusNumber.PROCESSING;
+        break;
+      case OrderStatus.READY_FOR_PICKUP:
+        cloneOrder.orderStatus.value = OrderStatusNumber.READY_FOR_PICKUP;
+        break;
+    }
+
+    listOrderStatus.push(cloneOrder);
+
+    return;
+  }
+
+  listOrderStatus.push(order);
 };
 
 const orderByStatusSlice = createSlice({
@@ -79,14 +112,14 @@ const orderByStatusSlice = createSlice({
             break;
           case OrderStatus.PROCESSING:
             state.data.orderStatusNew = removeOrderInColumn(action.payload.order, state.data.orderStatusNew);
-            addOrderInColumn(action.payload.order, state.data.orderStatusProcessing);
+            addOrderInColumn(action.payload.order, state.data.orderStatusProcessing, OrderStatus.PROCESSING);
             break;
           case OrderStatus.READY_FOR_PICKUP:
             state.data.orderStatusProcessing = removeOrderInColumn(
               action.payload.order,
               state.data.orderStatusProcessing,
             );
-            addOrderInColumn(action.payload.order, state.data.orderStatusReady);
+            addOrderInColumn(action.payload.order, state.data.orderStatusReady, OrderStatus.READY_FOR_PICKUP);
             break;
           case OrderStatus.CANCELED:
             if (action.payload.currentStatus === OrderStatus.NEW) {
@@ -100,6 +133,24 @@ const orderByStatusSlice = createSlice({
             break;
           case OrderStatus.DONE:
             state.data.orderStatusReady = removeOrderInColumn(action.payload.order, state.data.orderStatusReady);
+        }
+      })
+      .addCase(undoUpdateOrder, (state, action) => {
+        switch (action.payload.newStatus) {
+          case OrderStatus.PROCESSING: {
+            state.data.orderStatusNew.splice(action.payload.index, 0, action.payload.order);
+
+            state.data.orderStatusProcessing = removeOrderInColumn(
+              action.payload.order,
+              state.data.orderStatusProcessing,
+            );
+            break;
+          }
+          case OrderStatus.READY_FOR_PICKUP:
+            state.data.orderStatusProcessing.splice(action.payload.index, 0, action.payload.order);
+
+            state.data.orderStatusReady = removeOrderInColumn(action.payload.order, state.data.orderStatusReady);
+            break;
         }
       })
       .addCase(getOrdersByStatus.pending, (state) => {

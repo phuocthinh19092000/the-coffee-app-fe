@@ -1,20 +1,35 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ColumnOrderStatus, OrderStatus, SocketEvent } from '../../../../enum';
-import { getOrdersByStatus, selectOrderByStatusState, updateOrder } from '../../../orderStatus/action/orderStatus';
+import { ColumnOrder, OrderStatus, SocketEvent } from '../../../../enum';
+import {
+  getOrdersByStatus,
+  selectOrderByStatusState,
+  undoUpdateOrder,
+  updateOrder,
+} from '../../../orderStatus/action/orderStatus';
 import { joinRoomStaff, onListenEventStaff } from '../../../../services/socketService';
 import { useAppDispatch } from '../../../../storage/hooks';
 import { SocketContext } from '../../../../utils/socketContext';
-
-import ColumnOrderStaff from '../../../../components/ColumnOrderStaff/ColumnOrderStaff';
-import './ListOrderStaff.scss';
+import { DragDropContext, DragStart, DropResult } from 'react-beautiful-dnd';
 import { OrderSocket } from '../../../../interfaces/order';
+import { updateStatusOrder } from '../../../updateOrder/action/updateOrder';
+import ColumnOrderStaff from '../../../../components/ColumnOrderStaff/ColumnOrderStaff';
+
+import './ListOrderStaff.scss';
 
 type Props = {
   setIsShowNotification: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+enum IndexColumnOrder {
+  orderStatusNew,
+  orderStatusProcessing,
+  orderStatusReady,
+}
+
 const ListOrderStaff = (props: Props) => {
+  const [indexColumnOnDragStart, setIndexColumnOnDragStart] = useState<number>();
+
   const dispatch = useAppDispatch();
   const ordersByStatus = useSelector(selectOrderByStatusState);
   const socket = useContext(SocketContext);
@@ -24,6 +39,14 @@ const ListOrderStaff = (props: Props) => {
     dispatch(getOrdersByStatus(OrderStatus.PROCESSING)).unwrap();
     dispatch(getOrdersByStatus(OrderStatus.READY_FOR_PICKUP)).unwrap();
   }, []);
+
+  useEffect(() => {
+    joinRoomStaff(socket);
+    onListenEventStaff(socket, SocketEvent.HANDLE_ORDER_EVENT, handleOrder);
+    return () => {
+      socket.off(SocketEvent.HANDLE_ORDER_EVENT);
+    };
+  }, [socket]);
 
   const handleOrder = (data: OrderSocket) => {
     if (data.newOrderStatus) {
@@ -52,24 +75,77 @@ const ListOrderStaff = (props: Props) => {
     }
   };
 
-  useEffect(() => {
-    joinRoomStaff(socket);
-    onListenEventStaff(socket, SocketEvent.HANDLE_ORDER_EVENT, handleOrder);
-    return () => {
-      socket.off(SocketEvent.HANDLE_ORDER_EVENT);
-    };
-  }, [socket]);
+  const onDragStart = (initial: DragStart) => {
+    const indexColOnDragStart = IndexColumnOrder[initial.source.droppableId as keyof typeof IndexColumnOrder];
 
+    setIndexColumnOnDragStart(indexColOnDragStart);
+  };
+
+  const onDragEnd = async (result: DropResult) => {
+    setIndexColumnOnDragStart(undefined);
+
+    const { destination, source } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    const listOrderStartDrag = ordersByStatus[source.droppableId as keyof typeof ordersByStatus];
+    const orderIsDragging = listOrderStartDrag[source.index];
+    const valueNewStatus = orderIsDragging.orderStatus.value + 1;
+
+    switch (destination.droppableId) {
+      case ColumnOrder.PROCESSING:
+        dispatch(updateOrder(orderIsDragging, OrderStatus.PROCESSING));
+        break;
+      case ColumnOrder.READY_FOR_PICKUP:
+        dispatch(updateOrder(orderIsDragging, OrderStatus.READY_FOR_PICKUP));
+        break;
+    }
+
+    const response = await dispatch(updateStatusOrder({ id: orderIsDragging.id, newStatus: valueNewStatus }));
+
+    if (!updateStatusOrder.fulfilled.match(response)) {
+      switch (destination.droppableId) {
+        case ColumnOrder.PROCESSING:
+          dispatch(undoUpdateOrder(orderIsDragging, source.index, OrderStatus.PROCESSING));
+          break;
+        case ColumnOrder.READY_FOR_PICKUP:
+          dispatch(undoUpdateOrder(orderIsDragging, source.index, OrderStatus.READY_FOR_PICKUP));
+          break;
+      }
+    }
+  };
+
+  const checkIsDropDisable = (indexColOnDragEnd: number): boolean => {
+    const indexColOnDragStart = Number(indexColumnOnDragStart);
+    if (indexColOnDragEnd - indexColOnDragStart !== 1) {
+      return true;
+    }
+
+    return false;
+  };
   return (
-    <div className="list-order">
-      <ColumnOrderStaff title={ColumnOrderStatus.NEW} listOrder={ordersByStatus.orderStatusNew} />
-      <ColumnOrderStaff title={ColumnOrderStatus.PROCESSING} listOrder={ordersByStatus.orderStatusProcessing} />
-      <ColumnOrderStaff
-        title={ColumnOrderStatus.READY_FOR_PICKUP}
-        listOrder={ordersByStatus.orderStatusReady}
-        setIsShowNotification={props.setIsShowNotification}
-      />
-    </div>
+    <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
+      <div className="list-order">
+        <ColumnOrderStaff
+          title="New"
+          listOrder={ordersByStatus.orderStatusNew}
+          isDropDisabled={checkIsDropDisable(IndexColumnOrder.orderStatusNew)}
+        />
+        <ColumnOrderStaff
+          title="Processing"
+          listOrder={ordersByStatus.orderStatusProcessing}
+          isDropDisabled={checkIsDropDisable(IndexColumnOrder.orderStatusProcessing)}
+        />
+        <ColumnOrderStaff
+          title="Ready"
+          listOrder={ordersByStatus.orderStatusReady}
+          setIsShowNotification={props.setIsShowNotification}
+          isDropDisabled={checkIsDropDisable(IndexColumnOrder.orderStatusReady)}
+        />
+      </div>
+    </DragDropContext>
   );
 };
 
