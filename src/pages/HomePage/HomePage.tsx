@@ -18,13 +18,15 @@ import React, { useEffect, useState } from 'react';
 import { initSocket, joinRoomCustomer, onListenEventCustomer } from '../../services/socketService';
 import { SocketContext } from '../../utils/socketContext';
 import { useSelector } from 'react-redux';
-import { getFreeUnit, selectUserState } from '../../features/auth/actions/auth';
+import { getFreeUnit, selectLoginState, selectUserState } from '../../features/auth/actions/auth';
 import { customerAccessRole, TabNameNavbar, timeoutNotification, timeOutSplashScreen } from '../../constant';
 import { ROLE, SocketEvent } from '../../enum';
 import { useAppDispatch } from '../../storage/hooks';
 
 import '../../components/WrapperPage/WrapperPage.css';
 import './HomePage.scss';
+import CustomerInformationMobile from '../../components/CustomerInformationMobile/CustomerInformationMobile';
+import PopUpLoginRight from '../../features/auth/components/PopUpLoginRight/PopUpLoginRight';
 
 type NavbarBottomDirectionType = {
   [key: string]: () => void;
@@ -36,7 +38,7 @@ const HomePage = () => {
   const [dataFormCanceledOrder, setDataFormCanceledOrder] = useState({} as Order);
   const [isAccessed, setIsAccessed] = useState(!!window.sessionStorage.getItem('isAccessed'));
   const [popUpRef, isPopUpOpen, setIsPopUpOpen] = useComponentVisible(false);
-
+  const [isOpenCustomerInformation, setIsOpenCustomerInformation] = useState(false);
   const dispatch = useAppDispatch();
 
   const socket = initSocket();
@@ -95,17 +97,25 @@ const HomePage = () => {
   const showMyOderPopUp = () => {
     setIsPopUpOpen(true);
   };
+  const { role } = useSelector(selectUserState);
+  const auth = useSelector(selectLoginState);
+  const checkUser = auth && customerAccessRole.includes(role as ROLE);
+  const [popUpLoginRightRef, isShowPopUpLoginRight, setIsShowPopupLoginRight] = useComponentVisible(false);
 
   // TODO: Add logic to open/close CustomerInformation in object below
 
   const switchNavbarBottom: NavbarBottomDirectionType = {
     homePage: () => {
       setIsPopUpOpen(false);
+      setIsOpenCustomerInformation(false);
     },
     myOrder: () => {
       setIsPopUpOpen(true);
+      setIsOpenCustomerInformation(false);
     },
     information: () => {
+      setIsOpenCustomerInformation(true);
+      setIsShowPopupLoginRight(true);
       setIsPopUpOpen(false);
     },
   };
@@ -123,7 +133,6 @@ const HomePage = () => {
     <>
       <SocketContext.Provider value={socket}>
         <div className="home-page">
-          {/* <WrapperPage> */}
           <div className="w-full h-screen relative bg-grey-4">
             <div className="md:block hidden">
               <Header />
@@ -159,7 +168,6 @@ const HomePage = () => {
             <div className="w-full bottom-0 left-0">
               <Footer navbarIsActive={navbarActive} onClickChangeTab={onClickChangeTabNavbarBottom} />
             </div>
-            {/* </WrapperPage> */}
           </div>
         </div>
       </SocketContext.Provider>
@@ -168,6 +176,16 @@ const HomePage = () => {
         <div ref={popUpRef} className="background-blur">
           <MyOrder />
         </div>
+      )}
+      {isOpenCustomerInformation && checkUser ? (
+        <CustomerInformationMobile />
+      ) : (
+        !checkUser &&
+        isShowPopUpLoginRight && (
+          <div ref={popUpLoginRightRef} className="background-blur">
+            <PopUpLoginRight />
+          </div>
+        )
       )}
 
       {Object.keys(dataFormCanceledOrder).length > 0 && (

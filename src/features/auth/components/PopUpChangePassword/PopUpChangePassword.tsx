@@ -77,9 +77,9 @@ const PopUpChangePassword = (props: Props) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Card className="card card--right">
-        <p className="text-style-1440-h1 text-brown text-center py-[100px] ">Change Password</p>
-        <div className="space-y-1 mb-[200px]">
+      <Card className="card card--right flex flex-col justify-center items-center">
+        <p className="text-style-1440-h1 text-brown text-center">Change Password</p>
+        <div className="space-y-1 sm:py-2.5 md:pt-[10%] md:pb-[27.5%] xxl:pb-[22.5%]">
           <Controller
             name="currentPassword"
             control={control}

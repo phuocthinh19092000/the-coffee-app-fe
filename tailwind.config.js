@@ -65,13 +65,16 @@ module.exports = {
         2.5: '2.5rem',
         3: '3rem',
         3.5: '3.5rem',
+        3.75: '3.75rem',
         4: '4rem',
         4.5: '4.5rem',
         5: '5rem',
-        6: '6rem'
+        6: '6rem',
+        customer_information: '236px',
       },
       zIndex: {
         1: '1',
+        100: '100'
       },
       boxShadow: {
         order: '0px 2px 4px rgba(34, 34, 34, 0.08)',

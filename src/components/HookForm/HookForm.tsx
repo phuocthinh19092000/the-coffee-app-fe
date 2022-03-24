@@ -96,7 +96,7 @@ const HookForm = () => {
         />
       </div>
       <p
-        className="text-error cursor-pointer text-right  mt-2.5 sm:text-style-375-body md:text-style-768-body xxl:text-style-1440-body sm:mr-0.75"
+        className="text-error cursor-pointer text-right  mt-2.5 sm:text-style-375-body md:text-style-768-body xxl:text-style-1440-body sm:mr-0.75 sm:hidden md:block"
         onClick={moveToLoginStaff}
       >
         You are Staff?

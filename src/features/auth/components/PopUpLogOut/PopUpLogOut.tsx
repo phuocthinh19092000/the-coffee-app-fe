@@ -25,7 +25,7 @@ const PopUpLogOut = (props: Props) => {
   };
 
   return (
-    <Card className="card card--right card__content">
+    <Card className="card card--right justify-center">
       <span className="span-log-out"> Are you sure you want to log out ?</span>
       <Button
         onClick={LogOutHandler}
