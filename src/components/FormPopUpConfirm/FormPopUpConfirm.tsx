@@ -23,18 +23,22 @@ const FormPopUpConfirm = (props: Props) => {
       </div>
 
       <div className="form-popup-confirm__group">
-        {props.titleButton1 && <Button
-          onClick={props.handleClickConfirm}
-          className="btn btn-primary btn--enabled form-popup-confirm__button"
-          type="submit"
-          titleButton={props.titleButton1}
-        />}
-        {props.titleButton2 && <Button
-          onClick={props.onClickExit}
-          className="btn btn-primary btn-secondary form-popup-confirm__button"
-          type="submit"
-          titleButton={props.titleButton2}
-        />}
+        {props.titleButton1 && (
+          <Button
+            onClick={props.handleClickConfirm}
+            className="btn btn-primary btn--enabled form-popup-confirm__button"
+            type="submit"
+            titleButton={props.titleButton1}
+          />
+        )}
+        {props.titleButton2 && (
+          <Button
+            onClick={props.onClickExit}
+            className="btn btn-primary btn-secondary form-popup-confirm__button"
+            type="submit"
+            titleButton={props.titleButton2}
+          />
+        )}
       </div>
     </Card>
   );

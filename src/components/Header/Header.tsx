@@ -23,11 +23,14 @@ import { getWebhook } from '../../features/webhook/action/webhook';
 import { customerAccessRole } from '../../constant';
 
 import './Header.scss';
+import OrderProcess from '../OrderProcess/OrderProcess';
 
 const Header = () => {
   const [keyword, setKeyword] = useState('');
+  const [itemSearchDrink, setItemSearchDrink] = useState({} as Product);
   const [ref, isShowSearchDrink, setIsShowSearchDrink] = useComponentVisible(false);
   const [popUpLoginRightRef, isShowPopUpLoginRight, setIsShowPopupLoginRight] = useComponentVisible(false);
+  const [refOrderProcess, isOpenPopUpOrder, setIsOpenPopUpOrder] = useComponentVisible(false);
   const debouncedKeyword = useDebounce(keyword, 500);
   const history = useHistory();
   const dispatch = useAppDispatch();
@@ -63,8 +66,10 @@ const Header = () => {
     setKeyword(event.target.value);
   };
 
-  const handleClickSearchItem = (productId: string) => {
-    dispatch(getProductId(productId));
+  const handleClickSearchItem = (item: Product) => {
+    setItemSearchDrink(item);
+    setIsOpenPopUpOrder(!isOpenPopUpOrder);
+    dispatch(getProductId(item.id));
     resetValue();
   };
 
@@ -126,7 +131,7 @@ const Header = () => {
                     avatarUrl={searchItem.images}
                     name={searchItem.name}
                     price={searchItem.price.toString()}
-                    onClick={() => handleClickSearchItem(searchItem.id)}
+                    onClick={() => handleClickSearchItem(searchItem)}
                   />
                 ))}
               </div>
@@ -158,6 +163,17 @@ const Header = () => {
           </div>
         )}
       </div>
+      {isOpenPopUpOrder && (
+        <div ref={refOrderProcess} className="background-blur">
+          {
+            <OrderProcess
+              categoryId={itemSearchDrink.category.id}
+              itemDrink={itemSearchDrink}
+              setIsOpenPopUp={setIsOpenPopUpOrder}
+            />
+          }
+        </div>
+      )}
     </>
   );
 };
