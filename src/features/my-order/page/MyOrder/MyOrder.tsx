@@ -28,7 +28,7 @@ const MyOrder = () => {
     return dayjs(date.createdAt).format(datePattern);
   });
   return (
-    <Card className={`card card-login card--right my-order`}>
+    <Card className="card--right my-order">
       {loading === RequestState.PENDING ? (
         <Spinner />
       ) : Object.keys(orderData).length > 0 ? (
