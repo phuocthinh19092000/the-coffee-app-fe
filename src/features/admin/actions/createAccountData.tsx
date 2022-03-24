@@ -1,7 +1,7 @@
 import { RootState } from '../../../storage';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import Account from '../../../interfaces/account';
-import accountApi from '../api/accountAPI';
+import accountApi, { UpdateUserParams } from '../api/accountAPI';
 import { UserTypeDto } from '../../../interfaces';
 import { RequestState } from '../../../enum';
 
@@ -34,8 +34,7 @@ export const initialState: CreateAccountState = {
     status: null,
   },
 };
-
-export const createAccount = createAsyncThunk('/admin/account', async (body: UserTypeDto, { rejectWithValue }) => {
+export const createAccount = createAsyncThunk('/create-account', async (body: UserTypeDto, { rejectWithValue }) => {
   try {
     const account = await accountApi.createAccount(body);
     return account.data;
@@ -44,6 +43,19 @@ export const createAccount = createAsyncThunk('/admin/account', async (body: Use
     return rejectWithValue(error.data);
   }
 });
+
+export const updateAccount = createAsyncThunk(
+  '/update-account',
+  async (updateUserParams: UpdateUserParams, { rejectWithValue }) => {
+    try {
+      const account = await accountApi.updateAccount(updateUserParams);
+      return account.data;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      return rejectWithValue(error.data);
+    }
+  },
+);
 
 const createAccountSlice = createSlice({
   name: 'createProduct',
@@ -59,6 +71,19 @@ const createAccountSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(createAccount.rejected, (state, action) => {
+        state.loading = RequestState.REJECTED;
+        state.error = action.payload;
+        state.error = initialState.error;
+      })
+      .addCase(updateAccount.pending, (state) => {
+        state.loading = RequestState.PENDING;
+      })
+      .addCase(updateAccount.fulfilled, (state, action) => {
+        state.loading = RequestState.FULFILLED;
+        state.data = action.payload;
+        state.error = initialState.error;
+      })
+      .addCase(updateAccount.rejected, (state, action) => {
         state.loading = RequestState.REJECTED;
         state.error = action.payload;
       });

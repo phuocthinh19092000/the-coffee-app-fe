@@ -6,8 +6,7 @@ import { InputParams, NotificationParams, UserTypeDto } from '../../../interface
 import React, { useEffect, useState } from 'react';
 import './FormManageAccount.css';
 import { useAppDispatch } from '../../../storage/hooks';
-import { createAccount } from '../actions/createAccountData';
-import { statusCodeError } from '../../../constant';
+import { createAccount, updateAccount } from '../actions/createAccountData';
 import { NotificationType } from '../../../enum';
 import { startCase } from 'lodash';
 
@@ -61,16 +60,26 @@ const FormManageAccount = (props: Props) => {
     });
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const setContentNotification = (message: string, response: any) => {
-    if (statusCodeError.includes(response.payload?.statusCode)) {
-      props.setShowNotification({
-        type: NotificationType.FAILURE,
-        message: response.payload.message,
-      });
+  const setContentNotification = (message: string, type: NotificationType) => {
+    props.setShowNotification({ message, type });
+    props.onSave();
+  };
+
+  const handleCallApiUpdateAccount = async (userId: string, body: UserTypeDto) => {
+    const response = await dispatch(updateAccount({ userId, body }));
+    if (updateAccount.fulfilled.match(response)) {
+      setContentNotification('Account updated successfully!', NotificationType.SUCCESS);
     } else {
-      props.setShowNotification({ message, type: NotificationType.SUCCESS });
-      props.onSave();
+      setContentNotification('Email already existed!', NotificationType.FAILURE);
+    }
+  };
+
+  const handleCallApiAddAccount = async (body: UserTypeDto) => {
+    const response = await dispatch(createAccount(body));
+    if (createAccount.fulfilled.match(response)) {
+      setContentNotification('Account added successfully!', NotificationType.SUCCESS);
+    } else {
+      setContentNotification('Email already existed!', NotificationType.FAILURE);
     }
   };
 
@@ -78,17 +87,18 @@ const FormManageAccount = (props: Props) => {
     if (!isFullFill) {
       return;
     }
+    const { id, ...dataAccountWithoutId } = dataAccount;
 
     dataAccount.email = dataAccount.email.trim();
     dataAccount.name = startCase(dataAccount.name);
 
-    if (dataAccount.id) {
-      //TODO:  update information account
+    if (id) {
+      handleCallApiUpdateAccount(id, dataAccountWithoutId);
     } else {
-      const response = await dispatch(createAccount(dataAccount));
-      setContentNotification('New Account added successfully!', response);
+      handleCallApiAddAccount(dataAccount);
     }
   };
+
   return (
     <WrapperForm
       name={props.formName}
