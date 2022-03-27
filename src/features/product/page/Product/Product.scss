@@ -4,7 +4,7 @@
 }
 
 .product-left {
-  @apply xxl:w-1/5 xxl:pl-1.25 xxl:pr-1 xxl:overflow-hidden overflow-scroll w-[100vw] flex flex-row xxl:flex-col justify-start sm:mx-1 md:mx-1;
+  @apply xxl:w-1/5 xxl:pl-1.25 xxl:pr-1 xxl:overflow-hidden overflow-x-scroll flex flex-row xxl:flex-col justify-start sm:mx-1 md:mx-1;
 }
 
 .product-left::-webkit-scrollbar {

@@ -13,16 +13,18 @@ type Props = {
 
 function PopUpFinishOrder(props: Props) {
   return (
-    <Card className="card card--center card-confirm-order">
+    <Card className="card card--center">
       <img src={Exit} className="card-confirm-order__exit" onClick={props.onClick} alt="Exit Icon" />
 
       <div className="card-confirm-order__img">
         <img src={OrderImage} alt="Order Confirmed" />
       </div>
-      <h2 className="card-confirm-order__title">{props.title ?? 'ORDER PLACED!'}</h2>
-      <p className="card-confirm-order__description">
-        {props.description ?? 'You will be notified to pick up when drink is ready.'}
-      </p>
+      <div className="text-center mt-[10%] sm:mb-[15%] md:mb-[55%]">
+        <h2 className="card-confirm-order__title">{props.title ?? 'ORDER PLACED!'}</h2>
+        <p className="card-confirm-order__description">
+          {props.description ?? 'You will be notified to pick up when drink is ready.'}
+        </p>
+      </div>
 
       <Button
         onClick={props.onClick}

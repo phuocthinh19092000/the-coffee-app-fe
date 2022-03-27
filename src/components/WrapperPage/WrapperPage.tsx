@@ -12,7 +12,7 @@ type Props = {
 
 const WrapperPage = (props: Props) => {
   return (
-    <div className="w-full h-screen relative bg-grey-4">
+    <div className="w-full h-full relative bg-grey-4">
       <div className="md:block hidden">
         <Header />
       </div>

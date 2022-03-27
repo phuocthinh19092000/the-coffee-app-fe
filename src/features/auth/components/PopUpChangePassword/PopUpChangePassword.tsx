@@ -18,21 +18,25 @@ interface ChangePasswordDto {
 }
 
 const MIN_CHARACTER_PASSWORD_REQUIRED = 8;
+const MAX_CHARACTER_PASSWORD_REQUIRED = 24;
 
 const schemaFormChangePassword = yup.object().shape({
   currentPassword: yup
     .string()
     .required('Current password is required')
-    .min(MIN_CHARACTER_PASSWORD_REQUIRED, 'Current password must be at least 8 characters'),
+    .min(MIN_CHARACTER_PASSWORD_REQUIRED, 'Current password must be at least 8 characters')
+    .max(MAX_CHARACTER_PASSWORD_REQUIRED, 'Current password must be at longest 24 characters'),
   newPassword: yup
     .string()
     .required('New password is required')
     .min(MIN_CHARACTER_PASSWORD_REQUIRED, 'New password must be at least 8 characters')
+    .max(MAX_CHARACTER_PASSWORD_REQUIRED, 'New password must be at longest 24 characters')
     .notOneOf([yup.ref('currentPassword')], 'New password and current password must be different'),
   reEnterPassword: yup
     .string()
     .required('Re-enter password is required')
     .min(MIN_CHARACTER_PASSWORD_REQUIRED, 'Re-enter password must be at least 8 characters')
+    .max(MAX_CHARACTER_PASSWORD_REQUIRED, 'Re-enter password must be at longest 24 characters')
     .oneOf([yup.ref('newPassword')], 'Password does not match'),
 });
 
@@ -90,7 +94,7 @@ const PopUpChangePassword = (props: Props) => {
                 onChange={(event) => onChange(event.target.value)}
                 value={value}
                 src={isShowCurrentPassword ? CloseEyeIcon : EyeIcon}
-                onClickFirstIcon={() => setIsShowCurrentPassword(!isShowCurrentPassword)}
+                onClickSecondIcon={() => setIsShowCurrentPassword(!isShowCurrentPassword)}
                 error={errors.currentPassword}
                 className="block-input--white"
               />
@@ -106,7 +110,7 @@ const PopUpChangePassword = (props: Props) => {
                 onChange={(event) => onChange(event.target.value)}
                 value={value}
                 src={isShowNewPassword ? CloseEyeIcon : EyeIcon}
-                onClickFirstIcon={() => setIsShowNewPassword(!isShowNewPassword)}
+                onClickSecondIcon={() => setIsShowNewPassword(!isShowNewPassword)}
                 error={errors.newPassword}
                 className="block-input--white"
               />
@@ -122,7 +126,7 @@ const PopUpChangePassword = (props: Props) => {
                 onChange={(event) => onChange(event.target.value)}
                 value={value}
                 src={isShowReEnterPassword ? CloseEyeIcon : EyeIcon}
-                onClickFirstIcon={() => setIsShowReEnterPassword(!isShowReEnterPassword)}
+                onClickSecondIcon={() => setIsShowReEnterPassword(!isShowReEnterPassword)}
                 error={errors.reEnterPassword}
                 className="block-input--white"
               />

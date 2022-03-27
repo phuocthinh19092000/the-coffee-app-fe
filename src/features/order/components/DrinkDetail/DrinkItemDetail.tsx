@@ -39,7 +39,7 @@ function DrinkItemDetail(props: Props) {
   };
 
   return (
-    <Card className="card card--center popup-detail">
+    <Card className="card card--center">
       <img src={Exit} className="popup-detail__exit" onClick={props.handleClickExitPopUp} alt="Exit Icon" />
       <div className="popup-detail__drink-item">
         <DrinkItem item={props.item} />

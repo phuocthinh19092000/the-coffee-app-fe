@@ -1,23 +1,19 @@
-.popup-detail {
-    @apply justify-center;
-}
-
 .popup-detail__exit {
     @apply w-1 h-1 absolute top-2 right-2 cursor-pointer;
 }
 
 .popup-detail__drink-item {
-    @apply absolute top-[5%];
+    @apply py-[5%];
 }
 
 .popup-detail__input-group {
-    @apply absolute top-1/2;
+    @apply pt-[5%] sm:pb-[10%] md:pb-[20%];
 }
 
 .popup-detail__input {
-    @apply mt-[30px] mb-1.25 cursor-pointer;
+    @apply mb-1.25 cursor-pointer;
 }
 
 .popup-detail__button {
-    @apply absolute top-[85%] w-11/12;
+    @apply w-11/12;
 }

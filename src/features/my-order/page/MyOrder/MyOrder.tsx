@@ -30,7 +30,9 @@ const MyOrder = () => {
   return (
     <Card className="card--right my-order">
       {loading === RequestState.PENDING ? (
-        <Spinner />
+        <div className="card--right flex justify-center">
+          <Spinner />
+        </div>
       ) : Object.keys(orderData).length > 0 ? (
         <div className="h-full pt-0.5">
           <div className="flex justify-between w-full pt-1">

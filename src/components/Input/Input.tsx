@@ -35,7 +35,11 @@ const Input = (props: Props) => {
           <img src={props.src} alt="icon-input-2" className="right-1.5" onClick={props.onClickSecondIcon} />
         )}
       </div>
-      {props.error && <p className="text-error ml-[20px] my-[10px]">{props.error.message}</p>}
+      {props.error && (
+        <p className="text-error ml-[5px] my-[10px] sm:text-style-375-caption md:text-style-768-caption xxl:text-style-1440-caption">
+          {props.error.message}
+        </p>
+      )}
     </>
   );
 };

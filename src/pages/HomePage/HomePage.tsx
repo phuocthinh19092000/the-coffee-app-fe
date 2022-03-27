@@ -133,7 +133,7 @@ const HomePage = () => {
     <>
       <SocketContext.Provider value={socket}>
         <div className="home-page">
-          <div className="w-full h-screen relative bg-grey-4">
+          <div className="w-full sm:h-screen md:h-fit relative bg-grey-4">
             <div className="md:block hidden">
               <Header />
             </div>
