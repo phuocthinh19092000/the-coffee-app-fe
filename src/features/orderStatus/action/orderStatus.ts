@@ -1,4 +1,4 @@
-import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { OrderStatus, OrderStatusNumber, RequestState } from '../../../enum';
 import Order from '../../../interfaces/order';
 import { RootState } from '../../../storage';
@@ -102,7 +102,12 @@ const addOrderInColumn = (order: Order, listOrderStatus: Order[], newStatus?: st
 const orderByStatusSlice = createSlice({
   name: 'orderByStatus',
   initialState,
-  reducers: {},
+  reducers: {
+    updateOrderFromCustomer: (state, action: PayloadAction<Order>) => {
+      const updateOrderIndex = state.data.orderStatusNew.findIndex((item) => item.id === action.payload.id);
+      Object.assign(state.data.orderStatusNew[updateOrderIndex], action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(updateOrder, (state, action) => {
@@ -122,13 +127,13 @@ const orderByStatusSlice = createSlice({
             addOrderInColumn(action.payload.order, state.data.orderStatusReady, OrderStatus.READY_FOR_PICKUP);
             break;
           case OrderStatus.CANCELED:
-            if (action.payload.currentStatus === OrderStatus.NEW) {
-              state.data.orderStatusNew = removeOrderInColumn(action.payload.order, state.data.orderStatusNew);
-            } else {
+            if (action.payload.currentStatus === OrderStatus.PROCESSING) {
               state.data.orderStatusProcessing = removeOrderInColumn(
                 action.payload.order,
                 state.data.orderStatusProcessing,
               );
+            } else {
+              state.data.orderStatusNew = removeOrderInColumn(action.payload.order, state.data.orderStatusNew);
             }
             break;
           case OrderStatus.DONE:
@@ -180,4 +185,5 @@ const orderByStatusSlice = createSlice({
 });
 
 export const selectOrderByStatusState = (state: RootState) => state.orderByStatus.data;
+export const { updateOrderFromCustomer } = orderByStatusSlice.actions;
 export default orderByStatusSlice.reducer;

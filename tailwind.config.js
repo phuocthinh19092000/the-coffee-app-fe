@@ -130,7 +130,7 @@ module.exports = {
           letterSpacing: '0.15px',
         },
         '.text-style-vendor-sub-1': {
-          fontWeight: '400',
+          fontWeight: '600',
           fontSize: '18px',
           lineHeight: '21px',
           letterSpacing: '0.15px',

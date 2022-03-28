@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import Order from '../api/orderAPI';
-import { orderParams } from '../api/orderParams';
+import { createOrderParams } from '../api/orderParams';
 import { RootState } from '../../../storage';
 import { RequestState } from '../../../enum';
 
@@ -8,7 +8,7 @@ export interface OrderDetail {
   loading: RequestState;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
-  orderData: orderParams;
+  orderData: createOrderParams;
 }
 
 export const initialState: OrderDetail = {
@@ -25,7 +25,7 @@ export const initialState: OrderDetail = {
   },
 };
 
-export const placeOrder = createAsyncThunk('/orders', async (body: orderParams, { rejectWithValue }) => {
+export const placeOrder = createAsyncThunk('/orders', async (body: createOrderParams, { rejectWithValue }) => {
   try {
     const responseOrderData = await Order.placeOrder(body);
     return responseOrderData.data;
@@ -54,7 +54,7 @@ const orderSlice = createSlice({
     getQuantity: (state, action: PayloadAction<number>) => {
       state.orderData.quantity += action.payload;
     },
-    setOrderData: (state, action: PayloadAction<orderParams>) => {
+    setOrderData: (state, action: PayloadAction<createOrderParams>) => {
       state.orderData = action.payload;
     },
     resetOrder: () => initialState,

@@ -6,6 +6,7 @@ import {
   selectOrderByStatusState,
   undoUpdateOrder,
   updateOrder,
+  updateOrderFromCustomer,
 } from '../../../orderStatus/action/orderStatus';
 import { joinRoomStaff, onListenEventStaff } from '../../../../services/socketService';
 import { useAppDispatch } from '../../../../storage/hooks';
@@ -50,7 +51,12 @@ const ListOrderStaff = (props: Props) => {
 
   const handleOrder = (data: OrderSocket) => {
     if (data.newOrderStatus) {
+      const audio = new Audio('order.mp3');
       switch (data.newOrderStatus) {
+        case OrderStatus.NEW:
+          dispatch(updateOrder(data.order, OrderStatus.NEW));
+          audio.play();
+          break;
         case OrderStatus.PROCESSING:
           dispatch(updateOrder(data.order, OrderStatus.PROCESSING));
           break;
@@ -63,15 +69,12 @@ const ListOrderStaff = (props: Props) => {
           dispatch(updateOrder(data.order, OrderStatus.CANCELED, data.currentOrderStatus as OrderStatus));
           break;
 
-        case OrderStatus.DONE: {
+        case OrderStatus.DONE:
           dispatch(updateOrder(data.order, OrderStatus.DONE));
           break;
-        }
       }
     } else {
-      dispatch(updateOrder(data.order, OrderStatus.NEW));
-      const audio = new Audio('order.mp3');
-      audio.play();
+      dispatch(updateOrderFromCustomer(data.order));
     }
   };
 

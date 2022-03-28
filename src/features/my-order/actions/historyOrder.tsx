@@ -1,9 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import OrderHistory from '../api/historyAPI';
 import { RootState } from '../../../storage';
 import Order from '../../../interfaces/order';
 import { logout } from '../../auth/actions/auth';
-import { RequestState } from '../../../enum';
+import { OrderStatus, RequestState } from '../../../enum';
 
 export interface myOrdersDetails {
   loading: RequestState;
@@ -32,7 +32,12 @@ export const getMyOrders = createAsyncThunk('/user/orders', async (_, { rejectWi
 const myOrderSlice = createSlice({
   name: 'myOrder',
   initialState,
-  reducers: {},
+  reducers: {
+    cancelMyOrder: (state, action: PayloadAction<string>) => {
+      const index = state.data.findIndex((order) => order.id === action.payload);
+      state.data[index].orderStatus.name = OrderStatus.CANCELED;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getMyOrders.pending, (state) => {
@@ -52,6 +57,7 @@ const myOrderSlice = createSlice({
   },
 });
 
+export const { cancelMyOrder } = myOrderSlice.actions;
 export const getMyOrderState = (state: RootState) => state.myOrder.data;
 export const getMyOrderLoading = (state: RootState) => state.myOrder.loading;
 export default myOrderSlice.reducer;

@@ -16,7 +16,8 @@ import useComponentVisible from '../../../../utils/useComponentVisible';
 import OrderDetail from '../../../../components/OrderDetail/OrderDetail';
 import Order from '../../../../interfaces/order';
 
-import './OrderItemStaff.scss';
+import './OrderItemStaff.css';
+import { updateOrder } from '../../../orderStatus/action/orderStatus';
 interface Props {
   order: Order;
   setIsShowNotification?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -62,6 +63,12 @@ const OrderItemStaff = (props: Props) => {
   const onExitFormHandler = () => {
     setIsComponentVisible(false);
   };
+
+  const onSubmitCancelOrder = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
+    dispatch(updateOrder(props.order, OrderStatus.CANCELED));
+  };
+
   return (
     <>
       <Draggable
@@ -72,7 +79,12 @@ const OrderItemStaff = (props: Props) => {
         {(provided) => {
           return (
             <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-              <div className={`order-item-staff`} onClick={onShowDetailOrder}>
+              <div
+                className={`order-item-staff ${
+                  props.order.orderStatus.name === OrderStatus.CANCELED ? 'bg-grey-2' : 'bg-white'
+                }`}
+                onClick={onShowDetailOrder}
+              >
                 <img
                   src={props.order.product.images || BlackCoffeeImg}
                   className="order-item-staff__img"
@@ -97,16 +109,22 @@ const OrderItemStaff = (props: Props) => {
                           onClick={onRemindOrder}
                         />
                       )}
-                      <img
-                        src={icon}
-                        alt={icon}
-                        className={
-                          props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP
-                            ? 'order-detail-staff__icon'
-                            : 'order-detail-staff__icon__next'
-                        }
-                        onClick={onUpdateStatusHandler}
-                      />
+                      {props.order.orderStatus.name === OrderStatus.CANCELED ? (
+                        <button className="order-detail-staff__cancel-button" onClick={onSubmitCancelOrder}>
+                          Cancel
+                        </button>
+                      ) : (
+                        <img
+                          src={icon}
+                          alt={icon}
+                          className={
+                            props.order.orderStatus.name === OrderStatus.READY_FOR_PICKUP
+                              ? 'order-detail-staff__icon'
+                              : 'order-detail-staff__icon__next'
+                          }
+                          onClick={onUpdateStatusHandler}
+                        />
+                      )}
                     </div>
                     {props.order.note ? <p className="order-detail-staff__note">Note: {props.order.note}</p> : ''}
                   </div>

@@ -38,7 +38,7 @@ const OrderDetail = (props: Props) => {
               <img className="order-detail__img" src={props.order.product.images || CoffeeImg} alt="Avatar Drink" />
               <div className="order-detail__information-drink dp-center">
                 <p>{product?.name}</p>
-                <div className="dp-row">
+                <div className="flex">
                   <p>
                     {moneyFormat(product.price)} - Qty: {props.order.quantity} -&nbsp;
                   </p>
@@ -55,7 +55,9 @@ const OrderDetail = (props: Props) => {
               </div>
             </div>
           </div>
-          {props.order.orderStatus.name !== OrderStatus.READY_FOR_PICKUP ? (
+          {![OrderStatus.READY_FOR_PICKUP, OrderStatus.CANCELED].includes(
+            props.order.orderStatus.name as OrderStatus,
+          ) ? (
             <div className="order-detail__bottom">
               <button className="order-detail__btn-cancel" onClick={onShowPopUpConfirmCancel}>
                 Cancel Order
