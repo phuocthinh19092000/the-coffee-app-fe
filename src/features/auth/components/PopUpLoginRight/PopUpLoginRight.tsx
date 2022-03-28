@@ -10,7 +10,7 @@ import HookForm from '../../../../components/HookForm/HookForm';
 const PopUpLoginRight = () => {
   return (
     <Card className="card card-login card--right scroll-popup-right">
-      <div className="sm:pt-3.5 md:pt-[140px] xxl:pt-[120px]">
+      <div className="md:pt-[140px] xxl:pt-[120px]">
         <img src={LoginIcon} alt="Login Icon" />
         <div>
           <HookForm />

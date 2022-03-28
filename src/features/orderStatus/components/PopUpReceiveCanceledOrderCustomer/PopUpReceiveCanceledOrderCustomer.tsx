@@ -20,11 +20,9 @@ const PopUpReceiveCanceledOrderCustomer = (props: Props) => {
       <Card className="card card--center ">
         <img src={Exit} className="popup-detail__exit" alt="Exit Icon" onClick={props.onCloseForm} />
         <div className="order-canceled">
-          <div>
-            <p className="order-canceled__title">ORDER CANCELED</p>
-            <DrinkItem item={product} />
-          </div>
-          <div className="w-full">
+          <p className="order-canceled__title">ORDER CANCELED</p>
+          <DrinkItem item={product} />
+          <div className="sm:py-[10%] md:py-[30%]">
             <p className="order-canceled__reason mb-[16px]">We’re sorry that your order has been canceled.</p>
             <p className="order-canceled__reason">Reason: {reason}.</p>
           </div>

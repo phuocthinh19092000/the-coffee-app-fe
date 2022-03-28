@@ -1,5 +1,5 @@
 .left-side-bar {
-    @apply md:w-[90px] lg:w-[135px] sm:h-screen xxl:h-full bg-white mr-1 sticky top-0 left-0;
+    @apply md:w-[90px] lg:w-[135px] h-screen bg-white mr-1 sticky top-0 left-0;
 }
 
 .left-side-bar__img {
