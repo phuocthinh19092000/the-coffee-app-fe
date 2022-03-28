@@ -178,7 +178,9 @@ const HomePage = () => {
         </div>
       )}
       {isOpenCustomerInformation && checkUser ? (
-        <CustomerInformationMobile />
+        <div className="md:hidden sm:block">
+          <CustomerInformationMobile />
+        </div>
       ) : (
         !checkUser &&
         isShowPopUpLoginRight && (
