@@ -4,58 +4,6 @@ importScripts('https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.9.0/firebase-analytics.js');
 importScripts('https://www.gstatic.com/firebasejs/8.9.0/firebase-messaging.js');
 
-let CACHE_NAME = 'React App';
-let urlsToCache = ['/'];
-
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-    .register('./firebase-messaging-sw.js')
-    .then(function (registration) {})
-    .catch(function (err) {});
-}
-
-// Install a service worker
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('install', (event) => {
-  // Perform install steps
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(function (cache) {
-      return cache.addAll(urlsToCache);
-    }),
-  );
-});
-
-// Cache and return requests
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then(function (response) {
-      // Cache hit - return response
-      if (response) {
-        return response;
-      }
-      return fetch(event.request);
-    }),
-  );
-});
-
-// Update a service worker
-// eslint-disable-next-line no-restricted-globals
-self.addEventListener('activate', (event) => {
-  let cacheWhitelist = ['React App'];
-  event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        }),
-      );
-    }),
-  );
-});
-
 const firebaseConfig = {
   apiKey: 'AIzaSyCrtNWy-vBMARmFHQU57WeqeTFQsInB3Vg',
   authDomain: 'test-notification-coffee-app.firebaseapp.com',
