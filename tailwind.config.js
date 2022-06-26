@@ -3,6 +3,9 @@ const plugin = require('tailwindcss/plugin');
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
+    backgroundImage: {
+      'change-avatar': 'linear-gradient(180deg,  #F2F2F2 0%, #F2F2F2 30%, #EEDFD2 30% , #EEDFD2 100%)',
+    },
     fontFamily: {
       proximaNova: ['"proxima-nova"', 'sans-serif'],
     },
@@ -74,7 +77,7 @@ module.exports = {
       },
       zIndex: {
         1: '1',
-        100: '100'
+        100: '100',
       },
       boxShadow: {
         order: '0px 2px 4px rgba(34, 34, 34, 0.08)',
@@ -87,31 +90,31 @@ module.exports = {
         vendorFail: '0px 4px 28px rgba(219, 0, 0, 0.24)',
       },
       keyframes: {
-        'TopToBottom': {
-          'from': {
+        TopToBottom: {
+          from: {
             opacity: '0',
             top: '0px',
           },
-          'to': {
+          to: {
             opacity: '1',
-            top: '1.5rem'
-          }
+            top: '1.5rem',
+          },
         },
-        'ToastInRight': {
-          'from': {
+        ToastInRight: {
+          from: {
             opacity: '0',
             right: '0px',
           },
-          'to': {
+          to: {
             opacity: '1',
-            right: '1.25rem'
-          }
-        }
+            right: '1.25rem',
+          },
+        },
       },
       animation: {
-        'TopToBottom': 'TopToBottom 0.7s',
-        'ToastInRight': 'ToastInRight 0.7s',
-      }
+        TopToBottom: 'TopToBottom 0.7s',
+        ToastInRight: 'ToastInRight 0.7s',
+      },
     },
   },
   plugins: [

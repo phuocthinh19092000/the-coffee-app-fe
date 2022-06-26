@@ -48,7 +48,7 @@ const OrderDetail = (props: Props) => {
               </div>
             </div>
             <div className="dp-center">
-              <img className="order-detail__img" src={avatarDefaultUser} alt="Avatar Customer" />
+              <img className="order-detail__img" src={user.avatarUrl || avatarDefaultUser} alt="Avatar Customer" />
               <div className="order-detail__information-drink dp-center">
                 <p>{user.name}</p>
                 {/* <p> {user.phoneNumber} </p> */}

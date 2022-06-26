@@ -77,6 +77,16 @@ export const addDeviceToken = createAsyncThunk(
   },
 );
 
+export const updateAvatar = createAsyncThunk('users/avatar', async (avatar: FormData, { rejectWithValue }) => {
+  try {
+    const responseAvatarUrl = await GetUserData.updateAvatar(avatar);
+    return responseAvatarUrl.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    return rejectWithValue(error.data);
+  }
+});
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -127,6 +137,17 @@ const authSlice = createSlice({
         state.data.userInfor.freeUnit = action.payload;
       })
       .addCase(getFreeUnit.rejected, (state, action) => {
+        state.loading = RequestState.REJECTED;
+        state.error = action.payload;
+      })
+      .addCase(updateAvatar.pending, (state) => {
+        state.loading = RequestState.PENDING;
+      })
+      .addCase(updateAvatar.fulfilled, (state, action) => {
+        state.loading = RequestState.FULFILLED;
+        state.data.userInfor.avatarUrl = action.payload;
+      })
+      .addCase(updateAvatar.rejected, (state, action) => {
         state.loading = RequestState.REJECTED;
         state.error = action.payload;
       });

@@ -1,4 +1,5 @@
-import StaffImg from '../../../../share/assets/img/LoginStaff.png';
+// import StaffImg from '../../../../share/assets/img/LoginStaff.png';
+import Lips from '../../../../share/assets/img/lips.png';
 import Icon from '../../../../components/Icon/Icon';
 import FacebookIcon from '../../../../share/assets/vector/VectorFacebook.svg';
 import EyeIcon from '../../../../share/assets/vector/Eye.svg';
@@ -19,6 +20,8 @@ import { useAppDispatch } from '../../../../storage/hooks';
 import useClearNotification from '../../../../utils/useClearNotification';
 import ToastNotification from '../../../../components/ToastNotification/ToatstNotification';
 import ButtonStaff from '../../../../components/ButtonStaff/ButtonStaff';
+import { title } from 'process';
+import { myTitle } from '../../../../constant/myConstant';
 
 const LoginStaff = () => {
   const user = useSelector(selectUserState);
@@ -47,11 +50,17 @@ const LoginStaff = () => {
     }
   }, []);
 
+  const moveToHomePage = () => {
+    history.push('/');
+  };
   const onSubmitForm = async (dataFrom: FormLogin) => {
     const responeLogin = await dispatch(login({ email: dataFrom.email, password: dataFrom.password }));
     dispatch(checkRole([ROLE.VENDOR, ROLE.ADMIN]));
 
-    if (login.fulfilled.match(responeLogin)) {
+    if (
+      login.fulfilled.match(responeLogin) &&
+      [ROLE.VENDOR, ROLE.ADMIN].includes(responeLogin?.payload?.userInfor?.role)
+    ) {
       switch (responeLogin.payload.userInfor.role) {
         case ROLE.VENDOR:
           history.push('/staff');
@@ -72,7 +81,8 @@ const LoginStaff = () => {
   return (
     <div className="flex flex-col justify-center items-center h-[100vh] ">
       <div className="flex flex-[1.5] flex-col items-center rounded-2xl bg-white pt-[41px] pb-[80px] px-[28px] mt-[120px] w-1/3 ">
-        <img src={StaffImg} alt="Login Staff" className="mb-4" />
+        {/* <img src={StaffImg} alt="Login Staff" className="mb-4" /> */}
+        <img src={Lips} alt="Login Staff" className="mb-3 w-[150px]" />
         <div className="w-full flex flex-col">
           <form onSubmit={handleSubmit(onSubmitForm)}>
             <Controller
@@ -107,6 +117,12 @@ const LoginStaff = () => {
               )}
             />
             <ButtonStaff className="btn-staff--primary" titleButton="Login" />
+            <p
+              className="text-error cursor-pointer text-center  mt-2.5 sm:text-style-375-body md:text-style-768-body xxl:text-style-1440-body sm:mr-0.75 sm:hidden md:block"
+              onClick={moveToHomePage}
+            >
+              Back to Customer
+            </p>
           </form>
         </div>
       </div>
@@ -117,7 +133,7 @@ const LoginStaff = () => {
           <Icon href="https://www.linkedin.com/OneTechStopVietnam/" src={LinkedinIcon} className="icon" />
         </div>
         <div className="card__content">
-          <p className="login-staff ">ONE TECH STOP VIET NAM</p>
+          <p className="login-staff ">{myTitle.MY_NAME}</p>
         </div>
       </div>
 

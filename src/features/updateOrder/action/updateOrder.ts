@@ -30,6 +30,7 @@ export const initialState: UpdateStatusOrder = {
       id: '',
       name: '',
       phoneNumber: '',
+      avatarUrl: '',
     },
     createdAt: '',
     id: '',

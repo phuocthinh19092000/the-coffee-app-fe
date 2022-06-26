@@ -8,6 +8,7 @@ import PopUpChangeWebhook from '../../features/auth/components/PopUpChangeWebhoo
 import useComponentVisible from '../../utils/useComponentVisible';
 import MyOrder from '../../features/my-order/page/MyOrder/MyOrder';
 import PopUpChangePassword from '../../features/auth/components/PopUpChangePassword/PopUpChangePassword';
+import PopUpChangeAvatar from '../../features/auth/components/PopUpChangeAvatar/PopUpChangeAvatar';
 import PopUpLogOut from '../../features/auth/components/PopUpLogOut/PopUpLogOut';
 import useClearNotification from '../../utils/useClearNotification';
 import ToastNotification from '../ToastNotification/ToatstNotification';
@@ -35,6 +36,9 @@ const CustomerInformation = () => {
   const showPopUpCase: PopUpObjectType = useMemo(() => {
     return {
       MY_ORDERS: <MyOrder />,
+      CHANGE_AVATAR: (
+        <PopUpChangeAvatar onClickClosePopUp={onClickClosePopUp} setShowNotification={setTypeShowNotification} />
+      ),
       CHANGE_WEBHOOK: (
         <PopUpChangeWebhook setShowNotification={setTypeShowNotification} onClickClosePopUp={onClickClosePopUp} />
       ),
@@ -69,10 +73,9 @@ const CustomerInformation = () => {
               <span className="menu-dropdown__item" onClick={() => setShowPopUp('MY_ORDERS')}>
                 My Orders
               </span>
-              {/* //TODO: Add component change avatar  */}
-              {/* <span className="menu-dropdown__item" onClick={() => setShowPopUp('CHANGE_AVATAR')}>
+              <span className="menu-dropdown__item" onClick={() => setShowPopUp('CHANGE_AVATAR')}>
                 Change Avatar
-              </span> */}
+              </span>
               <span className="menu-dropdown__item" onClick={() => setShowPopUp('CHANGE_WEBHOOK')}>
                 Notification Settings
               </span>

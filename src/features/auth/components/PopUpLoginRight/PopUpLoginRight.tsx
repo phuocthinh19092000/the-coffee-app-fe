@@ -6,7 +6,7 @@ import InstaIcon from '../../../../share/assets/vector/VectorInsta.svg';
 import LinkedinIcon from '../../../../share/assets/vector/VectorLinkedin.svg';
 import './PopUpLoginRight.css';
 import HookForm from '../../../../components/HookForm/HookForm';
-
+import { myTitle } from '../../../../constant/myConstant';
 const PopUpLoginRight = () => {
   return (
     <Card className="card card-login card--right scroll-popup-right">
@@ -23,7 +23,7 @@ const PopUpLoginRight = () => {
           <Icon href="https://www.linkedin.com/OneTechStopVietnam/" src={LinkedinIcon} className="icon" />
         </div>
         <div className="card__content">
-          <p>ONE TECH STOP VIET NAM</p>
+          <p className="text-center">{myTitle.MY_NAME}</p>
         </div>
       </div>
     </Card>

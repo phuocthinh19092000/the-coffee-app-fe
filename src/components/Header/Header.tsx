@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import Lips from '../../share/assets/img/lips.png';
 import OTSLogo from '../../share/assets/img/OTSLogo.png';
 import SearchVector from '../../share/assets/vector/iconSearch.svg';
 import CancelVector from '../../share/assets/vector/cancelVector.svg';
@@ -101,7 +102,8 @@ const Header = () => {
     <>
       <div className="header md:px-1 xxl:px-[20px] z-[1]">
         <div className="header__logo">
-          <img className="h-full" src={OTSLogo} alt="Logo One Tech Stop" onClick={goHome} />
+          {/* <img className="h-full" src={OTSLogo} alt="Logo One Tech Stop" onClick={goHome} /> */}
+          <img className="h-full" src={Lips} alt="Logo One Tech Stop" onClick={goHome} />
         </div>
 
         {isShowSearchDrink && <div className="background-blur" />}

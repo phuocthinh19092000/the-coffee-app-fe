@@ -24,7 +24,7 @@
 }
 
 .menu-dropdown__item {
-  @apply block w-full text-left text-black no-underline	px-1.5 py-1.5;
+  @apply block w-full text-left text-black no-underline	px-1.5 py-1.25;
 }
 .menu-dropdown__item:hover {
   @apply bg-grey-4 text-black;

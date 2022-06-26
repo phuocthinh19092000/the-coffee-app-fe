@@ -18,6 +18,7 @@ export default interface Order {
     id: string;
     name: string;
     phoneNumber: string;
+    avatarUrl: string;
   };
   quantityBilled: number;
   reason: string;

@@ -11,4 +11,7 @@ export default class GetUserData {
   static addDeviceToken(body: { deviceToken: string }) {
     return http.post('/users/deviceToken', body);
   }
+  static updateAvatar(body: FormData) {
+    return http.patch('users/avatar', body);
+  }
 }

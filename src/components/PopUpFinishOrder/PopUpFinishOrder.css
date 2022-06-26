@@ -3,7 +3,7 @@
 }
 
 .card-confirm-order__img {
-    @apply flex w-full justify-center items-center pt-[10%];
+    @apply flex w-full justify-center items-center;
 }
 
 .card-confirm-order__title {

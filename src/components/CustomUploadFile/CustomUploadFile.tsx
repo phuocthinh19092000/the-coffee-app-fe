@@ -33,6 +33,12 @@ const CustomUploadFile = (props: Props) => {
     if (!selectedFile) {
       return;
     }
+    props.onChange({
+      body: {
+        name: props.name,
+        value: selectedFile,
+      },
+    });
     const objectUrl = URL.createObjectURL(selectedFile);
     setPreviewFile(objectUrl);
     setFailMessage('');
@@ -44,16 +50,16 @@ const CustomUploadFile = (props: Props) => {
     props.setIsHavePreviewFile(!!previewFile);
   }, [previewFile]);
 
-  useEffect(() => {
-    if (selectedFile) {
-      props.onChange({
-        body: {
-          name: props.name,
-          value: selectedFile,
-        },
-      });
-    }
-  }, [selectedFile]);
+  // useEffect(() => {
+  //   if (selectedFile) {
+  //     props.onChange({
+  //       body: {
+  //         name: props.name,
+  //         value: selectedFile,
+  //       },
+  //     });
+  //   }
+  // }, [selectedFile]);
 
   const dragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();

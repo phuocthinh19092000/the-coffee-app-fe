@@ -105,7 +105,8 @@ const FormManageProduct = (props: Props) => {
     }
 
     const { id, dataForm } = prepareDataToCallApi(dataProduct);
-
+    // eslint-disable-next-line no-console
+    console.log(dataForm.get('images'));
     if (id) {
       const response = await dispatch(updateProduct({ productId: id, body: dataForm }));
       setContentNotification('Update item successfully!', response);

@@ -19,6 +19,6 @@
   @apply font-normal tracking-[0.25px] text-style-upload;
 }
 .custom-upload__error {
-  @apply tracking-[0.25px] text-error text-style-upload;
+  @apply tracking-[0.25px] text-error ;
 }
 

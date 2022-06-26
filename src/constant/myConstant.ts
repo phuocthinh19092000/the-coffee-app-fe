@@ -1,0 +1,4 @@
+export const myTitle = {
+  ONE_TECH_STOP_VIETNAM: 'ONE TECH STOP V IET NAM',
+  MY_NAME: 'TRAN PHUOC THINH',
+};
