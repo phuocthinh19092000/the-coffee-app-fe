@@ -6,10 +6,11 @@ import { useSelector } from 'react-redux';
 import { selectUserState, updateAvatar } from '../../actions/auth';
 import { NotificationParams } from '../../../../interfaces';
 import { useAppDispatch } from '../../../../storage/hooks';
+import { NotificationType, PositionToast } from '../../../../enum';
 
 type Props = {
   onClickClosePopUp: () => void;
-  setShowNotification?: React.Dispatch<React.SetStateAction<NotificationParams>>;
+  setShowNotification: React.Dispatch<React.SetStateAction<NotificationParams>>;
 };
 
 const PopUpChangeAvatar = (props: Props) => {
@@ -52,6 +53,21 @@ const PopUpChangeAvatar = (props: Props) => {
       const response = await dispatch(updateAvatar(dataForm));
       // eslint-disable-next-line no-console
       console.log(response);
+      if (updateAvatar.fulfilled.match(response)) {
+        setPreviewFile('');
+        props.setShowNotification({
+          message: 'Avatar updated successfully!',
+          type: NotificationType.SUCCESS,
+          position: PositionToast.TOP_CENTER,
+        });
+      }
+      if (updateAvatar.rejected.match(response)) {
+        props.setShowNotification({
+          message: failMessage,
+          type: NotificationType.FAILURE,
+          position: PositionToast.TOP_CENTER,
+        });
+      }
     }
   };
 

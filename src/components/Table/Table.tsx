@@ -6,12 +6,13 @@ import BlackCoffee from '../../share/assets/img/blackcoffee.png';
 import './Table.css';
 import ProductCart from '../../share/assets/vector/ProductCart.svg';
 import { CategoryTypeDto } from '../../interfaces/category';
+import { OrderReportType } from '../../interfaces/order';
 
 type Props = {
   header: Array<string | JSX.Element>;
-  body: Array<ProductTypeDto | UserTypeDto | CategoryTypeDto>;
+  body: Array<ProductTypeDto | UserTypeDto | CategoryTypeDto | OrderReportType>;
   startIndex: number;
-  isHaveDropdown: boolean;
+  isHaveDropdown?: boolean;
   className?: string;
 };
 

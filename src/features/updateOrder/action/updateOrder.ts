@@ -35,6 +35,7 @@ export const initialState: UpdateStatusOrder = {
     createdAt: '',
     id: '',
     reason: '',
+    productPrice: 0,
   },
   loading: RequestState.PENDING,
   error: {

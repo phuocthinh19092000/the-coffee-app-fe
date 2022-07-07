@@ -11,6 +11,7 @@ import accountReducer from '../features/user/actions/getUserData';
 import createAccountReducer from '../features/admin/actions/createAccountData';
 import webhookReducer from '../features/webhook/action/webhook';
 import createCategoryReducer from '../features/product/actions/createCategoryData';
+import orderByDateReducer from '../features/order/actions/getOrderByDate';
 import storage from 'redux-persist/lib/storage';
 
 import { FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
@@ -36,6 +37,7 @@ export const store = configureStore({
     order: orderReducer,
     myOrder: myOrderReducer,
     orderByStatus: orderByStatusReducer,
+    orderByDate: orderByDateReducer,
     search: searchReducer,
     updateStatusOrder: updateStatusOrderReducer,
     createProduct: createProductReducer,

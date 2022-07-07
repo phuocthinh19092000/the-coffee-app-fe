@@ -14,3 +14,11 @@ export type updateOrderParams = {
   orderId: string;
   body: updateOrderBody;
 };
+
+export type getOrderByDateParams = {
+  code?: string;
+  type: string;
+  from: Date;
+  to: Date | null;
+  pagination: { offset?: number; limit: number };
+};

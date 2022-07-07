@@ -17,17 +17,19 @@ import useClearNotification from '../../utils/useClearNotification';
 import FormManageCategory from '../../features/staff/components/FormManageCategory/FormManageCategory';
 import FormManageAccount from '../../features/admin/component/FormManageAccount';
 import { getAccountPagination } from '../../features/user/actions/getUserData';
+import { OrderReportType } from '../../interfaces/order';
+type editableType = ProductTypeDto | UserTypeDto | CategoryTypeDto;
 type Props = {
-  selectedValue: ProductTypeDto | UserTypeDto | CategoryTypeDto;
+  selectedValue: ProductTypeDto | UserTypeDto | CategoryTypeDto | OrderReportType;
   startIndex: number;
 };
-function isProductTypeDto(object: ProductTypeDto | UserTypeDto | CategoryTypeDto): object is ProductTypeDto {
+function isProductTypeDto(object: editableType | OrderReportType): object is ProductTypeDto {
   return (object as ProductTypeDto).category !== undefined;
 }
-function isCategotyDto(object: ProductTypeDto | UserTypeDto | CategoryTypeDto): object is ProductTypeDto {
+function isCategotyDto(object: editableType | OrderReportType): object is ProductTypeDto {
   return (object as ProductTypeDto).images === undefined && (object as CategoryTypeDto).name !== undefined;
 }
-function isUserDto(object: ProductTypeDto | UserTypeDto | CategoryTypeDto): object is ProductTypeDto | UserTypeDto {
+function isUserDto(object: editableType | OrderReportType): object is ProductTypeDto | UserTypeDto {
   return (object as ProductTypeDto).images === undefined && (object as UserTypeDto).email !== undefined;
 }
 

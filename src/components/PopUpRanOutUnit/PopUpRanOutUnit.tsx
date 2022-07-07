@@ -19,7 +19,7 @@ const PopUpRanOutUnit = (props: Props) => {
       <img src={Exit} className="card-ran-out-unit__exit" onClick={props.onClickExit} alt="Exit" />
       <div className="pt-[40%]">
         <p className="card-ran-out-unit__title">You ran out of free units</p>
-        {freeUnit !== 0 ? (
+        {/* {freeUnit !== 0 ? (
           <p className="card-ran-out-unit__message">
             You have only {freeUnit} today.
             <br />
@@ -31,24 +31,29 @@ const PopUpRanOutUnit = (props: Props) => {
             <br />
             Come back tomorrow and order.
           </p>
-        )}
+        )} */}
+        <p className="card-ran-out-unit__message">
+          You only have {freeUnit} today .Your free unit is less than quantity.
+          <br />
+          Do you want to proceed?.
+        </p>
       </div>
-      {/*TODO: Order over 3 unit each day*/}
-      {/*<div className="pt-15">*/}
-      {/*  <Button*/}
-      {/*    onClick={props.onClickContinueProceed}*/}
-      {/*    className="btn btn-primary btn--enabled"*/}
-      {/*    type="submit"*/}
-      {/*    titleButton="YES, I WANT TO PROCEED"*/}
-      {/*  />*/}
-      {/*  <Button*/}
-      {/*    onClick={props.handleClickBackForm}*/}
-      {/*    className="btn btn-primary btn-secondary"*/}
-      {/*    type="submit"*/}
-      {/*    titleButton="NO, I CHANGE MY MIND"*/}
-      {/*  />*/}
-      {/*</div>*/}
-      {freeUnit === 0 ? (
+      {/* TODO: Order over 3 unit each day*/}
+      <div className="card-ran-out-unit__group">
+        <Button
+          onClick={props.onClickContinueProceed}
+          className="btn btn-primary btn--enabled mb-1"
+          type="submit"
+          titleButton="YES, I WANT TO PROCEED"
+        />
+        <Button
+          onClick={props.handleClickBackForm}
+          className="btn btn-primary btn-secondary"
+          type="submit"
+          titleButton="NO, I CHANGE MY MIND"
+        />
+      </div>
+      {/* {freeUnit === 0 ? (
         <div className="card-ran-out-unit__group">
           <Button
             onClick={props.onClickExit}
@@ -72,7 +77,7 @@ const PopUpRanOutUnit = (props: Props) => {
             titleButton="NO, I WANT TO EXIT"
           />
         </div>
-      )}
+      )} */}
     </Card>
   );
 };

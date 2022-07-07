@@ -22,10 +22,22 @@ export default interface Order {
   };
   quantityBilled: number;
   reason: string;
+  productPrice: number;
 }
 
 export interface OrderSocket {
   order: Order;
   newOrderStatus?: string;
   currentOrderStatus?: string;
+}
+
+export interface OrderReportType {
+  id?: string;
+  createAt: string;
+  user: string;
+  product: string;
+  quantity: number;
+  orderStatus: string;
+  price: number;
+  outOfRange: number;
 }
